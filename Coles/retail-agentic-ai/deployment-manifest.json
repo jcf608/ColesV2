@@ -1,0 +1,54 @@
+{
+  "deployment_date": "2025-10-16T06:27:11+11:00",
+  "version": "1.0.0",
+  "components": {
+    "system_prompts": {
+      "location": "/Users/AI Guy/Dropbox/Valorica/Coles/retail-agentic-ai/prompts",
+      "files": [
+        "produce-optimization-agent.txt"
+      ]
+    },
+    "policies": {
+      "location": "/Users/AI Guy/Dropbox/Valorica/Coles/retail-agentic-ai/policies",
+      "files": [
+        "produce-markdown-policy.txt",
+        "produce-markdown-policy.json"
+      ]
+    },
+    "examples": {
+      "location": "/Users/AI Guy/Dropbox/Valorica/Coles/retail-agentic-ai/examples",
+      "files": [
+        "blueberries-markdown.txt",
+        "salad-no-markdown.txt",
+        "strawberries-competitive-response.txt"
+      ]
+    },
+    "mcp_server": {
+      "location": "/Users/AI Guy/Dropbox/Valorica/Coles/retail-agentic-ai/mcp-server",
+      "build_output": "/Users/AI Guy/Dropbox/Valorica/Coles/retail-agentic-ai/mcp-server/build",
+      "config_file": "/Users/AI Guy/.config/mcp/servers.json",
+      "tools": [
+        "get_inventory_status",
+        "query_sales_velocity",
+        "check_pricing_policy",
+        "submit_price_change",
+        "get_competitor_pricing"
+      ]
+    }
+  },
+  "usage_instructions": {
+    "load_system_prompt": "Load /Users/AI Guy/Dropbox/Valorica/Coles/retail-agentic-ai/prompts/produce-optimization-agent.txt at agent initialization",
+    "reference_policies": "Agent should reference policies in /Users/AI Guy/Dropbox/Valorica/Coles/retail-agentic-ai/policies when reasoning",
+    "use_examples": "Examples in /Users/AI Guy/Dropbox/Valorica/Coles/retail-agentic-ai/examples guide training and evaluation",
+    "start_mcp_server": "MCP server auto-starts via config at /Users/AI Guy/.config/mcp/servers.json",
+    "test_server": "cd /Users/AI Guy/Dropbox/Valorica/Coles/retail-agentic-ai/mcp-server && npm start"
+  },
+  "next_steps": [
+    "Review and customize API endpoints in /Users/AI Guy/.config/mcp/servers.json",
+    "Configure authentication credentials for backend APIs",
+    "Test MCP server connectivity",
+    "Deploy system prompt to agent runtime",
+    "Monitor agent decisions against policy compliance",
+    "Review few-shot examples periodically and add new scenarios"
+  ]
+}

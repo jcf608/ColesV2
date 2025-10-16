@@ -1,0 +1,428 @@
+/* Add these styles to your existing style.css */
+
+/* Tool Call Enhanced Styling */
+.tool-call {
+  background: white;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  animation: slideIn 0.3s ease-out;
+}
+
+.tool-header {
+  padding: 1rem 1.5rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.tool-icon {
+  font-size: 1.5rem;
+}
+
+.tool-result {
+  padding: 1.5rem;
+  background: white;
+}
+
+/* Tool Data Grid */
+.tool-data-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.data-item {
+  padding: 0.75rem;
+  background: var(--gray-50);
+  border-radius: 8px;
+  border-left: 3px solid var(--primary);
+}
+
+.data-item.urgent {
+  background: #fee;
+  border-left-color: var(--danger);
+}
+
+.data-item.warning {
+  background: #fef3c7;
+  border-left-color: var(--warning);
+}
+
+.data-item.trend-down {
+  border-left-color: var(--danger);
+}
+
+.data-item.trend-up {
+  border-left-color: var(--success);
+}
+
+.data-item.trend-stable {
+  border-left-color: var(--gray-300);
+}
+
+.data-label {
+  display: block;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray-700);
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.data-value {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--gray-900);
+}
+
+.data-value.highlight {
+  color: var(--primary);
+}
+
+.data-value.token {
+  font-size: 0.875rem;
+  font-family: 'Courier New', monospace;
+  background: var(--gray-100);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* Supply Schedule */
+.supply-schedule {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: #e0f2fe;
+  border-radius: 8px;
+  border-left: 3px solid var(--secondary);
+}
+
+.delivery-item {
+  padding: 0.5rem 0;
+  font-size: 0.95rem;
+}
+
+/* Sales Velocity Chart */
+.daily-breakdown {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--gray-50);
+  border-radius: 8px;
+}
+
+.breakdown-chart {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: space-around;
+  align-items: flex-end;
+  height: 120px;
+  margin-top: 1rem;
+  padding: 0.5rem;
+}
+
+.breakdown-bar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.bar-fill {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  border-radius: 4px 4px 0 0;
+  min-height: 10px;
+  transition: all 0.3s;
+}
+
+.breakdown-bar:hover .bar-fill {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+}
+
+.bar-label {
+  font-size: 0.7rem;
+  color: var(--gray-700);
+  font-weight: 600;
+}
+
+.bar-value {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* Pricing Policy Result */
+.policy-result {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.policy-result.approved {
+  border: 2px solid var(--success);
+}
+
+.policy-result.rejected {
+  border: 2px solid var(--danger);
+}
+
+.policy-status {
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+.policy-result.approved .policy-status {
+  background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+}
+
+.policy-result.rejected .policy-status {
+  background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
+}
+
+.policy-notes {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--gray-50);
+  border-left: 3px solid var(--secondary);
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+/* Competitor Pricing Table */
+.competitor-pricing {
+  background: white;
+}
+
+.pricing-header {
+  padding: 0.75rem 1rem;
+  background: var(--gray-50);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.competitor-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+.competitor-table th {
+  background: var(--gray-100);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--gray-700);
+  border-bottom: 2px solid var(--gray-200);
+}
+
+.competitor-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.competitor-table tr:hover {
+  background: var(--gray-50);
+}
+
+.price-cell {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.pricing-summary {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  background: var(--gray-50);
+  border-radius: 8px;
+}
+
+.summary-item {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-label {
+  font-weight: 600;
+  color: var(--gray-700);
+}
+
+.summary-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+/* Price Change Result */
+.price-change-result {
+  text-align: center;
+}
+
+.success-message {
+  padding: 1rem;
+  background: linear-gradient(135deg, var(--success) 0%, #059669 100%);
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.change-message {
+  padding: 1rem;
+  background: var(--gray-50);
+  border-radius: 8px;
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+/* Error Message */
+.error-message {
+  padding: 1rem;
+  background: #fee;
+  border-left: 4px solid var(--danger);
+  border-radius: 4px;
+  color: var(--danger);
+  font-weight: 600;
+}
+
+/* Markdown Rendering in Messages */
+.message-content h1,
+.message-content h2,
+.message-content h3 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--gray-900);
+}
+
+.message-content h1 {
+  font-size: 1.5rem;
+  border-bottom: 2px solid var(--primary);
+  padding-bottom: 0.25rem;
+}
+
+.message-content h2 {
+  font-size: 1.25rem;
+  color: var(--primary);
+}
+
+.message-content h3 {
+  font-size: 1.1rem;
+}
+
+.message-content strong {
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.message-content em {
+  color: var(--gray-700);
+  font-style: italic;
+}
+
+.message-content code {
+  background: var(--gray-100);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.message-content pre {
+  background: var(--gray-100);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  border-left: 3px solid var(--primary);
+}
+
+.message-content pre code {
+  background: none;
+  padding: 0;
+}
+
+.message-content ul,
+.message-content ol {
+  margin-left: 1.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.message-content li {
+  margin-bottom: 0.25rem;
+}
+
+.message-content blockquote {
+  border-left: 4px solid var(--primary);
+  padding-left: 1rem;
+  margin: 1rem 0;
+  color: var(--gray-700);
+  font-style: italic;
+}
+
+.message-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.message-content th,
+.message-content td {
+  padding: 0.75rem;
+  border: 1px solid var(--gray-200);
+  text-align: left;
+}
+
+.message-content th {
+  background: var(--gray-100);
+  font-weight: 600;
+}
+
+.message-content tr:hover {
+  background: var(--gray-50);
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .tool-data-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .breakdown-chart {
+    height: 100px;
+  }
+  
+  .pricing-summary {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

@@ -1,0 +1,321 @@
+{
+  "version": "1.0",
+  "categories": {
+    "task_management": [
+      "get_pending_actions",
+      "execute_action",
+      "complete_action",
+      "analyze_task_dependencies"
+    ],
+    "alert_management": [
+      "create_alert",
+      "get_active_alerts",
+      "dismiss_alert",
+      "update_alert_status"
+    ],
+    "analytics": [
+      "search_knowledge_base",
+      "get_staff_allocation",
+      "get_predicted_traffic",
+      "analyze_sales_trends"
+    ],
+    "inventory": [
+      "get_inventory_status",
+      "query_sales_velocity",
+      "find_nearby_inventory"
+    ],
+    "pricing": [
+      "check_pricing_policy",
+      "submit_price_change",
+      "get_competitor_pricing"
+    ]
+  },
+  "tool_definitions": [
+    {
+      "name": "get_pending_actions",
+      "description": "Retrieve pending actions across stores",
+      "category": "task_management",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "store_id": {
+            "type": "string",
+            "description": "Filter by store ID"
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "critical",
+              "high",
+              "normal"
+            ],
+            "description": "Filter by priority level"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "in_progress",
+              "completed"
+            ],
+            "description": "Filter by status"
+          }
+        }
+      }
+    },
+    {
+      "name": "execute_action",
+      "description": "Execute an approved action",
+      "category": "task_management",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "action_id": {
+            "type": "string",
+            "required": true
+          },
+          "approval_token": {
+            "type": "string",
+            "required": true
+          },
+          "execution_parameters": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "action_id",
+          "approval_token"
+        ]
+      }
+    },
+    {
+      "name": "complete_action",
+      "description": "Mark action as completed with outcome",
+      "category": "task_management",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "action_id": {
+            "type": "string",
+            "required": true
+          },
+          "outcome": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": [
+                  "success",
+                  "partial",
+                  "failed"
+                ]
+              },
+              "actual_impact": {
+                "type": "object"
+              },
+              "variance_from_expected": {
+                "type": "number"
+              },
+              "notes": {
+                "type": "string"
+              }
+            }
+          },
+          "completion_notes": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "action_id",
+          "outcome"
+        ]
+      }
+    },
+    {
+      "name": "create_alert",
+      "description": "Create a new alert for monitoring",
+      "category": "alert_management",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "required": true
+          },
+          "description": {
+            "type": "string",
+            "required": true
+          },
+          "priority": {
+            "type": "string",
+            "enum": [
+              "critical",
+              "actionable",
+              "informational"
+            ],
+            "required": true
+          },
+          "source": {
+            "type": "string",
+            "required": true
+          },
+          "action_items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "affected_scope": {
+            "type": "object"
+          }
+        },
+        "required": [
+          "title",
+          "description",
+          "priority",
+          "source"
+        ]
+      }
+    },
+    {
+      "name": "get_active_alerts",
+      "description": "Retrieve current active alerts",
+      "category": "alert_management",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "priority": {
+            "type": "string",
+            "enum": [
+              "critical",
+              "actionable",
+              "informational"
+            ]
+          },
+          "time_range_hours": {
+            "type": "number",
+            "default": 24
+          },
+          "include_dismissed": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      }
+    },
+    {
+      "name": "dismiss_alert",
+      "description": "Dismiss or resolve an alert",
+      "category": "alert_management",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "alert_id": {
+            "type": "string",
+            "required": true
+          },
+          "resolution_notes": {
+            "type": "string",
+            "required": true
+          },
+          "resolution_type": {
+            "type": "string",
+            "enum": [
+              "resolved",
+              "false_positive",
+              "duplicate"
+            ]
+          }
+        },
+        "required": [
+          "alert_id",
+          "resolution_notes"
+        ]
+      }
+    },
+    {
+      "name": "search_knowledge_base",
+      "description": "Search store operations knowledge base",
+      "category": "analytics",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "required": true
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "policies",
+              "procedures",
+              "best_practices",
+              "faq"
+            ]
+          },
+          "max_results": {
+            "type": "number",
+            "default": 5
+          }
+        },
+        "required": [
+          "query"
+        ]
+      }
+    },
+    {
+      "name": "get_staff_allocation",
+      "description": "Get current and recommended staff allocation",
+      "category": "analytics",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "store_id": {
+            "type": "string"
+          },
+          "date_range": {
+            "type": "object",
+            "properties": {
+              "start_date": {
+                "type": "string",
+                "format": "date"
+              },
+              "end_date": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          },
+          "include_recommendations": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      }
+    },
+    {
+      "name": "analyze_task_dependencies",
+      "description": "Identify task dependencies and blockers",
+      "category": "analytics",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "task_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "depth": {
+            "type": "number",
+            "default": 3
+          },
+          "include_recommendations": {
+            "type": "boolean",
+            "default": true
+          }
+        }
+      }
+    }
+  ]
+}

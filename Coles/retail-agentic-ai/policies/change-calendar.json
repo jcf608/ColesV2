@@ -1,0 +1,124 @@
+{
+  "policy_id": "IT-CHANGE-WEEKLY-001",
+  "version": "2.1.0",
+  "effective_date": "2024-01-15T00:00:00Z",
+  "policy_name": "Weekly Change Calendar Management",
+  "category": "it-operations",
+  "description": "Governance for weekly change calendar review and high-risk change identification",
+  "approval_thresholds": {
+    "low_risk_changes": {
+      "approval_level": "team_lead",
+      "notification_required": true,
+      "advance_notice_hours": 24
+    },
+    "medium_risk_changes": {
+      "approval_level": "it_manager",
+      "notification_required": true,
+      "advance_notice_hours": 72,
+      "business_approval_required": false
+    },
+    "high_risk_changes": {
+      "approval_level": "it_director",
+      "notification_required": true,
+      "advance_notice_hours": 168,
+      "business_approval_required": true,
+      "change_advisory_board_review": true
+    },
+    "emergency_changes": {
+      "approval_level": "it_manager",
+      "post_implementation_review": true,
+      "documentation_deadline_hours": 24
+    }
+  },
+  "safety_constraints": {
+    "blackout_periods": {
+      "peak_shopping_hours": {
+        "days": ["friday", "saturday", "sunday"],
+        "time_range": "08:00-20:00",
+        "timezone": "local_store_time"
+      },
+      "holiday_periods": {
+        "advance_lockdown_days": 3,
+        "includes_major_sales_events": true
+      },
+      "month_end_processing": {
+        "lockdown_start": "last_business_day_minus_1",
+        "lockdown_end": "first_business_day_plus_1"
+      }
+    },
+    "rollback_requirements": {
+      "mandatory_rollback_plan": true,
+      "tested_rollback_procedure": true,
+      "rollback_time_limit_minutes": 30
+    },
+    "impact_assessment_required": {
+      "customer_facing_systems": true,
+      "payment_processing": true,
+      "inventory_management": true,
+      "supply_chain_systems": true
+    }
+  },
+  "numeric_thresholds": {
+    "risk_scoring": {
+      "low_risk_max": 30,
+      "medium_risk_max": 70,
+      "high_risk_min": 71
+    },
+    "system_availability": {
+      "minimum_uptime_requirement": 99.5,
+      "maximum_downtime_minutes_per_change": 15,
+      "maximum_changes_per_week": 25
+    },
+    "notification_timing": {
+      "stakeholder_notification_hours": 48,
+      "store_operations_notification_hours": 72,
+      "vendor_notification_hours": 96
+    },
+    "resource_limits": {
+      "max_concurrent_changes": 3,
+      "max_critical_system_changes_per_week": 1,
+      "minimum_staffing_during_change": 2
+    }
+  },
+  "category_specific_rules": {
+    "pos_system_changes": {
+      "requires_store_manager_approval": true,
+      "test_transaction_required": true,
+      "backup_pos_system_ready": true
+    },
+    "network_infrastructure": {
+      "redundancy_verification_required": true,
+      "connectivity_test_mandatory": true,
+      "isr_team_standby_required": true
+    },
+    "database_changes": {
+      "backup_completion_required": true,
+      "database_admin_approval": true,
+      "performance_baseline_required": true
+    },
+    "security_updates": {
+      "vulnerability_scanner_post_check": true,
+      "security_team_signoff": true,
+      "penetration_test_if_major": true
+    }
+  },
+  "reporting_requirements": {
+    "weekly_change_summary": {
+      "distribution_list": ["it_management", "store_operations", "executives"],
+      "metrics_included": ["success_rate", "downtime_minutes", "rollback_count"],
+      "delivery_day": "monday",
+      "delivery_time": "09:00"
+    },
+    "high_risk_change_tracking": {
+      "real_time_dashboard_required": true,
+      "executive_notification_mandatory": true,
+      "post_change_review_deadline_hours": 48
+    }
+  },
+  "compliance": {
+    "data_protection_review": true,
+    "financial_systems_sox_compliance": true,
+    "retail_industry_standards": ["pci_dss", "iso_27001"],
+    "audit_trail_retention_days": 2555
+  }
+}

@@ -1,0 +1,72 @@
+# ALERT MODE EXAMPLE SCENARIOS
+
+## Scenario 1: Critical Task Blocker
+
+**Detection**: Task dependency analysis identifies blocker
+
+**Alert Generated**:
+- Title: "Critical Priority Task Blocker"
+- Priority: Critical (Red)
+- Source: Task Monitor
+- Description: "Q4 Planning Review is blocked due to resource constraints from 2 dependent teams. Potential 5-day delay if not resolved within 48 hours."
+
+**User Actions Available**:
+1. [Take Action] - Routes to Act Mode to resolve
+2. [Investigate] - Routes to Ask Mode for details
+
+**Expected Flow**:
+1. Alert appears in real-time
+2. SMS + Email sent to store manager
+3. User clicks [Investigate]
+4. Ask Mode provides dependency details
+5. User returns, clicks [Take Action]
+6. Act Mode recommends resource reallocation
+7. Manager approves
+8. Alert marked resolved
+
+---
+
+## Scenario 2: Schedule Delay Warning
+
+**Detection**: Project tracking detects 15% pace lag
+
+**Alert Generated**:
+- Title: "Customer Feedback Analysis Behind Schedule"
+- Priority: Actionable (Yellow)
+- Source: Project Tracking
+- Description: "Analysis task is tracking 15% behind target pace. Data team dependency may cause further delays. Recommend check-in meeting."
+
+**User Actions Available**:
+1. [Take Action] - Schedule check-in meeting
+2. [Investigate] - Get detailed timeline analysis
+
+**Expected Flow**:
+1. Alert appears in dashboard
+2. Email notification sent
+3. User reviews alert context
+4. Clicks [Take Action]
+5. Act Mode suggests meeting times
+6. Meeting scheduled
+7. Alert moves to "In Progress"
+
+---
+
+## Scenario 3: Informational Status Update
+
+**Detection**: Regular status check shows positive progress
+
+**Alert Generated**:
+- Title: "System Integration Testing On Track"
+- Priority: Informational (Blue)
+- Source: Quality Assurance
+- Description: "Testing proceeding as planned with 30% completion. No blockers detected. Team documented 12 test cases for knowledge base."
+
+**User Actions Available**:
+1. [Investigate] - View detailed progress
+
+**Expected Flow**:
+1. Alert appears in feed
+2. No immediate action needed
+3. Available for review
+4. Auto-dismissed after 48 hours if not interacted
+5. Logged for trend analysis

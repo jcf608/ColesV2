@@ -1,0 +1,9 @@
+{
+  "id": "restock-options",
+  "icon": "📦",
+  "label": "Restock Options",
+  "question": "How can I get restock sooner? What are my options?",
+  "category": "inventory",
+  "order": 6,
+  "enabled": true
+}

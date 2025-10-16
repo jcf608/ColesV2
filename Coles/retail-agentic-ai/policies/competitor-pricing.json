@@ -1,0 +1,105 @@
+{
+  "policy_id": "COMP_PRICING_BERRIES_001",
+  "version": "2.1.0",
+  "effective_date": "2024-01-15",
+  "last_updated": "2024-01-15T09:00:00Z",
+  "category": "pricing",
+  "subcategory": "competitor_pricing",
+  "product_category": "berries",
+  "description": "Competitor pricing policy for berry products including strawberries, blueberries, raspberries, and blackberries",
+  "approval_thresholds": {
+    "automatic_approval": {
+      "price_variance_percentage": 5,
+      "max_discount_percentage": 15,
+      "conditions": [
+        "within_seasonal_range",
+        "margin_above_minimum"
+      ]
+    },
+    "manager_approval": {
+      "price_variance_percentage": 15,
+      "max_discount_percentage": 25,
+      "required_approver_level": "department_manager"
+    },
+    "director_approval": {
+      "price_variance_percentage": 30,
+      "max_discount_percentage": 40,
+      "required_approver_level": "regional_director"
+    }
+  },
+  "safety_constraints": {
+    "minimum_margin_percentage": 12,
+    "maximum_loss_leader_days": 3,
+    "price_change_frequency_limit": {
+      "max_changes_per_week": 2,
+      "cooling_period_hours": 24
+    },
+    "inventory_protection": {
+      "minimum_days_supply": 1,
+      "maximum_markdown_with_excess_inventory": 35
+    }
+  },
+  "competitor_monitoring": {
+    "primary_competitors": [
+      "whole_foods",
+      "kroger",
+      "safeway",
+      "trader_joes",
+      "costco"
+    ],
+    "monitoring_frequency": "daily",
+    "price_matching_window_hours": 48,
+    "geographic_radius_miles": 10
+  },
+  "category_specific_rules": {
+    "organic_premium_percentage": {
+      "min": 20,
+      "max": 45
+    },
+    "seasonal_pricing": {
+      "peak_season_months": [6, 7, 8],
+      "off_season_months": [12, 1, 2],
+      "seasonal_variance_allowance": 25
+    },
+    "product_specific_constraints": {
+      "strawberries": {
+        "price_per_lb_min": 2.99,
+        "price_per_lb_max": 8.99,
+        "standard_package_sizes": ["1lb", "2lb", "4lb"]
+      },
+      "blueberries": {
+        "price_per_lb_min": 3.99,
+        "price_per_lb_max": 12.99,
+        "standard_package_sizes": ["6oz", "1lb", "2lb"]
+      },
+      "raspberries": {
+        "price_per_lb_min": 4.99,
+        "price_per_lb_max": 15.99,
+        "standard_package_sizes": ["6oz", "12oz"]
+      },
+      "blackberries": {
+        "price_per_lb_min": 4.49,
+        "price_per_lb_max": 13.99,
+        "standard_package_sizes": ["6oz", "12oz"]
+      }
+    }
+  },
+  "numeric_thresholds": {
+    "alert_triggers": {
+      "competitor_price_drop_percentage": 10,
+      "market_share_loss_threshold": 5,
+      "inventory_turnover_below": 0.8
+    },
+    "performance_metrics": {
+      "target_market_position": "within_top_3_lowest",
+      "acceptable_price_premium_percentage": 8,
+      "minimum_weekly_price_checks": 14
+    }
+  },
+  "compliance_requirements": {
+    "audit_trail_retention_days": 730,
+    "documentation_required": true,
+    "regulatory_compliance": ["state_pricing_laws", "fair_competition_act"],
+    "approval_timeout_hours": 4
+  }
+}

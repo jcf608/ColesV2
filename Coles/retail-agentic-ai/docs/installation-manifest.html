@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carina Multi-Mode System - Installation Manifest</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background: #f5f5f5;
+      padding: 40px 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+    h1 {
+      font-size: 36px;
+      margin-bottom: 12px;
+      color: #1a1a1a;
+    }
+    .subtitle {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 40px;
+    }
+    h2 {
+      font-size: 28px;
+      margin: 40px 0 20px;
+      color: #1a1a1a;
+      border-bottom: 2px solid #e0e0e0;
+      padding-bottom: 12px;
+    }
+    h3 {
+      font-size: 22px;
+      margin: 28px 0 16px;
+      color: #333;
+    }
+    h4 {
+      font-size: 18px;
+      margin: 20px 0 12px;
+      color: #555;
+    }
+    ul, ol {
+      margin-left: 24px;
+      margin-bottom: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .section {
+      margin-bottom: 40px;
+    }
+    .component {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      border-left: 4px solid #1976d2;
+    }
+    .file-list {
+      background: #f9f9f9;
+      padding: 16px;
+      border-radius: 6px;
+      margin: 12px 0;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+    }
+    .status {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 8px;
+    }
+    .status-new { background: #e8f5e9; color: #388e3c; }
+    .status-modified { background: #fff3e0; color: #f57c00; }
+    .status-required { background: #ffebee; color: #d32f2f; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    th {
+      background: #f5f5f5;
+      font-weight: 600;
+    }
+    code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+    }
+    .workflow {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 24px;
+      border-radius: 8px;
+      margin: 24px 0;
+    }
+    .workflow h3 {
+      color: white;
+      margin-top: 0;
+    }
+    .note {
+      background: #e3f2fd;
+      border-left: 4px solid #1976d2;
+      padding: 16px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+    .warning {
+      background: #fff3e0;
+      border-left: 4px solid #f57c00;
+      padding: 16px;
+      margin: 20px 0;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 Carina Multi-Mode Agentic AI System</h1>
+    <p class="subtitle">Complete Installation Manifest & Asset Guide</p>
+
+    <div class="section">
+      <h2>📋 Overview</h2>
+      <p>Carina is a multi-mode agentic AI system for retail operations with three distinct modes:</p>
+      <ul>
+        <li><strong>Ask Mode:</strong> Query engine for operational insights and information</li>
+        <li><strong>Act Mode:</strong> Action recommendation and execution engine</li>
+        <li><strong>Alert Mode:</strong> Monitoring and notification system</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🏗️ System Architecture</h2>
+      <div class="workflow">
+        <h3>Information Flow</h3>
+        <pre style="color: white; line-height: 1.8;">
+User Input
+    ↓
+Mode Orchestrator (Routes to appropriate mode)
+    ↓
+Mode-Specific Handler (Ask/Act/Alert)
+    ↓
+System Prompt + Policies
+    ↓
+MCP Tools (Via MCP Server)
+    ↓
+Backend APIs & Databases
+    ↓
+Response with Actions/Insights/Alerts
+        </pre>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>📁 Component Inventory</h2>
+
+      <div class="component">
+        <h3>1. System Prompts <span class="status status-new">NEW</span></h3>
+        <p><strong>Location:</strong> <code>prompts/</code></p>
+        <div class="file-list">
+prompts/
+├── carina-ask-mode.txt
+├── carina-act-mode.txt
+├── carina-alert-mode.txt
+└── carina-mode-orchestrator.txt
+        </div>
+        <p><strong>Purpose:</strong> Define behavior, decision frameworks, and response patterns for each mode.</p>
+      </div>
+
+      <div class="component">
+        <h3>2. Policy Documents <span class="status status-new">NEW</span></h3>
+        <p><strong>Location:</strong> <code>policies/</code></p>
+        <div class="file-list">
+policies/
+├── alert-escalation-policy.json
+├── action-approval-policy.json
+└── task-monitoring-policy.json
+        </div>
+        <p><strong>Purpose:</strong> Business rules for approvals, escalation, and monitoring thresholds.</p>
+      </div>
+
+      <div class="component">
+        <h3>3. Example Scenarios <span class="status status-new">NEW</span></h3>
+        <p><strong>Location:</strong> <code>examples/</code></p>
+        <div class="file-list">
+examples/
+├── ask-mode-examples.txt
+├── act-mode-examples.txt
+└── alert-mode-examples.txt
+        </div>
+        <p><strong>Purpose:</strong> Few-shot examples demonstrating correct reasoning and tool usage patterns.</p>
+      </div>
+
+      <div class="component">
+        <h3>4. MCP Server Tools <span class="status status-modified">MODIFIED</span></h3>
+        <p><strong>Location:</strong> <code>mcp-server/</code></p>
+        <div class="file-list">
+mcp-server/
+├── src/
+│   ├── index.ts (existing)
+│   └── tools/
+│       └── carina-tools.ts (NEW)
+└── config/
+    └── tools-registry.json (NEW)
+        </div>
+        <p><strong>New Tools Added:</strong></p>
+        <ul>
+          <li>get_pending_actions</li>
+          <li>execute_action</li>
+          <li>complete_action</li>
+          <li>create_alert</li>
+          <li>get_active_alerts</li>
+          <li>dismiss_alert</li>
+          <li>search_knowledge_base</li>
+          <li>get_staff_allocation</li>
+          <li>analyze_task_dependencies</li>
+        </ul>
+      </div>
+
+      <div class="component">
+        <h3>5. UI Components <span class="status status-new">NEW</span></h3>
+        <p><strong>Location:</strong> <code>ui/</code></p>
+        <div class="file-list">
+ui/
+├── components/
+│   ├── ModeSelector.jsx
+│   ├── AskInterface.jsx
+│   ├── ActInterface.jsx
+│   └── AlertInterface.jsx
+├── styles/
+│   └── app.css
+├── App.jsx
+└── package.json
+        </div>
+        <p><strong>Purpose:</strong> React-based frontend implementing the three-mode interface.</p>
+      </div>
+
+      <div class="component">
+        <h3>6. Backend Services <span class="status status-new">NEW</span></h3>
+        <p><strong>Location:</strong> <code>app/services/</code></p>
+        <div class="file-list">
+app/services/
+├── mode_router.rb
+├── action_executor.rb
+└── alert_monitor.rb
+        </div>
+        <p><strong>Purpose:</strong> Ruby services for routing, action execution, and alert management.</p>
+      </div>
+
+      <div class="component">
+        <h3>7. Database Schema <span class="status status-new">NEW</span></h3>
+        <p><strong>Location:</strong> <code>db/</code></p>
+        <div class="file-list">
+db/
+├── schema.sql
+└── setup_database.rb
+        </div>
+        <p><strong>Tables:</strong></p>
+        <ul>
+          <li>actions (pending and completed actions)</li>
+          <li>alerts (active and resolved alerts)</li>
+          <li>conversations (chat history by mode)</li>
+          <li>audit_log (full audit trail)</li>
+        </ul>
+      </div>
+
+      <div class="component">
+        <h3>8. Configuration <span class="status status-new">NEW</span></h3>
+        <p><strong>Location:</strong> <code>config/</code></p>
+        <div class="file-list">
+config/
+└── carina-config.json
+        </div>
+        <p><strong>Purpose:</strong> Central configuration for modes, tools, API settings, and UI preferences.</p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🔧 API Endpoints</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Endpoint</th>
+            <th>Method</th>
+            <th>Purpose</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>/api/ask</code></td>
+            <td>POST</td>
+            <td>Process Ask mode queries</td>
+            <td><span class="status status-new">NEW</span></td>
+          </tr>
+          <tr>
+            <td><code>/api/actions</code></td>
+            <td>GET</td>
+            <td>Retrieve pending/completed actions</td>
+            <td><span class="status status-new">NEW</span></td>
+          </tr>
+          <tr>
+            <td><code>/api/actions/:id/execute</code></td>
+            <td>POST</td>
+            <td>Execute approved action</td>
+            <td><span class="status status-new">NEW</span></td>
+          </tr>
+          <tr>
+            <td><code>/api/alerts</code></td>
+            <td>GET</td>
+            <td>Retrieve active alerts</td>
+            <td><span class="status status-new">NEW</span></td>
+          </tr>
+          <tr>
+            <td><code>/api/alerts</code></td>
+            <td>POST</td>
+            <td>Create new alert</td>
+            <td><span class="status status-new">NEW</span></td>
+          </tr>
+          <tr>
+            <td><code>/api/alerts/:id/dismiss</code></td>
+            <td>POST</td>
+            <td>Dismiss/resolve alert</td>
+            <td><span class="status status-new">NEW</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>➕ Adding New Scenarios</h2>
+      <p>When adding a new scenario (e.g., "Staff scheduling optimization"), you need to create/modify:</p>
+
+      <h3>Required Assets:</h3>
+      <ol>
+        <li>
+          <strong>System Prompt Addition</strong>
+          <p>Add scenario-specific guidance to the relevant mode prompt</p>
+          <div class="file-list">prompts/carina-ask-mode.txt (or act-mode.txt or alert-mode.txt)</div>
+        </li>
+        <li>
+          <strong>Policy Document</strong>
+          <p>Define business rules and constraints</p>
+          <div class="file-list">policies/staff-scheduling-policy.json</div>
+        </li>
+        <li>
+          <strong>Example Scenarios</strong>
+          <p>Create few-shot examples</p>
+          <div class="file-list">examples/staff-scheduling-examples.txt</div>
+        </li>
+        <li>
+          <strong>MCP Tool(s)</strong>
+          <p>Add new tool to MCP server if needed</p>
+          <div class="file-list">mcp-server/src/tools/carina-tools.ts</div>
+          <code>
+{
+  name: "optimize_staff_schedule",
+  description: "Generate optimized staff schedule",
+  inputSchema: { ... }
+}
+          </code>
+        </li>
+        <li>
+          <strong>Backend Service Logic</strong>
+          <p>Implement business logic if complex</p>
+          <div class="file-list">app/services/staff_scheduler.rb</div>
+        </li>
+        <li>
+          <strong>Database Migration</strong> <span class="status status-required">IF NEEDED</span>
+          <p>Add tables/columns if new data types required</p>
+          <div class="file-list">db/migrations/add_staff_schedules.sql</div>
+        </li>
+      </ol>
+
+      <div class="note">
+        <strong>💡 Quick Add Checklist:</strong>
+        <ul style="margin-top: 12px;">
+          <li>☐ Update relevant mode prompt (prompts/)</li>
+          <li>☐ Create policy document (policies/)</li>
+          <li>☐ Add example scenarios (examples/)</li>
+          <li>☐ Implement MCP tool if needed (mcp-server/)</li>
+          <li>☐ Add service logic if complex (app/services/)</li>
+          <li>☐ Update database schema if needed (db/)</li>
+          <li>☐ Test with few-shot examples</li>
+          <li>☐ Update documentation</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>🚀 Installation Steps</h2>
+      <ol>
+        <li>Run installation script: <code>ruby install_carina_system.rb</code></li>
+        <li>Install UI dependencies: <code>cd ui && npm install</code></li>
+        <li>Install MCP server dependencies: <code>cd mcp-server && npm install && npm run build</code></li>
+        <li>Setup database: <code>ruby db/setup_database.rb</code></li>
+        <li>Manually merge routes: Add content from <code>app/routes_addition.rb</code> to <code>app/app.rb</code></li>
+        <li>Start backend: <code>cd app && ruby app.rb</code></li>
+        <li>Start UI (separate terminal): <code>cd ui && npm run dev</code></li>
+        <li>Open browser: <code>http://localhost:4567</code></li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>📊 Testing</h2>
+      <h3>Test Each Mode:</h3>
+      
+      <h4>Ask Mode:</h4>
+      <ul>
+        <li>"Which stores need additional staff this weekend?"</li>
+        <li>"What's the status of organic produce inventory?"</li>
+        <li>"How does our pricing compare to competitors?"</li>
+      </ul>
+
+      <h4>Act Mode:</h4>
+      <ul>
+        <li>Check for pending actions in the interface</li>
+        <li>Click "Take Action" on a recommendation</li>
+        <li>Verify approval routing works correctly</li>
+      </ul>
+
+      <h4>Alert Mode:</h4>
+      <ul>
+        <li>Create a test alert via API or monitoring service</li>
+        <li>Verify alert appears with correct priority</li>
+        <li>Test dismiss functionality</li>
+      </ul>
+    </div>
+
+    <div class="warning">
+      <strong>⚠️ Important Notes:</strong>
+      <ul style="margin-top: 12px;">
+        <li>Backend services currently use mock data - connect to real databases and APIs in production</li>
+        <li>MCP tools require backend API endpoints to be configured</li>
+        <li>Update <code>app/app.rb</code> manually with routes from <code>app/routes_addition.rb</code></li>
+        <li>Configure authentication and authorization before production deployment</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>📖 Additional Resources</h2>
+      <ul>
+        <li><strong>System Prompts:</strong> See <code>prompts/</code> directory for detailed mode behaviors</li>
+        <li><strong>Policy Reference:</strong> See <code>policies/</code> for complete business rules</li>
+        <li><strong>API Documentation:</strong> See <code>docs/api-reference.md</code> (to be created)</li>
+        <li><strong>Deployment Guide:</strong> See <code>deployment-manifest.json</code></li>
+      </ul>
+    </div>
+
+    <div style="margin-top: 60px; padding-top: 20px; border-top: 2px solid #e0e0e0; color: #999; text-align: center;">
+      <p>Generated by Carina Installation System v1.0.0</p>
+      <p>Installation Date: 2025-10-16 12:38:49</p>
+    </div>
+  </div>
+</body>
+</html>

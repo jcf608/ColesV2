@@ -1,0 +1,170 @@
+{
+  "policy_id": "INV-RISK-001",
+  "version": "2.1.0",
+  "effective_date": "2024-01-01",
+  "policy_name": "Items at Risk - Daily Attention Requirements",
+  "category": "inventory",
+  "description": "Identifies products requiring immediate attention based on risk factors",
+  "approval_thresholds": {
+    "low_risk": {
+      "approval_level": "department_supervisor",
+      "criteria": {
+        "days_until_expiry": {
+          "min": 3,
+          "max": 7
+        },
+        "inventory_turnover_ratio": {
+          "min": 0.6,
+          "max": 0.8
+        },
+        "stock_level_percentage": {
+          "min": 15,
+          "max": 25
+        }
+      }
+    },
+    "medium_risk": {
+      "approval_level": "store_manager",
+      "criteria": {
+        "days_until_expiry": {
+          "min": 1,
+          "max": 3
+        },
+        "inventory_turnover_ratio": {
+          "min": 0.3,
+          "max": 0.6
+        },
+        "stock_level_percentage": {
+          "min": 10,
+          "max": 15
+        }
+      }
+    },
+    "high_risk": {
+      "approval_level": "district_manager",
+      "criteria": {
+        "days_until_expiry": {
+          "min": 0,
+          "max": 1
+        },
+        "inventory_turnover_ratio": {
+          "min": 0,
+          "max": 0.3
+        },
+        "stock_level_percentage": {
+          "min": 0,
+          "max": 10
+        }
+      }
+    }
+  },
+  "safety_constraints": {
+    "temperature_sensitive": {
+      "cold_storage_temp_range": {
+        "min": 32,
+        "max": 40
+      },
+      "frozen_temp_range": {
+        "min": -10,
+        "max": 0
+      },
+      "monitoring_frequency_minutes": 30
+    },
+    "food_safety": {
+      "expiry_buffer_days": 1,
+      "recall_immediate_removal": true,
+      "batch_tracking_required": true
+    },
+    "quality_standards": {
+      "visual_inspection_required": true,
+      "damaged_goods_threshold_percentage": 5,
+      "customer_complaint_threshold": 3
+    }
+  },
+  "category_specific_rules": {
+    "produce": {
+      "shelf_life_days": 7,
+      "markdown_trigger_days": 2,
+      "discount_percentage_max": 50,
+      "seasonal_adjustment_factor": 1.2
+    },
+    "dairy": {
+      "shelf_life_days": 14,
+      "markdown_trigger_days": 3,
+      "discount_percentage_max": 30,
+      "temperature_critical": true
+    },
+    "meat": {
+      "shelf_life_days": 5,
+      "markdown_trigger_days": 1,
+      "discount_percentage_max": 40,
+      "butcher_approval_required": true
+    },
+    "bakery": {
+      "shelf_life_days": 3,
+      "markdown_trigger_days": 1,
+      "discount_percentage_max": 60,
+      "end_of_day_clearance": true
+    },
+    "frozen": {
+      "shelf_life_days": 365,
+      "markdown_trigger_days": 30,
+      "discount_percentage_max": 25,
+      "freezer_burn_inspection": true
+    },
+    "pantry": {
+      "shelf_life_days": 730,
+      "markdown_trigger_days": 60,
+      "discount_percentage_max": 20,
+      "best_before_vs_expiry": "best_before"
+    }
+  },
+  "numeric_thresholds": {
+    "reorder_point_percentage": 20,
+    "overstock_threshold_percentage": 150,
+    "shrinkage_alert_percentage": 2,
+    "profit_margin_minimum_percentage": 15,
+    "inventory_value_alert_amount": 10000,
+    "daily_loss_limit_amount": 500,
+    "slow_mover_days_threshold": 30,
+    "dead_stock_days_threshold": 90
+  },
+  "automated_actions": {
+    "price_reduction_triggers": {
+      "days_to_expiry": 2,
+      "overstocked_percentage": 130,
+      "slow_movement_days": 21
+    },
+    "vendor_notification": {
+      "quality_issues": true,
+      "overdelivery": true,
+      "shortage_threshold_percentage": 15
+    },
+    "transfer_recommendations": {
+      "between_stores": true,
+      "minimum_quantity": 5,
+      "maximum_distance_miles": 25
+    }
+  },
+  "reporting_requirements": {
+    "daily_at_risk_report": {
+      "delivery_time": "08:00",
+      "recipients": [
+        "store_manager",
+        "department_heads"
+      ],
+      "format": "json"
+    },
+    "weekly_trend_analysis": {
+      "delivery_day": "monday",
+      "historical_comparison_weeks": 4,
+      "predictive_modeling": true
+    }
+  },
+  "compliance": {
+    "food_safety_regulations": "FDA_2023",
+    "audit_trail_retention_days": 365,
+    "documentation_required": true,
+    "training_requirement_hours": 4
+  }
+}

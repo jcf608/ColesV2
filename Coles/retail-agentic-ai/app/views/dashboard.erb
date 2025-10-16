@@ -1,0 +1,147 @@
+<div class="container">
+  <div class="page-header">
+    <h1>📊 Inventory Dashboard</h1>
+    <p>Real-time view of produce requiring attention</p>
+  </div>
+  
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-value">47</div>
+      <div class="stat-label">Items at Risk</div>
+      <div class="stat-trend warning">↑ 12% from yesterday</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">$1,847</div>
+      <div class="stat-label">Potential Waste</div>
+      <div class="stat-trend warning">↑ $312 today</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">89%</div>
+      <div class="stat-label">Recovery Rate</div>
+      <div class="stat-trend success">↑ 3% this week</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">23</div>
+      <div class="stat-label">Active Markdowns</div>
+      <div class="stat-trend">Same as yesterday</div>
+    </div>
+  </div>
+  
+  <div class="inventory-table-container">
+    <h2>Products Requiring Attention</h2>
+    <table class="inventory-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Stock</th>
+          <th>Price</th>
+          <th>Cost</th>
+          <th>Expires In</th>
+          <th>Velocity</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @inventory_items.each do |item| %>
+        <tr class="status-<%= item[:status] %>">
+          <td>
+            <div class="product-info">
+              <strong><%= item[:name] %></strong>
+              <small><%= item[:product_id] %></small>
+            </div>
+          </td>
+          <td><%= item[:current_stock] %> units</td>
+          <td class="price">$<%= sprintf('%.2f', item[:price]) %></td>
+          <td class="cost">$<%= sprintf('%.2f', item[:cost]) %></td>
+          <td class="expiry-<%= item[:status] %>">
+            <%= item[:expires_in_days] %> days
+          </td>
+          <td><%= item[:velocity] %>/day</td>
+          <td>
+            <span class="status-badge status-<%= item[:status] %>">
+              <%= item[:status].capitalize %>
+            </span>
+          </td>
+          <td>
+            <button 
+              class="btn-action" 
+              onclick="analyzeProduct('<%= item[:product_id] %>', '<%= item[:name] %>')"
+            >
+              Analyze
+            </button>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="analysis-modal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>Product Analysis</h2>
+      <button class="modal-close" onclick="closeModal()">&times;</button>
+    </div>
+    <div id="modal-body" class="modal-body">
+      <div class="thinking-spinner">Analyzing...</div>
+    </div>
+  </div>
+</div>
+
+<script>
+function analyzeProduct(productId, productName) {
+  const modal = document.getElementById('analysis-modal');
+  const modalBody = document.getElementById('modal-body');
+  
+  modal.style.display = 'flex';
+  modalBody.innerHTML = '<div class="thinking-spinner">Analyzing...</div>';
+  
+  fetch('/api/ask', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `message=${encodeURIComponent(`Should we mark down ${productName} (${productId}) today? Check inventory status and provide recommendation.`)}`
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      let html = `<div class="analysis-result">`;
+      
+      if (data.tool_calls && data.tool_calls.length > 0) {
+        html += `<h3>📊 Data Retrieved</h3>`;
+        data.tool_calls.forEach(tool => {
+          html += `
+            <div class="tool-result-card">
+              <h4>🔧 ${tool.name}</h4>
+              <pre>${JSON.stringify(tool.result, null, 2)}</pre>
+            </div>
+          `;
+        });
+      }
+      
+      html += `<h3>🤖 Recommendation</h3>`;
+      html += `<div class="recommendation">${data.response.replace(/\n/g, '<br>')}</div>`;
+      html += `</div>`;
+      
+      modalBody.innerHTML = html;
+    } else {
+      modalBody.innerHTML = `<div class="error">Error: ${data.error}</div>`;
+    }
+  })
+  .catch(error => {
+    modalBody.innerHTML = `<div class="error">Error: ${error.message}</div>`;
+  });
+}
+
+function closeModal() {
+  document.getElementById('analysis-modal').style.display = 'none';
+}
+
+window.onclick = function(event) {
+  const modal = document.getElementById('analysis-modal');
+  if (event.target === modal) {
+    closeModal();
+  }
+}
+</script>

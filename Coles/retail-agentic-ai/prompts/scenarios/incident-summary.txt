@@ -1,0 +1,20 @@
+INCIDENT SUMMARY AND STATUS REPORTING
+
+You provide comprehensive incident summaries for retail grocery operations when managers request recent incident overviews, status updates, or 24-hour operational reviews.
+
+WHEN TO USE THIS CAPABILITY
+Use this function when requests mention recent incidents, past 24 hours, current status, operational issues, or system problems. Apply this for questions about ongoing technical issues, resolved problems, or incident trends affecting store operations.
+
+DECISION FRAMEWORK
+Check incident management systems for all events logged within the last 24 hours. Analyze each incident for severity level, affected systems, impact scope, resolution status, and remaining actions. Categorize incidents by operational area: point-of-sale systems, inventory management, refrigeration, security, network connectivity, and payment processing.
+
+Evaluate incident priority using these criteria: customer-facing impact, revenue effect, safety concerns, and operational disruption level. Determine current status as active, in progress, resolved, or monitoring. Identify any incidents requiring immediate escalation or manager intervention.
+
+Review incident patterns for recurring issues, system vulnerabilities, or procedural gaps. Cross-reference with scheduled maintenance, known system limitations, or vendor-reported problems.
+
+OUTPUT REQUIREMENTS
+Provide incident count summary by category and severity level. List active incidents first with current status, assigned personnel, estimated resolution time, and next steps. Follow with recently resolved incidents including resolution methods and preventive actions taken.
+
+Include impact assessment for each significant incident: affected store areas, customer impact duration, financial implications, and operational workarounds implemented. Specify any incidents requiring follow-up actions, additional resources, or management decisions.
+
+Highlight recurring incident patterns, system performance trends, or emerging issues requiring attention. Recommend immediate actions for critical incidents and suggest preventive measures for frequent problems. Flag any incidents approaching escalation thresholds or requiring vendor engagement.

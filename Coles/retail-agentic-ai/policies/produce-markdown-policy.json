@@ -1,0 +1,49 @@
+{
+  "policy_name": "Produce Markdown Policy",
+  "version": "1.0",
+  "effective_date": "2025-01-01",
+  "margin_thresholds": {
+    "organic_produce": {
+      "minimum_margin_pct": 15
+    },
+    "conventional_produce": {
+      "minimum_margin_pct": 12
+    },
+    "prepackaged_salads": {
+      "minimum_margin_pct": 10
+    }
+  },
+  "approval_rules": [
+    {
+      "markdown_pct_min": 0,
+      "markdown_pct_max": 20,
+      "approval_level": "automatic",
+      "condition": "margin_threshold_met"
+    },
+    {
+      "markdown_pct_min": 20,
+      "markdown_pct_max": 40,
+      "approval_level": "store_manager",
+      "notification_required": true
+    },
+    {
+      "markdown_pct_min": 40,
+      "markdown_pct_max": 100,
+      "approval_level": "regional_manager",
+      "escalation_required": true
+    },
+    {
+      "estimated_waste_usd_min": 500,
+      "approval_level": "regional_manager",
+      "escalation_required": true
+    }
+  ],
+  "quality_actions": {
+    "days_to_expiration": {
+      "1": "markdown_to_move",
+      "0": "remove_from_floor"
+    },
+    "visible_degradation": "remove_from_floor",
+    "supplier_issues": "document_and_escalate"
+  }
+}

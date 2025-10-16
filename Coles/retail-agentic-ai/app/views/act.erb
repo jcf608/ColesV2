@@ -1,0 +1,452 @@
+<div class="ask-container">
+  <div class="ask-header">
+    <h1>Ask</h1>
+  </div>
+  
+  <div class="ask-welcome">
+    <h2>Hi Carina, what would you like to know?</h2>
+    <p>Ask a question to get detailed, actionable insights for your stores</p>
+  </div>
+  
+  <div class="question-grid">
+    <button class="question-card" onclick="askQuestion('What products need attention today?')">
+      <span class="question-icon">⚠️</span>
+      <span class="question-label">Items at Risk</span>
+    </button>
+    <button class="question-card" onclick="askQuestion('Show me products expiring in 2 days')">
+      <span class="question-icon">📅</span>
+      <span class="question-label">Expiring Soon</span>
+    </button>
+    <button class="question-card" onclick="askQuestion('What are competitor prices for berries?')">
+      <span class="question-icon">💰</span>
+      <span class="question-label">Competitor Pricing</span>
+    </button>
+    <button class="question-card" onclick="askQuestion('Check pricing policy for 30% markdown')">
+      <span class="question-icon">✅</span>
+      <span class="question-label">Policy Check</span>
+    </button>
+    <button class="question-card" onclick="askQuestion('Show staff allocation for today')">
+      <span class="question-icon">👥</span>
+      <span class="question-label">Staff Allocation</span>
+    </button>
+    <button class="question-card" onclick="askQuestion('What are the restock options?')">
+      <span class="question-icon">📦</span>
+      <span class="question-label">Restock Options</span>
+    </button>
+    <button class="question-card" onclick="askQuestion('Show server outage impact')">
+      <span class="question-icon">🚨</span>
+      <span class="question-label">Server Outage Impact</span>
+    </button>
+    <button class="question-card" onclick="askQuestion('Check critical systems status')">
+      <span class="question-icon">💻</span>
+      <span class="question-label">Critical Systems Status</span>
+    </button>
+    <button class="question-card" onclick="askQuestion('What changed this week?')">
+      <span class="question-icon">📋</span>
+      <span class="question-label">This Week's Changes</span>
+    </button>
+    <button class="question-card" onclick="askQuestion('Show recent incidents')">
+      <span class="question-icon">⚡</span>
+      <span class="question-label">Recent Incidents</span>
+    </button>
+    <button class="question-card" onclick="askQuestion('Run system health check')">
+      <span class="question-icon">💚</span>
+      <span class="question-label">System Health Check</span>
+    </button>
+    <button class="question-card" onclick="askQuestion('Check backup status')">
+      <span class="question-icon">📁</span>
+      <span class="question-label">Backup Status</span>
+    </button>
+    <button class="question-card" onclick="askQuestion('Show security alerts')">
+      <span class="question-icon">🔒</span>
+      <span class="question-label">Security Alerts</span>
+    </button>
+    <button class="question-card" onclick="askQuestion('Show capacity forecast')">
+      <span class="question-icon">📊</span>
+      <span class="question-label">Capacity Forecast</span>
+    </button>
+    <button class="question-card" onclick="askQuestion('Check weather impact')">
+      <span class="question-icon">🌤️</span>
+      <span class="question-label">Weather Impact</span>
+    </button>
+  </div>
+  
+  <div id="conversation-area" class="conversation-area"></div>
+  
+  <div class="ask-input-container">
+    <form id="ask-form">
+      <div class="ask-input-wrapper">
+        <span class="input-icon">💬</span>
+        <input 
+          type="text" 
+          id="ask-input" 
+          class="ask-input" 
+          placeholder="Ask here..."
+          autocomplete="off"
+        >
+        <div class="input-actions">
+          <button type="button" class="icon-btn">✏️</button>
+          <button type="submit" class="icon-btn send-btn">➜</button>
+        </div>
+      </div>
+    </form>
+    <p class="input-hint">Press Enter to send or use voice input</p>
+  </div>
+</div>
+
+<script>
+const askForm = document.getElementById('ask-form');
+const askInput = document.getElementById('ask-input');
+const conversationArea = document.getElementById('conversation-area');
+
+askForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const message = askInput.value.trim();
+  if (!message) return;
+  
+  // Add user message to conversation
+  addConversationMessage('You', message);
+  askInput.value = '';
+  
+  // Add "analyzing" indicator
+  addAnalyzingIndicator(message);
+  
+  try {
+    const response = await fetch('/api/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `message=${encodeURIComponent(message)}`
+    });
+    
+    const data = await response.json();
+    removeAnalyzingIndicator();
+    
+    if (data.success) {
+      // Display tool calls if any
+      if (data.tool_calls && data.tool_calls.length > 0) {
+        data.tool_calls.forEach(tool => {
+          addToolCallDisplay(tool);
+        });
+      }
+      
+      // Display agent response
+      addConversationMessage('Assistant', data.response);
+    } else {
+      addConversationMessage('Assistant', `Error: ${data.error}`, true);
+    }
+  } catch (error) {
+    removeAnalyzingIndicator();
+    addConversationMessage('Assistant', `Error: ${error.message}`, true);
+  }
+});
+
+function addConversationMessage(sender, content, isError = false) {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `conversation-message ${isError ? 'error' : ''}`;
+  
+  // Format the content to handle line breaks and basic text formatting
+  let formattedContent = content
+    .replace(/\n/g, '<br>')  // Convert newlines to HTML line breaks
+    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')  // Convert **text** to bold
+    .replace(/\*(.*?)\*/g, '<em>$1</em>')  // Convert *text* to italic
+    .replace(/`(.*?)`/g, '<code style="background: rgba(0,0,0,0.1); padding: 2px 4px; border-radius: 3px;">$1</code>');  // Convert `code` to styled code
+  
+  messageDiv.innerHTML = `
+    <p><strong>${sender}:</strong> ${formattedContent}</p>
+  `;
+  conversationArea.appendChild(messageDiv);
+  conversationArea.scrollTop = conversationArea.scrollHeight;
+}
+
+function addAnalyzingIndicator(message) {
+  const indicator = document.createElement('div');
+  indicator.id = 'analyzing-indicator';
+  indicator.className = 'conversation-message analyzing';
+  indicator.innerHTML = `
+    <p><strong>Assistant:</strong> Analyzing "${message}"...</p>
+  `;
+  conversationArea.appendChild(indicator);
+  conversationArea.scrollTop = conversationArea.scrollHeight;
+}
+
+function removeAnalyzingIndicator() {
+  const indicator = document.getElementById('analyzing-indicator');
+  if (indicator) indicator.remove();
+}
+
+function addToolCallDisplay(tool) {
+  const toolDiv = document.createElement('div');
+  toolDiv.className = 'tool-call-display';
+  
+  const toolConfig = getToolConfig(tool.name);
+  
+  toolDiv.innerHTML = `
+    <div class="tool-header" style="background: ${toolConfig.color};">
+      <span class="tool-icon">${toolConfig.icon}</span>
+      <span class="tool-name">${toolConfig.label}</span>
+    </div>
+    <div class="tool-result">
+      ${formatToolResult(tool.name, tool.result)}
+    </div>
+  `;
+  
+  conversationArea.appendChild(toolDiv);
+  conversationArea.scrollTop = conversationArea.scrollHeight;
+}
+
+function getToolConfig(toolName) {
+  const configs = {
+    'get_inventory_status': {
+      icon: '📦',
+      label: 'Inventory Status',
+      color: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+    },
+    'query_sales_velocity': {
+      icon: '📈',
+      label: 'Sales Velocity',
+      color: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
+    },
+    'check_pricing_policy': {
+      icon: '✅',
+      label: 'Pricing Policy',
+      color: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
+    },
+    'get_competitor_pricing': {
+      icon: '💰',
+      label: 'Competitor Pricing',
+      color: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
+    },
+    'submit_price_change': {
+      icon: '🎯',
+      label: 'Price Change',
+      color: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
+    }
+  };
+  
+  return configs[toolName] || {
+    icon: '🔧',
+    label: toolName,
+    color: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)'
+  };
+}
+
+function formatToolResult(toolName, result) {
+  if (result.error) {
+    return `<div class="error-message">❌ ${result.error}</div>`;
+  }
+  
+  switch(toolName) {
+    case 'get_inventory_status':
+      return formatInventoryStatus(result);
+    case 'query_sales_velocity':
+      return formatSalesVelocity(result);
+    case 'check_pricing_policy':
+      return formatPricingPolicy(result);
+    case 'get_competitor_pricing':
+      return formatCompetitorPricing(result);
+    case 'submit_price_change':
+      return formatPriceChange(result);
+    default:
+      return `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+  }
+}
+
+function formatInventoryStatus(data) {
+  const expiryClass = parseInt(data.expiration_date?.split('-')[2]) <= new Date().getDate() + 2 ? 'urgent' : 'normal';
+  
+  return `
+    <div class="tool-data-grid">
+      <div class="data-item">
+        <span class="data-label">Product ID</span>
+        <span class="data-value">${data.product_id}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Store</span>
+        <span class="data-value">${data.store_id}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Stock</span>
+        <span class="data-value highlight">${data.current_stock} units</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Price</span>
+        <span class="data-value">$${data.shelf_price?.toFixed(2)}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Cost</span>
+        <span class="data-value">$${data.cost_per_unit?.toFixed(2)}</span>
+      </div>
+      <div class="data-item ${expiryClass}">
+        <span class="data-label">Expires</span>
+        <span class="data-value">${data.expiration_date}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Daily Sales</span>
+        <span class="data-value">${data.average_daily_sales} avg</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Sold Today</span>
+        <span class="data-value">${data.units_sold_today} units</span>
+      </div>
+    </div>
+    ${data.supply_schedule && data.supply_schedule.length > 0 ? `
+      <div class="supply-schedule">
+        <strong>📅 Upcoming Deliveries:</strong>
+        ${data.supply_schedule.map(s => `
+          <div class="delivery-item">
+            ${s.delivery_date}: <strong>${s.quantity} units</strong>
+          </div>
+        `).join('')}
+      </div>
+    ` : ''}
+  `;
+}
+
+function formatSalesVelocity(data) {
+  const trendIcon = data.velocity_trend === 'declining' ? '📉' : 
+                    data.velocity_trend === 'increasing' ? '📈' : '➡️';
+  const trendClass = data.velocity_trend === 'declining' ? 'trend-down' : 
+                     data.velocity_trend === 'increasing' ? 'trend-up' : 'trend-stable';
+  
+  return `
+    <div class="tool-data-grid">
+      <div class="data-item">
+        <span class="data-label">Current Velocity</span>
+        <span class="data-value highlight">${data.velocity_units_per_day} units/day</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Baseline</span>
+        <span class="data-value">${data.baseline_velocity} units/day</span>
+      </div>
+      <div class="data-item ${trendClass}">
+        <span class="data-label">Trend</span>
+        <span class="data-value">${trendIcon} ${data.velocity_trend}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Period</span>
+        <span class="data-value">${data.days_analyzed} days</span>
+      </div>
+    </div>
+    ${data.daily_breakdown ? `
+      <div class="daily-breakdown">
+        <strong>📊 Daily Sales:</strong>
+        <div class="breakdown-chart">
+          ${data.daily_breakdown.slice(0, 7).map(day => `
+            <div class="breakdown-bar">
+              <div class="bar-fill" style="height: ${(day.units_sold / 12) * 100}%"></div>
+              <div class="bar-label">${day.date.split('-')[2]}/${day.date.split('-')[1]}</div>
+              <div class="bar-value">${day.units_sold}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    ` : ''}
+  `;
+}
+
+function formatPricingPolicy(data) {
+  const approvedClass = data.approved ? 'approved' : 'rejected';
+  const approvedIcon = data.approved ? '✅' : '❌';
+  
+  return `
+    <div class="policy-result ${approvedClass}">
+      <div class="policy-status">
+        ${approvedIcon} ${data.approved ? 'APPROVED' : 'REJECTED'}
+      </div>
+      <div class="tool-data-grid">
+        <div class="data-item">
+          <span class="data-label">Markdown</span>
+          <span class="data-value highlight">${data.markdown_percentage}%</span>
+        </div>
+        <div class="data-item">
+          <span class="data-label">Resulting Margin</span>
+          <span class="data-value">${data.resulting_margin_pct}%</span>
+        </div>
+        ${data.requires_manager_approval ? `
+          <div class="data-item warning">
+            <span class="data-label">⚠️ Requires</span>
+            <span class="data-value">Manager Approval</span>
+          </div>
+        ` : ''}
+        ${data.approval_token ? `
+          <div class="data-item">
+            <span class="data-label">Token</span>
+            <span class="data-value token">${data.approval_token}</span>
+          </div>
+        ` : ''}
+      </div>
+      ${data.policy_notes ? `
+        <div class="policy-notes">
+          📋 ${data.policy_notes}
+        </div>
+      ` : ''}
+    </div>
+  `;
+}
+
+function formatCompetitorPricing(data) {
+  return `
+    <div class="competitor-pricing">
+      <div class="pricing-header">
+        <strong>📍 ${data.location}</strong> - ${data.category}
+      </div>
+      <table class="competitor-table">
+        <thead>
+          <tr>
+            <th>Competitor</th>
+            <th>Price</th>
+            <th>Distance</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${data.competitors.map(comp => `
+            <tr>
+              <td>${comp.name}</td>
+              <td class="price-cell">$${comp.price.toFixed(2)}</td>
+              <td>${comp.distance_miles} mi</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+      <div class="pricing-summary">
+        <div class="summary-item">
+          <span class="summary-label">Lowest:</span>
+          <span class="summary-value">$${data.lowest_price.toFixed(2)}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Average:</span>
+          <span class="summary-value">$${data.average_price.toFixed(2)}</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function formatPriceChange(data) {
+  return `
+    <div class="price-change-result">
+      <div class="success-message">
+        ✅ Price change executed successfully!
+      </div>
+      <div class="tool-data-grid">
+        <div class="data-item">
+          <span class="data-label">Change ID</span>
+          <span class="data-value">${data.change_id}</span>
+        </div>
+        <div class="data-item">
+          <span class="data-label">Updated</span>
+          <span class="data-value">${new Date(data.updated_at).toLocaleString()}</span>
+        </div>
+      </div>
+      <div class="change-message">
+        ${data.message}
+      </div>
+    </div>
+  `;
+}
+
+function askQuestion(question) {
+  askInput.value = question;
+  askForm.dispatchEvent(new Event('submit'));
+}
+</script>

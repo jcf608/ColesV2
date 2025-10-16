@@ -1,0 +1,99 @@
+[
+  {
+    "name": "get_weather_forecast",
+    "description": "Retrieves detailed weather forecast for a specific location and date range, including temperature, precipitation, humidity, and severe weather alerts",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "City, state/province, or zip code for weather forecast"
+        },
+        "date": {
+          "type": "string",
+          "description": "Target date in YYYY-MM-DD format"
+        },
+        "include_hourly": {
+          "type": "boolean",
+          "description": "Whether to include hourly breakdown of weather conditions"
+        }
+      },
+      "required": ["location", "date"]
+    }
+  },
+  {
+    "name": "get_current_produce_orders",
+    "description": "Retrieves current produce orders scheduled for delivery or pickup, including quantities, types of produce, delivery locations, and timing",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "date_range_start": {
+          "type": "string",
+          "description": "Start date for order retrieval in YYYY-MM-DD format"
+        },
+        "date_range_end": {
+          "type": "string",
+          "description": "End date for order retrieval in YYYY-MM-DD format"
+        },
+        "location_filter": {
+          "type": "string",
+          "description": "Optional filter to show orders for specific delivery location or region"
+        }
+      },
+      "required": ["date_range_start", "date_range_end"]
+    }
+  },
+  {
+    "name": "analyze_weather_produce_impact",
+    "description": "Analyzes how specific weather conditions affect different types of produce in terms of demand, shelf life, transportation, and storage requirements",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "weather_conditions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of weather conditions like 'rain', 'heat_wave', 'cold_snap', 'snow', 'high_humidity'"
+        },
+        "produce_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of produce types to analyze impact for"
+        },
+        "analysis_type": {
+          "type": "string",
+          "description": "Type of analysis: 'demand_forecast', 'storage_impact', 'transportation_risk', or 'all'"
+        }
+      },
+      "required": ["weather_conditions", "produce_types"]
+    }
+  },
+  {
+    "name": "get_supply_chain_alerts",
+    "description": "Retrieves current supply chain alerts and disruptions that may be weather-related, including supplier delays, transportation issues, and warehouse capacity constraints",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "region": {
+          "type": "string",
+          "description": "Geographic region to check for supply chain alerts"
+        },
+        "alert_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Types of alerts to retrieve: 'weather_delays', 'transportation', 'supplier_issues', 'storage_capacity'"
+        },
+        "severity_level": {
+          "type": "string",
+          "description": "Minimum severity level: 'low', 'medium', 'high', 'critical'"
+        }
+      },
+      "required": ["region"]
+    }
+  }
+]

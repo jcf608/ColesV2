@@ -1,0 +1,351 @@
+<div class="page-header">
+  <h1>Ask Assistant</h1>
+  <p>Hi there, what would you like to know?</p>
+  <p class="subtitle">Ask a question to get detailed, actionable insights for your stores</p>
+</div>
+
+<div class="page-content">
+  <div class="quick-questions" id="quick-questions">
+    <!-- Questions will be loaded dynamically -->
+    <div class="loading-message">Loading questions...</div>
+  </div>
+</div>
+<div class="chat-area" id="chat-area" style="display: none;"></div>
+
+<div class="input-section">
+  <div class="input-bar">
+    <span class="input-icon">💬</span>
+    <input type="text" id="ask-input" class="input-field" placeholder="Ask here..." />
+    <div class="input-actions">
+      <button class="icon-btn" onclick="startVoiceInput()">🎤</button>
+      <button class="icon-btn send-btn" onclick="sendQuestion()">➜</button>
+    </div>
+  </div>
+  <p class="input-hint">Press Enter to send or use voice input</p>
+</div>
+<script>
+// Load questions dynamically on page load
+async function loadQuestions() {
+  const container = document.getElementById('quick-questions');
+  
+  try {
+    const response = await fetch('/api/ask-questions');
+    const data = await response.json();
+    
+    if (data.success && data.questions && data.questions.length > 0) {
+      container.innerHTML = '';
+      
+      data.questions.forEach(q => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'quick-question';
+        questionDiv.onclick = () => askQuestion(q.question);
+        
+        // Add icon if present
+        if (q.icon) {
+          questionDiv.innerHTML = `<span style="margin-right: 0.5rem;">${q.icon}</span>${q.label || q.question}`;
+        } else {
+          questionDiv.textContent = q.label || q.question;
+        }
+        
+        container.appendChild(questionDiv);
+      });
+    } else {
+      container.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--text-secondary);">No questions available</div>';
+    }
+  } catch (error) {
+    console.error('Error loading questions:', error);
+    container.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--color-red);">Error loading questions</div>';
+  }
+}
+
+// Load questions when page loads
+document.addEventListener('DOMContentLoaded', loadQuestions);
+
+function askQuestion(q) { 
+  document.getElementById('ask-input').value = q; 
+  const chatArea = document.getElementById('chat-area');
+  chatArea.style.display = 'block';
+  sendQuestion(); 
+}
+
+async function sendQuestion() {
+  const input = document.getElementById('ask-input');
+  const question = input.value.trim();
+  if (!question) return;
+  
+  const chatArea = document.getElementById('chat-area');
+  
+  // Show chat area when first message is sent
+  chatArea.style.display = 'block';
+  
+  // Add user message
+  addConversationMessage('You', question, chatArea);
+  
+  input.value = '';
+  
+  // Add analyzing indicator
+  addAnalyzingIndicator(question, chatArea);
+  
+  // Make actual API call
+  try {
+    const response = await fetch('/api/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: 'message=' + encodeURIComponent(question)
+    });
+    
+    const data = await response.json();
+    
+    // Remove analyzing indicator
+    removeAnalyzingIndicator(chatArea);
+    
+    if (data.success) {
+      // Display tool calls if any
+      if (data.tool_calls && data.tool_calls.length > 0) {
+        data.tool_calls.forEach(tool => {
+          addToolCallDisplay(tool, chatArea);
+        });
+      }
+      
+      // Display assistant response
+      addConversationMessage('Assistant', data.response, chatArea);
+    } else {
+      addConversationMessage('Assistant', 'Error: ' + data.error, chatArea, true);
+    }
+    
+    chatArea.scrollTop = chatArea.scrollHeight;
+  } catch (error) {
+    removeAnalyzingIndicator(chatArea);
+    addConversationMessage('Assistant', 'Error: ' + error.message, chatArea, true);
+    chatArea.scrollTop = chatArea.scrollHeight;
+  }
+}
+
+function addConversationMessage(sender, content, container, isError = false) {
+  const messageDiv = document.createElement('div');
+  messageDiv.style.marginBottom = '1rem';
+  messageDiv.style.padding = '1rem';
+  messageDiv.style.borderRadius = 'var(--radius-lg)';
+  
+  if (isError) {
+    messageDiv.style.background = 'var(--color-red-light)';
+    messageDiv.style.color = 'var(--color-red)';
+  } else if (sender === 'You') {
+    messageDiv.style.background = 'var(--bg-secondary)';
+  } else {
+    messageDiv.style.background = 'var(--color-blue-light)';
+  }
+  
+  messageDiv.innerHTML = '<strong>' + sender + ':</strong> ' + content;
+  container.appendChild(messageDiv);
+  container.scrollTop = container.scrollHeight;
+}
+
+function addAnalyzingIndicator(message, container) {
+  const indicator = document.createElement('div');
+  indicator.id = 'analyzing-indicator';
+  indicator.style.marginBottom = '1rem';
+  indicator.style.padding = '1rem';
+  indicator.style.background = 'var(--color-blue-light)';
+  indicator.style.borderRadius = 'var(--radius-lg)';
+  indicator.innerHTML = '<strong>Assistant:</strong> Analyzing "' + message + '"...';
+  container.appendChild(indicator);
+  container.scrollTop = container.scrollHeight;
+}
+
+function removeAnalyzingIndicator(container) {
+  const indicator = document.getElementById('analyzing-indicator');
+  if (indicator) indicator.remove();
+}
+
+function addToolCallDisplay(tool, container) {
+  const toolDiv = document.createElement('div');
+  toolDiv.style.marginBottom = '1rem';
+  toolDiv.style.borderRadius = 'var(--radius-lg)';
+  toolDiv.style.overflow = 'hidden';
+  toolDiv.style.border = '1px solid var(--border-color)';
+  
+  const config = getToolConfig(tool.name);
+  
+  const headerDiv = document.createElement('div');
+  headerDiv.style.padding = '0.75rem 1rem';
+  headerDiv.style.background = config.color;
+  headerDiv.style.color = 'white';
+  headerDiv.style.fontWeight = '600';
+  headerDiv.innerHTML = '<span style="margin-right: 0.5rem;">' + config.icon + '</span>' + config.label;
+  
+  const resultDiv = document.createElement('div');
+  resultDiv.style.padding = '1rem';
+  resultDiv.style.background = 'white';
+  resultDiv.innerHTML = formatToolResult(tool.name, tool.result);
+  
+  toolDiv.appendChild(headerDiv);
+  toolDiv.appendChild(resultDiv);
+  container.appendChild(toolDiv);
+  container.scrollTop = container.scrollHeight;
+}
+
+function getToolConfig(toolName) {
+  const configs = {
+    'get_inventory_status': {
+      icon: '📦',
+      label: 'Inventory Status',
+      color: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+    },
+    'query_sales_velocity': {
+      icon: '📈',
+      label: 'Sales Velocity',
+      color: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
+    },
+    'check_pricing_policy': {
+      icon: '✅',
+      label: 'Pricing Policy',
+      color: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
+    },
+    'get_competitor_pricing': {
+      icon: '💰',
+      label: 'Competitor Pricing',
+      color: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
+    },
+    'submit_price_change': {
+      icon: '🎯',
+      label: 'Price Change',
+      color: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
+    }
+  };
+  
+  return configs[toolName] || {
+    icon: '🔧',
+    label: toolName,
+    color: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)'
+  };
+}
+
+function formatToolResult(toolName, result) {
+  if (result.error) {
+    return '<div style="color: var(--color-red); font-weight: 600;">❌ ' + result.error + '</div>';
+  }
+  
+  switch(toolName) {
+    case 'get_inventory_status':
+      return formatInventoryStatus(result);
+    case 'query_sales_velocity':
+      return formatSalesVelocity(result);
+    case 'check_pricing_policy':
+      return formatPricingPolicy(result);
+    case 'get_competitor_pricing':
+      return formatCompetitorPricing(result);
+    case 'submit_price_change':
+      return formatPriceChange(result);
+    default:
+      return '<pre style="background: var(--bg-secondary); padding: 1rem; border-radius: 0.5rem; overflow-x: auto;">' + JSON.stringify(result, null, 2) + '</pre>';
+  }
+}
+
+function formatInventoryStatus(data) {
+  let html = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Product ID</div><div style="font-weight: 600;">' + data.product_id + '</div></div>';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Store</div><div style="font-weight: 600;">' + data.store_id + '</div></div>';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Stock</div><div style="font-weight: 600; color: var(--color-blue);">' + data.current_stock + ' units</div></div>';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Price</div><div style="font-weight: 600;">$' + (data.shelf_price || 0).toFixed(2) + '</div></div>';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Cost</div><div style="font-weight: 600;">$' + (data.cost_per_unit || 0).toFixed(2) + '</div></div>';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Expires</div><div style="font-weight: 600; color: var(--color-orange);">' + data.expiration_date + '</div></div>';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Daily Sales</div><div style="font-weight: 600;">' + data.average_daily_sales + ' avg</div></div>';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Sold Today</div><div style="font-weight: 600;">' + data.units_sold_today + ' units</div></div>';
+  html += '</div>';
+  return html;
+}
+
+function formatSalesVelocity(data) {
+  const trendIcon = data.velocity_trend === 'declining' ? '📉' : data.velocity_trend === 'increasing' ? '📈' : '➡️';
+  
+  let html = '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Current Velocity</div><div style="font-weight: 600; color: var(--color-blue);">' + data.velocity_units_per_day + ' units/day</div></div>';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Baseline</div><div style="font-weight: 600;">' + data.baseline_velocity + ' units/day</div></div>';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Trend</div><div style="font-weight: 600;">' + trendIcon + ' ' + data.velocity_trend + '</div></div>';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Period</div><div style="font-weight: 600;">' + data.days_analyzed + ' days</div></div>';
+  html += '</div>';
+  return html;
+}
+
+function formatPricingPolicy(data) {
+  const approvedIcon = data.approved ? '✅' : '❌';
+  const approvedText = data.approved ? 'APPROVED' : 'REJECTED';
+  const approvedColor = data.approved ? 'var(--color-green)' : 'var(--color-red)';
+  
+  let html = '<div style="margin-bottom: 1rem; padding: 1rem; background: ' + (data.approved ? 'var(--color-green-light)' : 'var(--color-red-light)') + '; border-radius: 0.5rem; text-align: center;">';
+  html += '<div style="font-size: 1.5rem; font-weight: 700; color: ' + approvedColor + ';">' + approvedIcon + ' ' + approvedText + '</div>';
+  html += '</div>';
+  
+  html += '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem;">';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Markdown</div><div style="font-weight: 600; color: var(--color-blue);">' + data.markdown_percentage + '%</div></div>';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Resulting Margin</div><div style="font-weight: 600;">' + data.resulting_margin_pct + '%</div></div>';
+  
+  if (data.requires_manager_approval) {
+    html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">⚠️ Requires</div><div style="font-weight: 600; color: var(--color-orange);">Manager Approval</div></div>';
+  }
+  
+  if (data.approval_token) {
+    html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Token</div><div style="font-weight: 600; font-family: monospace; background: var(--bg-secondary); padding: 0.25rem 0.5rem; border-radius: 0.25rem; display: inline-block;">' + data.approval_token + '</div></div>';
+  }
+  
+  html += '</div>';
+  
+  if (data.policy_notes) {
+    html += '<div style="margin-top: 1rem; padding: 1rem; background: var(--bg-secondary); border-radius: 0.5rem;">📋 ' + data.policy_notes + '</div>';
+  }
+  
+  return html;
+}
+
+function formatCompetitorPricing(data) {
+  let html = '<div style="margin-bottom: 1rem; font-weight: 600;">📍 ' + data.location + ' - ' + data.category + '</div>';
+  
+  html += '<table style="width: 100%; border-collapse: collapse;">';
+  html += '<thead><tr style="border-bottom: 2px solid var(--border-color);">';
+  html += '<th style="padding: 0.5rem; text-align: left;">Competitor</th>';
+  html += '<th style="padding: 0.5rem; text-align: left;">Price</th>';
+  html += '<th style="padding: 0.5rem; text-align: left;">Distance</th>';
+  html += '</tr></thead><tbody>';
+  
+  data.competitors.forEach(comp => {
+    html += '<tr style="border-bottom: 1px solid var(--border-color);">';
+    html += '<td style="padding: 0.5rem;">' + comp.name + '</td>';
+    html += '<td style="padding: 0.5rem; font-weight: 600;">$' + comp.price.toFixed(2) + '</td>';
+    html += '<td style="padding: 0.5rem;">' + comp.distance_miles + ' mi</td>';
+    html += '</tr>';
+  });
+  
+  html += '</tbody></table>';
+  
+  html += '<div style="margin-top: 1rem; display: flex; gap: 2rem;">';
+  html += '<div><span style="color: var(--text-secondary);">Lowest:</span> <strong>$' + data.lowest_price.toFixed(2) + '</strong></div>';
+  html += '<div><span style="color: var(--text-secondary);">Average:</span> <strong>$' + data.average_price.toFixed(2) + '</strong></div>';
+  html += '</div>';
+  
+  return html;
+}
+
+function formatPriceChange(data) {
+  let html = '<div style="margin-bottom: 1rem; padding: 1rem; background: var(--color-green-light); border-radius: 0.5rem; text-align: center; color: var(--color-green); font-weight: 600;">';
+  html += '✅ Price change executed successfully!';
+  html += '</div>';
+  
+  html += '<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Change ID</div><div style="font-weight: 600;">' + data.change_id + '</div></div>';
+  html += '<div><div style="color: var(--text-secondary); font-size: 0.875rem; margin-bottom: 0.25rem;">Updated</div><div style="font-weight: 600;">' + new Date(data.updated_at).toLocaleString() + '</div></div>';
+  html += '</div>';
+  
+  html += '<div style="margin-top: 1rem; padding: 1rem; background: var(--bg-secondary); border-radius: 0.5rem;">' + data.message + '</div>';
+  
+  return html;
+}
+
+function startVoiceInput() { 
+  alert('Voice input coming soon!'); 
+}
+
+document.getElementById('ask-input').addEventListener('keypress', function(e) { 
+  if (e.key === 'Enter') sendQuestion(); 
+});
+</script>

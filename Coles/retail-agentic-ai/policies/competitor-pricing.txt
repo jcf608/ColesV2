@@ -1,0 +1,109 @@
+COMPETITOR PRICING POLICY - BERRIES
+Policy Number: PRICING-001-BERRIES
+Effective Date: [Date]
+Department: Pricing & Merchandising
+
+SCOPE AND PURPOSE
+
+This policy establishes procedures for monitoring, analyzing, and responding to competitor pricing on berry products including strawberries, blueberries, raspberries, blackberries, and mixed berry packages. The policy applies to all fresh and packaged berry products in our produce department.
+
+The purpose is to maintain competitive pricing while protecting profit margins and ensuring consistent decision-making across all store locations. This policy ensures our berry pricing remains competitive in the market while supporting business profitability objectives.
+
+DECISION THRESHOLDS
+
+Automated Pricing Adjustments (No Approval Required)
+- Price adjustments of 3% or less from current retail price
+- Competitor price differences of $0.25 or less per package
+- Adjustments that maintain gross margin above 35%
+- Price changes within seasonal fluctuation ranges established quarterly
+
+Manager Approval Required
+- Price adjustments between 3% and 8% from current retail price
+- Competitor price differences between $0.26 and $0.75 per package
+- Adjustments that reduce gross margin to 25-35% range
+- Emergency weekend pricing changes exceeding automated thresholds
+
+Regional Director Approval Required
+- Price adjustments exceeding 8% from current retail price
+- Competitor price differences exceeding $0.75 per package
+- Any pricing that reduces gross margin below 25%
+- Market-wide promotional pricing strategies
+- Loss leader pricing initiatives
+
+APPROVAL REQUIREMENTS
+
+Store Manager Authority
+- Individual SKU adjustments up to $0.75 per package
+- Temporary promotional pricing for 7 days or less
+- Local competitor matching within established thresholds
+- Emergency pricing for product quality or expiration issues
+
+Regional Manager Authority
+- Category-wide pricing adjustments affecting multiple berry types
+- Promotional pricing extending 8-30 days
+- Pricing strategies affecting 5 or more store locations
+- Seasonal pricing program implementation
+
+Corporate Pricing Director Authority
+- Chain-wide pricing policy changes
+- Supplier contract pricing modifications
+- Long-term promotional partnerships exceeding 30 days
+- Pricing strategies that impact annual profit margins
+
+SAFETY CONSTRAINTS AND GUARDRAILS
+
+Financial Guardrails
+- Minimum gross margin of 15% on any berry product
+- Maximum single-day price reduction of 15%
+- No pricing below wholesale cost without executive approval
+- Weekly gross margin targets must average minimum 30%
+
+Operational Constraints
+- Price changes must allow 24-hour system processing time
+- No more than two price changes per SKU per week
+- Competitor price matching requires verification from two sources
+- Price adjustments effective only during designated change windows
+
+Market Position Guardrails
+- Pricing must remain within 10% of market average for comparable quality
+- Premium berry products must maintain minimum 15% price premium over conventional
+- Organic berry pricing must sustain minimum 25% premium over conventional equivalents
+
+Customer Impact Limits
+- Price increases limited to 8% per change to minimize customer shock
+- Promotional pricing must maintain consistent quality standards
+- Rain check policy applies to all advertised berry specials
+
+DOCUMENTATION REQUIREMENTS
+
+Daily Documentation
+- Competitor price surveys from minimum three major competitors
+- Price change logs with timestamp and authorization code
+- Gross margin calculations for all adjusted items
+- Inventory turnover rates for promotional items
+
+Weekly Reporting
+- Competitive pricing analysis summary report
+- Margin performance versus targets by berry category
+- Sales volume impact assessment from pricing changes
+- Customer complaint summary related to berry pricing
+
+Monthly Documentation
+- Comprehensive competitor pricing trend analysis
+- Profit margin performance review by store location
+- Seasonal pricing strategy effectiveness evaluation
+- Supplier cost analysis and contract performance review
+
+Required Data Sources
+- Designated competitor store surveys conducted minimum twice weekly
+- Online competitor pricing monitoring through approved platforms
+- Supplier wholesale price tracking and trend analysis
+- Internal sales and margin performance reporting systems
+
+Approval Documentation
+- Written justification for all pricing decisions requiring manager approval
+- Email confirmation for all corporate-level pricing decisions
+- Audit trail maintenance for all automated pricing adjustments
+- Exception reporting for any decisions overriding established thresholds
+
+This policy will be reviewed quarterly and updated annually or as market conditions require. All pricing personnel must complete annual training on these procedures and maintain current certification on pricing management systems.

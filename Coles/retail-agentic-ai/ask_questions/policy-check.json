@@ -1,0 +1,9 @@
+{
+  "id": "policy-check",
+  "icon": "✅",
+  "label": "Policy Check",
+  "question": "Check pricing policy for 30% markdown",
+  "category": "policy",
+  "order": 4,
+  "enabled": true
+}

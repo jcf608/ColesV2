@@ -1,0 +1,9 @@
+{
+  "id": "security-alerts",
+  "icon": "🔒",
+  "label": "Security Alerts",
+  "question": "Show me any active security alerts or vulnerabilities requiring attention",
+  "category": "it-security",
+  "order": 16,
+  "enabled": true
+}

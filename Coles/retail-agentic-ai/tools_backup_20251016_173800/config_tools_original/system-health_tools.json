@@ -1,0 +1,109 @@
+[
+  {
+    "name": "get_system_health_status",
+    "description": "Retrieves current health status and metrics for production systems including CPU, memory, disk usage, and service availability",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "environment": {
+          "type": "string",
+          "description": "Environment to check (e.g., production, staging)"
+        },
+        "system_filter": {
+          "type": "string",
+          "description": "Optional filter to check specific systems or services"
+        },
+        "include_metrics": {
+          "type": "boolean",
+          "description": "Whether to include detailed performance metrics"
+        }
+      },
+      "required": ["environment"]
+    }
+  },
+  {
+    "name": "check_service_availability",
+    "description": "Tests connectivity and response times for critical services and endpoints",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "services": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of service names to check, or empty array for all services"
+        },
+        "timeout_seconds": {
+          "type": "integer",
+          "description": "Timeout for each service check in seconds"
+        },
+        "include_dependencies": {
+          "type": "boolean",
+          "description": "Whether to check dependent services as well"
+        }
+      },
+      "required": ["services"]
+    }
+  },
+  {
+    "name": "send_alert_notification",
+    "description": "Sends alert notifications to configured channels when system issues are detected",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "severity": {
+          "type": "string",
+          "enum": ["low", "medium", "high", "critical"],
+          "description": "Alert severity level"
+        },
+        "message": {
+          "type": "string",
+          "description": "Alert message content"
+        },
+        "affected_systems": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of affected system names"
+        },
+        "channels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Notification channels (email, slack, pagerduty, etc.)"
+        }
+      },
+      "required": ["severity", "message", "affected_systems"]
+    }
+  },
+  {
+    "name": "get_infrastructure_logs",
+    "description": "Retrieves and filters system logs for error analysis and troubleshooting",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "system_name": {
+          "type": "string",
+          "description": "Name of the system to get logs from"
+        },
+        "log_level": {
+          "type": "string",
+          "enum": ["debug", "info", "warn", "error", "fatal"],
+          "description": "Minimum log level to retrieve"
+        },
+        "time_range_minutes": {
+          "type": "integer",
+          "description": "Number of minutes back to retrieve logs"
+        },
+        "search_pattern": {
+          "type": "string",
+          "description": "Optional regex pattern to filter log entries"
+        }
+      },
+      "required": ["system_name", "time_range_minutes"]
+    }
+  }
+]

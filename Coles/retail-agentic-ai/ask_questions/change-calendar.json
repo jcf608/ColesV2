@@ -1,0 +1,9 @@
+{
+  "id": "change-calendar",
+  "icon": "📅",
+  "label": "This Week's Changes",
+  "question": "Show me this week's change calendar and any high-risk changes",
+  "category": "it-operations",
+  "order": 12,
+  "enabled": true
+}

@@ -1,0 +1,124 @@
+# Ruby
+*.gem
+*.rbc
+/.config
+/coverage/
+/InstalledFiles
+/pkg/
+/spec/reports/
+/spec/examples.txt
+/test/tmp/
+/test/version_tmp/
+/tmp/
+
+# Used by dotenv library to load environment variables.
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Ignore Byebug command history file.
+.byebug_history
+
+# Bundler
+vendor/bundle
+Gemfile.lock
+
+# Ruby version files
+.ruby-version
+.ruby-gemset
+
+# Logs
+*.log
+log/
+logs/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Temporary files
+*.tmp
+*.temp
+.tmp/
+.temp/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Backup files
+*.bak
+*.backup
+*~
+
+# Sensitive files
+keys.json
+*.key
+*.pem
+*.p12
+*.pfx
+
+# Archives
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+
+# Cache directories
+.cache/
+.sass-cache/
+
+# Database files
+*.sqlite
+*.sqlite3
+*.db
+
+# Output directories
+/build/
+/dist/
+/out/
+
+# Node modules (if any JavaScript dependencies)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage reports
+coverage/
+*.lcov
+
+# Application specific
+puma.log
+install_output.txt

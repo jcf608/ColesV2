@@ -1,0 +1,613 @@
+<div class="hero admin-hero">
+  <h1>🔧 MCP Server Admin Panel</h1>
+  <p class="hero-subtitle">Simulate backend API responses for testing</p>
+</div>
+
+<div class="container admin-container">
+  <div class="admin-stats">
+    <div class="stat-card">
+      <span class="stat-icon">📊</span>
+      <div class="stat-content">
+        <div class="stat-label">Total Requests</div>
+        <div class="stat-value" id="total-requests">0</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">✅</span>
+      <div class="stat-content">
+        <div class="stat-label">Simulated Responses</div>
+        <div class="stat-value" id="total-responses">0</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <span class="stat-icon">🔧</span>
+      <div class="stat-content">
+        <div class="stat-label">Active Tools</div>
+        <div class="stat-value">5</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick Actions Bar -->
+  <div class="admin-actions">
+    <button class="btn-action btn-add-question" onclick="openAddQuestionPage()">
+      ➕ Add New Question
+    </button>
+    <button class="btn-action btn-secondary" onclick="location.href='/'">
+      🏠 Back to Home
+    </button>
+  </div>
+
+  <div class="admin-panels">
+    <!-- Inventory Status Tool -->
+    <div class="tool-panel" data-tool="get_inventory_status">
+      <div class="tool-panel-header">
+        <h3>📦 Get Inventory Status</h3>
+        <span class="tool-status">Awaiting Request</span>
+      </div>
+      <div class="tool-panel-body">
+        <div class="request-section">
+          <h4>Incoming Request</h4>
+          <div class="request-display" id="req-get_inventory_status">
+            <pre>No requests yet</pre>
+          </div>
+        </div>
+        <div class="response-section">
+          <h4>Simulated Response</h4>
+          <textarea 
+            class="response-input" 
+            id="resp-get_inventory_status" 
+            rows="10"
+            placeholder="Response will be auto-suggested when request arrives"
+          ></textarea>
+          <button class="btn-send-response" onclick="sendResponse('get_inventory_status')">
+            Send Response
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sales Velocity Tool -->
+    <div class="tool-panel" data-tool="query_sales_velocity">
+      <div class="tool-panel-header">
+        <h3>📈 Query Sales Velocity</h3>
+        <span class="tool-status">Awaiting Request</span>
+      </div>
+      <div class="tool-panel-body">
+        <div class="request-section">
+          <h4>Incoming Request</h4>
+          <div class="request-display" id="req-query_sales_velocity">
+            <pre>No requests yet</pre>
+          </div>
+        </div>
+        <div class="response-section">
+          <h4>Simulated Response</h4>
+          <textarea 
+            class="response-input" 
+            id="resp-query_sales_velocity" 
+            rows="10"
+            placeholder="Response will be auto-suggested when request arrives"
+          ></textarea>
+          <button class="btn-send-response" onclick="sendResponse('query_sales_velocity')">
+            Send Response
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pricing Policy Tool -->
+    <div class="tool-panel" data-tool="check_pricing_policy">
+      <div class="tool-panel-header">
+        <h3>✅ Check Pricing Policy</h3>
+        <span class="tool-status">Awaiting Request</span>
+      </div>
+      <div class="tool-panel-body">
+        <div class="request-section">
+          <h4>Incoming Request</h4>
+          <div class="request-display" id="req-check_pricing_policy">
+            <pre>No requests yet</pre>
+          </div>
+        </div>
+        <div class="response-section">
+          <h4>Simulated Response</h4>
+          <textarea 
+            class="response-input" 
+            id="resp-check_pricing_policy" 
+            rows="10"
+            placeholder="Response will be auto-suggested when request arrives"
+          ></textarea>
+          <button class="btn-send-response" onclick="sendResponse('check_pricing_policy')">
+            Send Response
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Price Change Tool -->
+    <div class="tool-panel" data-tool="submit_price_change">
+      <div class="tool-panel-header">
+        <h3>💰 Submit Price Change</h3>
+        <span class="tool-status">Awaiting Request</span>
+      </div>
+      <div class="tool-panel-body">
+        <div class="request-section">
+          <h4>Incoming Request</h4>
+          <div class="request-display" id="req-submit_price_change">
+            <pre>No requests yet</pre>
+          </div>
+        </div>
+        <div class="response-section">
+          <h4>Simulated Response</h4>
+          <textarea 
+            class="response-input" 
+            id="resp-submit_price_change" 
+            rows="10"
+            placeholder="Response will be auto-suggested when request arrives"
+          ></textarea>
+          <button class="btn-send-response" onclick="sendResponse('submit_price_change')">
+            Send Response
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Competitor Pricing Tool -->
+    <div class="tool-panel" data-tool="get_competitor_pricing">
+      <div class="tool-panel-header">
+        <h3>🏪 Get Competitor Pricing</h3>
+        <span class="tool-status">Awaiting Request</span>
+      </div>
+      <div class="tool-panel-body">
+        <div class="request-section">
+          <h4>Incoming Request</h4>
+          <div class="request-display" id="req-get_competitor_pricing">
+            <pre>No requests yet</pre>
+          </div>
+        </div>
+        <div class="response-section">
+          <h4>Simulated Response</h4>
+          <textarea 
+            class="response-input" 
+            id="resp-get_competitor_pricing" 
+            rows="10"
+            placeholder="Response will be auto-suggested when request arrives"
+          ></textarea>
+          <button class="btn-send-response" onclick="sendResponse('get_competitor_pricing')">
+            Send Response
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.admin-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.admin-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.stat-icon {
+  font-size: 2.5rem;
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-label {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.admin-actions {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.btn-action {
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.btn-add-question {
+  background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+  color: white;
+  flex: 1;
+}
+
+.btn-add-question:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.btn-secondary {
+  background: white;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+.btn-secondary:hover {
+  background: #f5f5f5;
+  transform: translateY(-2px);
+}
+
+.admin-panels {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tool-panel {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.tool-panel-header {
+  background: linear-gradient(135deg, #5a67d8 0%, #667eea 100%);
+  color: white;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tool-panel-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.tool-status {
+  background: rgba(255,255,255,0.2);
+  padding: 0.375rem 0.875rem;
+  border-radius: 20px;
+  font-size: 0.875rem;
+}
+
+.tool-panel-body {
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.request-section h4,
+.response-section h4 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  color: #333;
+  font-size: 1rem;
+}
+
+.request-display {
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  min-height: 200px;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.875rem;
+}
+
+.request-display pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.response-input {
+  width: 100%;
+  background: #f7fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: 'Monaco', 'Courier New', monospace;
+  font-size: 0.875rem;
+  resize: vertical;
+  margin-bottom: 1rem;
+}
+
+.btn-send-response {
+  width: 100%;
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  color: white;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-send-response:hover {
+  transform: translateY(-2px);
+}
+
+.btn-send-response:active {
+  transform: translateY(0);
+}
+
+.admin-link {
+  background: rgba(255,255,255,0.1);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+}
+
+.tool-status.pending {
+  background: #fbbf24;
+  color: #78350f;
+}
+
+.tool-status.responded {
+  background: #34d399;
+  color: #064e3b;
+}
+</style>
+
+<script>
+let totalRequests = 0;
+let totalResponses = 0;
+let pendingRequests = {};
+
+// Open Add Question page in new tab
+function openAddQuestionPage() {
+  window.open('/add_agent_question', '_blank');
+}
+
+// Poll for new tool requests
+setInterval(pollToolRequests, 2000);
+
+async function pollToolRequests() {
+  try {
+    const response = await fetch('/api/admin/pending-requests');
+    const data = await response.json();
+    
+    if (data.success && data.requests) {
+      Object.keys(data.requests).forEach(toolName => {
+        const request = data.requests[toolName];
+        if (request && request.parameters) {
+          updateToolPanel(toolName, request);
+        }
+      });
+    }
+  } catch (error) {
+    console.error('Error polling requests:', error);
+  }
+}
+
+function updateToolPanel(toolName, request) {
+  const requestDisplay = document.getElementById(`req-${toolName}`);
+  const responseTextarea = document.getElementById(`resp-${toolName}`);
+  const panel = document.querySelector(`[data-tool="${toolName}"]`);
+  const status = panel.querySelector('.tool-status');
+  
+  if (requestDisplay) {
+    // Ensure request has all required parameters
+    const completeRequest = ensureRequiredParameters(toolName, request.parameters);
+    
+    requestDisplay.innerHTML = `<pre>${JSON.stringify(completeRequest, null, 2)}</pre>`;
+    totalRequests++;
+    document.getElementById('total-requests').textContent = totalRequests;
+    
+    // Update status
+    status.textContent = 'Request Pending';
+    status.classList.add('pending');
+    
+    // Generate suggested response
+    const suggestedResponse = generateSuggestedResponse(toolName, completeRequest);
+    responseTextarea.value = JSON.stringify(suggestedResponse, null, 2);
+    
+    // Store request ID
+    pendingRequests[toolName] = request.id;
+  }
+}
+
+function ensureRequiredParameters(toolName, params) {
+  const defaults = {
+    get_inventory_status: {
+      product_id: 'BLU-ORG-6OZ',
+      store_id: 'STORE-001',
+      include_supply_schedule: false
+    },
+    query_sales_velocity: {
+      product_id: 'BLU-ORG-6OZ',
+      store_id: 'STORE-001',
+      days_back: 7
+    },
+    check_pricing_policy: {
+      product_id: 'BLU-ORG-6OZ',
+      current_price: 7.99,
+      proposed_price: 5.99,
+      reason_code: 'expiration'
+    },
+    submit_price_change: {
+      product_id: 'BLU-ORG-6OZ',
+      store_id: 'STORE-001',
+      new_price: 5.99,
+      approval_token: 'APPR-SAMPLE-123'
+    },
+    get_competitor_pricing: {
+      category: 'berries',
+      store_location: 'STORE-001',
+      radius_miles: 5
+    }
+  };
+  
+  return { ...defaults[toolName], ...params };
+}
+
+function generateSuggestedResponse(toolName, params) {
+  const now = new Date().toISOString();
+  
+  switch (toolName) {
+    case 'get_inventory_status':
+      return {
+        product_id: params.product_id || 'BLU-ORG-6OZ',
+        store_id: params.store_id || 'STORE-001',
+        current_stock: 47,
+        cost_per_unit: 4.50,
+        shelf_price: 7.99,
+        expiration_date: new Date(Date.now() + 2 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+        units_sold_today: 4,
+        average_daily_sales: 8,
+        status: 'active',
+        supply_schedule: params.include_supply_schedule ? [
+          {
+            delivery_date: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            quantity: 25
+          }
+        ] : null
+      };
+      
+    case 'query_sales_velocity':
+      return {
+        product_id: params.product_id || 'BLU-ORG-6OZ',
+        store_id: params.store_id || 'STORE-001',
+        velocity_units_per_day: 8.2,
+        baseline_velocity: 9.5,
+        velocity_trend: 'declining',
+        days_analyzed: params.days_back || 7,
+        daily_breakdown: Array.from({length: params.days_back || 7}, (_, i) => ({
+          date: new Date(Date.now() - i * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+          units_sold: Math.floor(Math.random() * 5) + 6
+        }))
+      };
+      
+    case 'check_pricing_policy':
+      const current = params.current_price || 7.99;
+      const proposed = params.proposed_price || 5.99;
+      const reason = params.reason_code || 'expiration';
+      const markdownPct = ((current - proposed) / current * 100).toFixed(1);
+      
+      return {
+        product_id: params.product_id || 'BLU-ORG-6OZ',
+        approved: markdownPct <= 40,
+        approval_token: `APPR-${Date.now()}-${Math.floor(Math.random() * 10000)}`,
+        markdown_percentage: parseFloat(markdownPct),
+        resulting_margin_pct: 25.3,
+        requires_manager_approval: markdownPct > 20,
+        reason_code: reason,
+        policy_notes: markdownPct <= 15 ? 
+          'Meets minimum margin threshold for organic produce (15%)' :
+          'Markdown requires manager approval per policy'
+      };
+      
+    case 'submit_price_change':
+      return {
+        success: true,
+        change_id: `CHG-${Date.now()}`,
+        updated_at: now,
+        message: 'Price change executed successfully',
+        product_id: params.product_id,
+        store_id: params.store_id,
+        new_price: params.new_price
+      };
+      
+    case 'get_competitor_pricing':
+      return {
+        category: params.category || 'berries',
+        location: params.store_location || 'STORE-001',
+        competitors: [
+          { name: 'Farmers Market', price: 6.49, distance_miles: 0.3 },
+          { name: 'Competitor Store A', price: 7.29, distance_miles: 1.2 },
+          { name: 'Competitor Store B', price: 6.99, distance_miles: 2.1 }
+        ],
+        lowest_price: 6.49,
+        average_price: 6.92,
+        updated_at: now
+      };
+      
+    default:
+      return { error: 'Unknown tool' };
+  }
+}
+
+async function sendResponse(toolName) {
+  const responseTextarea = document.getElementById(`resp-${toolName}`);
+  const panel = document.querySelector(`[data-tool="${toolName}"]`);
+  const status = panel.querySelector('.tool-status');
+  
+  try {
+    const responseData = JSON.parse(responseTextarea.value);
+    
+    // Format response to match MCP standard
+    const mcpResponse = {
+      content: [{
+        type: "text",
+        text: JSON.stringify(responseData, null, 2)
+      }]
+    };
+    
+    const response = await fetch('/api/admin/tool-response', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        tool_name: toolName,
+        request_id: pendingRequests[toolName],
+        response: mcpResponse
+      })
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      totalResponses++;
+      document.getElementById('total-responses').textContent = totalResponses;
+      
+      status.textContent = 'Response Sent';
+      status.classList.remove('pending');
+      status.classList.add('responded');
+      
+      setTimeout(() => {
+        status.textContent = 'Awaiting Request';
+        status.classList.remove('responded');
+      }, 3000);
+      
+      delete pendingRequests[toolName];
+    } else {
+      alert('Error sending response: ' + result.error);
+    }
+  } catch (error) {
+    alert('Invalid JSON in response: ' + error.message);
+  }
+}
+</script>

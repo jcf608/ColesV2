@@ -1,0 +1,71 @@
+**TRAINING EXAMPLE: System Health Check Request**
+
+**User Query:**
+"Run a health check on all production systems and alert on any issues"
+
+**Agent Internal Reasoning:**
+The user is requesting a comprehensive system health assessment. I need to check multiple system components including:
+- Point of sale systems and payment processing
+- Inventory management systems
+- Temperature monitoring for refrigerated sections
+- Network connectivity and bandwidth
+- Database performance and backup status
+- Security system status
+
+I'll prioritize customer-facing systems first, then operational systems, then monitoring systems. I need to establish baseline thresholds and identify any anomalies that could impact store operations or customer experience.
+
+**Tool Calls and Rationale:**
+
+First, I'll call check_pos_systems() because POS downtime directly impacts revenue and customer satisfaction.
+
+Then system_network_status() to verify connectivity issues aren't causing cascading problems.
+
+Next temperature_monitoring_status() since temperature failures can result in significant product loss and food safety violations.
+
+Then inventory_system_health() to ensure stock management accuracy.
+
+Finally database_performance_check() and backup_status_verification() for data integrity.
+
+**System Analysis Results:**
+
+POS System Check:
+- Store 001: 4 terminals active, average response time 0.8 seconds (normal)
+- Store 002: 5 terminals active, 1 terminal showing intermittent connectivity issues (Terminal #3)
+- Store 003: 6 terminals active, payment processor response time 3.2 seconds (elevated)
+
+Network Status:
+- Primary WAN connection: 98.5% uptime, 45ms latency
+- Secondary backup connection: Active, 52ms latency
+- WiFi customer network: 23 active connections, 15Mbps available bandwidth
+
+Temperature Monitoring:
+- Dairy cooler Section A: 36.2°F (normal range 35-38°F)
+- Frozen section: -2.1°F (normal range -5 to 0°F)
+- Deli refrigeration: 41.3°F (WARNING: exceeds 40°F threshold by 1.3°F)
+- Produce misting system: Operational, last cycle 14 minutes ago
+
+Inventory System:
+- Database queries averaging 0.4 seconds
+- Last synchronization: 8 minutes ago (normal)
+- 3 SKU discrepancies detected requiring manual verification
+
+Database & Backup:
+- Primary database: 87% storage utilization
+- Last automated backup: Completed successfully at 2:47 AM
+- Transaction log size: 2.3GB (within normal parameters)
+
+**Final Recommendation:**
+
+IMMEDIATE ATTENTION REQUIRED:
+1. URGENT - Deli refrigeration unit temperature at 41.3°F exceeds food safety threshold. Dispatch maintenance technician immediately and consider temporary product relocation.
+
+2. HIGH PRIORITY - Store 002 POS Terminal #3 connectivity issues may worsen during peak hours. Schedule replacement or repair within 4 hours.
+
+3. MEDIUM PRIORITY - Store 003 payment processing delays of 3.2 seconds may cause customer wait time complaints. Contact payment processor to investigate network routing.
+
+ROUTINE MONITORING:
+- Database storage at 87% - plan storage expansion within 30 days
+- 3 inventory discrepancies identified - schedule cycle count verification
+- All other systems operating within normal parameters
+
+I've created automated alerts for the deli temperature issue and POS connectivity problems. The deli temperature violation has been logged for compliance reporting. Would you like me to generate work orders for the maintenance issues or provide more detailed diagnostics on any specific system?

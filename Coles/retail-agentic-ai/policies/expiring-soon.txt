@@ -1,0 +1,136 @@
+BUSINESS POLICY DOCUMENT
+
+POLICY TITLE: Expiring Soon Inventory Management
+POLICY NUMBER: INV-2024-003
+EFFECTIVE DATE: [Date]
+REVIEW DATE: [Annual Review Date]
+DEPARTMENT: Inventory Management / Operations
+APPROVED BY: [Operations Manager Name]
+
+1. SCOPE AND PURPOSE
+
+1.1 Scope
+This policy applies to all perishable and dated inventory items within the retail grocery operation that are identified as expiring within two (2) days of the current date. This includes but is not limited to:
+- Fresh produce
+- Dairy products
+- Meat and seafood
+- Bakery items
+- Prepared foods
+- Packaged goods with expiration dates
+
+1.2 Purpose
+The purpose of this policy is to:
+- Minimize inventory loss due to product expiration
+- Ensure food safety standards are maintained
+- Establish clear procedures for handling near-expiration products
+- Define decision-making authority and escalation procedures
+- Protect company profitability while maintaining customer satisfaction
+
+2. DECISION THRESHOLDS
+
+2.1 Automated Actions (No Approval Required)
+The following actions may be taken automatically by department staff when products are expiring within 2 days:
+
+- Apply discount markdowns up to 30% off regular retail price
+- Relocate products to designated "Quick Sale" areas
+- Update inventory tracking systems to reflect new pricing
+- Create promotional signage indicating reduced pricing
+
+2.2 Supervisory Approval Required
+The following actions require Department Supervisor approval:
+
+- Discount markdowns between 31% and 50% off regular retail price
+- Transfer of products between store locations (if applicable)
+- Donation of products to approved charitable organizations
+- Conversion of products for prepared food use (bakery to bread crumbs, etc.)
+
+2.3 Management Escalation Required
+The following situations require Store Manager or Operations Manager approval:
+
+- Discount markdowns exceeding 50% off regular retail price
+- Disposal of products with total value exceeding $500 per day per department
+- Vendor return requests for defective or prematurely expiring products
+- Emergency disposal due to quality concerns beyond normal expiration
+
+3. APPROVAL REQUIREMENTS
+
+3.1 Department Staff Authority
+Department associates may independently:
+- Identify expiring products during routine inventory checks
+- Apply markdowns up to 30%
+- Process products according to established automated procedures
+
+3.2 Department Supervisor Authority
+Department Supervisors may approve:
+- Markdowns between 31-50%
+- Product transfers and donations up to $300 total value per occurrence
+- Alternative product usage within department
+
+3.3 Store Management Authority
+Store Manager approval required for:
+- Markdowns exceeding 50%
+- Daily disposal values exceeding $500 per department
+- Vendor negotiations regarding defective products
+- Policy exceptions or unusual circumstances
+
+3.4 Regional Management Authority
+Regional Manager approval required for:
+- Weekly disposal values exceeding $2,000 store-wide
+- Systemic vendor quality issues
+- Policy modifications or permanent exceptions
+
+4. SAFETY CONSTRAINTS AND GUARDRAILS
+
+4.1 Food Safety Requirements
+- No product may be sold beyond its printed expiration date under any circumstances
+- Products showing signs of spoilage, damage, or quality deterioration must be removed from sale immediately regardless of expiration date
+- All discounted products must display clear expiration date information
+- Staff must follow all FDA and local health department guidelines
+
+4.2 Financial Safeguards
+- Maximum daily markdown allowance: $1,000 per department without management approval
+- Maximum weekly markdown allowance: $5,000 store-wide without regional approval
+- All markdowns must be tracked and reported in daily inventory reports
+- Monthly analysis required for departments exceeding 15% markdown rate
+
+4.3 Operational Constraints
+- Expiring products must be clearly segregated from regular inventory
+- Special handling areas must be maintained for discounted merchandise
+- Staff training required before implementing markdown procedures
+- Customer communication standards must be maintained for all discounted products
+
+5. DOCUMENTATION REQUIREMENTS
+
+5.1 Daily Documentation
+- Complete inventory scan of all departments for products expiring within 2 days
+- Record of all products marked down, including original price, markdown percentage, and final price
+- Documentation of all disposed products including reason and total value
+- Supervisor sign-off on all markdown activities exceeding automated thresholds
+
+5.2 Weekly Reporting
+- Summary report of total markdowns by department and category
+- Analysis of disposal reasons and trends
+- Vendor performance evaluation for products with premature expiration issues
+- Comparison to previous week and same period previous year
+
+5.3 Monthly Analysis
+- Comprehensive review of markdown effectiveness and sell-through rates
+- Financial impact analysis including cost of goods sold adjustments
+- Staff performance evaluation regarding markdown procedures
+- Recommendations for inventory ordering adjustments based on expiration patterns
+
+5.4 Record Retention
+- Daily reports: Retain for 2 years
+- Weekly summaries: Retain for 3 years
+- Monthly analyses: Retain for 5 years
+- All documentation must be available for internal audit and regulatory inspection
+
+5.5 System Requirements
+- All markdown activities must be recorded in the point-of-sale system
+- Inventory management system must be updated within 4 hours of markdown implementation
+- Digital photography required for disposal items exceeding $100 in value
+- Electronic approval workflow must be used for all escalated decisions
+
+POLICY REVIEW AND COMPLIANCE
+
+This policy will be reviewed annually or when significant operational changes occur. All staff members involved in inventory management must receive training on these procedures within 30 days of policy implementation or hire date. Compliance with this policy is mandatory and subject to internal audit verification.

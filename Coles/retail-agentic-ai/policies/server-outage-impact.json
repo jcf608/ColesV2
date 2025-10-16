@@ -1,0 +1,146 @@
+{
+  "policy_id": "IT-OPS-001",
+  "version": "2.1",
+  "effective_date": "2024-01-15",
+  "title": "Server Outage Impact Assessment Policy",
+  "category": "it-operations",
+  "description": "Defines impact levels, response procedures, and thresholds for server outages affecting critical retail operations",
+  "approval_thresholds": {
+    "low_impact": {
+      "approver": "IT_SUPERVISOR",
+      "max_downtime_minutes": 30,
+      "affected_systems_threshold": 1,
+      "revenue_impact_max": 5000
+    },
+    "medium_impact": {
+      "approver": "IT_MANAGER",
+      "max_downtime_minutes": 120,
+      "affected_systems_threshold": 3,
+      "revenue_impact_max": 25000
+    },
+    "high_impact": {
+      "approver": "CTO",
+      "max_downtime_minutes": 480,
+      "affected_systems_threshold": 5,
+      "revenue_impact_max": 100000
+    },
+    "critical_impact": {
+      "approver": "CEO",
+      "max_downtime_minutes": 1440,
+      "affected_systems_threshold": 10,
+      "revenue_impact_unlimited": true
+    }
+  },
+  "safety_constraints": {
+    "maximum_acceptable_downtime": {
+      "pos_systems": 15,
+      "inventory_management": 60,
+      "customer_database": 240,
+      "payment_processing": 5,
+      "temperature_monitoring": 30
+    },
+    "escalation_triggers": {
+      "customer_safety_risk": true,
+      "food_safety_compromise": true,
+      "payment_data_exposure": true,
+      "refrigeration_system_failure": true
+    },
+    "mandatory_notifications": [
+      "IT_MANAGER",
+      "OPERATIONS_MANAGER",
+      "STORE_MANAGERS",
+      "SECURITY_TEAM"
+    ]
+  },
+  "critical_systems": {
+    "tier_1": {
+      "systems": [
+        "POS",
+        "PAYMENT_GATEWAY",
+        "REFRIGERATION_MONITORING"
+      ],
+      "max_downtime_minutes": 15,
+      "recovery_time_objective": 5,
+      "backup_requirements": "HOT_STANDBY"
+    },
+    "tier_2": {
+      "systems": [
+        "INVENTORY_MANAGEMENT",
+        "EMPLOYEE_SCHEDULING",
+        "SECURITY_CAMERAS"
+      ],
+      "max_downtime_minutes": 60,
+      "recovery_time_objective": 30,
+      "backup_requirements": "WARM_STANDBY"
+    },
+    "tier_3": {
+      "systems": [
+        "CUSTOMER_LOYALTY",
+        "MARKETING_ANALYTICS",
+        "REPORTING"
+      ],
+      "max_downtime_minutes": 480,
+      "recovery_time_objective": 240,
+      "backup_requirements": "COLD_STANDBY"
+    }
+  },
+  "financial_thresholds": {
+    "revenue_loss_per_minute": {
+      "peak_hours": 850,
+      "regular_hours": 425,
+      "off_hours": 150
+    },
+    "compensation_triggers": {
+      "customer_refunds_threshold": 10000,
+      "vendor_penalties_threshold": 5000,
+      "regulatory_fines_threshold": 25000
+    }
+  },
+  "response_procedures": {
+    "immediate_actions": {
+      "notification_time_minutes": 5,
+      "assessment_time_minutes": 15,
+      "communication_channels": [
+        "EMAIL",
+        "SMS",
+        "PHONE",
+        "INCIDENT_MANAGEMENT_SYSTEM"
+      ]
+    },
+    "recovery_priorities": [
+      "PAYMENT_PROCESSING",
+      "POS_SYSTEMS",
+      "REFRIGERATION_MONITORING",
+      "INVENTORY_MANAGEMENT",
+      "SECURITY_SYSTEMS",
+      "CUSTOMER_SERVICES"
+    ]
+  },
+  "monitoring_requirements": {
+    "health_check_intervals_seconds": 30,
+    "alert_thresholds": {
+      "cpu_usage_percent": 85,
+      "memory_usage_percent": 80,
+      "disk_usage_percent": 90,
+      "network_latency_ms": 200
+    },
+    "automated_failover": {
+      "enabled": true,
+      "trigger_conditions": [
+        "SYSTEM_UNRESPONSIVE",
+        "PERFORMANCE_DEGRADATION",
+        "SECURITY_BREACH"
+      ]
+    }
+  },
+  "compliance_requirements": {
+    "data_retention_days": 90,
+    "incident_reporting_hours": 24,
+    "regulatory_notifications": [
+      "PCI_DSS",
+      "FDA",
+      "LOCAL_HEALTH_DEPT"
+    ],
+    "audit_trail_required": true
+  }
+}

@@ -1,0 +1,82 @@
+TRAINING EXAMPLE: Server Outage Impact Analysis
+
+USER INPUT:
+"What would be the impact of a server outage on our critical systems?"
+
+AGENT INTERNAL REASONING:
+The user is asking about business continuity and risk assessment. I need to evaluate multiple dimensions of impact:
+- Which systems would be affected and their criticality levels
+- Financial impact including lost revenue and operational costs
+- Customer experience degradation
+- Staff productivity and operational workflow disruption
+- Recovery time objectives and priorities
+
+I should gather current system status, recent performance data, and identify dependencies between systems. I also need to consider time-of-day factors since impact varies significantly between peak and off-peak hours.
+
+TOOL CALLS AND RATIONALE:
+
+Tool 1: get_system_status()
+Reason: Need to understand current system architecture and identify which systems are server-dependent vs. have local redundancy
+
+Tool 2: get_current_transaction_volume()
+Reason: Must establish baseline activity levels to calculate potential revenue loss
+
+Tool 3: get_recent_sales_data(hours=24)
+Reason: Need hourly sales patterns to model time-sensitive impact scenarios
+
+Tool 4: get_inventory_system_status()
+Reason: Inventory management is critical - outages affect receiving, cycle counts, and reorder triggers
+
+ANALYSIS PERFORMED:
+
+System Dependency Analysis:
+- POS terminals: 45 terminals with 2-hour local cache, then fail to offline mode
+- Inventory management: 100% server dependent, immediate impact
+- Employee scheduling: Server dependent but non-critical during outage
+- Customer loyalty system: Server dependent, affects 68% of transactions
+- Payment processing: Hybrid system, credit/debit continue, store cards fail
+- Price management: 4-hour local cache before reverting to shelf prices
+
+Financial Impact Calculation:
+- Current hour transaction rate: $2,847 per 15-minute interval
+- Average hourly revenue: $11,388
+- Loyalty program transactions: $7,744 per hour (68% of sales)
+- Store card payment failures would redirect to other payment methods (estimated 12% transaction abandonment)
+
+Customer Experience Impact:
+- Checkout delays increase by estimated 45 seconds per customer due to loyalty system failure
+- 12% of customers may abandon purchases when preferred payment method fails
+- No access to digital coupons or personalized promotions
+- Customer service desk overwhelmed with payment and loyalty inquiries
+
+Operational Impact:
+- Receiving department cannot process incoming deliveries
+- Cannot perform cycle counts or inventory adjustments
+- Reorder triggers suspended - risk of stockouts on fast-moving items
+- Staff scheduling changes require manual coordination
+- Manager override capabilities limited without server access
+
+FINAL RECOMMENDATION:
+
+IMMEDIATE ACTIONS REQUIRED:
+Deploy backup communication plan to all department managers within 5 minutes of confirmed outage. Switch POS systems to offline mode before 2-hour cache expires to prevent total transaction failure.
+
+REVENUE PROTECTION STRATEGY:
+Prioritize transactions for customers with physical loyalty cards and provide manual discount application for high-value customers. Redirect customers from store-branded payment cards to alternative methods with temporary incentives to reduce abandonment.
+
+OPERATIONAL CONTINUITY:
+Suspend all receiving operations except for critical fresh products. Delay non-essential inventory movements and focus staff on customer service and manual transaction support. Implement paper-based backup procedures for delivery tracking.
+
+EXPECTED IMPACT SUMMARY:
+- Revenue loss: $1,367 per hour (12% reduction)
+- Customer satisfaction: Significant degradation after first hour
+- Inventory accuracy: Deteriorates immediately, requires full reconciliation
+- Staff productivity: Reduced by approximately 35%
+
+RECOVERY PRIORITY:
+1. POS and payment systems (0-30 minutes)
+2. Inventory management system (30-60 minutes)  
+3. Customer loyalty system (60-90 minutes)
+4. Employee scheduling and reporting (90+ minutes)
+
+Maximum acceptable outage duration: 4 hours before inventory control becomes critically compromised and requires store closure consideration.

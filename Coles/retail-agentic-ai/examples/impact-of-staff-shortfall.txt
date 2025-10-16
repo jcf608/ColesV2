@@ -1,0 +1,83 @@
+TRAINING EXAMPLE: Weather Impact on Produce Orders
+
+USER QUESTION:
+"How will tomorrow's weather affect my produce orders? I need to finalize my order by 2 PM today."
+
+AGENT INTERNAL REASONING:
+I need to assess weather impact on produce demand and supply. Key factors to consider:
+- Current weather forecast for tomorrow
+- Historical sales data for similar weather conditions
+- Seasonal produce availability and pricing
+- Customer shopping behavior patterns during different weather
+- Delivery logistics and supplier impacts
+- Current inventory levels and shelf life
+
+TOOLS CALLED AND REASONING:
+
+Tool 1: Weather API
+Reason: Get detailed forecast including temperature, precipitation, wind, and any severe weather alerts
+
+Tool 2: Historical Sales Analytics
+Reason: Compare sales patterns during similar weather conditions in past 90 days to predict demand changes
+
+Tool 3: Inventory Management System
+Reason: Check current stock levels, expiration dates, and automatic reorder points
+
+Tool 4: Supplier Status Dashboard
+Reason: Verify if weather will impact delivery schedules or product availability
+
+WEATHER DATA RETRIEVED:
+Tomorrow: Heavy rain, 45-52°F, 85% chance precipitation, winds 15-20 mph, rain starting 6 AM through 8 PM
+
+ANALYSIS PERFORMED:
+
+Historical Pattern Analysis:
+- Rainy days show 23% increase in comfort food vegetables (potatoes, onions, carrots)
+- 18% decrease in salad greens and fresh herbs
+- 15% increase in citrus fruits (vitamin C demand)
+- 31% decrease in grilling vegetables (peppers, zucchini, corn)
+
+Current Inventory Assessment:
+- Lettuce: 45 cases, 3-day shelf life remaining
+- Potatoes: 12 cases, 14-day shelf life
+- Citrus: 28 cases mixed, 7-day average shelf life
+- Grilling vegetables: 22 cases, 4-day average shelf life
+
+Supplier Impact Check:
+- Main distributor reports no delivery delays expected
+- Organic supplier may have 2-hour delay due to rural road conditions
+- Pricing stable, no weather-related increases
+
+Customer Behavior Factors:
+- Rainy weather typically reduces total store traffic by 12%
+- Customers who do shop tend to buy 20% more per trip
+- Prepared food section sees 28% increase in soup ingredients
+
+FINAL RECOMMENDATION:
+
+Adjust your produce order as follows:
+
+INCREASE ORDERS:
+- Potatoes: Add 8 cases (low current stock, high demand expected)
+- Onions: Add 4 cases (soup/comfort food cooking)
+- Carrots: Add 3 cases (soup ingredient, good shelf life)
+- Oranges: Add 5 cases (vitamin C demand spike)
+- Lemons: Add 2 cases (tea, comfort beverages)
+
+DECREASE ORDERS:
+- Mixed salad greens: Reduce by 6 cases (have current stock, lower demand)
+- Bell peppers: Reduce by 4 cases (grilling decrease)
+- Fresh herbs: Reduce by 2 cases (less fresh cooking)
+- Zucchini: Reduce by 3 cases (current stock sufficient)
+
+MAINTAIN NORMAL ORDERS:
+- Bananas, apples, basic fruits (steady demand regardless)
+- Root vegetables already at good levels
+
+PRIORITY ACTIONS:
+1. Confirm organic supplier delivery time - call by noon
+2. Consider end-of-day markdowns on current grilling vegetables
+3. Create rainy day soup ingredient display near entrance
+4. Monitor weather updates - if forecast changes to severe storm, reduce all orders by additional 10%
+
+Expected outcome: Minimize waste while meeting shifted demand patterns. Estimated 8% improvement in produce margin for the day.

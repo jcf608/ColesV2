@@ -1,0 +1,46 @@
+{
+  "weather_based_inventory": {
+    "version": "1.0",
+    "effective_date": "2025-10-16",
+    "forecast_requirements": {
+      "approved_sources": [
+        "Bureau of Meteorology",
+        "Weather Underground"
+      ],
+      "minimum_confidence_pct": 70,
+      "max_forecast_days_without_approval": 3
+    },
+    "adjustment_thresholds": {
+      "minor": {
+        "max_change_pct": 10,
+        "approval": "automatic"
+      },
+      "moderate": {
+        "min_change_pct": 10,
+        "max_change_pct": 25,
+        "approval": "store_manager"
+      },
+      "major": {
+        "min_change_pct": 25,
+        "approval": "regional_manager"
+      }
+    },
+    "category_rules": {
+      "berries": {
+        "max_reduction_pct": 40,
+        "max_increase_pct": 30
+      },
+      "leafy_greens": {
+        "max_reduction_pct": 50,
+        "max_increase_pct": 20
+      },
+      "root_vegetables": {
+        "max_adjustment_pct": 15
+      }
+    },
+    "safety_constraints": {
+      "minimum_days_stock": 1,
+      "requires_documentation": true
+    }
+  }
+}

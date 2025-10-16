@@ -1,0 +1,28 @@
+PRODUCE MARKDOWN POLICY
+
+Minimum Margin Thresholds:
+- Organic produce: 15% minimum margin after markdown
+- Conventional produce: 12% minimum margin after markdown
+- Pre-packaged salads: 10% minimum margin after markdown
+
+Approval Requirements:
+- Markdowns <20%: Automatic approval if margin threshold met
+- Markdowns 20-40%: Store manager notification required
+- Markdowns >40%: Regional manager approval required
+- Estimated waste >$500: Regional manager approval required
+
+Quality Guidelines:
+- Items within 1 day of expiration: Markdown to move inventory
+- Items showing visible quality degradation: Remove from floor
+- Items with supplier quality issues: Document and escalate to procurement
+
+Competitive Response:
+- Match competitor pricing if margin threshold maintained
+- Flag sustained competitor underpricing for category review
+- Coordinate multi-store response for regional competitive threats
+
+Audit Requirements:
+- All markdown decisions must be logged with rationale
+- Include: product ID, original price, new price, reason code, approval chain
+- Retain records for 2 years for compliance review
+- Weekly reporting to category managers on markdown effectiveness

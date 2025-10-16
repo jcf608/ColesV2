@@ -1,0 +1,52 @@
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.pnpm-debug.log*
+
+# Ruby
+*.gem
+*.rbc
+.bundle
+vendor/bundle/
+
+# Logs
+*.log
+logs/
+puma.log
+
+# OS Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment & Secrets
+.env
+.env.local
+keys.json
+*.pem
+*.key
+
+# Backups
+*.backup
+*.bak
+*.backup.*
+
+# Build artifacts
+build/
+dist/
+tmp/
+

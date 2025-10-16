@@ -1,0 +1,160 @@
+RETAIL GROCERY OPERATIONS POLICY
+EXPEDITED RESTOCK OPTIONS
+
+POLICY NUMBER: INV-001
+EFFECTIVE DATE: [Date]
+REVIEW DATE: [Date + 1 Year]
+
+1. SCOPE AND PURPOSE
+
+1.1 Scope
+This policy applies to all retail grocery locations and covers procedures for expediting inventory restocking beyond standard delivery schedules. It encompasses all product categories including perishables, non-perishables, and specialty items.
+
+1.2 Purpose
+To establish clear guidelines for requesting and approving expedited restocking while maintaining cost control, operational efficiency, and inventory accuracy. This policy ensures appropriate decision-making authority and provides multiple options for addressing urgent inventory needs.
+
+2. EXPEDITED RESTOCK OPTIONS
+
+2.1 Available Options
+   - Emergency vendor delivery (next business day)
+   - Local supplier direct delivery (same day or next day)
+   - Inter-store transfer from nearby locations
+   - Partial shipment acceleration
+   - Third-party emergency procurement
+
+2.2 Standard Delivery Modification
+   - Delivery schedule advancement (moving scheduled delivery up by 1-3 days)
+   - Quantity adjustment on existing orders
+   - Priority flagging for warehouse fulfillment
+
+3. DECISION THRESHOLDS AND AUTOMATION
+
+3.1 Automated Approval Thresholds
+The following restock requests may be processed automatically without management approval:
+
+   - Inter-store transfers under $500 total value
+   - Delivery advancement by 1 day for orders under $1,000
+   - Emergency orders for products with current stock levels below 10% of normal inventory
+   - Perishable items with less than 24 hours remaining shelf life and stock below 25%
+
+3.2 Management Review Required
+Escalation to department management is required when:
+
+   - Total expedited order value exceeds $1,000
+   - Emergency delivery fees exceed $100
+   - Stock-out duration projected to exceed 48 hours for high-velocity items
+   - Customer complaints received regarding specific product unavailability
+   - Expedited request frequency exceeds 3 times per month for same product category
+
+3.3 Senior Management Escalation
+Escalation to senior management (District Manager or above) required when:
+
+   - Expedited order value exceeds $5,000
+   - Emergency procurement from non-contracted suppliers needed
+   - Delivery fees exceed 5% of order value
+   - Supply chain disruption affects multiple product categories
+   - Competitor pricing requires immediate inventory adjustment
+
+4. APPROVAL REQUIREMENTS
+
+4.1 Store Level Approval Authority
+Store Manager:
+   - Emergency orders up to $2,500
+   - Inter-store transfers up to $1,000
+   - Delivery schedule changes with fees under $150
+
+Assistant Store Manager:
+   - Emergency orders up to $1,000
+   - Inter-store transfers up to $500
+   - Same-day local supplier orders under $750
+
+Department Supervisor:
+   - Category-specific emergency orders up to $500
+   - Inter-store transfers up to $250
+   - Delivery advancement without additional fees
+
+4.2 Regional Approval Authority
+District Manager:
+   - Emergency orders $2,501 to $10,000
+   - Non-contracted supplier procurement up to $2,000
+   - Cross-district inventory transfers
+   - Supply chain disruption responses
+
+Regional Manager:
+   - Emergency orders exceeding $10,000
+   - New supplier emergency relationships
+   - Market-wide inventory strategy changes
+   - Crisis response inventory measures
+
+4.3 Approval Documentation Chain
+All approvals must include:
+   - Reason code for expedited request
+   - Cost-benefit analysis for orders over $1,000
+   - Expected resolution timeline
+   - Customer impact assessment
+
+5. SAFETY CONSTRAINTS AND GUARDRAILS
+
+5.1 Financial Constraints
+   - Monthly expedited restock budget cannot exceed 2% of total inventory budget
+   - Emergency delivery fees limited to 15% of monthly freight allocation
+   - Individual location expedited spending capped at $15,000 per month
+   - Automatic spending freeze when monthly threshold reaches 80%
+
+5.2 Operational Constraints
+   - Maximum 2 emergency deliveries per week per location
+   - Inter-store transfers limited to 4 per week to prevent inventory imbalances
+   - Same supplier emergency orders limited to once per 72-hour period
+   - Perishable emergency orders require cold chain verification
+
+5.3 Quality and Safety Guardrails
+   - All expedited products must meet standard quality inspection requirements
+   - Perishable items require temperature log documentation
+   - New supplier products require quality assurance approval
+   - Recalled or hold-status products cannot be expedited from any source
+
+5.4 Inventory Management Constraints
+   - Expedited orders cannot exceed 150% of normal order quantity
+   - Safety stock levels must be maintained for non-expedited items
+   - Automatic inventory system updates required within 2 hours of receipt
+   - Expedited products must be integrated into regular inventory rotation
+
+6. DOCUMENTATION REQUIREMENTS
+
+6.1 Required Documentation for All Expedited Orders
+   - Expedited Restock Request Form (Form INV-001A)
+   - Current inventory levels report
+   - Justification narrative (minimum 50 words)
+   - Cost comparison analysis
+   - Delivery confirmation and receipt documentation
+
+6.2 Additional Documentation by Order Value
+Orders $500-$1,999:
+   - Department supervisor signature
+   - Customer impact assessment
+   - Alternative solution evaluation
+
+Orders $2,000-$4,999:
+   - Store manager approval with written justification
+   - Budget impact analysis
+   - Supplier performance evaluation
+
+Orders $5,000 and above:
+   - District manager pre-approval
+   - Detailed cost-benefit analysis
+   - Market condition assessment
+   - Board reporting summary (for orders over $25,000)
+
+6.3 Tracking and Reporting Requirements
+   - Weekly expedited order summary report to district management
+   - Monthly cost analysis and budget variance report
+   - Quarterly supplier performance review including emergency response times
+   - Annual policy effectiveness review and threshold adjustment recommendations
+
+6.4 Record Retention
+   - Expedited order documentation: 3 years
+   - Approval communications: 2 years
+   - Cost analysis reports: 5 years
+   - Supplier emergency performance data: 3 years
+
+This policy shall be reviewed annually and updated as needed to reflect changing business conditions, supplier capabilities, and operational requirements.

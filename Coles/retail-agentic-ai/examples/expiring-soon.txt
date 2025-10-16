@@ -1,0 +1,69 @@
+TRAINING EXAMPLE: Expiring Soon
+
+USER QUESTION:
+"Show me products expiring in 2 days"
+
+AGENT'S INTERNAL REASONING:
+The user is asking for products that expire in exactly 2 days from today (which I'll calculate as April 15, 2024). This is a time-sensitive inventory management request. I need to:
+- Query the inventory database for products with expiration dates of April 17, 2024
+- Consider product categories since different types have different markdown strategies
+- Factor in current stock levels and sales velocity
+- Prioritize by financial impact and spoilage risk
+- Provide actionable recommendations for each product type
+
+TOOLS CALLED:
+
+Tool 1: query_inventory_by_expiration_date(date="2024-04-17", days_range=0)
+Why: Need to get all products expiring on the specific target date
+
+Tool 2: get_product_sales_velocity(product_ids=[401, 402, 403, 404, 405, 406, 407])  
+Why: Need to understand how quickly these items typically sell to gauge markdown urgency
+
+Tool 3: get_current_pricing_rules(category=["dairy", "bakery", "meat", "produce"])
+Why: Need to know existing markdown policies and pricing flexibility for different categories
+
+ANALYSIS PERFORMED:
+
+Raw Data Retrieved:
+- Whole milk (2% organic): 24 units, retail $4.99, cost $2.80, sells 8 units/day typically
+- Artisan sourdough bread: 15 loaves, retail $6.49, cost $2.60, sells 12 loaves/day typically  
+- Ground beef (80/20): 18 packages, retail $5.99/lb, cost $4.20/lb, sells 25 packages/day typically
+- Bananas: 8 bunches, retail $1.99/bunch, cost $0.80/bunch, sells 40 bunches/day typically
+- Greek yogurt cups: 36 units, retail $1.49, cost $0.75, sells 20 units/day typically
+- Rotisserie chicken: 6 units, retail $7.99, cost $4.50, sells 14 units/day typically
+- Pre-made Caesar salad: 12 units, retail $4.99, cost $2.25, sells 6 units/day typically
+
+Risk Assessment:
+HIGH RISK: Caesar salad (12 units, only sells 6/day = 2 days inventory), Rotisserie chicken (6 units but low sellthrough rate for prepared food)
+MEDIUM RISK: Whole milk (24 units, 3 days inventory), Artisan bread (15 units, slight oversupply)  
+LOW RISK: Ground beef, Greek yogurt, Bananas (all have strong sales velocity)
+
+Financial Impact Calculation:
+Total retail value at risk: $347.43
+Total cost basis: $196.85
+Potential loss if unsold: $196.85
+
+FINAL RECOMMENDATION:
+
+IMMEDIATE ACTION REQUIRED - Products Expiring April 17th:
+
+PRIORITY 1 - High Risk Items:
+- Caesar Salad (12 units): Implement 40% markdown immediately to $2.99. Move to front-facing display near deli counter. Estimated recovery: 10 units
+- Rotisserie Chicken (6 units): Mark down 30% to $5.59 and relocate to hot food warmer area with prominent signage. Estimated recovery: 5 units
+
+PRIORITY 2 - Medium Risk Items:  
+- Whole Milk Organic (24 units): Apply 25% markdown to $3.74. Create bundle offer with cereal. Estimated recovery: 20 units
+- Artisan Sourdough (15 loaves): Mark down 20% to $5.19. Cross-merchandise with soup display. Estimated recovery: 13 loaves
+
+PRIORITY 3 - Monitor Closely:
+- Greek Yogurt (36 units): Apply standard 15% short-date markdown to $1.27. Should clear normally
+- Ground Beef (18 packages): Minimal risk due to high velocity. Consider 10% markdown if not moved by end of day
+- Bananas (8 bunches): Very low risk. Standard ripeness pricing acceptable
+
+PROJECTED OUTCOME:
+- Estimated total recovery: $289.15 (83% of retail value)
+- Estimated waste reduction: 85% of units saved from disposal
+- Net margin preserved: $92.30 above cost basis
+
+NEXT STEPS:
+Implement markdowns immediately and reassess at 2 PM and 6 PM today. Coordinate with department heads on display changes.

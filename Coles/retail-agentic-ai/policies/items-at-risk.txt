@@ -1,0 +1,124 @@
+BUSINESS POLICY DOCUMENT
+
+POLICY TITLE: Items at Risk - Daily Inventory Management
+POLICY NUMBER: INV-004
+EFFECTIVE DATE: [Current Date]
+DEPARTMENT: Inventory Management
+APPROVED BY: Operations Manager
+
+SCOPE AND PURPOSE
+
+This policy establishes procedures for identifying, monitoring, and managing inventory items that require immediate attention due to expiration dates, quality deterioration, overstocking, or other risk factors. The policy applies to all retail grocery locations and covers perishable goods, non-perishable items with approaching expiration dates, damaged merchandise, and slow-moving inventory.
+
+The purpose is to minimize financial losses, ensure food safety compliance, optimize inventory turnover, and maintain customer satisfaction by proactively managing at-risk products.
+
+DEFINITIONS
+
+Items at Risk: Products requiring immediate attention due to one or more of the following conditions:
+- Perishable items within 48 hours of expiration
+- Products showing signs of quality deterioration
+- Overstocked items exceeding 150% of normal weekly sales velocity
+- Damaged packaging affecting product integrity
+- Slow-moving items with less than 2 inventory turns in the past 90 days
+
+DECISION THRESHOLDS
+
+AUTOMATED ACTIONS (No approval required):
+- Mark down perishable items by 30% when within 24-48 hours of expiration
+- Remove items from shelves when past expiration date
+- Apply 20% discount to items with minor cosmetic packaging damage
+- Initiate first-in-first-out rotation for items within 72 hours of expiration
+- Generate daily exception reports for department managers
+
+ESCALATION REQUIRED:
+- Markdowns exceeding 50% on any single item
+- Total daily markdown value exceeding $500 per department
+- Disposal of products valued over $200
+- Quality issues affecting multiple units of the same product
+- Vendor return considerations for defective merchandise
+
+APPROVAL REQUIREMENTS
+
+DEPARTMENT SUPERVISOR APPROVAL:
+- Markdowns between 30-50% on individual items
+- Daily markdown totals between $200-500 per department
+- Product disposal valued at $50-200
+- Moving slow-moving inventory to alternate locations within store
+
+STORE MANAGER APPROVAL:
+- Markdowns exceeding 50% on any item
+- Daily markdown totals exceeding $500 per department
+- Product disposal valued over $200
+- Vendor return requests
+- Emergency disposal due to contamination or safety concerns
+
+DISTRICT MANAGER APPROVAL:
+- Weekly markdown totals exceeding $2,000 per store
+- Systematic quality issues requiring vendor notification
+- Policy exceptions or deviations
+- Disposal of entire product lots or shipments
+
+SAFETY CONSTRAINTS AND GUARDRAILS
+
+FOOD SAFETY REQUIREMENTS:
+- Never sell expired perishable items regardless of condition
+- Maintain cold chain temperature logs for refrigerated at-risk items
+- Separate damaged from undamaged products to prevent cross-contamination
+- Follow FIFO protocols strictly for all perishable categories
+- Document all food safety related disposals for regulatory compliance
+
+FINANCIAL CONTROLS:
+- Maximum single-day markdown budget: $1,000 per store without district approval
+- Require dual authorization for markdowns exceeding $300 on single SKU
+- Monthly markdown percentage cannot exceed 3% of total department sales
+- All markdowns must be supported by photographic evidence when over $100
+
+OPERATIONAL SAFEGUARDS:
+- Verify pricing system updates within 2 hours of markdown decisions
+- Ensure adequate staff coverage during high-volume markdown periods
+- Maintain separate tracking for vendor-returnable versus disposed items
+- Coordinate with receiving department to prevent additional orders of at-risk items
+
+DOCUMENTATION REQUIREMENTS
+
+DAILY DOCUMENTATION:
+- Complete Items at Risk Assessment Form by 10:00 AM each day
+- Photograph all products marked for disposal over $25 value
+- Record markdown adjustments in inventory management system within 1 hour
+- Log temperature readings for refrigerated at-risk products every 4 hours
+- Update exception report with actions taken and approvals obtained
+
+WEEKLY REPORTING:
+- Submit Department Markdown Summary every Monday by 2:00 PM
+- Analyze markdown trends and identify recurring issues
+- Report vendor quality concerns requiring follow-up
+- Document staff training needs related to at-risk item management
+
+MONTHLY DOCUMENTATION:
+- Compile comprehensive At-Risk Inventory Analysis
+- Calculate markdown percentages by category and vendor
+- Review policy effectiveness and recommend improvements
+- Submit regulatory compliance documentation for food safety disposals
+
+RECORD RETENTION:
+- Daily assessment forms: 90 days
+- Disposal documentation and photographs: 1 year
+- Vendor return correspondence: 2 years
+- Regulatory compliance records: 3 years
+- Monthly analysis reports: 5 years
+
+RESPONSIBILITIES
+
+Department Associates: Identify at-risk items during daily stock rotation, report quality concerns immediately, execute approved markdowns within established timeframes.
+
+Department Supervisors: Review daily at-risk assessments, approve markdowns within authority limits, ensure compliance with food safety protocols, coordinate with other departments on markdown timing.
+
+Store Management: Provide final approval for high-value decisions, monitor overall markdown performance, ensure policy compliance, handle vendor communications regarding defective products.
+
+POLICY REVIEW
+
+This policy will be reviewed quarterly and updated as needed based on operational experience, regulatory changes, and business requirements. All staff must acknowledge receipt and understanding of policy updates within 30 days of implementation.
+
+EFFECTIVE IMPLEMENTATION
+
+This policy takes effect immediately upon approval and supersedes all previous informal procedures for managing at-risk inventory items. Questions regarding policy interpretation should be directed to the Operations Manager.

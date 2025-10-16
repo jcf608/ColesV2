@@ -1,0 +1,146 @@
+<div class="hero">
+  <h1>🤔 Ask the Agent</h1>
+  <p class="hero-subtitle">Get detailed, actionable insights for your stores</p>
+</div>
+
+<div class="container">
+  <div class="ask-page-layout">
+    <div class="greeting-section">
+      <h2>Hi Carina, what would you like to know?</h2>
+      <p class="subtitle">Ask a question to get detailed, actionable insights for your stores</p>
+    </div>
+    
+    <div class="questions-grid" id="questions-grid">
+      <!-- Questions will be loaded dynamically -->
+      <div class="loading-spinner">Loading questions...</div>
+    </div>
+  </div>
+</div>
+
+<style>
+.ask-page-layout {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.greeting-section {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.greeting-section h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--apple-text, #1d1d1f);
+  margin-bottom: 0.5rem;
+}
+
+.greeting-section .subtitle {
+  font-size: 1rem;
+  color: #666;
+}
+
+.questions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.question-card {
+  background: white;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.question-card:hover {
+  border-color: #007aff;
+  box-shadow: 0 4px 12px rgba(0, 122, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.question-card .icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.question-card .label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--apple-text, #1d1d1f);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.question-card .question-text {
+  font-size: 0.875rem;
+  color: #666;
+  display: block;
+}
+
+.loading-spinner {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  color: #666;
+}
+
+.error-message {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem;
+  color: #ff3b30;
+  background: #fff5f5;
+  border-radius: 8px;
+}
+</style>
+
+<script>
+// Load questions dynamically
+async function loadQuestions() {
+  const grid = document.getElementById('questions-grid');
+  
+  try {
+    const response = await fetch('/api/ask-questions');
+    const data = await response.json();
+    
+    if (data.success && data.questions.length > 0) {
+      grid.innerHTML = '';
+      
+      data.questions.forEach(q => {
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.onclick = () => askQuestion(q.question);
+        
+        card.innerHTML = `
+          <span class="icon">${q.icon}</span>
+          <span class="label">${q.label}</span>
+          <span class="question-text">${q.question}</span>
+        `;
+        
+        grid.appendChild(card);
+      });
+    } else {
+      grid.innerHTML = '<div class="error-message">No questions available</div>';
+    }
+  } catch (error) {
+    console.error('Error loading questions:', error);
+    grid.innerHTML = '<div class="error-message">Error loading questions</div>';
+  }
+}
+
+function askQuestion(question) {
+  // Store question in sessionStorage and redirect to main chat interface
+  sessionStorage.setItem('pendingQuestion', question);
+  window.location.href = '/';
+}
+
+// Load questions on page load
+document.addEventListener('DOMContentLoaded', loadQuestions);
+</script>

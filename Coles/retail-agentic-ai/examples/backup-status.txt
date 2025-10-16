@@ -1,0 +1,77 @@
+TRAINING EXAMPLE: Backup Status Inquiry
+
+USER QUESTION:
+"What is the status of last night's backups across all systems?"
+
+AGENT INTERNAL REASONING:
+The user is asking about backup status, which is critical for data protection and business continuity. I need to check multiple systems that a grocery store would typically run:
+- POS (Point of Sale) systems
+- Inventory management system
+- Employee management system
+- Financial/accounting system
+- Customer loyalty program database
+- Security camera footage storage
+
+I should verify completion status, timing, data integrity, and flag any failures or anomalies. Backup failures could lead to data loss if systems crash during business hours.
+
+TOOL CALLS:
+
+Tool: check_backup_logs
+Parameters: {
+  "systems": ["pos_primary", "pos_secondary", "inventory_mgmt", "employee_system", "financial_system", "loyalty_database", "security_cameras"],
+  "date": "2024-01-15",
+  "time_range": "22:00-06:00"
+}
+
+Tool: verify_backup_integrity
+Parameters: {
+  "backup_date": "2024-01-15",
+  "verification_type": "full_checksum"
+}
+
+Tool: check_storage_capacity
+Parameters: {
+  "backup_storage_locations": ["primary_nas", "offsite_cloud", "local_tape"]
+}
+
+ANALYSIS PERFORMED:
+
+Backup Results Analysis:
+- POS Primary: Completed at 23:47, 847MB, checksum verified
+- POS Secondary: Completed at 23:52, 839MB, checksum verified  
+- Inventory Management: Completed at 01:23, 2.1GB, checksum verified
+- Employee System: FAILED at 02:15 - database lock timeout error
+- Financial System: Completed at 02:45, 156MB, checksum verified
+- Loyalty Database: Completed at 03:12, 634MB, checksum verified
+- Security Cameras: Completed at 04:38, 12.7GB, checksum verified
+
+Storage Capacity Check:
+- Primary NAS: 78% full (concern threshold: 85%)
+- Offsite Cloud: 34% of allocated space used
+- Local Tape: Last rotation completed successfully
+
+Critical Issues Identified:
+1. Employee System backup failed due to database lock - likely caused by overnight payroll processing overlap
+2. Primary NAS approaching capacity limit
+
+FINAL RECOMMENDATION:
+
+BACKUP STATUS SUMMARY:
+6 out of 7 systems backed up successfully last night. One critical failure requires immediate attention.
+
+IMMEDIATE ACTION REQUIRED:
+The Employee System backup failed at 02:15 AM due to a database lock timeout. This system contains payroll, scheduling, and HR data. I recommend:
+
+1. Run manual backup of Employee System immediately - the database should be free now
+2. Adjust backup schedule to start Employee System backup at 01:00 AM instead of 02:00 AM to avoid conflict with payroll processing
+3. Contact IT to implement database backup with hot backup capability
+
+PREVENTIVE MEASURES:
+- Primary NAS storage is at 78% capacity. Schedule cleanup of backups older than 90 days or expand storage within 2 weeks
+- All other systems backed up successfully with verified data integrity
+- Offsite redundancy is functioning properly
+
+BUSINESS IMPACT:
+Currently moderate risk - if Employee System crashes today before manual backup, you could lose up to 24 hours of schedule changes, new hire data, and timecard modifications. All customer-facing and financial systems are properly protected.
+
+Estimated time to resolve: 30 minutes for manual backup, 1 hour for schedule adjustment.

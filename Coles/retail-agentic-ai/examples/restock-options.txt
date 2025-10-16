@@ -1,0 +1,72 @@
+TRAINING EXAMPLE: Restock Options Inquiry
+
+USER QUESTION:
+"How can I get restock sooner? What are my options?"
+
+AGENT INTERNAL REASONING:
+The user is asking about expediting restocking, which suggests they may have low inventory or stockouts. I need to:
+- Check current inventory levels to understand urgency
+- Review existing restock orders and timelines
+- Identify available expediting options
+- Consider cost vs benefit of each option
+- Check supplier capabilities and constraints
+
+TOOL CALLS AND REASONING:
+
+Tool Call 1: check_current_inventory()
+Reason: Need to assess which items are critically low to prioritize expediting efforts
+
+Tool Call 2: get_pending_orders()
+Reason: Must understand what's already ordered and expected delivery dates
+
+Tool Call 3: get_supplier_expedite_options(supplier_ids=['SUP001', 'SUP002', 'SUP003'])
+Reason: Need to know what acceleration options each supplier offers
+
+Tool Call 4: calculate_expedite_costs(order_ids=['ORD-2024-0847', 'ORD-2024-0851'])
+Reason: Must quantify additional costs for rush delivery options
+
+ANALYSIS PERFORMED:
+
+Current Inventory Analysis:
+- Organic bananas: 12 units remaining, 3-day supply
+- Whole wheat bread: 8 units remaining, 1-day supply (CRITICAL)
+- Greek yogurt: 45 units remaining, 2-day supply
+- Ground beef 80/20: 23 lbs remaining, 1.5-day supply (CRITICAL)
+
+Pending Orders Review:
+- Order ORD-2024-0847: Dairy products, scheduled delivery Thursday (3 days out)
+- Order ORD-2024-0851: Meat products, scheduled delivery Friday (4 days out)
+- Order ORD-2024-0849: Produce, scheduled delivery Wednesday (2 days out)
+
+Expedite Options Available:
+1. Rush delivery (next day): Available from Suppliers SUP001 and SUP002, $150 fee per order
+2. Partial shipment: Can get 50% of order tomorrow, remainder on schedule, $75 fee
+3. Local emergency supplier: Higher unit costs (15-20% markup) but same-day delivery
+4. Transfer from sister store: Available for bread and yogurt, $50 transport cost
+
+Cost-Benefit Calculation:
+- Rush delivery both critical orders: $300 in fees vs estimated $800 in lost sales
+- Emergency supplier for bread only: $45 extra cost vs $200 potential lost sales
+- Store transfer for bread: $50 cost vs $200 potential lost sales
+
+FINAL RECOMMENDATION:
+
+Based on your inventory analysis, I recommend a combined approach:
+
+IMMEDIATE ACTION (Today):
+1. Request store transfer for whole wheat bread from Location #47 - they have 35 units available. Cost: $50 transport fee. This covers your most critical shortage.
+
+2. Contact emergency supplier Metro Foods for ground beef - they can deliver 30 lbs today at $6.20/lb versus your regular $5.40/lb. Additional cost: $24, but prevents stockout.
+
+TOMORROW ACTION:
+3. Request partial shipment from Supplier SUP002 for your dairy order - get the Greek yogurt and milk tomorrow instead of Thursday. Cost: $75 fee.
+
+COST SUMMARY:
+- Total expedite costs: $149
+- Estimated prevented lost sales: $650
+- Net benefit: $501
+
+ALTERNATIVE OPTIONS:
+If budget is tight, prioritize only the bread transfer ($50) as it's your most critical item with lowest expedite cost.
+
+Would you like me to initiate any of these expedite requests or would you prefer to review specific supplier terms first?

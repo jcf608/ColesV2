@@ -1,0 +1,73 @@
+{
+  "policy_name": "Action Approval and Authorization Policy",
+  "version": "1.0",
+  "effective_date": "2025-10-16",
+  "approval_workflows": {
+    "automatic": {
+      "description": "Auto-approved actions that meet all criteria",
+      "conditions": [
+        "low_financial_impact",
+        "policy_compliant",
+        "within_authority",
+        "routine_operation"
+      ],
+      "max_value_usd": 100,
+      "audit_required": true,
+      "examples": [
+        "Standard markdowns <20%",
+        "Routine inventory adjustments",
+        "Schedule swaps between staff"
+      ]
+    },
+    "store_manager": {
+      "description": "Store manager approval required",
+      "conditions": [
+        "moderate_financial_impact",
+        "non_routine_operation"
+      ],
+      "value_range_usd": [
+        100,
+        500
+      ],
+      "timeout_hours": 4,
+      "notification_method": "email_and_app",
+      "audit_required": true,
+      "examples": [
+        "Markdowns 20-40%",
+        "Emergency restocks",
+        "Staff schedule overrides"
+      ]
+    },
+    "regional_manager": {
+      "description": "Regional manager approval required",
+      "conditions": [
+        "high_financial_impact",
+        "policy_exception",
+        "cross_store_impact"
+      ],
+      "min_value_usd": 500,
+      "timeout_hours": 24,
+      "notification_method": "phone_and_email",
+      "audit_required": true,
+      "escalation_required": true,
+      "examples": [
+        "Markdowns >40%",
+        "Policy exceptions",
+        "Store-wide operational changes"
+      ]
+    }
+  },
+  "audit_requirements": {
+    "retention_period_days": 730,
+    "required_fields": [
+      "action_type",
+      "initiator",
+      "approver",
+      "timestamp",
+      "financial_impact",
+      "rationale",
+      "outcome"
+    ],
+    "review_frequency": "quarterly"
+  }
+}

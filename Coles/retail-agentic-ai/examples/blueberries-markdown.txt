@@ -1,0 +1,28 @@
+EXAMPLE DECISION: Organic Blueberries Markdown
+
+Query: "Should we mark down organic blueberries today?"
+
+Agent reasoning:
+- Current inventory: 32 units, cost $4.50, shelf price $7.99
+- Sales velocity: 8 units/day average, only 4 units sold today
+- Expiration: 2 days remaining
+- Competitor pricing: Farmers market selling at $6.49
+- Weather: Rain forecast reduces foot traffic tomorrow
+- Supply schedule: No delivery for 3 days
+
+Analysis:
+At current velocity, 16 units remain at expiration (50% waste = $72 loss).
+Markdown to $5.99 (25% reduction) maintains 25% margin above policy minimum.
+Competitive with farmers market pricing.
+Estimated recovery: 24 units sold = $144 revenue vs. $72 waste.
+
+Recommendation: Yes, mark down to $5.99 today.
+Financial impact: $64 margin recovered vs. shrinkage alternative.
+Required actions: Submit to pricing policy engine, update POS if approved, monitor sales at 6pm for further adjustment.
+
+Tool calls executed:
+1. get_inventory_status(product_id="BLU-ORG-6OZ", store_id="STORE-001")
+2. query_sales_velocity(product_id="BLU-ORG-6OZ", store_id="STORE-001", days_back=7)
+3. get_competitor_pricing(category="berries", store_location="STORE-001")
+4. check_pricing_policy(product_id="BLU-ORG-6OZ", current_price=7.99, proposed_price=5.99, reason_code="expiration")
+5. submit_price_change(product_id="BLU-ORG-6OZ", store_id="STORE-001", new_price=5.99, approval_token="...")

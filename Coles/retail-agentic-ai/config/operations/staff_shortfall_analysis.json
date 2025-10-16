@@ -1,0 +1,84 @@
+{
+  "category": "operations",
+  "module": "StaffShortfallAnalysis", 
+  "description": "Tools for analyzing the impact of staff shortages on operations",
+  "tools": [
+    {
+      "name": "analyze_staff_shortfall_impact",
+      "description": "Analyze the operational impact of staff shortages",
+      "method": "analyze_staff_shortfall_impact",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "department": {
+            "type": "string",
+            "description": "Department experiencing staff shortfall"
+          },
+          "shortfall_percentage": {
+            "type": "number",
+            "description": "Percentage of staff shortage (0-100)",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "peak_hours": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Peak operational hours affected"
+          }
+        },
+        "required": ["department", "shortfall_percentage"]
+      }
+    },
+    {
+      "name": "get_staffing_alternatives",
+      "description": "Get alternative staffing solutions for shortfalls",
+      "method": "get_staffing_alternatives",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "department": {
+            "type": "string",
+            "description": "Department needing staff coverage"
+          },
+          "required_hours": {
+            "type": "integer",
+            "description": "Number of hours needing coverage",
+            "minimum": 1
+          },
+          "skills_required": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Required skills for the role"
+          }
+        },
+        "required": ["department"]
+      }
+    },
+    {
+      "name": "calculate_customer_queue_impact",
+      "description": "Calculate the impact of staff shortfall on customer wait times",
+      "method": "calculate_customer_queue_impact", 
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "department": {
+            "type": "string",
+            "description": "Department with customer-facing operations"
+          },
+          "shortfall_percentage": {
+            "type": "number",
+            "description": "Percentage of staff shortage",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "current_queue_time": {
+            "type": "number",
+            "description": "Current average queue time in minutes",
+            "minimum": 0
+          }
+        },
+        "required": ["department", "shortfall_percentage"]
+      }
+    }
+  ]
+}

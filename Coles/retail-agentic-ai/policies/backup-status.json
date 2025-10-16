@@ -1,0 +1,165 @@
+{
+  "policy_id": "IT-OPS-BACKUP-001",
+  "version": "2.1.0",
+  "effective_date": "2024-01-15",
+  "last_updated": "2024-01-15T08:00:00Z",
+  "category": "it-operations",
+  "subcategory": "backup_status",
+  "title": "Backup Status Monitoring and Response Policy",
+  "description": "Policy governing backup status evaluation, thresholds, and escalation procedures for retail grocery operations",
+  "scope": "all_systems",
+  "approval_thresholds": {
+    "green_status": {
+      "conditions": {
+        "success_rate": ">=95%",
+        "completion_time": "<=6_hours",
+        "failed_systems": "<=2",
+        "critical_system_failures": 0
+      },
+      "approval_required": false,
+      "notification_level": "none"
+    },
+    "yellow_status": {
+      "conditions": {
+        "success_rate": "80-94%",
+        "completion_time": "6-8_hours",
+        "failed_systems": "3-5",
+        "critical_system_failures": "<=1"
+      },
+      "approval_required": true,
+      "approver_roles": ["backup_administrator", "it_supervisor"],
+      "notification_level": "standard",
+      "response_time": "2_hours"
+    },
+    "red_status": {
+      "conditions": {
+        "success_rate": "<80%",
+        "completion_time": ">8_hours",
+        "failed_systems": ">5",
+        "critical_system_failures": ">1"
+      },
+      "approval_required": true,
+      "approver_roles": ["it_manager", "operations_director"],
+      "notification_level": "urgent",
+      "response_time": "30_minutes",
+      "escalation_required": true
+    }
+  },
+  "safety_constraints": {
+    "maximum_consecutive_failures": {
+      "pos_systems": 0,
+      "inventory_management": 1,
+      "financial_systems": 0,
+      "employee_systems": 2,
+      "customer_database": 0
+    },
+    "data_retention_compliance": {
+      "minimum_retention_days": 90,
+      "offsite_backup_required": true,
+      "encryption_required": true
+    },
+    "recovery_time_objectives": {
+      "pos_systems": "4_hours",
+      "inventory_management": "8_hours",
+      "financial_systems": "2_hours",
+      "employee_systems": "24_hours",
+      "customer_database": "6_hours"
+    },
+    "recovery_point_objectives": {
+      "pos_systems": "15_minutes",
+      "inventory_management": "1_hour",
+      "financial_systems": "5_minutes",
+      "employee_systems": "4_hours",
+      "customer_database": "30_minutes"
+    }
+  },
+  "system_classifications": {
+    "critical_systems": [
+      "pos_terminals",
+      "payment_processing",
+      "inventory_management",
+      "financial_reporting",
+      "customer_database"
+    ],
+    "important_systems": [
+      "employee_scheduling",
+      "supply_chain_management",
+      "loyalty_programs",
+      "security_systems"
+    ],
+    "standard_systems": [
+      "email_systems",
+      "document_management",
+      "training_platforms",
+      "maintenance_logs"
+    ]
+  },
+  "numeric_thresholds": {
+    "backup_window": {
+      "start_time": "23:00",
+      "end_time": "06:00",
+      "maximum_duration_hours": 7
+    },
+    "storage_thresholds": {
+      "warning_percentage": 75,
+      "critical_percentage": 90,
+      "maximum_percentage": 95
+    },
+    "performance_metrics": {
+      "minimum_throughput_mbps": 100,
+      "maximum_network_utilization": 60,
+      "concurrent_backup_limit": 8
+    },
+    "failure_limits": {
+      "daily_failure_threshold": 3,
+      "weekly_failure_threshold": 10,
+      "monthly_failure_threshold": 25
+    }
+  },
+  "category_specific_rules": {
+    "retail_operations": {
+      "peak_season_adjustments": {
+        "applicable_periods": ["thanksgiving_week", "christmas_season", "back_to_school"],
+        "backup_frequency_multiplier": 2,
+        "retention_extension_days": 30,
+        "success_rate_threshold": 98
+      },
+      "compliance_requirements": {
+        "pci_dss": true,
+        "sox_compliance": true,
+        "gdpr_applicable": true,
+        "audit_trail_required": true
+      },
+      "business_continuity": {
+        "disaster_recovery_site": "required",
+        "cross_region_replication": true,
+        "automated_failover": true,
+        "manual_override_allowed": false
+      }
+    }
+  },
+  "escalation_procedures": {
+    "level_1": {
+      "trigger": "yellow_status",
+      "contacts": ["it_helpdesk", "backup_administrator"],
+      "timeframe": "within_2_hours"
+    },
+    "level_2": {
+      "trigger": "red_status_or_critical_failure",
+      "contacts": ["it_manager", "operations_manager"],
+      "timeframe": "within_30_minutes"
+    },
+    "level_3": {
+      "trigger": "multiple_critical_failures_or_extended_outage",
+      "contacts": ["cto", "operations_director", "emergency_response_team"],
+      "timeframe": "immediate"
+    }
+  },
+  "monitoring_requirements": {
+    "check_frequency": "every_30_minutes",
+    "dashboard_update_interval": "5_minutes",
+    "automated_reporting": true,
+    "real_time_alerts": true,
+    "historical_trending": 90
+  }
+}

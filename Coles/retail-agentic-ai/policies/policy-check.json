@@ -1,0 +1,151 @@
+{
+  "policy_id": "PRC-MD-001",
+  "policy_name": "Pricing Policy - 30% Markdown Authorization",
+  "version": "2.1.0",
+  "effective_date": "2024-01-01",
+  "expiry_date": "2024-12-31",
+  "category": "pricing_policy",
+  "subcategory": "markdown_approval",
+  "approval_thresholds": {
+    "markdown_percentage": {
+      "level_1": {
+        "range": "0-15%",
+        "required_approver": "department_manager",
+        "approval_count": 1
+      },
+      "level_2": {
+        "range": "16-25%",
+        "required_approver": "store_manager",
+        "approval_count": 1
+      },
+      "level_3": {
+        "range": "26-35%",
+        "required_approver": "regional_manager",
+        "approval_count": 2,
+        "additional_requirements": ["finance_review", "inventory_justification"]
+      },
+      "level_4": {
+        "range": "36%+",
+        "required_approver": "district_director",
+        "approval_count": 3,
+        "additional_requirements": ["vendor_notification", "loss_analysis", "executive_review"]
+      }
+    },
+    "dollar_amount": {
+      "low_impact": {
+        "range": "0-500",
+        "currency": "USD",
+        "approval_level": "supervisor"
+      },
+      "medium_impact": {
+        "range": "501-2500",
+        "currency": "USD",
+        "approval_level": "department_head"
+      },
+      "high_impact": {
+        "range": "2501+",
+        "currency": "USD",
+        "approval_level": "store_manager_plus"
+      }
+    }
+  },
+  "safety_constraints": {
+    "minimum_margin_protection": {
+      "cannot_exceed_cost": true,
+      "minimum_margin_percentage": 5,
+      "override_requires": "finance_director_approval"
+    },
+    "time_restrictions": {
+      "markdown_window_days": 14,
+      "advance_notice_required_hours": 24,
+      "blackout_periods": ["black_friday", "christmas_week", "inventory_week"]
+    },
+    "volume_limits": {
+      "max_items_per_request": 100,
+      "max_daily_markdown_value": 10000,
+      "max_category_percentage": 40
+    }
+  },
+  "category_specific_rules": {
+    "perishables": {
+      "dairy": {
+        "max_markdown": 50,
+        "expiry_based": true,
+        "auto_approval_threshold": 25
+      },
+      "produce": {
+        "max_markdown": 60,
+        "quality_assessment_required": true,
+        "donation_consideration_threshold": 40
+      },
+      "meat_seafood": {
+        "max_markdown": 30,
+        "food_safety_review": true,
+        "manager_inspection_required": true
+      },
+      "bakery": {
+        "max_markdown": 75,
+        "day_old_policy": true,
+        "donation_priority": true
+      }
+    },
+    "non_perishables": {
+      "packaged_goods": {
+        "max_markdown": 35,
+        "vendor_agreement_check": true,
+        "competitor_price_verification": false
+      },
+      "household": {
+        "max_markdown": 40,
+        "seasonal_exceptions": true,
+        "clearance_eligible": true
+      },
+      "health_beauty": {
+        "max_markdown": 25,
+        "brand_restrictions": true,
+        "map_price_compliance": true
+      }
+    },
+    "restricted_categories": {
+      "alcohol": {
+        "max_markdown": 15,
+        "state_regulation_check": true,
+        "legal_review_required": true
+      },
+      "pharmacy": {
+        "max_markdown": 10,
+        "insurance_impact_review": true,
+        "regulatory_compliance_check": true
+      },
+      "tobacco": {
+        "markdown_prohibited": true,
+        "exception_process": "corporate_only"
+      }
+    }
+  },
+  "numeric_thresholds": {
+    "profit_margin_floor": 2.5,
+    "inventory_turn_minimum": 4.0,
+    "waste_reduction_target": 15,
+    "customer_satisfaction_threshold": 85,
+    "competitive_price_variance": 10
+  },
+  "compliance_requirements": {
+    "audit_trail": true,
+    "documentation_retention_days": 365,
+    "financial_reporting": "weekly",
+    "exception_reporting": "daily",
+    "regulatory_notifications": ["state_tax", "vendor_agreements"]
+  },
+  "escalation_matrix": {
+    "policy_violation": "immediate_supervisor",
+    "system_override": "IT_security_team",
+    "customer_complaint": "customer_service_manager",
+    "vendor_dispute": "procurement_team"
+  },
+  "review_schedule": {
+    "quarterly_assessment": true,
+    "annual_policy_review": true,
+    "trigger_based_review": ["margin_impact_5_percent", "customer_complaints_increase"]
+  }
+}

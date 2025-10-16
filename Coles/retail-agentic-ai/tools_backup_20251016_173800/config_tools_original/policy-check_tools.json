@@ -1,0 +1,60 @@
+[
+  {
+    "name": "get_markdown_policy_limits",
+    "description": "Retrieves the maximum allowed markdown percentage and any restrictions for different product categories or business units",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "product_category": {
+          "type": "string",
+          "description": "Product category to check markdown limits for"
+        },
+        "business_unit": {
+          "type": "string",
+          "description": "Business unit or department requesting the markdown"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "validate_markdown_authorization",
+    "description": "Checks if the requested markdown percentage requires special authorization and identifies who can approve it",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "markdown_percentage": {
+          "type": "number",
+          "description": "The markdown percentage to validate (e.g., 30 for 30%)"
+        },
+        "requester_role": {
+          "type": "string",
+          "description": "Role or title of the person requesting the markdown"
+        }
+      },
+      "required": ["markdown_percentage"]
+    }
+  },
+  {
+    "name": "check_markdown_compliance_rules",
+    "description": "Verifies if the markdown complies with company policies including seasonal restrictions, inventory thresholds, and margin requirements",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "markdown_percentage": {
+          "type": "number",
+          "description": "The markdown percentage to check for compliance"
+        },
+        "product_cost": {
+          "type": "number",
+          "description": "Original cost of the product"
+        },
+        "current_inventory_level": {
+          "type": "integer",
+          "description": "Current inventory count for the product"
+        }
+      },
+      "required": ["markdown_percentage"]
+    }
+  }
+]

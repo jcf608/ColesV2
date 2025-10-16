@@ -1,0 +1,93 @@
+[
+  {
+    "name": "get_low_stock_items",
+    "description": "Retrieves inventory items that are at or below their minimum stock threshold and need restocking attention",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "category": {
+          "type": "string",
+          "description": "Filter by product category (optional)"
+        },
+        "urgency_level": {
+          "type": "string",
+          "description": "Filter by urgency: 'critical', 'low', or 'all'",
+          "enum": ["critical", "low", "all"]
+        },
+        "location": {
+          "type": "string",
+          "description": "Filter by warehouse or store location (optional)"
+        }
+      },
+      "required": ["urgency_level"]
+    }
+  },
+  {
+    "name": "get_expiring_products",
+    "description": "Identifies products with upcoming expiration dates that require immediate attention for sale, discount, or disposal",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "days_ahead": {
+          "type": "integer",
+          "description": "Number of days to look ahead for expiring items"
+        },
+        "product_type": {
+          "type": "string",
+          "description": "Filter by product type such as 'perishable', 'pharmaceutical', 'cosmetic' (optional)"
+        },
+        "include_expired": {
+          "type": "boolean",
+          "description": "Whether to include already expired items"
+        }
+      },
+      "required": ["days_ahead", "include_expired"]
+    }
+  },
+  {
+    "name": "get_overstock_alerts",
+    "description": "Returns items with excessive inventory levels that may tie up capital or require promotional action",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "threshold_percentage": {
+          "type": "number",
+          "description": "Percentage above optimal stock level to trigger alert (e.g., 150 for 50% overstocked)"
+        },
+        "minimum_value": {
+          "type": "number",
+          "description": "Minimum dollar value of overstock to include in results (optional)"
+        },
+        "category": {
+          "type": "string",
+          "description": "Filter by product category (optional)"
+        }
+      },
+      "required": ["threshold_percentage"]
+    }
+  },
+  {
+    "name": "get_quality_control_items",
+    "description": "Retrieves items flagged for quality control review, damaged goods, or customer return issues requiring attention",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "issue_type": {
+          "type": "string",
+          "description": "Type of quality issue: 'damaged', 'returns', 'quality_flag', 'recall', or 'all'",
+          "enum": ["damaged", "returns", "quality_flag", "recall", "all"]
+        },
+        "priority": {
+          "type": "string",
+          "description": "Priority level: 'high', 'medium', 'low', or 'all'",
+          "enum": ["high", "medium", "low", "all"]
+        },
+        "days_pending": {
+          "type": "integer",
+          "description": "Filter items pending review for more than specified days (optional)"
+        }
+      },
+      "required": ["issue_type", "priority"]
+    }
+  }
+]

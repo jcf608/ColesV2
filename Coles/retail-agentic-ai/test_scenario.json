@@ -1,0 +1,161 @@
+{
+  "test_scenario": {
+    "name": "Quality Degradation Alert",
+    "description": "Monitor produce quality indicators and alert when items show signs of degradation",
+    "sample_questions": [
+      "Which items are showing quality degradation today?",
+      "Alert me to any quality issues in the berry section",
+      "What produce needs immediate attention for quality?"
+    ]
+  },
+  "system_prompt_addition": "QUALITY DEGRADATION MONITORING:\n\nWhen users ask about quality issues:\n1. Check visual indicators (browning, wilting, mold, bruising)\n2. Review temperature logs for cold chain breaks\n3. Compare current state to expected shelf life timeline\n4. Prioritize by value at risk and customer impact\n\nDecision Framework:\n- Immediate removal: Visible mold, severe bruising, off odors\n- Markdown candidate: Minor cosmetic issues, 1-2 days from degradation\n- Monitor closely: Early signs of quality decline\n- No action: Quality within normal parameters\n\nOutput Requirements:\n- List items requiring action, sorted by urgency\n- Specify recommended action (remove/mark down/monitor)\n- Estimate financial impact of each action\n- Flag patterns indicating supply chain issues",
+  "policy_rules": {
+    "text": "QUALITY DEGRADATION POLICY\n\nInspection Requirements:\n- Visual inspection of all produce 2x daily (opening, closing)\n- Temperature log check every 4 hours\n- Immediate inspection after any refrigeration issues\n- Customer complaints trigger spot inspection of category\n\nRemoval Criteria:\n- Any visible mold or pest damage: Immediate removal\n- Severe bruising (>30% of surface): Immediate removal\n- Off odor detected: Immediate removal\n- Temperature abuse (>2 hours outside safe range): Management review\n\nMarkdown vs. Removal:\n- Minor cosmetic issues + >1 day shelf life: Markdown 30-50%\n- Approaching expiration + acceptable quality: Markdown per standard policy\n- Quality degraded + <1 day shelf life: Remove from sale\n\nDocumentation:\n- All removals logged with reason code, quantity, value\n- Photos required for claims >$50\n- Supplier quality issues escalated within 24 hours\n- Weekly quality trending report to category managers",
+    "json": {
+      "quality_degradation_policy": {
+        "version": "1.0",
+        "inspection_schedule": {
+          "visual_inspection_per_day": 2,
+          "temperature_check_interval_hours": 4,
+          "customer_complaint_response": "immediate"
+        },
+        "immediate_removal_criteria": [
+          "visible_mold",
+          "pest_damage",
+          "severe_bruising_pct_gt_30",
+          "off_odor"
+        ],
+        "temperature_abuse": {
+          "hours_outside_range": 2,
+          "action": "management_review"
+        },
+        "markdown_criteria": {
+          "conditions": [
+            "minor_cosmetic_issues",
+            "shelf_life_days_gte_1"
+          ],
+          "markdown_pct_range": [30, 50]
+        },
+        "removal_criteria": {
+          "conditions": [
+            "quality_degraded",
+            "shelf_life_days_lt_1"
+          ],
+          "action": "remove_from_sale"
+        },
+        "documentation_requirements": {
+          "log_required": true,
+          "photo_required_value_threshold": 50,
+          "supplier_escalation_hours": 24,
+          "reporting_frequency": "weekly"
+        }
+      }
+    }
+  },
+  "example_dialog": "EXAMPLE DECISION: Quality Degradation Alert\n\nQuery: \"Which items need attention for quality issues today?\"\n\nAgent reasoning:\n- Current time: 10:30 AM, mid-morning inspection\n- Store: STORE-001, Sydney NSW\n- Quality alerts triggered: 3 items flagged by morning inspection\n- Temperature logs: Normal overnight, brief 30min spike at 6 AM (acceptable)\n\nInventory scan results:\n1. Strawberries (SKU: STR001): 15 units showing soft spots, 2 days to expiration\n2. Iceberg Lettuce (SKU: LET001): 8 units with brown edges, 3 days to expiration\n3. Pre-cut Melon (SKU: MEL001): 4 units approaching sell-by today\n\nAnalysis:\n\nStrawberries: Soft spots indicate handling damage or age. With 2 days remaining and current quality decline, estimate 30% loss if not acted upon. Value at risk: $120. Recommendation: Markdown to $4.99 (from $7.99), maintain margin above policy minimum.\n\nIceberg Lettuce: Brown edges common for this item type, still saleable with trim. 3 days shelf life sufficient. Value at risk: $32. Recommendation: Markdown to $1.99 (from $2.99), will sell within 24 hours at this price.\n\nPre-cut Melon: Sell-by date today, quality appears good. Value at risk: $36. Recommendation: Markdown to $3.99 (from $5.99) and promote for same-day consumption.\n\nTotal value at risk: $188\nEstimated recovery with markdowns: $145\nNet savings vs. shrinkage: $145 vs. $0\n\nRecommendation: Yes, markdown all three items immediately.\nPriority order: Melon (today), Strawberries (high value), Lettuce (low urgency)\nRequired actions: Update pricing, create point-of-sale signage, monitor sales at 2 PM\n\nTool calls executed:\n1. get_quality_inspection_alerts(store_id=\"STORE-001\", inspection_time=\"morning\")\n2. get_inventory_status(product_ids=[\"STR001\", \"LET001\", \"MEL001\"], store_id=\"STORE-001\")\n3. check_temperature_logs(store_id=\"STORE-001\", hours_back=12)\n4. calculate_shrinkage_risk(product_ids=[\"STR001\", \"LET001\", \"MEL001\"])\n5. check_pricing_policy(product_id=\"STR001\", current_price=7.99, proposed_price=4.99, reason_code=\"quality\")\n6. check_pricing_policy(product_id=\"LET001\", current_price=2.99, proposed_price=1.99, reason_code=\"quality\")\n7. check_pricing_policy(product_id=\"MEL001\", current_price=5.99, proposed_price=3.99, reason_code=\"expiration\")\n8. submit_quality_alert_response(actions=[{product: \"STR001\", action: \"markdown\"}, {product: \"LET001\", action: \"markdown\"}, {product: \"MEL001\", action: \"markdown\"}])",
+  "tool_definitions": [
+    {
+      "name": "get_quality_inspection_alerts",
+      "description": "Retrieve quality inspection alerts for a store from the current inspection cycle",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "store_id": {
+            "type": "string",
+            "description": "Store location identifier"
+          },
+          "inspection_time": {
+            "type": "string",
+            "enum": ["morning", "evening", "emergency"],
+            "description": "Which inspection cycle to retrieve"
+          },
+          "category_filter": {
+            "type": "string",
+            "description": "Optional: filter by category (berries, salads, etc)"
+          }
+        },
+        "required": ["store_id", "inspection_time"]
+      }
+    },
+    {
+      "name": "check_temperature_logs",
+      "description": "Check refrigeration temperature logs for cold chain compliance",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "store_id": {
+            "type": "string",
+            "description": "Store location identifier"
+          },
+          "hours_back": {
+            "type": "integer",
+            "description": "Number of hours of history to retrieve",
+            "minimum": 1,
+            "maximum": 72
+          },
+          "zone": {
+            "type": "string",
+            "description": "Specific refrigeration zone (optional)"
+          }
+        },
+        "required": ["store_id", "hours_back"]
+      }
+    },
+    {
+      "name": "calculate_shrinkage_risk",
+      "description": "Calculate potential shrinkage value for products with quality issues",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "product_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of product IDs to analyze"
+          },
+          "include_historical_rates": {
+            "type": "boolean",
+            "description": "Include historical shrinkage rates for comparison"
+          }
+        },
+        "required": ["product_ids"]
+      }
+    },
+    {
+      "name": "submit_quality_alert_response",
+      "description": "Log the actions taken in response to quality alerts",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "actions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "product": {"type": "string"},
+                "action": {
+                  "type": "string",
+                  "enum": ["markdown", "remove", "monitor", "no_action"]
+                },
+                "reason": {"type": "string"}
+              }
+            },
+            "description": "List of actions taken for each product"
+          },
+          "inspector_id": {
+            "type": "string",
+            "description": "ID of person conducting inspection"
+          }
+        },
+        "required": ["actions"]
+      }
+    }
+  ],
+  "tool_implementation": "# Quality Degradation Tools\n# Auto-generated test implementation\n\ndef execute_quality_tools(tool_name, parameters)\n  case tool_name\n  when 'get_quality_inspection_alerts'\n    {\n      store_id: parameters['store_id'],\n      inspection_time: parameters['inspection_time'],\n      inspection_date: Date.today.to_s,\n      inspector_id: 'INSP-001',\n      alerts: [\n        {\n          product_id: 'STR001',\n          product_name: 'Organic Strawberries',\n          issue: 'soft_spots',\n          severity: 'medium',\n          quantity_affected: 15,\n          recommended_action: 'markdown'\n        },\n        {\n          product_id: 'LET001',\n          product_name: 'Iceberg Lettuce',\n          issue: 'brown_edges',\n          severity: 'low',\n          quantity_affected: 8,\n          recommended_action: 'markdown'\n        },\n        {\n          product_id: 'MEL001',\n          product_name: 'Pre-cut Melon',\n          issue: 'approaching_sellby',\n          severity: 'medium',\n          quantity_affected: 4,\n          recommended_action: 'markdown'\n        }\n      ],\n      total_alerts: 3,\n      next_inspection: '18:00'\n    }\n  when 'check_temperature_logs'\n    {\n      store_id: parameters['store_id'],\n      hours_analyzed: parameters['hours_back'],\n      temperature_range: '0-4°C',\n      compliance_status: 'compliant',\n      alerts: [\n        {\n          timestamp: (Time.now - 4 * 3600).iso8601,\n          zone: 'produce_cooler_1',\n          temperature_c: 6.2,\n          duration_minutes: 30,\n          severity: 'low',\n          note: 'Brief spike during restocking, returned to normal'\n        }\n      ],\n      overall_compliance_pct: 98.5\n    }\n  when 'calculate_shrinkage_risk'\n    products = parameters['product_ids']\n    {\n      analysis_date: Date.today.to_s,\n      products: products.map do |pid|\n        {\n          product_id: pid,\n          current_quantity: 15,\n          unit_cost: 4.50,\n          unit_price: 7.99,\n          estimated_loss_units: 8,\n          estimated_loss_value: 36.00,\n          probability_pct: 75,\n          days_to_complete_loss: 2\n        }\n      end,\n      total_at_risk_value: products.length * 36.00,\n      recommended_action: 'immediate_markdown'\n    }\n  when 'submit_quality_alert_response'\n    {\n      submission_timestamp: Time.now.iso8601,\n      actions_logged: parameters['actions'].length,\n      confirmation_number: \"QA-#{Time.now.to_i}-#{rand(1000)}\",\n      status: 'recorded',\n      next_review: 'evening_inspection',\n      actions_summary: parameters['actions']\n    }\n  else\n    { error: \"Unknown tool: #{tool_name}\" }\n  end\nend",
+  "quick_action": {
+    "icon": "⚠️",
+    "label": "Quality Alerts",
+    "question": "What quality issues need attention today?"
+  }
+}

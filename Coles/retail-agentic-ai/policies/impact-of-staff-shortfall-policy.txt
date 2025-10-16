@@ -1,0 +1,22 @@
+WEATHER-BASED INVENTORY POLICY
+
+Forecast Reliability Requirements:
+- Only act on weather forecasts from approved sources (Bureau of Meteorology)
+- Minimum 70% confidence threshold for inventory adjustments
+- Forecasts beyond 3 days require manager approval for major changes
+
+Adjustment Thresholds:
+- Minor adjustment (<10% change): Automatic approval
+- Moderate adjustment (10-25% change): Store manager notification
+- Major adjustment (>25% change): Regional manager approval required
+
+Category-Specific Rules:
+- Berries: Maximum 40% reduction in rain forecast; never increase >30% for heat
+- Leafy Greens: Can be reduced up to 50% for extended heat periods
+- Root Vegetables: Weather-resistant; maximum 15% adjustment
+- Pre-cut Items: Follow standard markdown policy; weather is secondary factor
+
+Safety Constraints:
+- Never reduce safety stock below 1 day of average sales
+- Maintain buffer stock for staple items regardless of weather
+- Document all weather-based decisions with forecast source and timestamp

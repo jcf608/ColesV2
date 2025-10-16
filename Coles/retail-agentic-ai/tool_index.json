@@ -1,0 +1,161 @@
+{
+  "structure_version": "2.0",
+  "rationalized_date": "2025-10-16", 
+  "description": "CARINA rationalized tool structure - eliminates duplicates and creates logical organization",
+  "categories": {
+    "retail": {
+      "description": "Retail operations and management tools",
+      "tools": [
+        {
+          "name": "competitor_pricing",
+          "file": "tools/retail/competitor_pricing.rb",
+          "config": "config/retail/competitor_pricing.json", 
+          "class": "CARINA::Retail::CompetitorPricing",
+          "description": "Tools for monitoring and analyzing competitor pricing data"
+        },
+        {
+          "name": "expiring_products", 
+          "file": "tools/retail/expiring_products.rb",
+          "config": "config/retail/expiring_products.json",
+          "class": "CARINA::Retail::ExpiringProducts",
+          "description": "Tools for monitoring products approaching expiration dates"
+        },
+        {
+          "name": "inventory_risk",
+          "file": "tools/retail/inventory_risk.rb", 
+          "config": "config/retail/inventory_risk.json",
+          "class": "CARINA::Retail::InventoryRisk",
+          "description": "Tools for analyzing inventory at risk of spoilage or loss"
+        },
+        {
+          "name": "restock_management",
+          "file": "tools/retail/restock_management.rb",
+          "config": "config/retail/restock_management.json", 
+          "class": "CARINA::Retail::RestockManagement",
+          "description": "Tools for managing product restocking and procurement"
+        },
+        {
+          "name": "policy_compliance",
+          "file": "tools/retail/policy_compliance.rb",
+          "config": "config/retail/policy_compliance.json",
+          "class": "CARINA::Retail::PolicyCompliance", 
+          "description": "Tools for compliance checking and policy validation"
+        }
+      ]
+    },
+    "operations": {
+      "description": "Operational management and workforce tools",
+      "tools": [
+        {
+          "name": "staff_allocation",
+          "file": "tools/operations/staff_allocation.rb",
+          "config": "config/operations/staff_allocation.json",
+          "class": "CARINA::Operations::StaffAllocation",
+          "description": "Tools for optimizing staff scheduling and allocation"
+        },
+        {
+          "name": "capacity_planning", 
+          "file": "tools/operations/capacity_planning.rb",
+          "config": "config/operations/capacity_planning.json",
+          "class": "CARINA::Operations::CapacityPlanning",
+          "description": "Tools for planning and managing operational capacity"
+        },
+        {
+          "name": "staff_shortfall_analysis",
+          "file": "tools/operations/staff_shortfall_analysis.rb",
+          "config": "config/operations/staff_shortfall_analysis.json", 
+          "class": "CARINA::Operations::StaffShortfallAnalysis",
+          "description": "Tools for analyzing the impact of staff shortages on operations"
+        }
+      ]
+    },
+    "systems": {
+      "description": "IT systems and infrastructure monitoring tools",
+      "tools": [
+        {
+          "name": "backup_status",
+          "file": "tools/systems/backup_status.rb",
+          "config": "config/systems/backup_status.json",
+          "class": "CARINA::Systems::BackupStatus", 
+          "description": "Tools for monitoring backup systems and recovery status"
+        },
+        {
+          "name": "system_health",
+          "file": "tools/systems/system_health.rb",
+          "config": "config/systems/system_health.json",
+          "class": "CARINA::Systems::SystemHealth",
+          "description": "Tools for monitoring overall system health and performance"
+        },
+        {
+          "name": "server_outage_analysis",
+          "file": "tools/systems/server_outage_analysis.rb", 
+          "config": "config/systems/server_outage_analysis.json",
+          "class": "CARINA::Systems::ServerOutageAnalysis",
+          "description": "Tools for analyzing server outages and their business impact"
+        },
+        {
+          "name": "critical_systems",
+          "file": "tools/systems/critical_systems.rb",
+          "config": "config/systems/critical_systems.json",
+          "class": "CARINA::Systems::CriticalSystems",
+          "description": "Tools for monitoring critical system components"
+        }
+      ]
+    },
+    "security": {
+      "description": "Security monitoring and threat management tools", 
+      "tools": [
+        {
+          "name": "security_alerts",
+          "file": "tools/security/security_alerts.rb",
+          "config": "config/security/security_alerts.json",
+          "class": "CARINA::Security::SecurityAlerts",
+          "description": "Tools for monitoring security alerts and threats"
+        }
+      ]
+    },
+    "incidents": {
+      "description": "Incident and change management tools",
+      "tools": [
+        {
+          "name": "incident_management",
+          "file": "tools/incidents/incident_management.rb", 
+          "config": "config/incidents/incident_management.json",
+          "class": "CARINA::Incidents::IncidentManagement",
+          "description": "Tools for managing incidents and service disruptions"
+        },
+        {
+          "name": "change_calendar",
+          "file": "tools/incidents/change_calendar.rb",
+          "config": "config/incidents/change_calendar.json",
+          "class": "CARINA::Incidents::ChangeCalendar", 
+          "description": "Tools for managing change schedules and release calendars"
+        }
+      ]
+    },
+    "external": {
+      "description": "External service integration tools",
+      "tools": [
+        {
+          "name": "weather_analysis", 
+          "file": "tools/external/weather_analysis.rb",
+          "config": "config/external/weather_analysis.json",
+          "class": "CARINA::External::WeatherAnalysis",
+          "description": "Tools for weather data analysis and retail impact assessment"
+        }
+      ]
+    }
+  },
+  "migration_info": {
+    "duplicates_resolved": [
+      "impact-of-staff-shortfall_tools.rb (app/tools & tools) -> operations/staff_shortfall_analysis.rb",
+      "server-outage-impact_tools.rb (app/tools & tools) -> systems/server_outage_analysis.rb"
+    ],
+    "naming_conventions": {
+      "removed_suffixes": "_tools",
+      "category_structure": "logical grouping by business function", 
+      "class_naming": "CARINA::Category::ToolName",
+      "file_naming": "snake_case without suffixes"
+    }
+  }
+}

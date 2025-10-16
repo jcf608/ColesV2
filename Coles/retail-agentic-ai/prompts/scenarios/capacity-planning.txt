@@ -1,0 +1,21 @@
+**CAPACITY FORECAST CAPABILITY**
+
+You activate this capability when users ask about system capacity predictions, resource utilization trends, or infrastructure planning over the next 30 days. This applies to all retail technology systems including POS networks, inventory databases, payment processors, refrigeration monitoring, and customer Wi-Fi.
+
+**DECISION FRAMEWORK**
+
+Check current utilization rates across all monitored systems and compare against baseline performance metrics. Analyze trending data from the past 90 days to identify growth patterns, seasonal spikes, and recurring capacity stress periods. Calculate projected resource consumption using historical growth rates and known upcoming events like sales, holidays, or store renovations.
+
+Examine these critical factors: transaction volume increases, data storage growth rates, network bandwidth consumption, processing power demands, and concurrent user loads. Cross-reference with store calendars for promotional events, inventory cycles, and peak shopping periods that drive system usage spikes.
+
+Identify systems currently operating above 70% capacity as immediate concerns and those projected to exceed 80% within 30 days as critical risks requiring intervention.
+
+**OUTPUT REQUIREMENTS**
+
+Present findings in priority order starting with highest risk systems. For each system approaching thresholds, specify current utilization percentage, projected peak usage date, estimated capacity shortage, and business impact if limits are exceeded.
+
+Include recommended actions with specific timelines: immediate interventions for systems above 80%, planning actions for those approaching 70-80%, and monitoring protocols for systems trending upward but still below 70%.
+
+Provide cost estimates for capacity upgrades and alternative solutions like load balancing or usage optimization. Flag any systems where capacity constraints could affect customer experience, transaction processing, or regulatory compliance.
+
+Conclude with a 30-day monitoring schedule identifying key dates when capacity should be reassessed based on projected growth patterns.

@@ -1,0 +1,61 @@
+Training Example: Items at Risk Analysis
+
+USER QUESTION:
+"What products need attention today?"
+
+AGENT INTERNAL REASONING:
+The user is asking for products that need immediate attention today. As a grocery manager assistant, I need to identify items that could impact sales, customer satisfaction, or profitability if not addressed promptly. I should consider:
+- Items approaching expiration dates
+- Low stock items that might run out before next delivery
+- Overstock items taking up space or at risk of spoiling
+- Items with unusual sales patterns (slow movers or unexpected high demand)
+- Temperature-sensitive products with storage issues
+
+I'll need current inventory data, expiration dates, sales velocity, and delivery schedules to make proper recommendations.
+
+TOOLS CALLED:
+1. get_current_inventory() - To see current stock levels across all products
+2. get_expiration_alerts(days=3) - To find items expiring in next 3 days
+3. get_low_stock_alerts(threshold=0.2) - To find items below 20% of normal stock levels
+4. get_sales_velocity_report(days=7) - To identify slow-moving items from past week
+5. get_delivery_schedule() - To see when next deliveries are expected
+6. get_temperature_log_alerts() - To check for any cold chain issues
+
+ANALYSIS PERFORMED:
+Examining the data returned:
+
+Critical Expiration Issues:
+- Organic strawberries: 24 units expire tomorrow, only sold 8 units in past 2 days
+- Greek yogurt (brand A): 36 containers expire day after tomorrow, normal sales 15/day
+- Pre-made sushi: 12 platters expire tonight, typically sell 8/day
+
+Low Stock Critical:
+- Milk (2% gallon): Only 18 units left, sells 45/day average, next dairy delivery not until Thursday
+- Bananas: 12 bunches remaining, sells 35 bunches/day, produce delivery tomorrow morning
+- Bread (store brand): 8 loaves left, sells 25/day, bakery delivery delayed until Wednesday
+
+Slow Movers Taking Space:
+- Premium ice cream flavor X: 48 units, only 3 sold this week, taking freezer space needed for faster items
+- Specialty pasta sauce: 60 jars, 5 sold this week, shelf space could be used for higher velocity items
+
+Temperature Issues:
+- Freezer case 3 temperature spiked to 12°F for 2 hours yesterday, affecting 200 units of frozen vegetables
+
+FINAL RECOMMENDATION:
+"I've identified several products requiring immediate attention today:
+
+URGENT - Handle First:
+1. Pre-made sushi (12 platters expiring tonight) - Mark down 30% immediately or donate before 6 PM
+2. Milk shortage - You'll run out by tomorrow afternoon. Contact distributor for emergency delivery or source from secondary supplier
+3. Freezer case 3 frozen vegetables - Inspect 200 units for quality issues from temperature spike, may need disposal or discount
+
+HIGH PRIORITY - Handle Today:
+4. Organic strawberries (24 units expiring tomorrow) - Apply 40% discount stickers now while still appealing
+5. Greek yogurt - 36 containers expiring Wednesday, create buy-one-get-one promotion or 25% off
+6. Banana restock - Verify tomorrow morning delivery is confirmed, consider emergency pickup if delayed
+
+MODERATE PRIORITY - Address This Week:
+7. Premium ice cream flavor X - Move to clearance section with 20% discount to free freezer space
+8. Specialty pasta sauce - Create end-cap display or bundle with pasta for 15% combo discount
+
+This prioritization focuses on preventing waste, avoiding stockouts of essentials, and optimizing space utilization. The urgent items could result in $340 in losses if not addressed today."

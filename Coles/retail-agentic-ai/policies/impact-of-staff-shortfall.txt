@@ -1,0 +1,169 @@
+WEATHER IMPACT PRODUCE ORDERING POLICY
+
+Policy Number: PO-WI-001
+Effective Date: [Date]
+Review Date: [Annual Review Date]
+Department: Procurement/Produce
+Classification: Custom Operations Policy
+
+1. SCOPE AND PURPOSE
+
+1.1 Scope
+This policy applies to all produce ordering decisions influenced by weather forecasts for the following day's operations. It covers fresh fruits, vegetables, and other perishable produce items across all store locations within the retail grocery operation.
+
+1.2 Purpose
+To establish standardized procedures for adjusting produce orders based on weather forecasts to:
+- Minimize food waste and inventory losses
+- Ensure adequate product availability during weather events
+- Optimize inventory levels based on anticipated customer behavior
+- Maintain consistent decision-making across all locations
+- Protect profit margins during weather-related demand fluctuations
+
+2. DECISION THRESHOLDS
+
+2.1 Automated Adjustments (No Approval Required)
+Weather conditions that trigger automatic order modifications within the following parameters:
+
+Temperature-Based Adjustments:
+- Forecasted high temperature above 85°F: Increase cold beverage produce orders (lemons, limes, watermelon) by 15-25%
+- Forecasted high temperature below 40°F: Increase soup/stew vegetables (onions, carrots, celery, potatoes) by 10-20%
+- Temperature variance of 20°F or more from seasonal average: Adjust seasonal produce orders by 10-15%
+
+Precipitation-Based Adjustments:
+- Light rain (0.1-0.3 inches forecasted): Reduce outdoor grilling produce (corn, bell peppers, tomatoes) by 10-15%
+- Moderate to heavy rain (0.4+ inches forecasted): Reduce grilling produce by 20-30%, increase comfort food vegetables by 15%
+- Snow forecast under 3 inches: Increase pantry staple produce (onions, potatoes, garlic) by 15-20%
+
+2.2 Manager Approval Required
+Weather conditions requiring Produce Manager or Store Manager approval:
+
+Severe Weather Conditions:
+- Winter storm warnings with 3+ inches of snow forecasted
+- Severe thunderstorm warnings with high wind or hail
+- Temperature extremes below 20°F or above 100°F
+- Any weather advisory affecting transportation routes
+
+Order Adjustment Thresholds:
+- Any single item adjustment exceeding 30% of standard order
+- Total produce order value changes exceeding 25% of daily average
+- Requests to discontinue or dramatically reduce orders for seasonal items
+- Emergency reorders due to weather-related supply chain disruptions
+
+2.3 Regional Manager Escalation Required
+Conditions requiring Regional Manager involvement:
+
+Multi-Day Weather Events:
+- Weather patterns affecting operations for 3+ consecutive days
+- Regional weather emergencies affecting multiple store locations
+- Supply chain disruptions lasting more than 48 hours
+- Total store closure considerations due to severe weather
+
+Financial Impact Thresholds:
+- Projected inventory losses exceeding $5,000 per location
+- Order modifications affecting weekly produce budget by more than 40%
+- Supplier contract modifications due to force majeure weather events
+
+3. APPROVAL REQUIREMENTS
+
+3.1 Approval Hierarchy
+
+Assistant Produce Manager/Department Lead:
+- Approve automated adjustments within established parameters
+- Authorize single-item modifications up to 30%
+- Approve emergency markdowns due to weather impact
+
+Produce Manager:
+- Authorize order modifications between 25-50% of daily average
+- Approve supplier substitutions due to weather delays
+- Authorize inventory transfers between locations
+- Sign off on weather-related promotional pricing strategies
+
+Store Manager:
+- Approve total order modifications exceeding 50%
+- Authorize emergency closures of produce department
+- Approve inventory write-offs exceeding $2,500
+- Make final decisions on severe weather operational changes
+
+Regional Manager:
+- Approve multi-location weather response strategies
+- Authorize contract modifications with suppliers
+- Approve budget variances exceeding 40% due to weather
+- Make decisions affecting regional distribution patterns
+
+4. SAFETY CONSTRAINTS AND GUARDRAILS
+
+4.1 Inventory Safety Limits
+- Minimum inventory levels: Maintain at least 50% of standard daily inventory during any weather event
+- Maximum inventory increase: Do not exceed 200% of standard daily order without Regional Manager approval
+- Perishable item limits: Fresh cut produce orders cannot exceed 150% during weather events due to shortened shelf life
+
+4.2 Financial Guardrails
+- Daily variance limit: Weather-related order modifications cannot exceed $10,000 per location without Store Manager approval
+- Weekly budget protection: Cumulative weather adjustments cannot exceed 35% of weekly produce budget
+- Loss prevention ceiling: Maximum acceptable weather-related losses set at 8% of monthly produce revenue
+
+4.3 Quality and Safety Standards
+- Temperature-sensitive items: Maintain cold chain integrity during all weather-related order modifications
+- Supplier verification: Confirm supplier ability to maintain quality standards during adverse weather
+- Product inspection: Implement enhanced quality checks for all weather-delayed shipments
+- Customer safety priority: Never compromise food safety standards to meet inventory targets during weather events
+
+4.4 Operational Constraints
+- Lead time requirements: All weather-based order changes must be submitted minimum 18 hours before delivery
+- Supplier capacity limits: Verify supplier availability before increasing orders by more than 25%
+- Transportation considerations: Confirm delivery feasibility during adverse weather conditions
+- Staff scheduling alignment: Ensure adequate staffing for increased or modified inventory handling
+
+5. DOCUMENTATION REQUIREMENTS
+
+5.1 Mandatory Documentation
+All weather-related produce ordering decisions must include:
+
+Decision Log Entry:
+- Date and time of decision
+- Weather forecast details and source
+- Specific items and quantities affected
+- Percentage changes from standard orders
+- Decision maker identification and approval level
+- Rationale for adjustment
+
+Financial Impact Record:
+- Estimated cost impact of order modifications
+- Projected revenue effect
+- Comparison to standard order values
+- Running total of weather-related variances
+
+5.2 Approval Documentation
+Written approval required for:
+- All modifications exceeding automated thresholds
+- Emergency order changes
+- Supplier substitutions or changes
+- Inventory transfers between locations
+
+Approval records must include:
+- Approver name, title, and signature/electronic approval
+- Date and time of approval
+- Specific authorization details
+- Expected duration of modified ordering pattern
+
+5.3 Performance Tracking
+Weekly documentation requirements:
+- Accuracy assessment of weather-based predictions
+- Actual vs. projected sales performance
+- Waste and shrink analysis related to weather adjustments
+- Customer satisfaction metrics during weather events
+- Financial performance variance reports
+
+5.4 Retention and Review
+- Daily weather decision logs: Retain for 2 years
+- Approval documentation: Retain for 3 years
+- Performance analysis reports: Retain for 5 years
+- Annual policy effectiveness review including weather pattern analysis and financial impact assessment
+
+5.5 Reporting Structure
+- Daily weather impact summary to Store Manager
+- Weekly performance report to Regional Manager
+- Monthly trend analysis to District Operations
+- Quarterly policy effectiveness review to Corporate Procurement
+
+This policy shall be reviewed annually and updated based on operational experience, climate pattern changes, and business performance metrics.

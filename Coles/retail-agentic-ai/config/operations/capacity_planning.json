@@ -1,0 +1,153 @@
+{
+  "category": "operations",
+  "module": "CapacityPlanning",
+  "description": "Tools for planning and managing operational capacity",
+  "tools": [
+    {
+      "name": "get_system_capacity_metrics",
+      "description": "Retrieves current capacity utilization metrics for systems including CPU, memory, disk, and network usage",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "system_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of system IDs to query. If empty, returns metrics for all monitored systems"
+          },
+          "metric_types": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "cpu",
+                "memory",
+                "disk",
+                "network",
+                "storage"
+              ]
+            },
+            "description": "Types of capacity metrics to retrieve"
+          },
+          "time_range_hours": {
+            "type": "integer",
+            "description": "Number of hours of historical data to include for trend analysis",
+            "default": 168
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "get_capacity_thresholds",
+      "description": "Retrieves configured capacity threshold limits and alerting rules for systems and resources",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "system_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of system IDs to get thresholds for. If empty, returns thresholds for all systems"
+          },
+          "threshold_types": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "warning",
+                "critical",
+                "emergency"
+              ]
+            },
+            "description": "Types of threshold levels to retrieve"
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "forecast_capacity_trends",
+      "description": "Generates capacity forecasts based on historical usage patterns and growth trends",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "system_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of system IDs to forecast. If empty, forecasts for all monitored systems"
+          },
+          "forecast_days": {
+            "type": "integer",
+            "description": "Number of days into the future to forecast",
+            "default": 30
+          },
+          "historical_days": {
+            "type": "integer",
+            "description": "Number of days of historical data to use for trend analysis",
+            "default": 90
+          },
+          "confidence_level": {
+            "type": "number",
+            "description": "Confidence level for forecast predictions (0.0-1.0)",
+            "default": 0.95
+          }
+        },
+        "required": [
+          "forecast_days"
+        ]
+      }
+    },
+    {
+      "name": "identify_threshold_violations",
+      "description": "Identifies systems that are currently exceeding thresholds or projected to exceed them within a specified timeframe",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "forecast_days": {
+            "type": "integer",
+            "description": "Number of days ahead to check for projected threshold violations"
+          },
+          "severity_levels": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "warning",
+                "critical",
+                "emergency"
+              ]
+            },
+            "description": "Severity levels of thresholds to check against"
+          },
+          "resource_types": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "cpu",
+                "memory",
+                "disk",
+                "network",
+                "storage"
+              ]
+            },
+            "description": "Types of resources to check for threshold violations"
+          },
+          "include_current_violations": {
+            "type": "boolean",
+            "description": "Whether to include systems currently violating thresholds",
+            "default": true
+          }
+        },
+        "required": [
+          "forecast_days"
+        ]
+      }
+    }
+  ]
+}

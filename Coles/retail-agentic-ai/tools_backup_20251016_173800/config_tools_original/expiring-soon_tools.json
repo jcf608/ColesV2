@@ -1,0 +1,59 @@
+[
+  {
+    "name": "get_expiring_products",
+    "description": "Retrieves products that are expiring within a specified number of days",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "days_until_expiry": {
+          "type": "integer",
+          "description": "Number of days from today to check for expiring products"
+        },
+        "category": {
+          "type": "string",
+          "description": "Optional product category to filter results"
+        },
+        "location": {
+          "type": "string",
+          "description": "Optional warehouse or store location to filter results"
+        }
+      },
+      "required": ["days_until_expiry"]
+    }
+  },
+  {
+    "name": "get_product_expiry_details",
+    "description": "Gets detailed expiry information for specific products including batch numbers and exact expiry dates",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "product_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of product IDs to get expiry details for"
+        }
+      },
+      "required": ["product_ids"]
+    }
+  },
+  {
+    "name": "get_inventory_alerts",
+    "description": "Retrieves active inventory alerts for expiring products and stock levels",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "alert_type": {
+          "type": "string",
+          "description": "Type of alert to filter by (expiry, low_stock, overstock)"
+        },
+        "priority": {
+          "type": "string",
+          "description": "Alert priority level (high, medium, low)"
+        }
+      },
+      "required": []
+    }
+  }
+]

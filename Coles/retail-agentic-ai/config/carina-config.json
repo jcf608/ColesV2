@@ -1,0 +1,58 @@
+{
+  "version": "1.0",
+  "modes": {
+    "ask": {
+      "enabled": true,
+      "default_tools": [
+        "get_inventory_status",
+        "query_sales_velocity",
+        "get_staff_allocation",
+        "search_knowledge_base"
+      ],
+      "max_context_messages": 10,
+      "streaming_enabled": true
+    },
+    "act": {
+      "enabled": true,
+      "approval_required": true,
+      "default_tools": [
+        "get_pending_actions",
+        "execute_action",
+        "complete_action"
+      ],
+      "auto_refresh_seconds": 60
+    },
+    "alert": {
+      "enabled": true,
+      "auto_refresh_seconds": 30,
+      "default_tools": [
+        "get_active_alerts",
+        "create_alert",
+        "dismiss_alert"
+      ],
+      "notification_settings": {
+        "critical": [
+          "sms",
+          "email",
+          "in_app"
+        ],
+        "actionable": [
+          "email",
+          "in_app"
+        ],
+        "informational": [
+          "in_app"
+        ]
+      }
+    }
+  },
+  "api": {
+    "base_url": "http://localhost:4567",
+    "timeout_seconds": 30
+  },
+  "ui": {
+    "theme": "light",
+    "enable_voice_input": true,
+    "show_tool_calls": true
+  }
+}

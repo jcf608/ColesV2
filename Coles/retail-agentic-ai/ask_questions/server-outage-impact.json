@@ -1,0 +1,9 @@
+{
+  "id": "server-outage-impact",
+  "icon": "🚨",
+  "label": "Server Outage Impact",
+  "question": "What would be the impact of a server outage on our critical systems?",
+  "category": "custom",
+  "order": 100,
+  "enabled": true
+}

@@ -1,0 +1,128 @@
+{
+  "policy_id": "INVENTORY_EXPIRING_SOON_001",
+  "version": "1.2.0",
+  "effective_date": "2024-01-15T00:00:00Z",
+  "category": "inventory",
+  "policy_name": "Products Expiring Soon Management",
+  "description": "Policy for handling products expiring within specified timeframes",
+  "expiration_thresholds": {
+    "critical": {
+      "days_remaining": 1,
+      "action_required": "immediate_markdown_or_removal"
+    },
+    "urgent": {
+      "days_remaining": 2,
+      "action_required": "apply_discount_or_transfer"
+    },
+    "warning": {
+      "days_remaining": 3,
+      "action_required": "monitor_and_alert"
+    }
+  },
+  "approval_thresholds": {
+    "markdown_discount": {
+      "0_to_25_percent": {
+        "approval_level": "department_manager",
+        "required_approvers": 1
+      },
+      "26_to_50_percent": {
+        "approval_level": "store_manager",
+        "required_approvers": 1
+      },
+      "51_to_75_percent": {
+        "approval_level": "district_manager",
+        "required_approvers": 1
+      },
+      "above_75_percent": {
+        "approval_level": "regional_director",
+        "required_approvers": 2
+      }
+    },
+    "disposal_authorization": {
+      "value_threshold": 500.00,
+      "approval_level": "store_manager",
+      "documentation_required": true
+    }
+  },
+  "safety_constraints": {
+    "prohibited_sale_categories": [
+      "dairy",
+      "meat",
+      "seafood",
+      "prepared_foods"
+    ],
+    "days_past_expiry": 0,
+    "temperature_sensitive_items": {
+      "refrigerated": {
+        "max_days_before_expiry": 1
+      },
+      "frozen": {
+        "max_days_before_expiry": 2
+      }
+    },
+    "health_department_compliance": true
+  },
+  "category_specific_rules": {
+    "dairy": {
+      "early_warning_days": 3,
+      "markdown_start_days": 2,
+      "removal_days": 1,
+      "max_discount_percent": 50
+    },
+    "meat": {
+      "early_warning_days": 2,
+      "markdown_start_days": 1,
+      "removal_days": 0,
+      "max_discount_percent": 30
+    },
+    "produce": {
+      "early_warning_days": 4,
+      "markdown_start_days": 3,
+      "removal_days": 1,
+      "max_discount_percent": 60
+    },
+    "bakery": {
+      "early_warning_days": 2,
+      "markdown_start_days": 1,
+      "removal_days": 0,
+      "max_discount_percent": 50,
+      "donation_eligible": true
+    },
+    "packaged_goods": {
+      "early_warning_days": 7,
+      "markdown_start_days": 5,
+      "removal_days": 2,
+      "max_discount_percent": 75
+    }
+  },
+  "numeric_limits": {
+    "max_daily_markdown_value": 5000.00,
+    "max_single_item_markdown": 100.00,
+    "minimum_shelf_life_hours": 24,
+    "inventory_check_frequency_hours": 12,
+    "alert_threshold_items": 10
+  },
+  "automated_actions": {
+    "generate_markdown_labels": true,
+    "update_inventory_system": true,
+    "notify_department_managers": true,
+    "create_donation_list": true,
+    "schedule_removal_tasks": true
+  },
+  "reporting_requirements": {
+    "daily_expiry_report": true,
+    "weekly_loss_summary": true,
+    "markdown_effectiveness_tracking": true,
+    "compliance_audit_trail": true
+  },
+  "escalation_matrix": {
+    "high_value_items": {
+      "threshold": 200.00,
+      "notify": ["department_manager", "store_manager"]
+    },
+    "bulk_expiry_event": {
+      "item_count_threshold": 50,
+      "notify": ["store_manager", "district_manager"]
+    }
+  }
+}

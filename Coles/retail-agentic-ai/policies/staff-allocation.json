@@ -1,0 +1,115 @@
+{
+  "id": "STAFF_ALLOC_001",
+  "version": "2.1.0",
+  "effective_date": "2024-01-15",
+  "category": "staffing",
+  "policy_name": "Weekend Staff Allocation Policy",
+  "description": "Determines additional staffing requirements for weekend operations",
+  "approval_thresholds": {
+    "low_priority": {
+      "additional_hours": 40,
+      "approval_level": "store_manager",
+      "auto_approval": true
+    },
+    "medium_priority": {
+      "additional_hours": 80,
+      "approval_level": "district_manager",
+      "auto_approval": false,
+      "requires_justification": true
+    },
+    "high_priority": {
+      "additional_hours": 120,
+      "approval_level": "regional_manager",
+      "auto_approval": false,
+      "requires_business_case": true,
+      "budget_impact_review": true
+    }
+  },
+  "safety_constraints": {
+    "minimum_staff_per_shift": 3,
+    "maximum_consecutive_hours": 12,
+    "mandatory_break_coverage": true,
+    "security_staff_minimum": 1,
+    "management_presence_required": true,
+    "minimum_rest_between_shifts": 8
+  },
+  "allocation_rules": {
+    "trigger_conditions": {
+      "projected_sales_increase": {
+        "threshold_percentage": 15,
+        "measurement_period": "week_over_week"
+      },
+      "inventory_turnover_rate": {
+        "threshold": 1.5,
+        "departments": ["produce", "bakery", "deli"]
+      },
+      "customer_traffic_forecast": {
+        "increase_threshold": 20,
+        "peak_hours": ["10:00-14:00", "16:00-19:00"]
+      },
+      "promotional_events": {
+        "major_sale_event": true,
+        "seasonal_promotion": true,
+        "new_product_launch": true
+      }
+    },
+    "department_priorities": {
+      "checkout": {
+        "priority_level": 1,
+        "minimum_lanes_open": 4,
+        "queue_time_threshold": 300
+      },
+      "produce": {
+        "priority_level": 2,
+        "restocking_frequency": 2,
+        "quality_check_intervals": 1
+      },
+      "customer_service": {
+        "priority_level": 1,
+        "response_time_target": 180,
+        "escalation_coverage": true
+      },
+      "stockroom": {
+        "priority_level": 3,
+        "weekend_delivery_support": true
+      }
+    }
+  },
+  "numeric_thresholds": {
+    "store_size_multipliers": {
+      "small": {
+        "sq_ft_max": 15000,
+        "base_weekend_hours": 120,
+        "multiplier": 1.0
+      },
+      "medium": {
+        "sq_ft_max": 35000,
+        "base_weekend_hours": 200,
+        "multiplier": 1.3
+      },
+      "large": {
+        "sq_ft_max": 999999,
+        "base_weekend_hours": 280,
+        "multiplier": 1.6
+      }
+    },
+    "performance_metrics": {
+      "customer_satisfaction_minimum": 85,
+      "checkout_efficiency_target": 95,
+      "inventory_accuracy_minimum": 98,
+      "overtime_budget_limit": 5000
+    },
+    "cost_constraints": {
+      "max_hourly_rate_weekend": 22.50,
+      "overtime_multiplier": 1.5,
+      "budget_variance_tolerance": 10,
+      "emergency_staffing_premium": 25
+    }
+  },
+  "evaluation_criteria": {
+    "data_sources": ["pos_systems", "traffic_counters", "sales_forecasts", "staff_schedules"],
+    "assessment_frequency": "weekly",
+    "review_cutoff": "wednesday_5pm",
+    "implementation_deadline": "friday_6pm"
+  }
+}

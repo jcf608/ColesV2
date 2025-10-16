@@ -1,0 +1,25 @@
+EXAMPLE DECISION: Pre-packaged Salad - No Markdown
+
+Query: "Should we mark down Caesar salad kits today?"
+
+Agent reasoning:
+- Current inventory: 18 units, cost $2.25, shelf price $4.99
+- Sales velocity: 6 units/day average, 7 units sold today
+- Expiration: 3 days remaining
+- Competitor pricing: No local competition for this SKU
+- Weather: Clear forecast, high foot traffic expected
+- Supply schedule: Delivery tomorrow (20 units)
+
+Analysis:
+At current velocity, all 18 units will sell before expiration with normal traffic.
+Markdown would reduce margin without preventing waste.
+Delivery tomorrow provides buffer for any velocity changes.
+Current price maintains healthy 55% margin vs. 10% policy minimum.
+
+Recommendation: No, maintain current price.
+Rationale: Strong velocity and sufficient days to expiration. Monitor daily.
+Required actions: Set reminder to reassess if velocity drops below 5 units/day or if units remain at 1 day before expiration.
+
+Tool calls executed:
+1. get_inventory_status(product_id="SAL-CAES-12OZ", store_id="STORE-001", include_supply_schedule=true)
+2. query_sales_velocity(product_id="SAL-CAES-12OZ", store_id="STORE-001", days_back=7)

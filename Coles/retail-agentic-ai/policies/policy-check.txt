@@ -1,0 +1,190 @@
+PRICING POLICY: 30% MARKDOWN AUTHORIZATION AND CONTROL
+
+POLICY NUMBER: PRC-001
+EFFECTIVE DATE: [Date]
+REVIEW DATE: [Date + 12 months]
+DEPARTMENT: Retail Operations
+APPROVED BY: [Name], Vice President of Operations
+
+1. SCOPE AND PURPOSE
+
+1.1 Purpose
+This policy establishes guidelines, approval requirements, and control mechanisms for implementing 30% markdown pricing on merchandise within our retail grocery operations. The policy ensures proper financial controls while enabling timely inventory management decisions.
+
+1.2 Scope
+This policy applies to all retail locations, department managers, assistant managers, store managers, and regional management staff. It covers all product categories including perishables, non-perishables, seasonal items, and promotional merchandise.
+
+1.3 Objectives
+- Maintain gross margin targets while optimizing inventory turnover
+- Establish clear decision-making authority at appropriate organizational levels
+- Ensure consistent application of markdown policies across all locations
+- Protect against unauthorized or excessive markdowns that impact profitability
+
+2. DECISION THRESHOLDS AND AUTOMATION PARAMETERS
+
+2.1 Automatic Authorization Thresholds
+The following 30% markdowns may be processed automatically through the point-of-sale system without additional approval:
+
+- Individual item value under $25.00
+- Perishable items within 24 hours of expiration date
+- Seasonal merchandise during designated clearance periods
+- Items with existing vendor markdown allowances covering 20% or more of the reduction
+- Daily markdown total per department not exceeding $200
+
+2.2 Management Approval Required
+Escalation to Department Manager or Assistant Manager is required when:
+
+- Individual item value is between $25.01 and $100.00
+- Daily department markdown total exceeds $200 but remains under $500
+- Non-perishable items with more than 30 days remaining shelf life
+- Customer service recovery situations involving defective merchandise
+
+2.3 Store Manager Approval Required
+Escalation to Store Manager is mandatory when:
+
+- Individual item value exceeds $100.00
+- Daily store-wide markdown total exceeds $1,500
+- Weekly department markdown total exceeds $1,000
+- Markdowns on vendor-consigned merchandise
+- Competitive price matching requests exceeding normal parameters
+
+2.4 Regional Manager Approval Required
+Escalation to Regional Manager is required when:
+
+- Single transaction markdowns exceed $500
+- Weekly store markdown total exceeds $5,000
+- Systematic markdowns affecting entire product categories
+- Vendor dispute resolution requiring markdown adjustments
+
+3. APPROVAL REQUIREMENTS AND AUTHORIZATION MATRIX
+
+3.1 Authorization Levels
+
+Department Staff/Cashier:
+- Maximum single item: $25.00
+- Maximum daily total: $200 per department
+- Must document reason code in system
+
+Assistant Manager/Department Manager:
+- Maximum single item: $100.00
+- Maximum daily total: $500 per department
+- Electronic approval required in POS system
+
+Store Manager:
+- Maximum single item: $500.00
+- Maximum daily total: $1,500 store-wide
+- Written justification required for amounts over $200
+
+Regional Manager:
+- Maximum single item: $2,000.00
+- Maximum daily total: $5,000 store-wide
+- Business case documentation required
+
+Vice President Approval:
+- Required for markdowns exceeding regional manager limits
+- Required for policy exceptions or temporary suspension
+
+3.2 Approval Documentation
+All approvals must include:
+- Approver name and employee ID
+- Date and time of authorization
+- Reason code selection from approved list
+- Electronic signature in management system
+
+4. SAFETY CONSTRAINTS AND GUARDRAILS
+
+4.1 Financial Controls
+
+Maximum Daily Exposure:
+- No single store may exceed $1,500 in 30% markdowns without regional approval
+- Company-wide daily markdown exposure may not exceed $25,000 without executive review
+
+Margin Protection:
+- Markdowns reducing gross margin below 18% require regional manager approval
+- Department margins falling below 15% due to markdowns trigger automatic review
+
+Sequential Authorization:
+- Markdowns on previously marked-down merchandise require approval one level higher than initial markdown
+- No item may be marked down more than twice without regional approval
+
+4.2 Operational Safeguards
+
+Time Restrictions:
+- Automated markdowns disabled between 10:00 PM and 6:00 AM
+- Weekend markdowns exceeding $750 require Monday management review
+
+Vendor Restrictions:
+- Consigned merchandise markdowns require vendor notification within 24 hours
+- Direct-store-delivery items require vendor pre-approval for markdowns over $50
+
+Audit Trail Requirements:
+- All markdown transactions must capture employee ID, reason code, and timestamp
+- Manager overrides logged separately with justification notes
+
+4.3 Escalation Triggers
+
+Automatic escalation occurs when:
+- Individual employee markdown total exceeds $500 in single shift
+- Department markdown velocity exceeds 150% of historical average
+- Customer complaints regarding markdown pricing policies
+- System identifies potential markdown abuse patterns
+
+5. DOCUMENTATION REQUIREMENTS
+
+5.1 Transaction Documentation
+
+Required for all markdowns:
+- Original retail price and marked-down price
+- Product identification (SKU, UPC, or PLU)
+- Reason code from approved list
+- Employee authorization details
+- Date and time stamp
+
+Additional documentation for markdowns over $100:
+- Photographic evidence of product condition (if applicable)
+- Vendor notification confirmation
+- Manager approval signature
+- Impact on department margin calculation
+
+5.2 Reporting Requirements
+
+Daily Reports:
+- Store managers must review daily markdown summary report
+- Exception reports for markdowns exceeding normal parameters
+- Automated alerts for approaching threshold limits
+
+Weekly Reports:
+- Regional managers receive consolidated markdown reports by store and category
+- Variance analysis comparing markdown activity to budget
+- Margin impact assessment by department
+
+Monthly Reports:
+- Executive dashboard showing markdown trends and financial impact
+- Vendor performance analysis related to markdown requirements
+- Policy compliance audit results
+
+5.3 Record Retention
+
+Documentation must be retained as follows:
+- Transaction records: 24 months
+- Approval documentation: 36 months
+- Policy exception requests: 60 months
+- Audit reports: 84 months
+
+All records must be maintained in both electronic format and hard copy backup for transactions exceeding $500.
+
+5.4 Compliance Monitoring
+
+Monthly audits will verify:
+- Adherence to approval authorization limits
+- Proper documentation of markdown justifications
+- Accuracy of margin impact calculations
+- Timeliness of vendor notifications
+
+Quarterly reviews will assess:
+- Policy effectiveness and business impact
+- Training needs identification
+- System control adequacy
+- Threshold adjustment requirements
+
+This policy is subject to annual review and updates based on business needs, financial performance, and operational feedback. All personnel are responsible for understanding and complying with these requirements.

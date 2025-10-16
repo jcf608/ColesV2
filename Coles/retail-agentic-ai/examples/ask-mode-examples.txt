@@ -1,0 +1,60 @@
+# ASK MODE EXAMPLE SCENARIOS
+
+## Scenario 1: Staff Allocation Query
+
+**User Query**: "Which stores need additional staff this weekend?"
+
+**Expected Tool Calls**:
+1. get_staff_allocation(time_range: "this_weekend")
+2. get_predicted_traffic(time_range: "this_weekend")
+
+**Expected Response**:
+Identifies stores with staffing gaps, explains rationale using traffic predictions, suggests specific coverage needs.
+
+**Key Elements**:
+- Clear identification of stores with shortfalls
+- Quantified gaps (how many staff short)
+- Time-specific details (which shifts)
+- Context (why the gap exists)
+- Proactive follow-up offer
+
+---
+
+## Scenario 2: Inventory Status Query
+
+**User Query**: "What's the status of our organic produce inventory?"
+
+**Expected Tool Calls**:
+1. get_inventory_status(category: "organic_produce")
+2. query_sales_velocity(category: "organic_produce")
+
+**Expected Response**:
+Comprehensive inventory overview with quantities, expiration dates, velocity trends, and flagged at-risk items.
+
+**Key Elements**:
+- Current quantities by product
+- Days until expiration
+- Sales velocity comparison
+- Flagged issues (slow movers, near expiration)
+- Suggested actions (if any)
+
+---
+
+## Scenario 3: Competitive Intelligence
+
+**User Query**: "How does our produce pricing compare to competitors?"
+
+**Expected Tool Calls**:
+1. get_competitor_pricing(category: "produce")
+2. get_current_pricing(category: "produce")
+3. check_pricing_policy()
+
+**Expected Response**:
+Side-by-side comparison of pricing, identification of significant gaps, policy-compliant recommendations.
+
+**Key Elements**:
+- Clear comparison table or list
+- Highlighted significant differences
+- Context on margin impact
+- Policy compliance notes
+- Suggested responses if warranted

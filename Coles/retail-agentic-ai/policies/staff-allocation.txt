@@ -1,0 +1,143 @@
+GROCERY OPERATIONS POLICY
+Staff Allocation for Weekend Coverage
+
+POLICY NUMBER: HR-SA-001
+EFFECTIVE DATE: [Date]
+DEPARTMENT: Human Resources & Store Operations
+CLASSIFICATION: Internal Use
+
+1. SCOPE AND PURPOSE
+
+1.1 Purpose
+This policy establishes standardized procedures for determining weekend staff allocation across all retail grocery locations to ensure adequate customer service levels, maintain operational efficiency, and comply with safety requirements.
+
+1.2 Scope
+This policy applies to all retail grocery stores within the organization and covers decisions regarding additional weekend staffing beyond baseline schedules. It encompasses temporary staff reassignment, overtime authorization, and emergency staffing protocols.
+
+1.3 Objectives
+- Maintain customer satisfaction through appropriate service levels
+- Optimize labor costs while meeting operational demands
+- Ensure consistent decision-making across all locations
+- Provide clear escalation pathways for staffing challenges
+
+2. DECISION THRESHOLDS
+
+2.1 Automated Approval Thresholds
+Store managers may automatically approve additional weekend staff without escalation when ALL of the following conditions are met:
+- Projected weekend sales volume exceeds previous weekend by 15% or more
+- Current staff-to-customer ratio falls below 1:25 during peak hours
+- Additional labor cost does not exceed 3% of projected weekend revenue
+- Total weekend overtime does not exceed 20 hours per location
+- Request is submitted by Thursday 6:00 PM for the upcoming weekend
+
+2.2 Mandatory Escalation Triggers
+District Manager approval is required when ANY of the following conditions exist:
+- Additional labor cost exceeds 3% of projected weekend revenue
+- Total overtime hours exceed 20 hours for the weekend
+- Request involves reassigning staff from other locations
+- Projected customer wait times exceed 8 minutes during peak periods
+- Store experiences unexpected call-outs affecting 20% or more of scheduled staff
+
+2.3 Regional Manager Escalation
+Regional Manager approval is mandatory when:
+- Additional labor cost exceeds 5% of projected weekend revenue
+- Cross-district staff transfers are required
+- Emergency staffing affects more than three locations simultaneously
+- Overtime budget variance exceeds 15% of monthly allocation
+
+3. APPROVAL REQUIREMENTS
+
+3.1 Store Manager Authority
+Store Managers may approve:
+- Up to 20 overtime hours per weekend
+- Schedule adjustments within existing staff roster
+- Temporary duty reassignments within the same store
+- Part-time to full-time shift conversions for the weekend
+
+3.2 District Manager Authority
+District Managers may approve:
+- 21-40 overtime hours per weekend per store
+- Staff transfers between stores within the district
+- Hiring temporary staff through approved agencies
+- Labor cost variances up to 5% of weekend revenue projection
+
+3.3 Regional Manager Authority
+Regional Managers may approve:
+- Overtime exceeding 40 hours per weekend per store
+- Cross-district staff transfers
+- Emergency hiring outside standard procedures
+- Labor cost variances exceeding 5% of weekend revenue projection
+
+3.4 Approval Timeline Requirements
+- Store Manager decisions: Within 2 hours of request
+- District Manager decisions: Within 4 hours of escalation
+- Regional Manager decisions: Within 8 hours of escalation
+- All weekend staffing decisions must be finalized by Friday 2:00 PM
+
+4. SAFETY CONSTRAINTS AND GUARDRAILS
+
+4.1 Minimum Staffing Requirements
+Each store must maintain minimum weekend staffing levels:
+- At least 2 employees present during all operating hours
+- Minimum 1 certified pharmacy technician when pharmacy is open
+- At least 1 manager or assistant manager on duty during peak hours (10 AM - 6 PM)
+- Minimum 1 employee certified in equipment operation per shift
+
+4.2 Maximum Working Hours Constraints
+- No employee may exceed 60 hours in a single work week
+- Maximum 12-hour shifts for individual employees
+- Minimum 8-hour rest period between shifts
+- No more than 6 consecutive working days for any employee
+
+4.3 Compliance Requirements
+- All additional staff must complete safety orientation within 30 days
+- Temporary workers require supervisor assignment and cannot work alone
+- Cash handling authorization required for register operations
+- Age restrictions apply: employees under 18 limited to 20 hours per week
+
+4.4 Emergency Protocols
+- Stores operating below minimum staffing must notify District Manager immediately
+- Emergency closure procedures activate when staffing falls below 2 employees
+- Customer safety takes precedence over operational targets in all circumstances
+
+5. DOCUMENTATION REQUIREMENTS
+
+5.1 Required Documentation for All Requests
+- Completed Staff Allocation Request Form (Form HR-SA-100)
+- Previous weekend sales data and current weekend projections
+- Current staff availability roster
+- Justification narrative not exceeding 200 words
+- Cost-benefit analysis for requests exceeding automated thresholds
+
+5.2 Approval Documentation
+- All approvals must include written justification
+- Electronic signatures required in company system within 1 hour of verbal approval
+- Declined requests require documented explanation
+- Copy of all approvals forwarded to Payroll Department by Friday 4:00 PM
+
+5.3 Post-Weekend Reporting
+Store Managers must submit within 48 hours of weekend completion:
+- Actual hours worked versus projected
+- Customer satisfaction metrics and wait time data
+- Any incidents or issues related to staffing decisions
+- Variance analysis comparing projected versus actual labor costs
+
+5.4 Record Retention
+- Staff allocation requests and approvals: 3 years
+- Weekend performance reports: 2 years
+- Overtime tracking documentation: 7 years (payroll compliance)
+- Safety incident reports related to staffing: 7 years
+
+5.5 Reporting and Review
+- Monthly staffing efficiency reports due to Regional Manager by 5th of following month
+- Quarterly policy compliance audit by Human Resources Department
+- Annual review and update of thresholds and approval limits
+- Exception reports generated automatically for all policy deviations
+
+POLICY APPROVAL
+This policy has been reviewed and approved by:
+- Chief Operating Officer
+- Human Resources Director
+- Regional Operations Manager
+
+For questions regarding this policy, contact Human Resources at extension 1100.

@@ -1,0 +1,133 @@
+{
+  "id": "CRIT-SYS-STATUS-001",
+  "version": "2.1.0",
+  "effective_date": "2024-01-15",
+  "policy_name": "Critical Systems Status Monitoring",
+  "category": "it-operations",
+  "context": "Current status monitoring and alerting for all critical retail grocery systems",
+  "metadata": {
+    "last_updated": "2024-01-15T09:00:00Z",
+    "created_by": "IT Operations Team",
+    "approved_by": "CTO",
+    "review_cycle_days": 90,
+    "compliance_level": "mandatory"
+  },
+  "approval_thresholds": {
+    "system_degradation": {
+      "yellow_alert": {
+        "performance_threshold": 85,
+        "approver": "shift_supervisor",
+        "response_time_minutes": 15
+      },
+      "red_alert": {
+        "performance_threshold": 70,
+        "approver": "it_manager",
+        "response_time_minutes": 5
+      },
+      "critical_alert": {
+        "performance_threshold": 50,
+        "approver": "cto",
+        "response_time_minutes": 2
+      }
+    },
+    "system_outage": {
+      "partial_outage": {
+        "affected_stores_threshold": 3,
+        "approver": "it_manager",
+        "escalation_minutes": 10
+      },
+      "major_outage": {
+        "affected_stores_threshold": 10,
+        "approver": "cto",
+        "escalation_minutes": 5
+      },
+      "enterprise_outage": {
+        "affected_stores_percentage": 25,
+        "approver": "ceo",
+        "escalation_minutes": 2
+      }
+    }
+  },
+  "safety_constraints": {
+    "maximum_downtime_minutes": {
+      "pos_systems": 5,
+      "payment_processing": 2,
+      "inventory_management": 30,
+      "cold_chain_monitoring": 15,
+      "security_systems": 0
+    },
+    "backup_activation": {
+      "automatic_failover_seconds": 30,
+      "manual_override_required": false,
+      "backup_system_capacity_percentage": 80
+    },
+    "data_integrity": {
+      "transaction_rollback_enabled": true,
+      "backup_frequency_hours": 4,
+      "recovery_point_objective_minutes": 15,
+      "recovery_time_objective_minutes": 60
+    }
+  },
+  "critical_systems": {
+    "pos_terminals": {
+      "availability_threshold": 99.5,
+      "response_time_ms": 500,
+      "concurrent_transactions": 1000,
+      "monitoring_interval_seconds": 30
+    },
+    "payment_processing": {
+      "availability_threshold": 99.9,
+      "response_time_ms": 2000,
+      "transaction_success_rate": 99.8,
+      "monitoring_interval_seconds": 15
+    },
+    "inventory_management": {
+      "availability_threshold": 98.0,
+      "response_time_ms": 3000,
+      "batch_processing_delay_minutes": 30,
+      "monitoring_interval_seconds": 60
+    },
+    "cold_chain_monitoring": {
+      "availability_threshold": 99.0,
+      "sensor_response_time_seconds": 10,
+      "temperature_alert_threshold_celsius": 2,
+      "monitoring_interval_seconds": 30
+    },
+    "security_systems": {
+      "availability_threshold": 99.9,
+      "camera_uptime_percentage": 100,
+      "access_control_response_ms": 1000,
+      "monitoring_interval_seconds": 10
+    },
+    "network_infrastructure": {
+      "availability_threshold": 99.5,
+      "bandwidth_utilization_max": 80,
+      "latency_threshold_ms": 100,
+      "packet_loss_max_percentage": 0.1
+    }
+  },
+  "alerting_rules": {
+    "notification_channels": ["email", "sms", "slack", "pager"],
+    "escalation_matrix": {
+      "level_1": ["on_duty_technician"],
+      "level_2": ["it_supervisor", "store_manager"],
+      "level_3": ["it_manager", "regional_manager"],
+      "level_4": ["cto", "coo"]
+    },
+    "business_hours": {
+      "weekday_start": "06:00",
+      "weekday_end": "23:00",
+      "weekend_start": "07:00",
+      "weekend_end": "22:00",
+      "timezone": "America/New_York"
+    },
+    "after_hours_multiplier": 0.5
+  },
+  "compliance_requirements": {
+    "pci_dss_monitoring": true,
+    "gdpr_data_protection": true,
+    "sox_financial_controls": true,
+    "audit_log_retention_days": 2555,
+    "incident_documentation_required": true
+  }
+}

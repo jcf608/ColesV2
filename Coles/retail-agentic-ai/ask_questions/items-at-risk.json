@@ -1,0 +1,9 @@
+{
+  "id": "items-at-risk",
+  "icon": "⚠️",
+  "label": "Items at Risk",
+  "question": "What products need attention today?",
+  "category": "custom",
+  "order": 100,
+  "enabled": true
+}

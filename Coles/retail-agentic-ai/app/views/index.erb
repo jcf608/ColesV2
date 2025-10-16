@@ -1,0 +1,425 @@
+<div class="hero">
+  <h1>🤔 Produce Optimization Agent</h1>
+  <p class="hero-subtitle">AI-powered markdown decisions that minimize waste and protect margins</p>
+</div>
+
+<div class="container">
+  <div class="chat-container">
+    <div class="chat-header">
+      <h2>Ask the Agent</h2>
+      <span class="status-indicator">● Online</span>
+    </div>
+    
+    <div id="chat-messages" class="chat-messages">
+      <div class="message agent-message">
+        <div class="message-avatar">🤔</div>
+        <div class="message-content">
+          <p>Hello! I'm your produce optimization agent. I can help you make data-driven markdown decisions.</p>
+          <p>Try asking me things like:</p>
+          <ul>
+            <li>"Should we mark down organic strawberries today?"</li>
+            <li>"What's the inventory status for blueberries?"</li>
+            <li>"Check competitor pricing for berries"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <form id="chat-form" class="chat-input-form">
+      <input 
+        type="text" 
+        id="message-input" 
+        class="chat-input" 
+        placeholder="Ask about markdowns, inventory, pricing..."
+        autocomplete="off"
+      >
+      <button type="submit" class="chat-submit">Send</button>
+    </form>
+  </div>
+  
+  <div class="quick-actions">
+    <h3>Quick Actions</h3>
+    <div class="action-grid">
+      <button class="action-card" onclick="askQuestion('What products need attention today?')">
+        <span class="action-icon">⚠️</span>
+        <span class="action-label">Items at Risk</span>
+      </button>
+      <button class="action-card" onclick="askQuestion('Show me products expiring in 2 days')">
+        <span class="action-icon">📅</span>
+        <span class="action-label">Expiring Soon</span>
+      </button>
+      <button class="action-card" onclick="askQuestion('What are competitor prices for berries?')">
+        <span class="action-icon">💰</span>
+        <span class="action-label">Competitor Pricing</span>
+      </button>
+      <button class="action-card" onclick="askQuestion('Check pricing policy for 30% markdown')">
+        <span class="action-icon">✅</span>
+        <span class="action-label">Policy Check</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Include marked.js for markdown rendering -->
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<script>
+const chatForm = document.getElementById('chat-form');
+const messageInput = document.getElementById('message-input');
+const chatMessages = document.getElementById('chat-messages');
+
+chatForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const message = messageInput.value.trim();
+  if (!message) return;
+  
+  addMessage('user', message);
+  messageInput.value = '';
+  
+  addThinkingIndicator();
+  
+  try {
+    const response = await fetch('/api/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `message=${encodeURIComponent(message)}`
+    });
+    
+    const data = await response.json();
+    removeThinkingIndicator();
+    
+    if (data.success) {
+      if (data.tool_calls && data.tool_calls.length > 0) {
+        data.tool_calls.forEach(tool => {
+          addToolCall(tool);
+        });
+      }
+      addMessage('agent', data.response);
+    } else {
+      addMessage('agent', `Error: ${data.error}`, true);
+    }
+  } catch (error) {
+    removeThinkingIndicator();
+    addMessage('agent', `Error: ${error.message}`, true);
+  }
+});
+
+function addMessage(sender, content, isError = false) {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message ${sender}-message${isError ? ' error' : ''}`;
+  
+  const avatar = document.createElement('div');
+  avatar.className = 'message-avatar';
+  avatar.textContent = sender === 'user' ? '👤' : '🤔';
+  
+  const contentDiv = document.createElement('div');
+  contentDiv.className = 'message-content';
+  
+  // Render markdown for agent messages
+  if (sender === 'agent' && typeof marked !== 'undefined') {
+    contentDiv.innerHTML = marked.parse(content);
+  } else {
+    contentDiv.innerHTML = `<p>${content.replace(/\n/g, '<br>')}</p>`;
+  }
+  
+  messageDiv.appendChild(avatar);
+  messageDiv.appendChild(contentDiv);
+  chatMessages.appendChild(messageDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function addToolCall(tool) {
+  const toolDiv = document.createElement('div');
+  toolDiv.className = 'tool-call';
+  
+  // Get icon and color based on tool type
+  const toolConfig = getToolConfig(tool.name);
+  
+  toolDiv.innerHTML = `
+    <div class="tool-header" style="background: ${toolConfig.color};">
+      <span class="tool-icon">${toolConfig.icon}</span>
+      <span class="tool-name">${toolConfig.label}</span>
+    </div>
+    <div class="tool-result">
+      ${formatToolResult(tool.name, tool.result)}
+    </div>
+  `;
+  chatMessages.appendChild(toolDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function getToolConfig(toolName) {
+  const configs = {
+    'get_inventory_status': {
+      icon: '📦',
+      label: 'Inventory Status',
+      color: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+    },
+    'query_sales_velocity': {
+      icon: '📈',
+      label: 'Sales Velocity',
+      color: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)'
+    },
+    'check_pricing_policy': {
+      icon: '✅',
+      label: 'Pricing Policy',
+      color: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)'
+    },
+    'get_competitor_pricing': {
+      icon: '💰',
+      label: 'Competitor Pricing',
+      color: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)'
+    },
+    'submit_price_change': {
+      icon: '🎯',
+      label: 'Price Change',
+      color: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)'
+    }
+  };
+  
+  return configs[toolName] || {
+    icon: '🔧',
+    label: toolName,
+    color: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)'
+  };
+}
+
+function formatToolResult(toolName, result) {
+  if (result.error) {
+    return `<div class="error-message">❌ ${result.error}</div>`;
+  }
+  
+  switch(toolName) {
+    case 'get_inventory_status':
+      return formatInventoryStatus(result);
+    case 'query_sales_velocity':
+      return formatSalesVelocity(result);
+    case 'check_pricing_policy':
+      return formatPricingPolicy(result);
+    case 'get_competitor_pricing':
+      return formatCompetitorPricing(result);
+    case 'submit_price_change':
+      return formatPriceChange(result);
+    default:
+      return `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+  }
+}
+
+function formatInventoryStatus(data) {
+  const expiryClass = parseInt(data.expiration_date?.split('-')[2]) <= new Date().getDate() + 2 ? 'urgent' : 'normal';
+  
+  return `
+    <div class="tool-data-grid">
+      <div class="data-item">
+        <span class="data-label">Product ID</span>
+        <span class="data-value">${data.product_id}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Store</span>
+        <span class="data-value">${data.store_id}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Stock</span>
+        <span class="data-value highlight">${data.current_stock} units</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Price</span>
+        <span class="data-value">$${data.shelf_price?.toFixed(2)}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Cost</span>
+        <span class="data-value">$${data.cost_per_unit?.toFixed(2)}</span>
+      </div>
+      <div class="data-item ${expiryClass}">
+        <span class="data-label">Expires</span>
+        <span class="data-value">${data.expiration_date}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Daily Sales</span>
+        <span class="data-value">${data.average_daily_sales} avg</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Sold Today</span>
+        <span class="data-value">${data.units_sold_today} units</span>
+      </div>
+    </div>
+    ${data.supply_schedule && data.supply_schedule.length > 0 ? `
+      <div class="supply-schedule">
+        <strong>📅 Upcoming Deliveries:</strong>
+        ${data.supply_schedule.map(s => `
+          <div class="delivery-item">
+            ${s.delivery_date}: <strong>${s.quantity} units</strong>
+          </div>
+        `).join('')}
+      </div>
+    ` : ''}
+  `;
+}
+
+function formatSalesVelocity(data) {
+  const trendIcon = data.velocity_trend === 'declining' ? '📉' : 
+                    data.velocity_trend === 'increasing' ? '📈' : '➡️';
+  const trendClass = data.velocity_trend === 'declining' ? 'trend-down' : 
+                     data.velocity_trend === 'increasing' ? 'trend-up' : 'trend-stable';
+  
+  return `
+    <div class="tool-data-grid">
+      <div class="data-item">
+        <span class="data-label">Current Velocity</span>
+        <span class="data-value highlight">${data.velocity_units_per_day} units/day</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Baseline</span>
+        <span class="data-value">${data.baseline_velocity} units/day</span>
+      </div>
+      <div class="data-item ${trendClass}">
+        <span class="data-label">Trend</span>
+        <span class="data-value">${trendIcon} ${data.velocity_trend}</span>
+      </div>
+      <div class="data-item">
+        <span class="data-label">Period</span>
+        <span class="data-value">${data.days_analyzed} days</span>
+      </div>
+    </div>
+    ${data.daily_breakdown ? `
+      <div class="daily-breakdown">
+        <strong>📊 Daily Sales:</strong>
+        <div class="breakdown-chart">
+          ${data.daily_breakdown.slice(0, 7).map(day => `
+            <div class="breakdown-bar">
+              <div class="bar-fill" style="height: ${(day.units_sold / 12) * 100}%"></div>
+              <div class="bar-label">${day.date.split('-')[2]}/${day.date.split('-')[1]}</div>
+              <div class="bar-value">${day.units_sold}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    ` : ''}
+  `;
+}
+
+function formatPricingPolicy(data) {
+  const approvedClass = data.approved ? 'approved' : 'rejected';
+  const approvedIcon = data.approved ? '✅' : '❌';
+  
+  return `
+    <div class="policy-result ${approvedClass}">
+      <div class="policy-status">
+        ${approvedIcon} ${data.approved ? 'APPROVED' : 'REJECTED'}
+      </div>
+      <div class="tool-data-grid">
+        <div class="data-item">
+          <span class="data-label">Markdown</span>
+          <span class="data-value highlight">${data.markdown_percentage}%</span>
+        </div>
+        <div class="data-item">
+          <span class="data-label">Resulting Margin</span>
+          <span class="data-value">${data.resulting_margin_pct}%</span>
+        </div>
+        ${data.requires_manager_approval ? `
+          <div class="data-item warning">
+            <span class="data-label">⚠️ Requires</span>
+            <span class="data-value">Manager Approval</span>
+          </div>
+        ` : ''}
+        ${data.approval_token ? `
+          <div class="data-item">
+            <span class="data-label">Token</span>
+            <span class="data-value token">${data.approval_token}</span>
+          </div>
+        ` : ''}
+      </div>
+      ${data.policy_notes ? `
+        <div class="policy-notes">
+          📋 ${data.policy_notes}
+        </div>
+      ` : ''}
+    </div>
+  `;
+}
+
+function formatCompetitorPricing(data) {
+  return `
+    <div class="competitor-pricing">
+      <div class="pricing-header">
+        <strong>📍 ${data.location}</strong> - ${data.category}
+      </div>
+      <table class="competitor-table">
+        <thead>
+          <tr>
+            <th>Competitor</th>
+            <th>Price</th>
+            <th>Distance</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${data.competitors.map(comp => `
+            <tr>
+              <td>${comp.name}</td>
+              <td class="price-cell">$${comp.price.toFixed(2)}</td>
+              <td>${comp.distance_miles} mi</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+      <div class="pricing-summary">
+        <div class="summary-item">
+          <span class="summary-label">Lowest:</span>
+          <span class="summary-value">$${data.lowest_price.toFixed(2)}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Average:</span>
+          <span class="summary-value">$${data.average_price.toFixed(2)}</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function formatPriceChange(data) {
+  return `
+    <div class="price-change-result">
+      <div class="success-message">
+        ✅ Price change executed successfully!
+      </div>
+      <div class="tool-data-grid">
+        <div class="data-item">
+          <span class="data-label">Change ID</span>
+          <span class="data-value">${data.change_id}</span>
+        </div>
+        <div class="data-item">
+          <span class="data-label">Updated</span>
+          <span class="data-value">${new Date(data.updated_at).toLocaleString()}</span>
+        </div>
+      </div>
+      <div class="change-message">
+        ${data.message}
+      </div>
+    </div>
+  `;
+}
+
+function addThinkingIndicator() {
+  const thinkingDiv = document.createElement('div');
+  thinkingDiv.id = 'thinking-indicator';
+  thinkingDiv.className = 'message agent-message thinking';
+  thinkingDiv.innerHTML = `
+    <div class="message-avatar">🤔</div>
+    <div class="message-content">
+      <p class="thinking-dots">Thinking<span>.</span><span>.</span><span>.</span></p>
+    </div>
+  `;
+  chatMessages.appendChild(thinkingDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function removeThinkingIndicator() {
+  const indicator = document.getElementById('thinking-indicator');
+  if (indicator) indicator.remove();
+}
+
+function askQuestion(question) {
+  messageInput.value = question;
+  chatForm.dispatchEvent(new Event('submit'));
+}
+</script>

@@ -1,0 +1,163 @@
+{
+  "policy_id": "IT-OPS-INC-001",
+  "version": "2.1.0",
+  "effective_date": "2024-01-15T00:00:00Z",
+  "last_updated": "2024-01-15T08:30:00Z",
+  "category": "it-operations",
+  "title": "Recent Incidents Summary and Status Policy",
+  "description": "Policy governing the summarization and reporting of IT incidents from the past 24 hours for retail grocery operations",
+  "approval_thresholds": {
+    "incident_severity_levels": {
+      "critical": {
+        "approval_required": true,
+        "approver_roles": ["IT_DIRECTOR", "OPERATIONS_MANAGER", "STORE_MANAGER"],
+        "escalation_time_minutes": 15,
+        "notification_channels": ["email", "sms", "slack", "phone"]
+      },
+      "high": {
+        "approval_required": true,
+        "approver_roles": ["IT_MANAGER", "SHIFT_SUPERVISOR"],
+        "escalation_time_minutes": 30,
+        "notification_channels": ["email", "slack"]
+      },
+      "medium": {
+        "approval_required": false,
+        "approver_roles": ["IT_TECHNICIAN"],
+        "escalation_time_minutes": 60,
+        "notification_channels": ["email"]
+      },
+      "low": {
+        "approval_required": false,
+        "approver_roles": ["IT_TECHNICIAN"],
+        "escalation_time_minutes": 240,
+        "notification_channels": ["email"]
+      }
+    },
+    "financial_impact_thresholds": {
+      "high_impact": {
+        "threshold_amount": 10000,
+        "currency": "USD",
+        "approval_required": true,
+        "approver_roles": ["CFO", "IT_DIRECTOR"]
+      },
+      "medium_impact": {
+        "threshold_amount": 2500,
+        "currency": "USD",
+        "approval_required": true,
+        "approver_roles": ["IT_DIRECTOR", "OPERATIONS_MANAGER"]
+      },
+      "low_impact": {
+        "threshold_amount": 500,
+        "currency": "USD",
+        "approval_required": false,
+        "approver_roles": ["IT_MANAGER"]
+      }
+    }
+  },
+  "safety_constraints": {
+    "customer_data_protection": {
+      "pii_exposure_tolerance": 0,
+      "data_breach_immediate_escalation": true,
+      "compliance_frameworks": ["PCI-DSS", "GDPR", "CCPA"]
+    },
+    "system_availability": {
+      "pos_system_downtime_max_minutes": 5,
+      "inventory_system_downtime_max_minutes": 15,
+      "payment_processing_downtime_max_minutes": 2,
+      "website_downtime_max_minutes": 10
+    },
+    "food_safety_systems": {
+      "temperature_monitoring_outage_max_minutes": 3,
+      "cold_chain_alert_escalation_seconds": 60,
+      "freezer_system_backup_required": true
+    }
+  },
+  "category_specific_rules": {
+    "retail_grocery_operations": {
+      "peak_hours": {
+        "weekday_morning": "07:00-09:00",
+        "weekday_evening": "17:00-19:00",
+        "weekend_all_day": "08:00-20:00"
+      },
+      "critical_systems": [
+        "pos_terminals",
+        "inventory_management",
+        "payment_processing",
+        "temperature_monitoring",
+        "security_cameras",
+        "employee_scheduling",
+        "price_management",
+        "loyalty_program"
+      ],
+      "store_impact_levels": {
+        "single_store": {
+          "max_resolution_time_hours": 4,
+          "customer_notification_required": false
+        },
+        "regional_stores": {
+          "max_resolution_time_hours": 2,
+          "customer_notification_required": true,
+          "store_count_threshold": 5
+        },
+        "all_stores": {
+          "max_resolution_time_hours": 1,
+          "customer_notification_required": true,
+          "media_response_required": true
+        }
+      }
+    }
+  },
+  "numeric_thresholds": {
+    "incident_volume_limits": {
+      "daily_incident_cap": 50,
+      "hourly_incident_rate_alert": 10,
+      "critical_incident_daily_max": 3
+    },
+    "response_times": {
+      "acknowledgment_time_minutes": 5,
+      "initial_response_time_minutes": 15,
+      "status_update_interval_minutes": 30,
+      "resolution_communication_minutes": 10
+    },
+    "performance_metrics": {
+      "mttr_target_hours": 2,
+      "mtbf_target_hours": 720,
+      "sla_uptime_percentage": 99.9,
+      "customer_satisfaction_threshold": 4.0
+    },
+    "reporting_requirements": {
+      "incident_summary_generation_minutes": 30,
+      "stakeholder_report_delivery_hours": 2,
+      "post_incident_review_days": 3,
+      "trend_analysis_lookback_days": 7
+    }
+  },
+  "status_categories": {
+    "open": {
+      "description": "Incident reported and under investigation",
+      "auto_escalation_hours": 2
+    },
+    "in_progress": {
+      "description": "Incident being actively worked on",
+      "status_update_required_minutes": 30
+    },
+    "resolved": {
+      "description": "Incident fixed and systems restored",
+      "verification_period_minutes": 15
+    },
+    "closed": {
+      "description": "Incident confirmed resolved and documented",
+      "customer_confirmation_required": true
+    },
+    "monitoring": {
+      "description": "Solution implemented, monitoring for stability",
+      "monitoring_period_hours": 24
+    }
+  },
+  "compliance_requirements": {
+    "audit_trail": true,
+    "incident_documentation_retention_days": 2555,
+    "regulatory_notification_minutes": 60,
+    "data_classification_required": true
+  }
+}

@@ -1,0 +1,58 @@
+<div class="page-section">
+  <div class="section-header">
+    <div>
+      <h1 class="section-title">Monitor & Respond</h1>
+      <p class="section-subtitle">Stay informed about critical updates and take action on what matters</p>
+    </div>
+  </div>
+</div>
+<div class="alert-card critical">
+  <div class="alert-header">
+    <div class="alert-title">
+      <span class="alert-icon">⛔</span>
+      <h4>Critical Priority Task Blocker</h4>
+    </div>
+    <span class="alert-priority critical">critical</span>
+    <button class="alert-close" onclick="dismissAlert(this)">×</button>
+  </div>
+  <div class="alert-body">Q4 Planning Review is blocked due to resource constraints from 2 dependent teams. Potential 5-day delay if not resolved within 48 hours.</div>
+  <div class="alert-meta"><span>Task Monitor</span><span>•</span><span>Just now</span></div>
+  <div class="alert-actions">
+    <button class="btn-action btn-take-action">➜ Take Action</button>
+    <button class="btn-action btn-investigate">🔍 Investigate</button>
+  </div>
+</div>
+<div class="alert-card actionable">
+  <div class="alert-header">
+    <div class="alert-title">
+      <span class="alert-icon">⚠️</span>
+      <h4>Customer Feedback Analysis Behind Schedule</h4>
+    </div>
+    <span class="alert-priority actionable">Actionable</span>
+    <button class="alert-close" onclick="dismissAlert(this)">×</button>
+  </div>
+  <div class="alert-body">Analysis task is tracking 15% behind target pace. Data team dependency may cause further delays. Recommend check-in meeting.</div>
+  <div class="alert-meta"><span>Project Tracking</span><span>•</span><span>15 minutes ago</span></div>
+  <div class="alert-actions">
+    <button class="btn-action btn-take-action">➜ Take Action</button>
+    <button class="btn-action btn-investigate">🔍 Investigate</button>
+  </div>
+</div>
+<div class="input-bar">
+  <span class="input-icon">🔍</span>
+  <input type="text" class="input-field" placeholder="Search alerts or type command..." />
+  <div class="input-actions">
+    <button class="icon-btn">🎤</button>
+    <button class="icon-btn send-btn">➜</button>
+  </div>
+</div>
+<p class="input-hint">Press Enter to search, or use voice input</p>
+<script>
+function dismissAlert(btn) {
+  const card = btn.closest('.alert-card');
+  card.style.opacity = '0';
+  card.style.transform = 'translateX(100%)';
+  card.style.transition = 'all 0.3s ease';
+  setTimeout(function() { card.remove(); }, 300);
+}
+</script>

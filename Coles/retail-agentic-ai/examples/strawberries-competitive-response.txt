@@ -1,0 +1,29 @@
+EXAMPLE DECISION: Competitive Response - Strawberries
+
+Query: "Competitor just dropped strawberry prices to $2.99. What should we do?"
+
+Agent reasoning:
+- Current inventory: 45 units, cost $2.00, shelf price $4.99
+- Sales velocity: 12 units/day average, only 3 units sold today
+- Expiration: 2 days remaining
+- Competitor pricing: Across the street now at $2.99 (40% below our price)
+- Weather: Normal conditions
+- Supply schedule: No delivery for 4 days
+
+Analysis:
+Competitor pricing is depressing our velocity significantly (75% below average).
+At reduced velocity, 21 units remain at expiration (47% waste = $42 loss).
+Matching competitor at $2.99 maintains 33% margin (well above 12% minimum).
+Competitive match likely recovers velocity to historical baseline.
+Estimated recovery at $2.99: 36 units sold = $108 revenue vs. $42 waste.
+
+Recommendation: Yes, match competitor price at $2.99.
+Financial impact: $66 margin recovered vs. shrinkage alternative.
+Strategic note: Flag to category manager - sustained underpricing requires regional response.
+Required actions: Submit to pricing policy engine, update POS if approved, notify store manager per policy (>40% markdown), monitor competitor pricing daily.
+
+Tool calls executed:
+1. get_inventory_status(product_id="STR-CONV-16OZ", store_id="STORE-001")
+2. query_sales_velocity(product_id="STR-CONV-16OZ", store_id="STORE-001", days_back=7)
+3. get_competitor_pricing(category="berries", store_location="STORE-001")
+4. check_pricing_policy(product_id="STR-CONV-16OZ", current_price=4.99, proposed_price=2.99, reason_code="competition")

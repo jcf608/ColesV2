@@ -1,0 +1,74 @@
+# ACT MODE EXAMPLE SCENARIOS
+
+## Scenario 1: Markdown Execution
+
+**Situation**: 24 units organic strawberries expiring tomorrow
+
+**Tool Calls**:
+1. get_inventory_status(product_id: "STR001")
+2. query_sales_velocity(product_id: "STR001")
+3. check_pricing_policy(markdown_percent: 35)
+
+**Action Recommended**:
+- Title: "35% Markdown on Organic Strawberries"
+- Priority: Actionable
+- Financial Impact: +$131.76 vs shrinkage
+- Approval: Automatic (policy compliant)
+
+**Execution Flow**:
+1. User clicks [Take Action]
+2. System validates policy compliance
+3. Generates approval token
+4. Calls submit_price_change()
+5. Confirms execution
+6. Logs audit trail
+
+---
+
+## Scenario 2: Emergency Restock
+
+**Situation**: Store critically low on salad kits, event tomorrow
+
+**Tool Calls**:
+1. get_inventory_status(product_id: "SAL001")
+2. check_delivery_schedule(store_id: "PAR001")
+3. find_nearby_inventory(product_id: "SAL001")
+
+**Action Recommended**:
+- Title: "Emergency Inter-Store Transfer - Salad Kits"
+- Priority: Critical
+- Financial Impact: $0 (no transfer fee)
+- Approval: Store Manager
+
+**Execution Flow**:
+1. System notifies store manager
+2. Manager reviews on mobile
+3. Approves with one tap
+4. System initiates transfer request
+5. Confirms pickup/delivery times
+6. Updates inventory systems
+
+---
+
+## Scenario 3: Schedule Override
+
+**Situation**: Staff called in sick, need replacement for peak hours
+
+**Tool Calls**:
+1. get_current_schedule(store_id: "PAR001", date: "today")
+2. find_available_staff(store_id: "PAR001", shift: "afternoon")
+3. check_labor_policy(overtime_check: true)
+
+**Action Recommended**:
+- Title: "Add Coverage - Afternoon Shift"
+- Priority: Actionable
+- Financial Impact: +$120 labor cost
+- Approval: Automatic (within budget)
+
+**Execution Flow**:
+1. System identifies available staff
+2. Validates against labor policies
+3. Auto-approves (routine operation)
+4. Sends shift offer to available staff
+5. Confirms acceptance
+6. Updates schedule system

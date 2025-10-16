@@ -1,0 +1,878 @@
+<div class="hero admin-hero">
+  <h1>➕ Add New Agent Scenario</h1>
+  <p class="hero-subtitle">Configure a new question type for the agent to handle</p>
+</div>
+
+<div class="container wizard-container">
+  <div class="progress-steps">
+    <div class="step active" data-step="1">
+      <div class="step-number">1</div>
+      <div class="step-label">Question Type</div>
+    </div>
+    <div class="step" data-step="2">
+      <div class="step-number">2</div>
+      <div class="step-label">System Prompt</div>
+    </div>
+    <div class="step" data-step="3">
+      <div class="step-number">3</div>
+      <div class="step-label">Policy Rules</div>
+    </div>
+    <div class="step" data-step="4">
+      <div class="step-number">4</div>
+      <div class="step-label">Example Dialog</div>
+    </div>
+    <div class="step" data-step="5">
+      <div class="step-number">5</div>
+      <div class="step-label">Tools Config</div>
+    </div>
+    <div class="step" data-step="6">
+      <div class="step-number">6</div>
+      <div class="step-label">Quick Action</div>
+    </div>
+  </div>
+
+  <!-- Step 1: Question Type -->
+  <div class="wizard-step active" id="step-1">
+    <div class="step-content">
+      <h2>Step 1: Define Question Type</h2>
+      <p class="step-description">Give your new scenario a name and describe what kind of questions it handles.</p>
+      
+      <div class="form-group">
+        <label for="scenario-name">Scenario Name</label>
+        <input 
+          type="text" 
+          id="scenario-name" 
+          class="form-input" 
+          placeholder="e.g., Weather Impact Analysis"
+          value="Weather Impact Analysis"
+        >
+        <small>This will be used in file names and internal references</small>
+      </div>
+
+      <div class="form-group">
+        <label for="scenario-description">Description</label>
+        <textarea 
+          id="scenario-description" 
+          class="form-textarea" 
+          rows="4"
+          placeholder="Describe what this scenario handles..."
+        >Analyze how weather conditions affect produce sales and recommend inventory adjustments based on forecasted weather patterns.</textarea>
+        <small>Explain what types of questions this scenario answers</small>
+      </div>
+
+      <div class="form-group">
+        <label for="sample-questions">Sample Questions (one per line)</label>
+        <textarea 
+          id="sample-questions" 
+          class="form-textarea" 
+          rows="5"
+          placeholder="List example questions..."
+        >How will tomorrow's rain affect berry sales?
+What inventory should I adjust for the heatwave next week?
+Should I increase salad stock before the cold front?</textarea>
+      </div>
+    </div>
+
+    <div class="step-actions">
+      <button class="btn btn-primary" onclick="nextStep(1)">Next: System Prompt →</button>
+    </div>
+  </div>
+
+  <!-- Step 2: System Prompt -->
+  <div class="wizard-step" id="step-2">
+    <div class="step-content">
+      <h2>Step 2: System Prompt Addition</h2>
+      <p class="step-description">Add instructions to the agent's system prompt for handling this scenario.</p>
+      
+      <div class="form-group">
+        <label for="system-prompt-addition">System Prompt Text</label>
+        <textarea 
+          id="system-prompt-addition" 
+          class="form-textarea" 
+          rows="15"
+          placeholder="Write the system prompt addition..."
+        >WEATHER IMPACT ANALYSIS CAPABILITY:
+
+When users ask about weather impacts on produce:
+1. Identify the weather condition (rain, heat, cold, etc.)
+2. Determine the timeframe (today, tomorrow, next week)
+3. Analyze which produce categories are most affected
+4. Consider both sales velocity changes and quality impacts
+
+Decision Framework for Weather-Based Recommendations:
+- Rain: Expect 15-25% decrease in foot traffic; reduce fresh produce orders
+- Heatwave (>32°C): Berries sell 30% faster; salads increase 20%; citrus decreases
+- Cold Front (<10°C): Hot meal components increase; salads decrease 15%
+- Storm Warning: Reduce all orders by 30%; focus on shelf-stable prepared items
+
+Output Requirements:
+- State the weather condition and expected impact percentage
+- List specific product categories affected
+- Provide actionable inventory recommendations
+- Include confidence level based on historical data
+- Flag if weather data is unavailable or uncertain</textarea>
+        <small>This text will be appended to the main system prompt file</small>
+      </div>
+
+      <div class="info-box">
+        <strong>💡 Tip:</strong> Focus on the decision-making logic specific to this scenario. The agent already knows its general role.
+      </div>
+    </div>
+
+    <div class="step-actions">
+      <button class="btn btn-secondary" onclick="prevStep(2)">← Back</button>
+      <button class="btn btn-primary" onclick="nextStep(2)">Next: Policy Rules →</button>
+    </div>
+  </div>
+
+  <!-- Step 3: Policy Rules -->
+  <div class="wizard-step" id="step-3">
+    <div class="step-content">
+      <h2>Step 3: Policy Rules</h2>
+      <p class="step-description">Define business rules and constraints for this scenario.</p>
+      
+      <div class="form-group">
+        <label for="policy-name">Policy Section Name</label>
+        <input 
+          type="text" 
+          id="policy-name" 
+          class="form-input" 
+          placeholder="e.g., Weather-Based Inventory Policy"
+          value="Weather-Based Inventory Policy"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="policy-rules-text">Policy Rules (Human-Readable)</label>
+        <textarea 
+          id="policy-rules-text" 
+          class="form-textarea" 
+          rows="15"
+          placeholder="Write policy rules..."
+        >WEATHER-BASED INVENTORY POLICY
+
+Forecast Reliability Requirements:
+- Only act on weather forecasts from approved sources (Bureau of Meteorology)
+- Minimum 70% confidence threshold for inventory adjustments
+- Forecasts beyond 3 days require manager approval for major changes
+
+Adjustment Thresholds:
+- Minor adjustment (<10% change): Automatic approval
+- Moderate adjustment (10-25% change): Store manager notification
+- Major adjustment (>25% change): Regional manager approval required
+
+Category-Specific Rules:
+- Berries: Maximum 40% reduction in rain forecast; never increase >30% for heat
+- Leafy Greens: Can be reduced up to 50% for extended heat periods
+- Root Vegetables: Weather-resistant; maximum 15% adjustment
+- Pre-cut Items: Follow standard markdown policy; weather is secondary factor
+
+Safety Constraints:
+- Never reduce safety stock below 1 day of average sales
+- Maintain buffer stock for staple items regardless of weather
+- Document all weather-based decisions with forecast source and timestamp</textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="policy-rules-json">Policy Rules (Machine-Readable JSON)</label>
+        <textarea 
+          id="policy-rules-json" 
+          class="form-textarea" 
+          rows="15"
+          placeholder='{"weather_policy": {...}}'
+        >{
+  "weather_based_inventory": {
+    "version": "1.0",
+    "effective_date": "2025-10-16",
+    "forecast_requirements": {
+      "approved_sources": ["Bureau of Meteorology", "Weather Underground"],
+      "minimum_confidence_pct": 70,
+      "max_forecast_days_without_approval": 3
+    },
+    "adjustment_thresholds": {
+      "minor": {
+        "max_change_pct": 10,
+        "approval": "automatic"
+      },
+      "moderate": {
+        "min_change_pct": 10,
+        "max_change_pct": 25,
+        "approval": "store_manager"
+      },
+      "major": {
+        "min_change_pct": 25,
+        "approval": "regional_manager"
+      }
+    },
+    "category_rules": {
+      "berries": {
+        "max_reduction_pct": 40,
+        "max_increase_pct": 30
+      },
+      "leafy_greens": {
+        "max_reduction_pct": 50,
+        "max_increase_pct": 20
+      },
+      "root_vegetables": {
+        "max_adjustment_pct": 15
+      }
+    },
+    "safety_constraints": {
+      "minimum_days_stock": 1,
+      "requires_documentation": true
+    }
+  }
+}</textarea>
+      </div>
+    </div>
+
+    <div class="step-actions">
+      <button class="btn btn-secondary" onclick="prevStep(3)">← Back</button>
+      <button class="btn btn-primary" onclick="nextStep(3)">Next: Example Dialog →</button>
+    </div>
+  </div>
+
+  <!-- Step 4: Example Dialog -->
+  <div class="wizard-step" id="step-4">
+    <div class="step-content">
+      <h2>Step 4: Example Dialog</h2>
+      <p class="step-description">Create a few-shot example showing how the agent should handle this scenario.</p>
+      
+      <div class="form-group">
+        <label for="example-name">Example Name</label>
+        <input 
+          type="text" 
+          id="example-name" 
+          class="form-input" 
+          placeholder="e.g., rain-berry-adjustment"
+          value="rain-berry-adjustment"
+        >
+        <small>Use lowercase with hyphens, no spaces</small>
+      </div>
+
+      <div class="form-group">
+        <label for="example-dialog">Example Dialog</label>
+        <textarea 
+          id="example-dialog" 
+          class="form-textarea" 
+          rows="20"
+          placeholder="Write the full example interaction..."
+        >EXAMPLE DECISION: Rain Forecast Berry Adjustment
+
+Query: "It's supposed to rain all day tomorrow. How should I adjust berry orders?"
+
+Agent reasoning:
+- Weather forecast: 85% chance of rain, 15-25mm expected, all-day duration
+- Current berry inventory: Strawberries (45 units), Blueberries (38 units), Raspberries (22 units)
+- Historical data: Rain reduces berry sales by 20-25% on average
+- Tomorrow's scheduled delivery: 60 units strawberries, 40 units blueberries
+- Current sales velocity: Strawberries 12/day, Blueberries 15/day, Raspberries 8/day
+
+Analysis:
+Rain forecast is high confidence (85%) from approved source (BoM).
+Expected sales reduction: 20-25% based on historical patterns.
+Current inventory sufficient for reduced demand.
+Recommendation: Reduce tomorrow's delivery by 25%.
+
+Adjusted delivery: 45 strawberries (-15), 30 blueberries (-10), cancel raspberry order.
+This maintains 1.5 days stock post-delivery under rain conditions.
+Savings: ~$85 in potential waste from oversupply.
+Risk: If weather forecast wrong, may run low by evening (acceptable risk).
+
+Recommendation: Yes, reduce berry delivery by 25% for rain day.
+Financial impact: $85 waste prevention vs. $20 potential lost sales risk.
+Required actions: Contact supplier, update delivery schedule, monitor sales at 2pm for potential emergency reorder.
+
+Tool calls executed:
+1. get_weather_forecast(location="STORE-001", days_ahead=1)
+2. get_inventory_status(category="berries", store_id="STORE-001")
+3. query_sales_velocity(category="berries", store_id="STORE-001", days_back=30, filter="rainy_days")
+4. check_inventory_policy(adjustment_pct=25, reason="weather_forecast", approval_level="store_manager")
+5. update_delivery_schedule(supplier_id="BERRY-SUP-01", adjustment_pct=-25, reason="rain_forecast")</textarea>
+      </div>
+
+      <div class="info-box">
+        <strong>💡 Format:</strong> Include the query, agent reasoning, analysis, recommendation, and tool calls executed.
+      </div>
+    </div>
+
+    <div class="step-actions">
+      <button class="btn btn-secondary" onclick="prevStep(4)">← Back</button>
+      <button class="btn btn-primary" onclick="nextStep(4)">Next: Tools Config →</button>
+    </div>
+  </div>
+
+  <!-- Step 5: Tools Config -->
+  <div class="wizard-step" id="step-5">
+    <div class="step-content">
+      <h2>Step 5: MCP Tools Configuration</h2>
+      <p class="step-description">Define new tools or update existing tools needed for this scenario.</p>
+      
+      <div class="form-group">
+        <label for="new-tools">New Tools Required</label>
+        <div class="info-box">
+          <strong>Current Tools:</strong> get_inventory_status, query_sales_velocity, check_pricing_policy, submit_price_change, get_competitor_pricing
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="tool-definitions">Tool Definitions (JSON)</label>
+        <textarea 
+          id="tool-definitions" 
+          class="form-textarea" 
+          rows="25"
+          placeholder='[{"name": "tool_name", ...}]'
+        >[
+  {
+    "name": "get_weather_forecast",
+    "description": "Retrieve weather forecast for store location including temperature, precipitation, and confidence levels",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "store_id": {
+          "type": "string",
+          "description": "Store location identifier"
+        },
+        "days_ahead": {
+          "type": "integer",
+          "description": "Number of days to forecast (1-7)",
+          "minimum": 1,
+          "maximum": 7
+        },
+        "include_historical": {
+          "type": "boolean",
+          "description": "Include historical weather for same period last year"
+        }
+      },
+      "required": ["store_id", "days_ahead"]
+    }
+  },
+  {
+    "name": "update_delivery_schedule",
+    "description": "Adjust scheduled supplier delivery quantities based on demand forecast",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "supplier_id": {
+          "type": "string",
+          "description": "Supplier identifier"
+        },
+        "delivery_date": {
+          "type": "string",
+          "description": "ISO date of scheduled delivery"
+        },
+        "adjustment_pct": {
+          "type": "number",
+          "description": "Percentage adjustment (negative for reduction, positive for increase)"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason code for adjustment"
+        },
+        "approval_token": {
+          "type": "string",
+          "description": "Token from policy approval if required"
+        }
+      },
+      "required": ["supplier_id", "delivery_date", "adjustment_pct", "reason"]
+    }
+  }
+]</textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="tool-implementation">Tool Implementation (Ruby)</label>
+        <textarea 
+          id="tool-implementation" 
+          class="form-textarea" 
+          rows="25"
+          placeholder="def execute_tool(tool_name, parameters) ..."
+>def execute_weather_tools(tool_name, parameters)
+  case tool_name
+  when 'get_weather_forecast'
+    {
+      store_id: parameters['store_id'],
+      location: 'Sydney, NSW',
+      forecast_date: (Date.today + parameters['days_ahead']).to_s,
+      temperature_high: 28,
+      temperature_low: 18,
+      conditions: 'Rain',
+      precipitation_mm: 15,
+      precipitation_probability: 85,
+      wind_speed_kmh: 25,
+      confidence_level: 85,
+      source: 'Bureau of Meteorology',
+      historical_same_date: parameters['include_historical'] ? {
+        temperature_high: 26,
+        conditions: 'Partly Cloudy',
+        sales_impact_pct: -5
+      } : nil
+    }
+  when 'update_delivery_schedule'
+    {
+      supplier_id: parameters['supplier_id'],
+      delivery_date: parameters['delivery_date'],
+      original_quantity: 100,
+      adjusted_quantity: (100 * (1 + parameters['adjustment_pct'] / 100.0)).round,
+      adjustment_pct: parameters['adjustment_pct'],
+      reason: parameters['reason'],
+      status: parameters['adjustment_pct'].abs > 25 ? 'pending_approval' : 'confirmed',
+      confirmation_number: "DEL-#{Time.now.to_i}-#{rand(1000)}",
+      estimated_savings: (100 * 4.50 * parameters['adjustment_pct'].abs / 100.0).round(2)
+    }
+  else
+    { error: "Unknown tool: #{tool_name}" }
+  end
+end</textarea>
+      </div>
+    </div>
+
+    <div class="step-actions">
+      <button class="btn btn-secondary" onclick="prevStep(5)">← Back</button>
+      <button class="btn btn-primary" onclick="nextStep(5)">Next: Quick Action →</button>
+    </div>
+  </div>
+
+  <!-- Step 6: Quick Action Button -->
+  <div class="wizard-step" id="step-6">
+    <div class="step-content">
+      <h2>Step 6: Quick Action Button</h2>
+      <p class="step-description">Add a quick action button to the home page for easy access to this scenario.</p>
+      
+      <div class="form-group">
+        <label for="button-icon">Button Icon (Emoji)</label>
+        <input 
+          type="text" 
+          id="button-icon" 
+          class="form-input" 
+          placeholder="🌧️"
+          value="🌧️"
+          maxlength="2"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="button-label">Button Label</label>
+        <input 
+          type="text" 
+          id="button-label" 
+          class="form-input" 
+          placeholder="Weather Impact"
+          value="Weather Impact"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="button-question">Default Question</label>
+        <input 
+          type="text" 
+          id="button-question" 
+          class="form-input" 
+          placeholder="The question to ask when clicked"
+          value="How will tomorrow's weather affect my produce orders?"
+        >
+      </div>
+
+      <div class="form-group">
+        <label>Button Preview</label>
+        <div class="button-preview">
+          <button class="action-card preview-card">
+            <span class="action-icon" id="preview-icon">🌧️</span>
+            <span class="action-label" id="preview-label">Weather Impact</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="step-actions">
+      <button class="btn btn-secondary" onclick="prevStep(6)">← Back</button>
+      <button class="btn btn-success" onclick="saveConfiguration()">💾 Save Configuration</button>
+    </div>
+  </div>
+
+  <!-- Success Message -->
+  <div class="wizard-step" id="step-success" style="display: none;">
+    <div class="success-message">
+      <div class="success-icon">✅</div>
+      <h2>Configuration Saved Successfully!</h2>
+      <p>Your new agent scenario has been added to the system.</p>
+      
+      <div class="files-created">
+        <h3>Files Created:</h3>
+        <ul id="created-files-list"></ul>
+      </div>
+
+      <div class="next-steps">
+        <h3>Next Steps:</h3>
+        <ol>
+          <li>Restart the application server to load new configuration</li>
+          <li>Test the new scenario on the home page</li>
+          <li>Review and refine the agent's responses</li>
+          <li>Update the configuration if needed</li>
+        </ol>
+      </div>
+
+      <div class="step-actions">
+        <button class="btn btn-primary" onclick="window.location.href='/'">← Back to Home</button>
+        <button class="btn btn-secondary" onclick="window.location.reload()">Add Another Scenario</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.wizard-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.progress-steps::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #e0e0e0;
+  z-index: 0;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.step.active .step-number,
+.step.completed .step-number {
+  background: #4CAF50;
+  color: white;
+}
+
+.step-label {
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+}
+
+.step.active .step-label {
+  color: #000;
+  font-weight: 600;
+}
+
+.wizard-step {
+  display: none;
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.wizard-step.active {
+  display: block;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-content h2 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.step-description {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-group small {
+  display: block;
+  color: #666;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.form-textarea {
+  font-family: 'Monaco', 'Courier New', monospace;
+  resize: vertical;
+}
+
+.info-box {
+  background: #e3f2fd;
+  border-left: 4px solid #2196F3;
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+.step-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: #4CAF50;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #45a049;
+}
+
+.btn-secondary {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #d0d0d0;
+}
+
+.btn-success {
+  background: #2196F3;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.btn-success:hover {
+  background: #1976D2;
+}
+
+.button-preview {
+  padding: 2rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.preview-card {
+  pointer-events: none;
+}
+
+.success-message {
+  text-align: center;
+  padding: 2rem;
+}
+
+.success-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.success-message h2 {
+  color: #4CAF50;
+  margin-bottom: 1rem;
+}
+
+.files-created,
+.next-steps {
+  text-align: left;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.files-created h3,
+.next-steps h3 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.files-created ul {
+  list-style: none;
+  padding: 0;
+}
+
+.files-created li {
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  background: white;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.next-steps ol {
+  margin-left: 1.5rem;
+}
+
+.next-steps li {
+  margin: 0.5rem 0;
+}
+
+.admin-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+</style>
+
+<script>
+let currentStep = 1;
+const totalSteps = 6;
+
+function nextStep(step) {
+  if (step < totalSteps) {
+    // Hide current step
+    document.getElementById(`step-${step}`).classList.remove('active');
+    document.querySelector(`.step[data-step="${step}"]`).classList.add('completed');
+    
+    // Show next step
+    currentStep = step + 1;
+    document.getElementById(`step-${currentStep}`).classList.add('active');
+    document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+    
+    // Update preview if on last step
+    if (currentStep === 6) {
+      updatePreview();
+    }
+  }
+}
+
+function prevStep(step) {
+  if (step > 1) {
+    // Hide current step
+    document.getElementById(`step-${step}`).classList.remove('active');
+    document.querySelector(`.step[data-step="${step}"]`).classList.remove('active');
+    
+    // Show previous step
+    currentStep = step - 1;
+    document.getElementById(`step-${currentStep}`).classList.add('active');
+    document.querySelector(`.step[data-step="${currentStep-1}"]`).classList.remove('completed');
+  }
+}
+
+function updatePreview() {
+  const icon = document.getElementById('button-icon').value;
+  const label = document.getElementById('button-label').value;
+  
+  document.getElementById('preview-icon').textContent = icon;
+  document.getElementById('preview-label').textContent = label;
+}
+
+// Live preview updates
+document.getElementById('button-icon')?.addEventListener('input', updatePreview);
+document.getElementById('button-label')?.addEventListener('input', updatePreview);
+
+async function saveConfiguration() {
+  const config = {
+    scenario_name: document.getElementById('scenario-name').value,
+    scenario_description: document.getElementById('scenario-description').value,
+    sample_questions: document.getElementById('sample-questions').value,
+    system_prompt: document.getElementById('system-prompt-addition').value,
+    policy_name: document.getElementById('policy-name').value,
+    policy_text: document.getElementById('policy-rules-text').value,
+    policy_json: document.getElementById('policy-rules-json').value,
+    example_name: document.getElementById('example-name').value,
+    example_dialog: document.getElementById('example-dialog').value,
+    tool_definitions: document.getElementById('tool-definitions').value,
+    tool_implementation: document.getElementById('tool-implementation').value,
+    button_icon: document.getElementById('button-icon').value,
+    button_label: document.getElementById('button-label').value,
+    button_question: document.getElementById('button-question').value
+  };
+
+  try {
+    const response = await fetch('/api/save-scenario', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(config)
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      // Show success message
+      document.querySelectorAll('.wizard-step').forEach(step => step.style.display = 'none');
+      const successStep = document.getElementById('step-success');
+      successStep.style.display = 'block';
+
+      // Populate files list
+      const filesList = document.getElementById('created-files-list');
+      result.files_created.forEach(file => {
+        const li = document.createElement('li');
+        li.textContent = file;
+        filesList.appendChild(li);
+      });
+    } else {
+      alert('Error saving configuration: ' + result.error);
+    }
+  } catch (error) {
+    alert('Error: ' + error.message);
+  }
+}
+</script

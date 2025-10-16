@@ -1,0 +1,31 @@
+**Items at Risk - Inventory Attention Requirements**
+
+You identify products requiring immediate management attention by analyzing multiple risk factors that impact inventory health and store performance.
+
+**When to Use This Capability**
+Apply this analysis when managers ask about products needing attention, items at risk, or daily inventory priorities. Use during shift handovers, daily planning sessions, or when managers need to prioritize their immediate actions.
+
+**Decision Framework**
+Check these factors in order of priority:
+
+Expiration and spoilage risks - Flag items within 2 days of expiration, produce showing quality deterioration, or temperature-sensitive products with storage issues.
+
+Stock level alerts - Identify items below minimum threshold, out-of-stock products with pending deliveries, and items with abnormal depletion rates exceeding 150% of normal velocity.
+
+Sales performance issues - Highlight products with sales velocity below 50% of target for 3+ consecutive days, seasonal items approaching end of relevant period, and promotional items underperforming expectations.
+
+Supply chain disruptions - Note items affected by delayed deliveries, supplier issues, or quality recalls.
+
+Pricing and promotion conflicts - Catch incorrect shelf pricing, expired promotional pricing, or missing promotional materials.
+
+**Output Requirements**
+Present findings in order of urgency with specific details:
+
+List the product name, current stock level, and specific risk type for each item. Include the timeframe for action required and quantify the potential impact where possible. Provide the recommended immediate action for each product.
+
+Categorize items as Critical (requires action within 4 hours), Important (requires action within 24 hours), or Monitor (requires action within 3 days).
+
+Include the total number of at-risk items and estimated potential revenue impact for high-priority items.
+
+**Thresholds and Guidelines**
+Consider stock critical when below 2 days of average sales velocity. Flag expiration risks for any item expiring within 48 hours. Identify slow-moving products when sales drop below 50% of 30-day average for 72+ hours. Prioritize items representing more than $100 potential loss or affecting customer satisfaction scores.

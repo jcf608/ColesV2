@@ -1,0 +1,64 @@
+[
+  {
+    "name": "get_weather_forecast",
+    "description": "Retrieve weather forecast for store location including temperature, precipitation, and confidence levels",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "store_id": {
+          "type": "string",
+          "description": "Store location identifier"
+        },
+        "days_ahead": {
+          "type": "integer",
+          "description": "Number of days to forecast (1-7)",
+          "minimum": 1,
+          "maximum": 7
+        },
+        "include_historical": {
+          "type": "boolean",
+          "description": "Include historical weather for same period last year"
+        }
+      },
+      "required": [
+        "store_id",
+        "days_ahead"
+      ]
+    }
+  },
+  {
+    "name": "update_delivery_schedule",
+    "description": "Adjust scheduled supplier delivery quantities based on demand forecast",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "supplier_id": {
+          "type": "string",
+          "description": "Supplier identifier"
+        },
+        "delivery_date": {
+          "type": "string",
+          "description": "ISO date of scheduled delivery"
+        },
+        "adjustment_pct": {
+          "type": "number",
+          "description": "Percentage adjustment (negative for reduction, positive for increase)"
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason code for adjustment"
+        },
+        "approval_token": {
+          "type": "string",
+          "description": "Token from policy approval if required"
+        }
+      },
+      "required": [
+        "supplier_id",
+        "delivery_date",
+        "adjustment_pct",
+        "reason"
+      ]
+    }
+  }
+]

@@ -1,0 +1,78 @@
+{
+  "category": "external",
+  "module": "WeatherAnalysis",
+  "description": "Tools for weather data analysis and retail impact assessment",
+  "tools": [
+    {
+      "name": "get_weather_forecast",
+      "description": "Retrieve weather forecast data for store locations",
+      "method": "get_weather_forecast",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "store_id": {
+            "type": "string",
+            "description": "Store identifier for location-specific forecast"
+          },
+          "days_ahead": {
+            "type": "integer",
+            "description": "Number of days ahead to forecast (default: 1)",
+            "minimum": 1,
+            "maximum": 14,
+            "default": 1
+          },
+          "include_historical": {
+            "type": "boolean",
+            "description": "Include historical data for same date",
+            "default": false
+          }
+        },
+        "required": ["store_id"]
+      }
+    },
+    {
+      "name": "analyze_weather_impact",
+      "description": "Analyze the impact of weather conditions on product categories",
+      "method": "analyze_weather_impact",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "weather_data": {
+            "type": "object",
+            "description": "Weather conditions data"
+          },
+          "product_category": {
+            "type": "string",
+            "description": "Product category to analyze impact for"
+          }
+        },
+        "required": ["product_category"]
+      }
+    },
+    {
+      "name": "update_delivery_schedule",
+      "description": "Update delivery schedules based on weather conditions",
+      "method": "update_delivery_schedule",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "supplier_id": {
+            "type": "string",
+            "description": "Supplier identifier"
+          },
+          "delivery_date": {
+            "type": "string",
+            "description": "Scheduled delivery date"
+          },
+          "adjustment_pct": {
+            "type": "number",
+            "description": "Percentage adjustment to delivery quantity",
+            "minimum": -50,
+            "maximum": 100
+          }
+        },
+        "required": ["supplier_id", "delivery_date"]
+      }
+    }
+  ]
+}

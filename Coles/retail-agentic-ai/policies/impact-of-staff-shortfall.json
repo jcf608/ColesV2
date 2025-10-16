@@ -1,0 +1,131 @@
+{
+  "policy_id": "weather_produce_impact_001",
+  "policy_name": "Weather Impact on Produce Orders",
+  "version": "2.1.0",
+  "effective_date": "2024-01-15",
+  "category": "custom",
+  "last_updated": "2024-01-15T08:00:00Z",
+  "created_by": "procurement_system",
+  "approval_thresholds": {
+    "automatic_adjustment": {
+      "max_order_increase_percent": 25,
+      "max_order_decrease_percent": 30,
+      "value_threshold_usd": 5000
+    },
+    "manager_approval_required": {
+      "order_increase_percent": 50,
+      "order_decrease_percent": 40,
+      "value_threshold_usd": 15000
+    },
+    "director_approval_required": {
+      "order_increase_percent": 75,
+      "value_threshold_usd": 25000,
+      "supply_chain_disruption": true
+    }
+  },
+  "weather_conditions": {
+    "severe_weather": {
+      "conditions": ["hurricane", "tornado", "blizzard", "ice_storm"],
+      "actions": {
+        "increase_shelf_stable": 40,
+        "decrease_perishable": 35,
+        "extend_delivery_window": 72
+      }
+    },
+    "moderate_weather": {
+      "conditions": ["heavy_rain", "snow", "high_winds"],
+      "actions": {
+        "increase_shelf_stable": 20,
+        "decrease_perishable": 15,
+        "extend_delivery_window": 24
+      }
+    },
+    "temperature_extremes": {
+      "hot_weather": {
+        "threshold_fahrenheit": 85,
+        "increase_categories": ["beverages", "ice_cream", "salads"],
+        "adjustment_percent": 30
+      },
+      "cold_weather": {
+        "threshold_fahrenheit": 32,
+        "increase_categories": ["soup", "hot_beverages", "comfort_foods"],
+        "adjustment_percent": 25
+      }
+    }
+  },
+  "safety_constraints": {
+    "minimum_stock_levels": {
+      "essential_produce_days": 3,
+      "backup_supplier_required": true,
+      "quality_inspection_mandatory": true
+    },
+    "maximum_adjustments": {
+      "single_day_change_percent": 50,
+      "weekly_cumulative_percent": 100,
+      "inventory_turnover_limit": 0.85
+    },
+    "supplier_requirements": {
+      "weather_contingency_plan": true,
+      "alternative_routing": true,
+      "quality_guarantee_hours": 48
+    }
+  },
+  "produce_categories": {
+    "highly_perishable": {
+      "items": ["leafy_greens", "berries", "mushrooms", "herbs"],
+      "weather_sensitivity": "high",
+      "reduction_factor": 0.4,
+      "shelf_life_hours": 72
+    },
+    "moderately_perishable": {
+      "items": ["tomatoes", "peppers", "cucumbers", "zucchini"],
+      "weather_sensitivity": "medium",
+      "reduction_factor": 0.2,
+      "shelf_life_hours": 120
+    },
+    "weather_resistant": {
+      "items": ["potatoes", "onions", "carrots", "apples"],
+      "weather_sensitivity": "low",
+      "increase_factor": 0.15,
+      "shelf_life_hours": 240
+    }
+  },
+  "numeric_thresholds": {
+    "order_value_limits": {
+      "minimum_order_usd": 500,
+      "maximum_single_order_usd": 50000,
+      "daily_total_limit_usd": 100000
+    },
+    "weather_severity_scale": {
+      "minor": {
+        "score_range": [1, 3],
+        "adjustment_percent": 5
+      },
+      "moderate": {
+        "score_range": [4, 6],
+        "adjustment_percent": 15
+      },
+      "severe": {
+        "score_range": [7, 10],
+        "adjustment_percent": 30
+      }
+    },
+    "lead_time_adjustments": {
+      "normal_weather_hours": 24,
+      "adverse_weather_hours": 48,
+      "severe_weather_hours": 72
+    }
+  },
+  "automation_rules": {
+    "trigger_conditions": {
+      "weather_alert_severity": 4,
+      "forecast_confidence_percent": 75,
+      "advance_notice_hours": 12
+    },
+    "override_permissions": {
+      "emergency_weather": ["store_manager", "regional_director"],
+      "quality_concerns": ["quality_assurance", "store_manager"],
+      "supplier_issues": ["procurement_manager", "operations_director"]
+    }
+  }
+}

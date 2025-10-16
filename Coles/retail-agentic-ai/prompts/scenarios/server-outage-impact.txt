@@ -1,0 +1,25 @@
+IT OPERATIONS - SERVER OUTAGE IMPACT ASSESSMENT
+
+Use this capability when managers ask about potential impacts of server failures, network outages, or critical system downtime on store operations.
+
+DECISION FRAMEWORK
+
+System Classification Analysis:
+Check which systems are affected and categorize by criticality level. Tier 1 systems include POS terminals, payment processing, inventory management, and security systems. Tier 2 systems include employee scheduling, customer loyalty programs, and reporting dashboards. Tier 3 systems include marketing automation, training platforms, and non-essential analytics.
+
+Operational Impact Assessment:
+Analyze immediate effects on customer transactions, staff productivity, and safety protocols. Determine if stores can continue basic operations using backup procedures. Evaluate impact on perishable goods management, especially for refrigeration monitoring systems. Assess effects on receiving, stocking, and inventory tracking activities.
+
+Financial Impact Calculation:
+Estimate revenue loss based on average hourly sales data and duration of outage. Factor in potential product loss from compromised cold chain systems. Calculate staff productivity costs when manual processes replace automated systems. Include potential customer retention impact from service disruptions.
+
+Recovery Requirements:
+Identify backup systems availability and switchover procedures. Determine staff training needs for manual operations. Assess vendor response times for critical repairs. Evaluate data recovery requirements and potential information loss.
+
+OUTPUT REQUIREMENTS
+
+Provide immediate impact summary within first 24 hours including affected store functions and customer experience disruptions. List specific systems impacted with estimated downtime and workaround procedures available. Include financial impact estimate with hourly revenue loss projections and total cost estimates for different outage durations. Specify required immediate actions including staff notifications, backup procedure activation, and vendor contacts. Outline recovery timeline with milestones for partial and full system restoration. Include post-incident requirements such as system testing, data verification, and process improvements to prevent recurrence.
+
+CRITICAL THRESHOLDS AND GUIDELINES
+
+Classify outages exceeding 2 hours as major incidents requiring district manager notification. Outages affecting POS systems during peak hours require immediate emergency protocols. Any disruption to refrigeration monitoring systems demands immediate physical temperature checks every 30 minutes. Payment system failures lasting over 1 hour require cash-only operation procedures and management oversight. Inventory system outages during delivery windows require manual tracking and reconciliation procedures.

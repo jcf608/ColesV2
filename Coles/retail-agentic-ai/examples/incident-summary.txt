@@ -1,0 +1,77 @@
+**Training Example: Incident Summary Request**
+
+**USER QUESTION:**
+"Summarize incidents from the past 24 hours and their current status"
+
+**AGENT INTERNAL REASONING:**
+The user is asking for an operational overview of recent incidents. I need to:
+- Query the incident management system for the last 24 hours
+- Categorize incidents by type and severity
+- Check current status of each incident
+- Identify any patterns or escalating issues
+- Prioritize based on business impact
+- Provide actionable status information
+
+**TOOLS CALLED:**
+
+1. **get_incident_log(time_range="24h", status="all")**
+   Reason: Need comprehensive view of all incidents regardless of current status
+
+2. **check_system_status(systems=["POS", "inventory", "refrigeration", "security"])**
+   Reason: Verify if any incidents are still affecting critical systems
+
+3. **get_store_performance_metrics(timeframe="24h")**
+   Reason: Assess business impact of incidents on sales and operations
+
+**ANALYSIS PERFORMED:**
+
+Found 8 incidents in past 24 hours:
+
+HIGH PRIORITY:
+- Incident #2847: Freezer unit F-12 temperature alarm at 3:42 AM
+  Status: RESOLVED at 6:15 AM
+  Impact: $2,800 of frozen goods at risk, maintenance replaced faulty sensor
+  
+- Incident #2851: POS system crash during morning rush at 8:23 AM
+  Status: RESOLVED at 8:41 AM
+  Impact: 18-minute downtime, backup registers activated, $450 estimated lost sales
+
+MEDIUM PRIORITY:
+- Incident #2849: Delivery truck 2 hours late for produce delivery
+  Status: RESOLVED at 11:30 AM
+  Impact: Temporary shortage of organic lettuce and tomatoes
+  
+- Incident #2852: Staff member called in sick - deli department understaffed
+  Status: ONGOING
+  Impact: Reduced deli service hours, temp worker arriving at 2 PM
+
+- Incident #2854: Customer slip incident in aisle 7 at 2:15 PM
+  Status: RESOLVED at 3:00 PM
+  Impact: Safety report filed, wet floor signs deployed, no injury
+
+LOW PRIORITY:
+- Incident #2848: Shopping cart with broken wheel reported
+- Incident #2850: Flickering light in restroom
+- Incident #2853: Customer complaint about expired milk (isolated case)
+All marked RESOLVED
+
+**FINAL RECOMMENDATION:**
+
+SUMMARY: 8 incidents in past 24 hours - 6 resolved, 2 ongoing
+
+IMMEDIATE ATTENTION NEEDED:
+- Deli staffing shortage continues until temp worker arrives at 2 PM
+- Monitor freezer unit F-12 closely for next 48 hours to ensure repair effectiveness
+
+KEY LEARNINGS:
+- POS backup procedures worked well, minimized downtime impact
+- Freezer monitoring system functioning properly - early detection prevented major loss
+- Need to review delivery vendor SLA compliance (2nd late delivery this month)
+
+ACTIONS RECOMMENDED:
+1. Schedule follow-up maintenance check on freezer F-12 within 72 hours
+2. Review deli staffing backup procedures for future sick calls
+3. Contact produce supplier about delivery reliability issues
+4. Continue standard monitoring protocols
+
+Overall assessment: Operations stable with no major ongoing issues requiring escalation.

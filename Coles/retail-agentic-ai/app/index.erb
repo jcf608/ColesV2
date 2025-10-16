@@ -1,0 +1,201 @@
+<div class="hero">
+  <h1>🤔 Produce Optimization Agent</h1>
+  <p class="hero-subtitle">AI-powered markdown decisions that minimize waste and protect margins</p>
+</div>
+
+<div class="container">
+  <div class="chat-container">
+    <div class="chat-header">
+      <h2>Ask the Agent</h2>
+      <span class="status-indicator">● Online</span>
+    </div>
+    
+    <div id="chat-messages" class="chat-messages">
+      <div class="message agent-message">
+        <div class="message-avatar">🤔</div>
+        <div class="message-content">
+          <p>Hello! I'm your produce optimization agent. I can help you make data-driven markdown decisions.</p>
+          <p>Try asking me things like:</p>
+          <ul>
+            <li>"Should we mark down organic strawberries today?"</li>
+            <li>"What's the inventory status for blueberries?"</li>
+            <li>"Check competitor pricing for berries"</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <form id="chat-form" class="chat-input-form">
+      <input 
+        type="text" 
+        id="message-input" 
+        class="chat-input" 
+        placeholder="Ask about markdowns, inventory, pricing..."
+        autocomplete="off"
+      >
+      <button type="submit" class="chat-submit">Send</button>
+    </form>
+  </div>
+  
+  <div class="quick-actions">
+    <h3>Quick Actions</h3>
+    <div class="action-grid" id="quick-actions-grid">
+      <!-- Quick actions loaded dynamically -->
+      <button class="action-card" onclick="askQuestion('What products need attention today?')">
+        <span class="action-icon">⚠️</span>
+        <span class="action-label">Items at Risk</span>
+      </button>
+      <button class="action-card" onclick="askQuestion('Show me products expiring in 2 days')">
+        <span class="action-icon">📅</span>
+        <span class="action-label">Expiring Soon</span>
+      </button>
+      <button class="action-card" onclick="askQuestion('What are competitor prices for berries?')">
+        <span class="action-icon">💰</span>
+        <span class="action-label">Competitor Pricing</span>
+      </button>
+      <button class="action-card" onclick="askQuestion('Check pricing policy for 30% markdown')">
+        <span class="action-icon">✅</span>
+        <span class="action-label">Policy Check</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+const chatForm = document.getElementById('chat-form');
+const messageInput = document.getElementById('message-input');
+const chatMessages = document.getElementById('chat-messages');
+
+// Check for pending question from Ask page
+document.addEventListener('DOMContentLoaded', function() {
+  const pendingQuestion = sessionStorage.getItem('pendingQuestion');
+  if (pendingQuestion) {
+    sessionStorage.removeItem('pendingQuestion');
+    messageInput.value = pendingQuestion;
+    chatForm.dispatchEvent(new Event('submit'));
+  }
+  
+  // Load quick actions dynamically
+  loadQuickActions();
+});
+
+async function loadQuickActions() {
+  try {
+    const response = await fetch('/api/ask-questions');
+    const data = await response.json();
+    
+    if (data.success && data.questions.length > 0) {
+      const grid = document.getElementById('quick-actions-grid');
+      grid.innerHTML = '';
+      
+      // Limit to first 6 questions for quick actions
+      data.questions.slice(0, 6).forEach(q => {
+        const button = document.createElement('button');
+        button.className = 'action-card';
+        button.onclick = () => askQuestion(q.question);
+        button.innerHTML = `
+          <span class="action-icon">${q.icon}</span>
+          <span class="action-label">${q.label}</span>
+        `;
+        grid.appendChild(button);
+      });
+    }
+  } catch (error) {
+    console.error('Error loading quick actions:', error);
+  }
+}
+
+chatForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const message = messageInput.value.trim();
+  if (!message) return;
+  
+  addMessage('user', message);
+  messageInput.value = '';
+  
+  addThinkingIndicator();
+  
+  try {
+    const response = await fetch('/api/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `message=${encodeURIComponent(message)}`
+    });
+    
+    const data = await response.json();
+    removeThinkingIndicator();
+    
+    if (data.success) {
+      if (data.tool_calls && data.tool_calls.length > 0) {
+        data.tool_calls.forEach(tool => {
+          addToolCall(tool);
+        });
+      }
+      addMessage('agent', data.response);
+    } else {
+      addMessage('agent', `Error: ${data.error}`, true);
+    }
+  } catch (error) {
+    removeThinkingIndicator();
+    addMessage('agent', `Error: ${error.message}`, true);
+  }
+});
+
+function addMessage(sender, content, isError = false) {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message ${sender}-message${isError ? ' error' : ''}`;
+  
+  const avatar = document.createElement('div');
+  avatar.className = 'message-avatar';
+  avatar.textContent = sender === 'user' ? '👤' : '🤔';
+  
+  const contentDiv = document.createElement('div');
+  contentDiv.className = 'message-content';
+  contentDiv.innerHTML = `<p>${content.replace(/\n/g, '<br>')}</p>`;
+  
+  messageDiv.appendChild(avatar);
+  messageDiv.appendChild(contentDiv);
+  chatMessages.appendChild(messageDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function addToolCall(tool) {
+  const toolDiv = document.createElement('div');
+  toolDiv.className = 'tool-call';
+  toolDiv.innerHTML = `
+    <div class="tool-header">
+      <span class="tool-icon">🔧</span>
+      <span class="tool-name">${tool.name}</span>
+    </div>
+    <div class="tool-result">
+      <pre>${JSON.stringify(tool.result, null, 2)}</pre>
+    </div>
+  `;
+  chatMessages.appendChild(toolDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function addThinkingIndicator() {
+  const thinkingDiv = document.createElement('div');
+  thinkingDiv.id = 'thinking-indicator';
+  thinkingDiv.className = 'message agent-message thinking';
+  thinkingDiv.innerHTML = `
+    <div class="message-avatar">🤔</div>
+    <div class="message-content">
+      <p class="thinking-dots">Thinking<span>.</span><span>.</span><span>.</span></p>
+    </div>
+  `;
+  chatMessages.appendChild(thinkingDiv);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function removeThinkingIndicator() {
+  const indicator = document.getElementById('thinking-indicator');
+  if (indicator) indicator.remove();
+}
+
+function askQuestion(question) {
+  messageInput.value = question;
+  chatForm.dispatchEvent(new Event('submit'));
+}
+</script>

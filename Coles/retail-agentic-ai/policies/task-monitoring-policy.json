@@ -1,0 +1,47 @@
+{
+  "policy_name": "Task Monitoring and Tracking Policy",
+  "version": "1.0",
+  "effective_date": "2025-10-16",
+  "monitoring_rules": {
+    "task_blockers": {
+      "detection_interval_minutes": 15,
+      "escalation_threshold_hours": 4,
+      "notification_priority": "critical",
+      "auto_create_alert": true
+    },
+    "schedule_delays": {
+      "warning_threshold_percent": 15,
+      "critical_threshold_percent": 25,
+      "check_frequency_hours": 4,
+      "notification_priority": "actionable"
+    },
+    "dependency_tracking": {
+      "enabled": true,
+      "max_dependency_depth": 3,
+      "circular_dependency_detection": true,
+      "alert_on_dependency_failure": true
+    },
+    "completion_tracking": {
+      "require_outcome_documentation": true,
+      "outcome_review_period_days": 7,
+      "variance_reporting_threshold_percent": 20
+    }
+  },
+  "task_priorities": {
+    "critical": {
+      "max_duration_days": 1,
+      "requires_daily_updates": true,
+      "auto_escalate_if_stalled": true
+    },
+    "high": {
+      "max_duration_days": 7,
+      "requires_weekly_updates": true,
+      "auto_escalate_if_stalled": false
+    },
+    "normal": {
+      "max_duration_days": 30,
+      "requires_weekly_updates": false,
+      "auto_escalate_if_stalled": false
+    }
+  }
+}

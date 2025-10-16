@@ -1,0 +1,104 @@
+TRAINING EXAMPLE: Staff Allocation Analysis
+
+USER QUESTION:
+"Which stores need additional staff this weekend?"
+
+AGENT'S INTERNAL REASONING:
+To answer this staffing question, I need to analyze multiple factors:
+- Weekend traffic patterns vs current staff schedules
+- Upcoming promotions or events that could drive higher customer volume
+- Recent sales data to predict demand
+- Current staff availability and any known absences
+- Store-specific considerations like size and typical weekend patterns
+
+Let me gather the necessary data to make informed recommendations.
+
+TOOL CALLS:
+
+Tool 1: get_weekend_forecast()
+Why: Need to understand expected customer traffic for Saturday-Sunday
+Result: Weekend forecast shows 15-20% higher foot traffic than typical due to back-to-school shopping season and favorable weather
+
+Tool 2: get_current_staff_schedules(stores=['Downtown', 'Mall Plaza', 'Westside', 'Riverside', 'North Hills'])
+Why: Need to see current weekend staffing levels across all locations
+Result: 
+- Downtown: 8 staff Saturday, 6 staff Sunday
+- Mall Plaza: 12 staff Saturday, 10 staff Sunday  
+- Westside: 6 staff Saturday, 5 staff Sunday
+- Riverside: 9 staff Saturday, 7 staff Sunday
+- North Hills: 7 staff Saturday, 6 staff Sunday
+
+Tool 3: get_store_weekend_sales_data(last_4_weekends=True)
+Why: Historical data helps predict which stores will be busiest
+Result:
+- Downtown: Avg 1,850 transactions/weekend (high foot traffic location)
+- Mall Plaza: Avg 2,240 transactions/weekend (largest store, family shopping)
+- Westside: Avg 980 transactions/weekend (smaller neighborhood store)
+- Riverside: Avg 1,420 transactions/weekend (medium-sized suburban)
+- North Hills: Avg 1,650 transactions/weekend (busy but efficient layout)
+
+Tool 4: check_promotional_events(weekend_date='2024-01-13_14')
+Why: Special promotions require additional staff for customer service and restocking
+Result: Mall Plaza has "Back to School 25% Off" promotion, Downtown has new craft beer tasting event Saturday 2-5pm
+
+Tool 5: get_staff_availability_issues()
+Why: Need to account for call-outs, vacations, or other staffing constraints
+Result: Westside manager reports 2 staff called out sick, Mall Plaza has 1 staff member on vacation
+
+ANALYSIS PERFORMED:
+
+Store-by-store staffing adequacy assessment:
+
+Downtown Store:
+- High transaction volume (1,850/weekend) + special beer tasting event
+- Current staff: 8 Saturday, 6 Sunday
+- Ratio: 231 transactions per staff member Saturday, 308 per staff member Sunday
+- Assessment: Sunday understaffed for expected volume with event spillover
+
+Mall Plaza:
+- Highest transaction volume (2,240/weekend) + major promotion + 1 staff on vacation
+- Current staff: 12 Saturday, 10 Sunday (effectively 11 Saturday, 9 Sunday)
+- Ratio: 204 transactions per staff member Saturday, 249 per staff member Sunday
+- Assessment: Both days need reinforcement due to promotion and staff shortage
+
+Westside:
+- Lowest volume (980/weekend) but 2 staff called out sick
+- Current staff: 6 Saturday, 5 Sunday (effectively 4 Saturday, 3 Sunday)
+- Ratio: 245 transactions per staff member Saturday, 327 per staff member Sunday
+- Assessment: Critical understaffing both days due to sick calls
+
+Riverside:
+- Moderate volume (1,420/weekend)
+- Current staff: 9 Saturday, 7 Sunday  
+- Ratio: 158 transactions per staff member Saturday, 203 per staff member Sunday
+- Assessment: Adequately staffed
+
+North Hills:
+- Moderate-high volume (1,650/weekend) but efficient store layout
+- Current staff: 7 Saturday, 6 Sunday
+- Ratio: 236 transactions per staff member Saturday, 275 per staff member Sunday
+- Assessment: Could use 1 additional person Sunday
+
+FINAL RECOMMENDATION:
+
+Based on my analysis, three stores need additional staff this weekend:
+
+PRIORITY 1 - Westside Store: 
+Add 2 staff Saturday, 2 staff Sunday
+Reason: Sick callouts created critical shortage. Currently at 245-327 transactions per staff member, well above optimal range.
+
+PRIORITY 2 - Mall Plaza:
+Add 2 staff Saturday, 2 staff Sunday  
+Reason: Back-to-school promotion will drive 20-30% higher traffic, plus vacation absence. Need extra coverage for promotion setup, customer questions, and restocking.
+
+PRIORITY 3 - Downtown Store:
+Add 1 staff Sunday
+Reason: Beer tasting event Saturday will likely increase Sunday traffic. Current Sunday ratio of 308 transactions per person too high.
+
+OPTIONAL - North Hills:
+Add 1 staff Sunday
+Reason: Sunday ratio of 275 transactions per person is manageable but could improve customer service.
+
+Total additional staff needed: 8 shifts across weekend
+Estimated labor cost increase: $1,440 (8 shifts x $18/hour x 10 hours)
+Expected benefit: Improved customer service, reduced wait times, better stock management during high-traffic weekend

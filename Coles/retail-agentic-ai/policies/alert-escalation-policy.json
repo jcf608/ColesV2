@@ -1,0 +1,60 @@
+{
+  "policy_name": "Alert Escalation and Notification Policy",
+  "version": "1.0",
+  "effective_date": "2025-10-16",
+  "priority_levels": {
+    "critical": {
+      "response_time_minutes": 5,
+      "approval_required": true,
+      "notification_channels": [
+        "sms",
+        "email",
+        "in_app"
+      ],
+      "escalation_path": [
+        "store_manager",
+        "regional_manager"
+      ],
+      "auto_escalate_after_minutes": 10
+    },
+    "actionable": {
+      "response_time_hours": 24,
+      "approval_required": false,
+      "notification_channels": [
+        "email",
+        "in_app"
+      ],
+      "escalation_path": [
+        "store_manager"
+      ],
+      "auto_escalate_after_hours": 48
+    },
+    "informational": {
+      "response_time_hours": 48,
+      "approval_required": false,
+      "notification_channels": [
+        "in_app"
+      ],
+      "escalation_path": [],
+      "auto_escalate": false
+    }
+  },
+  "monitoring_rules": {
+    "duplicate_detection": {
+      "enabled": true,
+      "time_window_minutes": 30,
+      "similarity_threshold": 0.8
+    },
+    "aggregation": {
+      "enabled": true,
+      "group_related_alerts": true,
+      "max_group_size": 5
+    },
+    "quiet_hours": {
+      "enabled": true,
+      "start_time": "22:00",
+      "end_time": "06:00",
+      "critical_only": true
+    }
+  }
+}

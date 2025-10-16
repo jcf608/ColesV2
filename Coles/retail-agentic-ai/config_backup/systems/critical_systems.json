@@ -1,0 +1,108 @@
+{
+  "category": "systems",
+  "module": "CriticalSystems",
+  "description": "Tools for monitoring critical system components",
+  "tools": [
+    {
+      "name": "get_system_health_status",
+      "description": "Retrieves the current health status and operational state of all critical infrastructure systems including servers, databases, network components, and applications",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "include_metrics": {
+            "type": "boolean",
+            "description": "Whether to include detailed performance metrics like CPU, memory, and disk usage"
+          },
+          "severity_filter": {
+            "type": "string",
+            "description": "Filter results by severity level",
+            "enum": [
+              "critical",
+              "warning",
+              "info",
+              "all"
+            ]
+          }
+        },
+        "required": []
+      }
+    },
+    {
+      "name": "get_active_alerts",
+      "description": "Fetches all active alerts and incidents from monitoring systems for critical infrastructure components",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "time_range": {
+            "type": "string",
+            "description": "Time range for alert retrieval in hours",
+            "enum": [
+              "1h",
+              "6h",
+              "24h",
+              "7d"
+            ]
+          },
+          "alert_priority": {
+            "type": "string",
+            "description": "Filter alerts by priority level",
+            "enum": [
+              "p1",
+              "p2",
+              "p3",
+              "all"
+            ]
+          }
+        },
+        "required": [
+          "time_range"
+        ]
+      }
+    },
+    {
+      "name": "check_service_availability",
+      "description": "Performs availability checks on critical services and applications to verify they are responding and accessible",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "service_group": {
+            "type": "string",
+            "description": "Specific group of services to check",
+            "enum": [
+              "web_services",
+              "databases",
+              "apis",
+              "messaging",
+              "all"
+            ]
+          },
+          "include_response_times": {
+            "type": "boolean",
+            "description": "Whether to include response time measurements in the results"
+          }
+        },
+        "required": [
+          "service_group"
+        ]
+      }
+    },
+    {
+      "name": "get_infrastructure_summary",
+      "description": "Provides a high-level summary dashboard view of overall infrastructure status including capacity utilization and recent changes",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "include_capacity": {
+            "type": "boolean",
+            "description": "Whether to include capacity utilization information for storage, compute, and network resources"
+          },
+          "include_recent_changes": {
+            "type": "boolean",
+            "description": "Whether to include information about recent deployments, updates, or configuration changes"
+          }
+        },
+        "required": []
+      }
+    }
+  ]
+}

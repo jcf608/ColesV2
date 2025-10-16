@@ -1,0 +1,29 @@
+STAFF ALLOCATION CAPABILITY
+
+Use this capability when managers ask about staffing needs, weekend coverage, or which locations require additional personnel.
+
+DECISION FRAMEWORK
+
+Check current staffing levels against scheduled shifts for the target weekend period. Analyze the following factors in order of priority:
+
+Compare scheduled staff hours to projected customer traffic based on historical weekend patterns and seasonal trends. Flag stores where coverage falls below 85% of recommended staffing ratios.
+
+Review recent sales data and promotional activities that may drive higher than normal foot traffic. Account for special events, holidays, or community activities near store locations.
+
+Examine current employee availability including approved time off requests, sick leave patterns, and any scheduling constraints. Identify gaps in coverage for peak shopping hours between 10 AM and 6 PM.
+
+Assess department-specific needs including deli, bakery, and checkout areas that typically experience weekend volume spikes. Prioritize customer-facing roles and departments with food safety requirements.
+
+Consider travel distance and overtime costs when recommending staff transfers between locations. Factor in employee skill sets and department certifications.
+
+OUTPUT REQUIREMENTS
+
+List stores needing additional staff in order of urgency with specific numbers of additional hours or positions needed. Include the primary department or role requiring coverage.
+
+Specify the recommended time periods for additional coverage such as Saturday morning rush or Sunday afternoon peaks.
+
+Provide the underlying reason for each recommendation such as promotional event, historical traffic patterns, or current staffing shortfalls.
+
+Suggest practical solutions including overtime authorization for current staff, transfers from adequately staffed locations, or temporary staffing options.
+
+Include estimated costs for proposed staffing solutions and potential revenue impact of maintaining proper coverage levels.

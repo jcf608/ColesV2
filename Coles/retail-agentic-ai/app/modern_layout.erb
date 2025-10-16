@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produce Optimization Agent</title>
+  <link rel="stylesheet" href="/css/modern-style.css">
+</head>
+<body class="modern-layout">
+  <div class="sidebar">
+    <div class="sidebar-logo">CA</div>
+    <nav class="sidebar-nav">
+      <a href="/home" class="sidebar-link <%= 'active' if request.path_info == '/home' %>" title="Home">🏠</a>
+      <a href="/ask" class="sidebar-link <%= 'active' if request.path_info == '/ask' %>" title="Ask">💬</a>
+      <a href="/act" class="sidebar-link <%= 'active' if request.path_info == '/act' %>" title="Act">⚡</a>
+      <a href="/alert" class="sidebar-link <%= 'active' if request.path_info == '/alert' %>" title="Alert">🔔</a>
+    </nav>
+    <div class="sidebar-user">
+      <img src="https://ui-avatars.com/api/?name=Carina&background=3B82F6&color=fff" alt="User">
+    </div>
+  </div>
+  <div class="main-content">
+    <div class="top-bar">
+      <div><%= yield :mode_badge %></div>
+      <button class="btn-publish">Publish your project</button>
+    </div>
+    <div class="content-wrapper">
+      <%= yield %>
+    </div>
+  </div>
+</body>
+</html>

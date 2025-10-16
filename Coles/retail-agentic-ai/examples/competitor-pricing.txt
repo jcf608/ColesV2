@@ -1,0 +1,75 @@
+TRAINING EXAMPLE: Competitor Pricing Analysis
+
+USER QUESTION:
+"What are competitor prices for berries?"
+
+AGENT'S INTERNAL REASONING:
+The user is asking about competitor pricing for berries, which is a broad category. I need to:
+- Identify which specific berry products to analyze (strawberries, blueberries, raspberries, blackberries)
+- Determine relevant competitors in the local market area
+- Check current pricing data from multiple sources
+- Consider seasonal factors affecting berry prices
+- Compare against our current pricing
+- Provide actionable insights for pricing strategy
+
+TOOLS CALLED:
+
+1. get_competitor_prices(product_category="berries", radius_miles=5)
+   Reason: Need current local competitor pricing data for berry products
+
+2. get_current_inventory_prices(category="berries") 
+   Reason: Must compare competitor prices against our current pricing
+
+3. get_seasonal_pricing_trends(product="berries", time_period="last_3_months")
+   Reason: Berry prices fluctuate significantly by season, need context
+
+4. get_store_locations(competitors=["FreshMart", "GreenGrocer", "SuperSave", "Whole Market"])
+   Reason: Identify which competitor locations are most relevant to analyze
+
+ANALYSIS PERFORMED:
+
+Competitor Price Data Retrieved:
+- FreshMart (0.8 miles): Strawberries $3.99/lb, Blueberries $4.49/lb, Raspberries $5.99/lb
+- GreenGrocer (1.2 miles): Strawberries $3.79/lb, Blueberries $4.29/lb, Raspberries $5.79/lb  
+- SuperSave (2.1 miles): Strawberries $3.49/lb, Blueberries $3.99/lb, Raspberries $5.49/lb
+- Whole Market (2.8 miles): Strawberries $4.49/lb, Blueberries $5.29/lb, Raspberries $6.99/lb
+
+Our Current Prices:
+- Strawberries: $3.89/lb
+- Blueberries: $4.39/lb  
+- Raspberries: $5.89/lb
+
+Market Position Analysis:
+- Strawberries: We're priced in middle range, 10 cents above SuperSave, 10 cents below FreshMart
+- Blueberries: We're positioned between mid-tier competitors
+- Raspberries: We're priced competitively in the premium segment
+
+Seasonal Context:
+Peak berry season pricing shows we're currently in shoulder season with prices 15-20% above summer lows but 25% below winter peaks.
+
+FINAL RECOMMENDATION:
+
+Based on competitor analysis for berries in your 5-mile radius:
+
+CURRENT MARKET POSITION: You're competitively positioned in the mid-to-premium segment across all berry categories.
+
+KEY FINDINGS:
+- SuperSave is consistently 10-15% below market average, likely using berries as loss leaders
+- Whole Market commands 15-25% premium, suggesting strong organic/premium positioning
+- FreshMart and GreenGrocer are your closest price competitors
+
+RECOMMENDATIONS:
+1. MAINTAIN strawberry pricing at $3.89/lb - you're well-positioned between value and premium tiers
+
+2. CONSIDER LOWERING blueberry prices to $4.19/lb to match GreenGrocer and increase competitive pressure on FreshMart
+
+3. OPPORTUNITY exists to raise raspberry prices to $6.09/lb - still 15% below Whole Market while maintaining premium positioning
+
+4. MONITOR SuperSave closely - their aggressive pricing suggests possible promotional period
+
+PROJECTED IMPACT: 
+- Blueberry price reduction could increase volume 8-12%
+- Raspberry price increase would improve margins by 3.4% with minimal volume risk
+- Overall berry category profit could increase 5-7%
+
+Would you like me to set up automated weekly competitor monitoring for berry pricing or analyze any specific berry variety in more detail?

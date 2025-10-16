@@ -1,0 +1,114 @@
+{
+  "policy_id": "RST-001",
+  "version": "2.1",
+  "effective_date": "2024-01-15",
+  "category": "inventory",
+  "policy_name": "Restock Options Policy",
+  "description": "Defines accelerated restocking procedures, approval requirements, and safety constraints for inventory management",
+  "approval_thresholds": {
+    "emergency_restock": {
+      "threshold_value": 10000,
+      "currency": "USD",
+      "required_approvals": ["store_manager", "district_manager"],
+      "max_approval_time_hours": 2,
+      "trigger_conditions": ["stockout_critical_items", "forecast_demand_spike"]
+    },
+    "expedited_restock": {
+      "threshold_value": 5000,
+      "currency": "USD",
+      "required_approvals": ["department_manager", "store_manager"],
+      "max_approval_time_hours": 4,
+      "trigger_conditions": ["low_stock_warning", "promotional_demand"]
+    },
+    "standard_accelerated": {
+      "threshold_value": 2000,
+      "currency": "USD",
+      "required_approvals": ["department_manager"],
+      "max_approval_time_hours": 8,
+      "trigger_conditions": ["seasonal_adjustment", "supplier_delay_recovery"]
+    }
+  },
+  "restock_options": {
+    "same_day_delivery": {
+      "availability_hours": "06:00-14:00",
+      "max_order_value": 15000,
+      "min_order_value": 500,
+      "supplier_fee_percentage": 15,
+      "eligible_categories": ["produce", "dairy", "bakery", "deli"],
+      "blackout_periods": ["major_holidays", "severe_weather"]
+    },
+    "next_day_priority": {
+      "availability_hours": "24/7",
+      "max_order_value": 50000,
+      "min_order_value": 200,
+      "supplier_fee_percentage": 8,
+      "eligible_categories": ["all"],
+      "guaranteed_delivery_time": "before_10am"
+    },
+    "vendor_direct_ship": {
+      "min_order_value": 1000,
+      "lead_time_days": 1,
+      "eligible_suppliers": ["primary_vendors_only"],
+      "requires_special_approval": true,
+      "freight_cost_threshold": 200
+    }
+  },
+  "safety_constraints": {
+    "max_weekly_emergency_orders": 3,
+    "max_monthly_expedited_budget": 25000,
+    "min_stock_verification_required": true,
+    "demand_forecast_validation": true,
+    "supplier_capacity_check": true,
+    "inventory_turn_rate_minimum": 4.0,
+    "perishable_safety_margin_days": 2,
+    "frozen_goods_temperature_monitoring": true
+  },
+  "category_specific_rules": {
+    "produce": {
+      "max_shelf_life_days": 7,
+      "quality_inspection_required": true,
+      "same_day_delivery_priority": 1,
+      "waste_factor_percentage": 8
+    },
+    "dairy": {
+      "max_shelf_life_days": 14,
+      "temperature_controlled_required": true,
+      "same_day_delivery_priority": 2,
+      "waste_factor_percentage": 5
+    },
+    "frozen": {
+      "max_shelf_life_days": 90,
+      "cold_chain_verification": true,
+      "expedited_handling_required": true,
+      "waste_factor_percentage": 2
+    },
+    "dry_goods": {
+      "standard_restock_preferred": true,
+      "bulk_order_discount_eligible": true,
+      "storage_space_check_required": true,
+      "waste_factor_percentage": 1
+    }
+  },
+  "numeric_thresholds": {
+    "critical_stock_level_percentage": 10,
+    "low_stock_warning_percentage": 25,
+    "reorder_point_percentage": 35,
+    "max_inventory_level_percentage": 95,
+    "demand_spike_threshold_percentage": 150,
+    "cost_variance_alert_percentage": 20,
+    "delivery_delay_escalation_hours": 4
+  },
+  "escalation_procedures": {
+    "supplier_non_response_hours": 2,
+    "inventory_critical_alert_recipients": ["store_manager", "regional_inventory_manager", "supply_chain_director"],
+    "financial_approval_timeout_hours": 6,
+    "alternative_supplier_activation_trigger": "primary_supplier_unavailable"
+  },
+  "monitoring_requirements": {
+    "real_time_inventory_tracking": true,
+    "supplier_performance_metrics": true,
+    "cost_impact_analysis": true,
+    "customer_satisfaction_impact": true,
+    "waste_reduction_tracking": true
+  }
+}

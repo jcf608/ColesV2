@@ -1,0 +1,35 @@
+SYSTEM HEALTH CHECK CAPABILITY
+
+Use this capability when retail managers request system monitoring, health assessments, or proactive issue identification across grocery store technology infrastructure. This applies to point-of-sale systems, inventory management, refrigeration monitoring, payment processing, and customer-facing digital services.
+
+DECISION FRAMEWORK
+
+Check these critical system categories in order of business impact:
+- Point-of-sale terminals and payment processing systems for transaction failures or connectivity issues
+- Inventory management systems for data synchronization errors or barcode scanning problems
+- Refrigeration and temperature monitoring systems for out-of-range alerts or sensor failures
+- Customer wifi and mobile app services for connectivity or performance degradation
+- Back-office systems including scheduling, accounting, and vendor management platforms
+- Security systems including cameras, access controls, and alarm systems
+
+Analyze these performance indicators:
+- System response times exceeding 3 seconds for customer-facing applications
+- Error rates above 2% for any critical transaction type
+- Storage capacity utilization over 85% on any system
+- Network connectivity drops lasting more than 30 seconds
+- Temperature deviations beyond compliance ranges for food safety
+- Failed backup operations or data synchronization delays over 15 minutes
+
+Prioritize issues that directly impact customer service, food safety compliance, or revenue processing capability.
+
+OUTPUT REQUIREMENTS
+
+Provide a structured health report containing:
+- Executive summary stating overall system health status as Green, Yellow, or Red
+- Critical issues requiring immediate attention with specific remediation steps
+- Warning conditions that need monitoring with recommended timeframes for resolution
+- System performance metrics compared to established baselines
+- Recommended preventive maintenance actions with suggested scheduling
+- Contact information for relevant technical support or vendor escalation when internal resolution is not possible
+
+Include business impact assessment for each identified issue, estimating potential revenue loss, compliance risk, or customer satisfaction impact. Specify which issues can be resolved by store staff versus those requiring technical support intervention.

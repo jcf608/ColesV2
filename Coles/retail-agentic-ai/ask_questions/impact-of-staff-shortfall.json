@@ -1,0 +1,9 @@
+{
+  "id": "impact-of-staff-shortfall",
+  "icon": "🌧️",
+  "label": "Weather Impact",
+  "question": "How will tomorrow's weather affect my produce orders?",
+  "category": "custom",
+  "order": 135,
+  "enabled": true
+}

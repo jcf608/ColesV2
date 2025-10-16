@@ -1,0 +1,9 @@
+{
+  "id": "system-health",
+  "icon": "💚",
+  "label": "System Health Check",
+  "question": "Run a health check on all production systems and alert on any issues",
+  "category": "it-operations",
+  "order": 14,
+  "enabled": true
+}

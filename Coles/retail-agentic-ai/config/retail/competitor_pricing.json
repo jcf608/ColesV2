@@ -1,0 +1,119 @@
+{
+  "category": "retail",
+  "module": "CompetitorPricing",
+  "description": "Tools for monitoring and analyzing competitor pricing data",
+  "tools": [
+    {
+      "name": "get_competitor_pricing",
+      "description": "Retrieve current pricing data for products from specified competitors",
+      "method": "get_competitor_pricing",
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "product": {
+            "type": "string",
+            "description": "Product name to check pricing for (e.g., milk, bread, eggs, bananas)"
+          },
+          "competitors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of competitor names to check pricing from (e.g., Walmart, Target, Kroger)"
+          },
+          "location": {
+            "type": "string",
+            "description": "Geographic location or market area for pricing data"
+          }
+        },
+        "required": ["product", "location"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {"type": "boolean"},
+          "product": {"type": "string"},
+          "location": {"type": "string"},
+          "market_analysis": {
+            "type": "object",
+            "properties": {
+              "average_price": {"type": "number"},
+              "min_price": {"type": "number"},
+              "max_price": {"type": "number"},
+              "price_range": {"type": "number"},
+              "market_position": {"type": "string"}
+            }
+          },
+          "competitor_data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "competitor": {"type": "string"},
+                "price": {"type": "number"},
+                "unit": {"type": "string"},
+                "promotion": {"type": "object"},
+                "stock_status": {"type": "string"},
+                "last_updated": {"type": "string"}
+              }
+            }
+          },
+          "recommendations": {
+            "type": "array",
+            "items": {"type": "string"}
+          }
+        }
+      }
+    },
+    {
+      "name": "analyze_price_trends",
+      "description": "Analyze pricing trends over a specified time period",
+      "method": "analyze_price_trends", 
+      "input_schema": {
+        "type": "object",
+        "properties": {
+          "product": {
+            "type": "string",
+            "description": "Product name to analyze trends for"
+          },
+          "period_days": {
+            "type": "integer",
+            "description": "Number of days to analyze (default: 30)",
+            "minimum": 1,
+            "maximum": 365,
+            "default": 30
+          }
+        },
+        "required": ["product"]
+      },
+      "output_schema": {
+        "type": "object",
+        "properties": {
+          "success": {"type": "boolean"},
+          "product": {"type": "string"},
+          "period_days": {"type": "integer"},
+          "trends": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "date": {"type": "string"},
+                "average_market_price": {"type": "number"},
+                "price_change": {"type": "number"}
+              }
+            }
+          },
+          "summary": {
+            "type": "object",
+            "properties": {
+              "current_price": {"type": "number"},
+              "period_start_price": {"type": "number"},
+              "total_change": {"type": "number"},
+              "volatility": {"type": "number"}
+            }
+          }
+        }
+      }
+    }
+  ]
+}

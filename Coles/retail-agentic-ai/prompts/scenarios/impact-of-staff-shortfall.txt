@@ -1,0 +1,36 @@
+WEATHER IMPACT ON PRODUCE ORDERS
+
+Use this capability when managers ask about weather effects on produce inventory, ordering decisions, or sales forecasting for perishable items.
+
+DECISION FRAMEWORK
+
+Check weather conditions for the next 24-48 hours in your store's location:
+- Temperature extremes above 85°F or below 32°F
+- Precipitation probability above 60%
+- Severe weather warnings or advisories
+- Humidity levels outside 40-70% range
+
+Analyze impact on produce categories:
+- Heat-sensitive items: leafy greens, berries, herbs, cut fruits
+- Cold-sensitive items: bananas, tomatoes, tropical fruits, citrus
+- High-demand weather items: salad ingredients during heat waves, comfort foods during storms
+- Transportation risks: delivery delays during severe weather
+- Customer shopping pattern changes: increased pre-storm shopping, reduced foot traffic during bad weather
+
+Evaluate ordering adjustments needed:
+- Reduce orders for highly perishable items if extreme temperatures expected
+- Increase orders for weather-appropriate produce 24 hours before weather events
+- Consider alternative suppliers if primary routes face weather disruptions
+- Adjust safety stock levels based on potential delivery delays
+
+OUTPUT REQUIREMENTS
+
+Provide specific recommendations that include:
+- Which produce categories to increase, decrease, or maintain at current levels
+- Percentage adjustments for order quantities when applicable
+- Timeline for implementing changes
+- Alternative products to promote if primary items are at risk
+- Storage and display modifications to protect inventory
+- Customer communication suggestions for popular items that may be limited
+
+Include brief rationale for each major recommendation linking weather conditions to business impact. Prioritize food safety and minimize waste while maintaining customer satisfaction and sales opportunities.

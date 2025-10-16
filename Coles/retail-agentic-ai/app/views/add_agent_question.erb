@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Agent Question - Produce Optimization Agent</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+    }
+
+    .hero-subtitle {
+      opacity: 0.9;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: #4CAF50;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #45a049;
+    }
+  </style>
+</head>
+<body>
+
+<div class="admin-container">
+  <!-- Sidebar with question index -->
+  <div class="questions-sidebar">
+    <div class="sidebar-header">
+      <h3>📋 Questions</h3>
+      <div class="sidebar-header-actions">
+        <button 
+          class="btn btn-icon" 
+          id="sort-toggle"
+          onclick="toggleSort()" 
+          title="Sort alphabetically"
+        >
+          <span id="sort-icon">🔤</span>
+        </button>
+        <button class="btn btn-small btn-primary" onclick="createNewQuestion()">
+          ➕ New
+        </button>
+      </div>
+    </div>
+    
+    <div class="sidebar-search">
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          id="question-search" 
+          placeholder="Search questions..."
+          oninput="filterQuestions()"
+        >
+        <button 
+          class="search-clear" 
+          id="search-clear"
+          onclick="clearSearch()"
+          style="display: none;"
+        >
+          ✕
+        </button>
+      </div>
+    </div>
+    
+    <div class="questions-list" id="questions-list">
+      <!-- Dynamically populated -->
+    </div>
+  </div>
+
+  <!-- Main wizard area -->
+  <div class="wizard-main">
+    <div class="hero admin-hero">
+      <div class="hero-content">
+        <div>
+          <h1 id="page-title">➕ Add New Agent Scenario</h1>
+          <p class="hero-subtitle" id="page-subtitle">Configure a new question type for the agent to handle</p>
+        </div>
+        <button class="btn-close-tab" onclick="closeTab()" title="Close this tab">
+          ✕ Close
+        </button>
+      </div>
+    </div>
+
+    <div class="container wizard-container">
+      <div class="progress-steps">
+        <div class="step active" data-step="1">
+          <div class="step-number">1</div>
+          <div class="step-label">Question Type</div>
+        </div>
+        <div class="step" data-step="2">
+          <div class="step-number">2</div>
+          <div class="step-label">System Prompt</div>
+        </div>
+        <div class="step" data-step="3">
+          <div class="step-number">3</div>
+          <div class="step-label">Policy Rules</div>
+        </div>
+        <div class="step" data-step="4">
+          <div class="step-number">4</div>
+          <div class="step-label">Example Dialog</div>
+        </div>
+        <div class="step" data-step="5">
+          <div class="step-number">5</div>
+          <div class="step-label">Tools Config</div>
+        </div>
+        <div class="step" data-step="6">
+          <div class="step-number">6</div>
+          <div class="step-label">Quick Action</div>
+        </div>
+      </div>
+
+      <!-- Step 1: Question Type -->
+      <div class="wizard-step active" id="step-1">
+        <div class="step-content">
+          <h2>Step 1: Define Question Type</h2>
+          <p class="step-description">Give your scenario a name and describe what kind of questions it handles.</p>
+          
+          <div class="ai-assist-box">
+            <button class="btn btn-ai" onclick="generateQuestionWithClaude()">
+              🤖 Generate with AI
+            </button>
+            <small>Let generative AI help you write this section</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="scenario-name">Scenario Name</label>
+            <input 
+              type="text" 
+              id="scenario-name" 
+              class="form-input" 
+              placeholder="e.g., Weather Impact Analysis"
+            >
+            <small>This will be used in file names and internal references</small>
+          </div>
+
+          <div class="form-group">
+            <label for="scenario-description">Description</label>
+            <textarea 
+              id="scenario-description" 
+              class="form-textarea" 
+              rows="4"
+              placeholder="Describe what this scenario handles..."
+            ></textarea>
+            <small>Explain what types of questions this scenario answers</small>
+          </div>
+
+          <div class="form-group">
+            <label for="sample-questions">Sample Questions (one per line)</label>
+            <textarea 
+              id="sample-questions" 
+              class="form-textarea" 
+              rows="5"
+              placeholder="List example questions..."
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn btn-primary" onclick="nextStep(1)">Next: System Prompt →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: System Prompt -->
+      <div class="wizard-step" id="step-2">
+        <div class="step-content">
+          <h2>Step 2: System Prompt Addition</h2>
+          <p class="step-description">Add instructions to the agent's system prompt for handling this scenario.</p>
+          
+          <div class="ai-assist-box">
+            <button class="btn btn-ai" onclick="generateSystemPromptWithClaude()">
+              🤖 Generate System Prompt with AI
+            </button>
+            <small>AI will write a professional system prompt for this scenario</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="system-prompt-addition">System Prompt Text</label>
+            <textarea 
+              id="system-prompt-addition" 
+              class="form-textarea" 
+              rows="15"
+              placeholder="Write the system prompt addition..."
+            ></textarea>
+            <small>This text will be appended to the main system prompt file</small>
+          </div>
+
+          <div class="info-box">
+            <strong>💡 Tip:</strong> Focus on the decision-making logic specific to this scenario. The agent already knows its general role.
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn btn-secondary" onclick="prevStep(2)">← Back</button>
+          <button class="btn btn-primary" onclick="nextStep(2)">Next: Policy Rules →</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Policy Rules -->
+      <div class="wizard-step" id="step-3">
+        <div class="step-content">
+          <h2>Step 3: Policy Rules</h2>
+          <p class="step-description">Define business rules and constraints for this scenario.</p>
+          
+          <div class="ai-assist-box">
+            <button class="btn btn-ai" onclick="generatePolicyWithClaude()">
+              🤖 Generate Policy Documents with AI
+            </button>
+            <small>AI will create both human-readable and machine-readable policies</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="policy-name">Policy Section Name</label>
+            <input 
+              type="text" 
+              id="policy-name" 
+              class="form-input" 
+              placeholder="e.g., Weather-Based Inventory Policy"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="policy-rules-text">Policy Rules (Human-Readable)</label>
+            <textarea 
+              id="policy-rules-text" 
+              class="form-textarea" 
+              rows="15"
+              placeholder="Write policy rules..."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="policy-rules-json">Policy Rules (Machine-Readable JSON)</label>
+            <textarea 
+              id="policy-rules-json" 
+              class="form-textarea" 
+              rows="15"
+              placeholder='{"policy": {...}}'
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn btn-secondary" onclick="prevStep(3)">← Back</button>
+          <button class="btn btn-primary" onclick="nextStep(3)">Next: Example Dialog →</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Example Dialog -->
+      <div class="wizard-step" id="step-4">
+        <div class="step-content">
+          <h2>Step 4: Example Dialog</h2>
+          <p class="step-description">Create a few-shot example showing how the agent should handle this scenario.</p>
+          
+          <div class="ai-assist-box">
+            <button class="btn btn-ai" onclick="generateExampleWithClaude()">
+              🤖 Generate Example Dialog with AI
+            </button>
+            <small>AI will write a realistic example with reasoning and recommendations</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="example-name">Example Name</label>
+            <input 
+              type="text" 
+              id="example-name" 
+              class="form-input" 
+              placeholder="e.g., rain-berry-adjustment"
+            >
+            <small>Use lowercase with hyphens, no spaces</small>
+          </div>
+
+          <div class="form-group">
+            <label for="example-dialog">Example Dialog</label>
+            <textarea 
+              id="example-dialog" 
+              class="form-textarea" 
+              rows="20"
+              placeholder="Write the full example interaction..."
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn btn-secondary" onclick="prevStep(4)">← Back</button>
+          <button class="btn btn-primary" onclick="nextStep(4)">Next: Tools Config →</button>
+        </div>
+      </div>
+
+      <!-- Step 5: Tools Configuration -->
+      <div class="wizard-step" id="step-5">
+        <div class="step-content">
+          <h2>Step 5: Tools Configuration</h2>
+          <p class="step-description">Define the tools (functions) the agent can call for this scenario.</p>
+          
+          <div class="ai-assist-box">
+            <button class="btn btn-ai" onclick="generateToolsWithClaude()">
+              🤖 Generate Tools with AI
+            </button>
+            <small>AI will design appropriate tools and implementations</small>
+          </div>
+          
+          <div class="form-group">
+            <label for="tool-definitions">Tool Definitions (JSON Schema)</label>
+            <textarea 
+              id="tool-definitions" 
+              class="form-textarea" 
+              rows="15"
+              placeholder='[{"name": "tool_name", "description": "...", "input_schema": {...}}]'
+            ></textarea>
+            <small>Define the tools following the function calling schema</small>
+          </div>
+
+          <div class="form-group">
+            <label for="tool-implementation">Tool Implementation (Ruby Code)</label>
+            <textarea 
+              id="tool-implementation" 
+              class="form-textarea" 
+              rows="15"
+              placeholder="def tool_name(params)
+  # Implementation
+end"
+            ></textarea>
+            <small>Ruby methods that implement each tool</small>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn btn-secondary" onclick="prevStep(5)">← Back</button>
+          <button class="btn btn-primary" onclick="nextStep(5)">Next: Quick Action →</button>
+        </div>
+      </div>
+
+      <!-- Step 6: Quick Action Button -->
+      <div class="wizard-step" id="step-6">
+        <div class="step-content">
+          <h2>Step 6: Quick Action Button</h2>
+          <p class="step-description">Configure how this scenario appears as a quick action button.</p>
+          
+          <div class="form-group">
+            <label for="button-icon">Button Icon (Emoji)</label>
+            <input 
+              type="text" 
+              id="button-icon" 
+              class="form-input" 
+              placeholder="⚠️"
+              value="⚠️"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="button-label">Button Label</label>
+            <input 
+              type="text" 
+              id="button-label" 
+              class="form-input" 
+              placeholder="Items at Risk"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="button-question">Question Text</label>
+            <input 
+              type="text" 
+              id="button-question" 
+              class="form-input" 
+              placeholder="What products need attention today?"
+            >
+          </div>
+
+          <div class="button-preview">
+            <div class="ask-card preview-card">
+              <div class="ask-icon" id="preview-icon">⚠️</div>
+              <div class="ask-label" id="preview-label">Preview</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="step-actions">
+          <button class="btn btn-secondary" onclick="prevStep(6)">← Back</button>
+          <button class="btn btn-success" onclick="saveConfiguration()">💾 Save Configuration</button>
+        </div>
+      </div>
+
+      <!-- Success Step -->
+      <div class="wizard-step" id="step-success" style="display: none;">
+        <div class="success-message">
+          <div class="success-icon">✅</div>
+          <h2>Configuration Saved Successfully!</h2>
+          <p>Your new agent scenario has been created and all files have been generated.</p>
+
+          <div class="files-created">
+            <h3>Files Created:</h3>
+            <ul id="created-files-list"></ul>
+          </div>
+
+          <div class="next-steps">
+            <h3>Next Steps:</h3>
+            <ol>
+              <li>Review the generated files in your project directories</li>
+              <li>Test the new quick action button on the Ask page</li>
+              <li>Refine the policies and examples as needed</li>
+              <li>Deploy and monitor agent performance</li>
+            </ol>
+          </div>
+
+          <div class="step-actions">
+            <button class="btn btn-primary" onclick="location.href='/admin'">← Back to Admin</button>
+            <button class="btn btn-secondary" onclick="createNewQuestion()">➕ Add Another</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.questions-sidebar {
+  width: 280px;
+  background: #f8f9fa;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.sidebar-header h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+}
+
+.sidebar-header-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.btn-small {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.85rem;
+}
+
+.btn-icon {
+  padding: 0.4rem 0.6rem;
+  font-size: 1rem;
+  background: white;
+  border: 1px solid #ddd;
+  min-width: auto;
+}
+
+.btn-icon:hover {
+  background: #f5f5f5;
+  border-color: #4CAF50;
+}
+
+.btn-icon.active {
+  background: #4CAF50;
+  color: white;
+  border-color: #4CAF50;
+}
+
+.sidebar-search {
+  padding: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+  background: white;
+}
+
+.search-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  font-size: 1rem;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.sidebar-search input {
+  width: 100%;
+  padding: 0.5rem 2rem 0.5rem 2.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.sidebar-search input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.search-clear {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: #999;
+  cursor: pointer;
+  padding: 0.25rem;
+  font-size: 1rem;
+  line-height: 1;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+}
+
+.search-clear:hover {
+  background: #f0f0f0;
+  color: #333;
+}
+
+.questions-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.question-item {
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  background: white;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.question-item:hover {
+  border-color: #4CAF50;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transform: translateX(2px);
+}
+
+.question-item.active {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-color: #667eea;
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+  position: relative;
+}
+
+.question-item.active::before {
+  content: '📌';
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.question-item.active .question-item-category {
+  opacity: 0.9;
+}
+
+.question-item-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.question-item-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.question-item-category {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.wizard-main {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.ai-assist-box {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.btn-ai {
+  background: white;
+  color: #667eea;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 0.5rem;
+}
+
+.btn-ai:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.ai-assist-box small {
+  display: block;
+  color: white;
+  opacity: 0.9;
+}
+
+/* Rest of the existing styles */
+.wizard-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 2rem 2rem;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.progress-steps::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: #e0e0e0;
+  z-index: 0;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.step-number {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #e0e0e0;
+  color: #666;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.step-label {
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+}
+
+.step.active .step-number {
+  background: #4CAF50;
+  color: white;
+  box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.2);
+}
+
+.step.active .step-label {
+  color: #4CAF50;
+  font-weight: 600;
+}
+
+.step.completed .step-number {
+  background: #4CAF50;
+  color: white;
+}
+
+.wizard-step {
+  display: none;
+  animation: fadeInUp 0.5s ease;
+}
+
+.wizard-step.active {
+  display: block;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.step-content h2 {
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.step-description {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-group small {
+  display: block;
+  color: #666;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 0.95rem;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.form-textarea {
+  font-family: 'Monaco', 'Courier New', monospace;
+  resize: vertical;
+}
+
+.info-box {
+  background: #e3f2fd;
+  border-left: 4px solid #2196F3;
+  padding: 1rem;
+  border-radius: 4px;
+  margin: 1rem 0;
+}
+
+.step-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e0e0e0;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: #4CAF50;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #45a049;
+}
+
+.btn-secondary {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #d0d0d0;
+}
+
+.btn-success {
+  background: #2196F3;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.btn-success:hover {
+  background: #1976D2;
+}
+
+.button-preview {
+  padding: 2rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.preview-card {
+  pointer-events: none;
+}
+
+.success-message {
+  text-align: center;
+  padding: 2rem;
+}
+
+.success-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.success-message h2 {
+  color: #4CAF50;
+  margin-bottom: 1rem;
+}
+
+.files-created,
+.next-steps {
+  text-align: left;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.files-created h3,
+.next-steps h3 {
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.files-created ul {
+  list-style: none;
+  padding: 0;
+}
+
+.files-created li {
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  background: white;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.next-steps ol {
+  margin-left: 1.5rem;
+}
+
+.next-steps li {
+  margin: 0.5rem 0;
+}
+
+.admin-hero {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.hero-content > div {
+  flex: 1;
+}
+
+.btn-close-tab {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  backdrop-filter: blur(10px);
+}
+
+.btn-close-tab:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-close-tab:active {
+  transform: translateY(0);
+}
+</style>
+
+<script>
+let currentStep = 1;
+const totalSteps = 6;
+let currentQuestionId = null;
+let allQuestions = [];
+let hasUnsavedChanges = false;
+let originalFormState = {};
+let sortAlphabetically = false;
+
+// Close tab function
+function closeTab() {
+  // Check for unsaved changes
+  if (hasUnsavedChanges) {
+    if (confirm('You have unsaved changes. Are you sure you want to close this tab?')) {
+      window.close();
+    }
+  } else {
+    window.close();
+  }
+}
+
+// Load questions on page load
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadQuestions();
+  setupChangeTracking();
+  setupSearchClearButton();
+});
+
+// Setup search clear button visibility
+function setupSearchClearButton() {
+  const searchInput = document.getElementById('question-search');
+  const clearButton = document.getElementById('search-clear');
+  
+  searchInput.addEventListener('input', () => {
+    clearButton.style.display = searchInput.value ? 'block' : 'none';
+  });
+}
+
+// Clear search
+function clearSearch() {
+  const searchInput = document.getElementById('question-search');
+  const clearButton = document.getElementById('search-clear');
+  
+  searchInput.value = '';
+  clearButton.style.display = 'none';
+  filterQuestions();
+}
+
+// Toggle sort order
+function toggleSort() {
+  sortAlphabetically = !sortAlphabetically;
+  
+  const sortBtn = document.getElementById('sort-toggle');
+  const sortIcon = document.getElementById('sort-icon');
+  
+  if (sortAlphabetically) {
+    sortBtn.classList.add('active');
+    sortIcon.textContent = '🔤';
+    sortBtn.title = 'Sort by order';
+  } else {
+    sortBtn.classList.remove('active');
+    sortIcon.textContent = '🔢';
+    sortBtn.title = 'Sort alphabetically';
+  }
+  
+  renderQuestionsList();
+}
+
+// Track changes to all form inputs
+function setupChangeTracking() {
+  const formInputs = document.querySelectorAll('input, textarea');
+  formInputs.forEach(input => {
+    input.addEventListener('input', () => {
+      hasUnsavedChanges = true;
+    });
+  });
+}
+
+// Capture current form state
+function captureFormState() {
+  originalFormState = {
+    scenario_name: document.getElementById('scenario-name').value,
+    scenario_description: document.getElementById('scenario-description').value,
+    sample_questions: document.getElementById('sample-questions').value,
+    system_prompt: document.getElementById('system-prompt-addition').value,
+    policy_name: document.getElementById('policy-name').value,
+    policy_text: document.getElementById('policy-rules-text').value,
+    policy_json: document.getElementById('policy-rules-json').value,
+    example_name: document.getElementById('example-name').value,
+    example_dialog: document.getElementById('example-dialog').value,
+    tool_definitions: document.getElementById('tool-definitions').value,
+    tool_implementation: document.getElementById('tool-implementation').value,
+    button_icon: document.getElementById('button-icon').value,
+    button_label: document.getElementById('button-label').value,
+    button_question: document.getElementById('button-question').value
+  };
+  hasUnsavedChanges = false;
+}
+
+async function loadQuestions() {
+  try {
+    const response = await fetch('/api/questions');
+    const data = await response.json();
+    allQuestions = data.questions || [];
+    renderQuestionsList();
+  } catch (error) {
+    console.error('Failed to load questions:', error);
+  }
+}
+
+function renderQuestionsList() {
+  const list = document.getElementById('questions-list');
+  list.innerHTML = '';
+  
+  // Create a copy to sort
+  let questionsToDisplay = [...allQuestions];
+  
+  // Sort based on current mode
+  if (sortAlphabetically) {
+    questionsToDisplay.sort((a, b) => a.label.localeCompare(b.label));
+  } else {
+    questionsToDisplay.sort((a, b) => (a.order || 999) - (b.order || 999));
+  }
+  
+  // Separate active question from others
+  const activeQuestion = questionsToDisplay.find(q => q.id === currentQuestionId);
+  const otherQuestions = questionsToDisplay.filter(q => q.id !== currentQuestionId);
+  
+  // Render active question first (pinned to top)
+  if (activeQuestion) {
+    const item = createQuestionItem(activeQuestion, true);
+    list.appendChild(item);
+    
+    // Add a subtle divider
+    if (otherQuestions.length > 0) {
+      const divider = document.createElement('div');
+      divider.style.cssText = `
+        height: 1px;
+        background: linear-gradient(to right, transparent, #ddd, transparent);
+        margin: 0.75rem 0;
+      `;
+      list.appendChild(divider);
+    }
+  }
+  
+  // Render other questions
+  otherQuestions.forEach(question => {
+    const item = createQuestionItem(question, false);
+    list.appendChild(item);
+  });
+  
+  // Apply search filter if active
+  filterQuestions();
+}
+
+function createQuestionItem(question, isActive) {
+  const item = document.createElement('div');
+  item.className = 'question-item';
+  item.dataset.questionId = question.id;
+  
+  if (isActive) {
+    item.classList.add('active');
+  }
+  
+  item.innerHTML = `
+    <div class="question-item-icon">${question.icon}</div>
+    <div class="question-item-label">${question.label}</div>
+    <div class="question-item-category">${question.category}</div>
+  `;
+  
+  item.onclick = () => handleQuestionClick(question.id);
+  
+  return item;
+}
+
+function filterQuestions() {
+  const search = document.getElementById('question-search').value.toLowerCase();
+  const items = document.querySelectorAll('.question-item');
+  
+  let visibleCount = 0;
+  
+  items.forEach(item => {
+    const text = item.textContent.toLowerCase();
+    const matches = text.includes(search);
+    
+    item.style.display = matches ? 'block' : 'none';
+    
+    if (matches) visibleCount++;
+  });
+  
+  // Show "no results" message if nothing matches
+  const list = document.getElementById('questions-list');
+  let noResults = list.querySelector('.no-results');
+  
+  if (visibleCount === 0 && search) {
+    if (!noResults) {
+      noResults = document.createElement('div');
+      noResults.className = 'no-results';
+      noResults.style.cssText = `
+        padding: 2rem 1rem;
+        text-align: center;
+        color: #999;
+        font-size: 0.9rem;
+      `;
+      noResults.innerHTML = `
+        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔍</div>
+        <div>No questions found</div>
+      `;
+      list.appendChild(noResults);
+    }
+  } else if (noResults) {
+    noResults.remove();
+  }
+}
+
+// Handle question click with unsaved changes check
+async function handleQuestionClick(questionId) {
+  // Don't show dialog if clicking the same question
+  if (questionId === currentQuestionId) {
+    return;
+  }
+  
+  // Check for unsaved changes
+  if (hasUnsavedChanges) {
+    const result = await showUnsavedChangesDialog();
+    
+    if (result === 'cancel') {
+      return; // Stay on current question
+    } else if (result === 'save') {
+      // Save current changes first
+      await saveConfiguration();
+      // Then load the new question
+      await loadQuestion(questionId);
+    } else if (result === 'discard') {
+      // Just load the new question
+      await loadQuestion(questionId);
+    }
+  } else {
+    // No changes, just load
+    await loadQuestion(questionId);
+  }
+}
+
+// Show custom dialog for unsaved changes
+function showUnsavedChangesDialog() {
+  return new Promise((resolve) => {
+    // Create modal
+    const modal = document.createElement('div');
+    modal.style.cssText = `
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    `;
+    
+    const dialog = document.createElement('div');
+    dialog.style.cssText = `
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 500px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    `;
+    
+    dialog.innerHTML = `
+      <h2 style="margin: 0 0 1rem 0; color: #333;">⚠️ Unsaved Changes</h2>
+      <p style="margin: 0 0 2rem 0; color: #666;">
+        You have unsaved changes. What would you like to do?
+      </p>
+      <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+        <button id="dialog-cancel" class="btn btn-secondary">Cancel</button>
+        <button id="dialog-discard" class="btn" style="background: #f44336; color: white;">Discard Changes</button>
+        <button id="dialog-save" class="btn btn-primary">Save Changes</button>
+      </div>
+    `;
+    
+    modal.appendChild(dialog);
+    document.body.appendChild(modal);
+    
+    // Add event listeners
+    document.getElementById('dialog-cancel').onclick = () => {
+      document.body.removeChild(modal);
+      resolve('cancel');
+    };
+    
+    document.getElementById('dialog-discard').onclick = () => {
+      document.body.removeChild(modal);
+      resolve('discard');
+    };
+    
+    document.getElementById('dialog-save').onclick = () => {
+      document.body.removeChild(modal);
+      resolve('save');
+    };
+  });
+}
+
+async function loadQuestion(questionId) {
+  try {
+    const response = await fetch(`/api/question/${questionId}`);
+    const data = await response.json();
+    
+    if (data.success) {
+      currentQuestionId = questionId;
+      
+      // Reset wizard to step 1
+      resetWizardToStart();
+      
+      // Populate form fields
+      populateWizard(data.question);
+      
+      // Update UI
+      renderQuestionsList();
+      document.getElementById('page-title').textContent = `✏️ Edit: ${data.question.scenario_name}`;
+      document.getElementById('page-subtitle').textContent = `Modify the configuration for this scenario`;
+      
+      // Capture the new form state
+      captureFormState();
+      
+      // Scroll to top of page
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  } catch (error) {
+    console.error('Failed to load question:', error);
+    alert('Failed to load question details');
+  }
+}
+
+function resetWizardToStart() {
+  // Hide all steps
+  document.querySelectorAll('.wizard-step').forEach(step => step.classList.remove('active'));
+  
+  // Show step 1
+  document.getElementById('step-1').classList.add('active');
+  
+  // Reset progress indicators
+  document.querySelectorAll('.step').forEach(step => {
+    step.classList.remove('active', 'completed');
+  });
+  document.querySelector('.step[data-step="1"]').classList.add('active');
+  
+  // Reset current step counter
+  currentStep = 1;
+}
+
+function populateWizard(data) {
+  document.getElementById('scenario-name').value = data.scenario_name || '';
+  document.getElementById('scenario-description').value = data.scenario_description || '';
+  document.getElementById('sample-questions').value = data.sample_questions || '';
+  document.getElementById('system-prompt-addition').value = data.system_prompt || '';
+  document.getElementById('policy-name').value = data.policy_name || '';
+  document.getElementById('policy-rules-text').value = data.policy_text || '';
+  document.getElementById('policy-rules-json').value = data.policy_json || '';
+  document.getElementById('example-name').value = data.example_name || '';
+  document.getElementById('example-dialog').value = data.example_dialog || '';
+  document.getElementById('tool-definitions').value = data.tool_definitions || '';
+  document.getElementById('tool-implementation').value = data.tool_implementation || '';
+  document.getElementById('button-icon').value = data.button_icon || '';
+  document.getElementById('button-label').value = data.button_label || '';
+  document.getElementById('button-question').value = data.button_question || '';
+  
+  updatePreview();
+}
+
+function createNewQuestion() {
+  // Check for unsaved changes first
+  if (hasUnsavedChanges) {
+    if (!confirm('You have unsaved changes. Are you sure you want to create a new question?')) {
+      return;
+    }
+  }
+  
+  currentQuestionId = null;
+  
+  // Clear all fields
+  document.getElementById('scenario-name').value = '';
+  document.getElementById('scenario-description').value = '';
+  document.getElementById('sample-questions').value = '';
+  document.getElementById('system-prompt-addition').value = '';
+  document.getElementById('policy-name').value = '';
+  document.getElementById('policy-rules-text').value = '';
+  document.getElementById('policy-rules-json').value = '';
+  document.getElementById('example-name').value = '';
+  document.getElementById('example-dialog').value = '';
+  document.getElementById('tool-definitions').value = '';
+  document.getElementById('tool-implementation').value = '';
+  document.getElementById('button-icon').value = '⚠️';
+  document.getElementById('button-label').value = '';
+  document.getElementById('button-question').value = '';
+  
+  // Reset wizard to step 1
+  resetWizardToStart();
+  
+  document.getElementById('page-title').textContent = '➕ Add New Agent Scenario';
+  document.getElementById('page-subtitle').textContent = 'Configure a new question type for the agent to handle';
+  
+  renderQuestionsList();
+  updatePreview();
+  
+  // Capture clean state
+  captureFormState();
+  
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// AI-Powered Generation Functions
+async function generateQuestionWithClaude() {
+  const btn = event.target;
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = '🤖 Generating...';
+  
+  try {
+    const scenarioName = document.getElementById('scenario-name').value || 'New Scenario';
+    
+    const response = await fetch('/api/generate-question-details', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ scenario_name: scenarioName })
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      document.getElementById('scenario-name').value = result.scenario_name;
+      document.getElementById('scenario-description').value = result.description;
+      document.getElementById('sample-questions').value = result.sample_questions.join('\n');
+    } else {
+      alert('Generation failed: ' + (result.error || 'Unknown error'));
+    }
+  } catch (error) {
+    alert('Error: ' + error.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = originalText;
+  }
+}
+
+async function generateSystemPromptWithClaude() {
+  const btn = event.target;
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = '🤖 Generating...';
+  
+  try {
+    const context = {
+      scenario_name: document.getElementById('scenario-name').value,
+      description: document.getElementById('scenario-description').value,
+      sample_questions: document.getElementById('sample-questions').value
+    };
+    
+    // Validate we have required data
+    if (!context.scenario_name || !context.scenario_name.trim()) {
+      alert('Please enter a scenario name first');
+      return;
+    }
+    
+    const response = await fetch('/api/generate-system-prompt', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(context)
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      document.getElementById('system-prompt-addition').value = result.system_prompt;
+    } else {
+      alert('Generation failed: ' + (result.error || 'Unknown error'));
+    }
+  } catch (error) {
+    alert('Error: ' + error.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = originalText;
+  }
+}
+
+async function generatePolicyWithClaude() {
+  const btn = event.target;
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = '🤖 Generating...';
+  
+  try {
+    const context = {
+      scenario_name: document.getElementById('scenario-name').value,
+      description: document.getElementById('scenario-description').value
+    };
+    
+    const response = await fetch('/api/generate-policy', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(context)
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      document.getElementById('policy-name').value = result.policy_name;
+      document.getElementById('policy-rules-text').value = result.policy_text;
+      document.getElementById('policy-rules-json').value = result.policy_json;
+    } else {
+      alert('Generation failed: ' + (result.error || 'Unknown error'));
+    }
+  } catch (error) {
+    alert('Error: ' + error.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = originalText;
+  }
+}
+
+async function generateExampleWithClaude() {
+  const btn = event.target;
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = '🤖 Generating...';
+  
+  try {
+    const context = {
+      scenario_name: document.getElementById('scenario-name').value,
+      description: document.getElementById('scenario-description').value,
+      sample_questions: document.getElementById('sample-questions').value
+    };
+    
+    const response = await fetch('/api/generate-example', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(context)
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      document.getElementById('example-name').value = result.example_name;
+      document.getElementById('example-dialog').value = result.example_dialog;
+    } else {
+      alert('Generation failed: ' + (result.error || 'Unknown error'));
+    }
+  } catch (error) {
+    alert('Error: ' + error.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = originalText;
+  }
+}
+
+async function generateToolsWithClaude() {
+  const btn = event.target;
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = '🤖 Generating...';
+  
+  try {
+    const context = {
+      scenario_name: document.getElementById('scenario-name').value,
+      description: document.getElementById('scenario-description').value,
+      sample_questions: document.getElementById('sample-questions').value
+    };
+    
+    const response = await fetch('/api/generate-tools', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(context)
+    });
+    
+    const result = await response.json();
+    
+    if (result.success) {
+      document.getElementById('tool-definitions').value = result.tool_definitions;
+      document.getElementById('tool-implementation').value = result.tool_implementation;
+    } else {
+      alert('Generation failed: ' + (result.error || 'Unknown error'));
+    }
+  } catch (error) {
+    alert('Error: ' + error.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = originalText;
+  }
+}
+
+// Navigation functions
+function nextStep(step) {
+  if (step < totalSteps) {
+    document.getElementById(`step-${step}`).classList.remove('active');
+    document.querySelector(`.step[data-step="${step}"]`).classList.add('completed');
+    
+    currentStep = step + 1;
+    document.getElementById(`step-${currentStep}`).classList.add('active');
+    document.querySelector(`.step[data-step="${currentStep}"]`).classList.add('active');
+    
+    if (currentStep === 6) {
+      updatePreview();
+    }
+  }
+}
+
+function prevStep(step) {
+  if (step > 1) {
+    document.getElementById(`step-${step}`).classList.remove('active');
+    document.querySelector(`.step[data-step="${step}"]`).classList.remove('active');
+    
+    currentStep = step - 1;
+    document.getElementById(`step-${currentStep}`).classList.add('active');
+    document.querySelector(`.step[data-step="${currentStep-1}"]`).classList.remove('completed');
+  }
+}
+
+function updatePreview() {
+  const icon = document.getElementById('button-icon').value;
+  const label = document.getElementById('button-label').value;
+  
+  document.getElementById('preview-icon').textContent = icon;
+  document.getElementById('preview-label').textContent = label || 'Preview';
+}
+
+document.getElementById('button-icon')?.addEventListener('input', updatePreview);
+document.getElementById('button-label')?.addEventListener('input', updatePreview);
+
+async function saveConfiguration() {
+  const config = {
+    question_id: currentQuestionId,
+    scenario_name: document.getElementById('scenario-name').value,
+    scenario_description: document.getElementById('scenario-description').value,
+    sample_questions: document.getElementById('sample-questions').value,
+    system_prompt: document.getElementById('system-prompt-addition').value,
+    policy_name: document.getElementById('policy-name').value,
+    policy_text: document.getElementById('policy-rules-text').value,
+    policy_json: document.getElementById('policy-rules-json').value,
+    example_name: document.getElementById('example-name').value,
+    example_dialog: document.getElementById('example-dialog').value,
+    tool_definitions: document.getElementById('tool-definitions').value,
+    tool_implementation: document.getElementById('tool-implementation').value,
+    button_icon: document.getElementById('button-icon').value,
+    button_label: document.getElementById('button-label').value,
+    button_question: document.getElementById('button-question').value
+  };
+
+  try {
+    const response = await fetch('/api/save-scenario', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(config)
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
+      // Reset unsaved changes flag
+      hasUnsavedChanges = false;
+      
+      // Hide wizard steps and show success
+      document.querySelectorAll('.wizard-step').forEach(step => step.style.display = 'none');
+      const successStep = document.getElementById('step-success');
+      successStep.style.display = 'block';
+
+      const filesList = document.getElementById('created-files-list');
+      filesList.innerHTML = '';
+      result.files_created.forEach(file => {
+        const li = document.createElement('li');
+        li.textContent = file;
+        filesList.appendChild(li);
+      });
+      
+      // Reload questions list
+      await loadQuestions();
+      
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      alert('Error saving configuration: ' + result.error);
+    }
+  } catch (error) {
+    alert('Error: ' + error.message);
+  }
+}
+</script>
+
+</body>
+</html>

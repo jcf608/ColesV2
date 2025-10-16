@@ -1,0 +1,21 @@
+{
+  "scenario_name": "Server Outage Impact",
+  "scenario_id": "server-outage-impact",
+  "created_at": "2025-10-16T15:15:29+11:00",
+  "description": "What would be the impact of a server outage on our critical systems?",
+  "sample_questions": [],
+  "files": {
+    "system_prompt": "prompts/scenarios/server-outage-impact.txt",
+    "policy_text": "policies/server-outage-impact.txt",
+    "policy_json": "policies/server-outage-impact.json",
+    "example": "examples/server-outage-impact.txt",
+    "tools_config": "app/config/tools/server-outage-impact_tools.json",
+    "tools_implementation": "app/tools/server-outage-impact_tools.rb",
+    "ask_question": "ask_questions/server-outage-impact.json"
+  },
+  "quick_action": {
+    "icon": "🚨",
+    "label": "Server Outage Impact",
+    "question": "What would be the impact of a server outage on our critical systems?"
+  }
+}

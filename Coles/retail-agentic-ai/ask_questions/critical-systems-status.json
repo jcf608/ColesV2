@@ -1,0 +1,9 @@
+{
+  "id": "critical-systems-status",
+  "icon": "💻",
+  "label": "Critical Systems Status",
+  "question": "What is the current status of all critical systems?",
+  "category": "it-operations",
+  "order": 11,
+  "enabled": true
+}

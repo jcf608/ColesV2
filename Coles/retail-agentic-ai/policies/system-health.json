@@ -1,0 +1,185 @@
+{
+  "policy_id": "SYS-HEALTH-001",
+  "version": "2.1.0",
+  "effective_date": "2024-01-15T00:00:00Z",
+  "category": "it-operations",
+  "title": "System Health Check Policy",
+  "description": "Automated health monitoring and alerting for all production systems in retail grocery operations",
+  "scope": "production_systems",
+  "metadata": {
+    "created_by": "IT Operations Team",
+    "last_modified": "2024-01-10T14:30:00Z",
+    "review_cycle": "quarterly",
+    "next_review": "2024-04-15T00:00:00Z",
+    "business_impact": "critical"
+  },
+  "approval_thresholds": {
+    "automatic_response": {
+      "cpu_utilization": 85,
+      "memory_utilization": 90,
+      "disk_utilization": 80,
+      "response_time_ms": 2000
+    },
+    "escalation_required": {
+      "cpu_utilization": 95,
+      "memory_utilization": 95,
+      "disk_utilization": 95,
+      "response_time_ms": 5000,
+      "consecutive_failures": 3
+    },
+    "emergency_escalation": {
+      "system_downtime_minutes": 5,
+      "pos_system_failure": true,
+      "payment_processing_failure": true,
+      "inventory_system_failure": true
+    }
+  },
+  "safety_constraints": {
+    "maximum_concurrent_checks": 10,
+    "check_interval_minutes": 5,
+    "timeout_seconds": 30,
+    "rate_limiting": {
+      "max_alerts_per_hour": 20,
+      "cooldown_period_minutes": 15
+    },
+    "maintenance_windows": {
+      "daily_backup": "02:00-04:00",
+      "weekly_maintenance": "SUN:01:00-05:00"
+    },
+    "blackout_periods": [
+      "thanksgiving",
+      "black_friday",
+      "christmas_eve",
+      "new_years_eve"
+    ]
+  },
+  "system_categories": {
+    "critical_systems": {
+      "pos_terminals": {
+        "availability_threshold": 99.9,
+        "response_time_ms": 500,
+        "check_interval_minutes": 2,
+        "alert_priority": "high"
+      },
+      "payment_processing": {
+        "availability_threshold": 99.95,
+        "response_time_ms": 1000,
+        "check_interval_minutes": 1,
+        "alert_priority": "critical"
+      },
+      "inventory_management": {
+        "availability_threshold": 99.5,
+        "response_time_ms": 2000,
+        "check_interval_minutes": 5,
+        "alert_priority": "high"
+      }
+    },
+    "supporting_systems": {
+      "employee_scheduling": {
+        "availability_threshold": 98.0,
+        "response_time_ms": 3000,
+        "check_interval_minutes": 15,
+        "alert_priority": "medium"
+      },
+      "loyalty_program": {
+        "availability_threshold": 97.0,
+        "response_time_ms": 2500,
+        "check_interval_minutes": 10,
+        "alert_priority": "medium"
+      },
+      "digital_signage": {
+        "availability_threshold": 95.0,
+        "response_time_ms": 5000,
+        "check_interval_minutes": 30,
+        "alert_priority": "low"
+      }
+    }
+  },
+  "health_check_parameters": {
+    "system_metrics": {
+      "cpu_usage_warning": 75,
+      "cpu_usage_critical": 90,
+      "memory_usage_warning": 80,
+      "memory_usage_critical": 95,
+      "disk_usage_warning": 70,
+      "disk_usage_critical": 85,
+      "network_latency_warning_ms": 100,
+      "network_latency_critical_ms": 500
+    },
+    "application_metrics": {
+      "error_rate_warning_percent": 2.0,
+      "error_rate_critical_percent": 5.0,
+      "transaction_success_rate_minimum": 98.5,
+      "queue_depth_warning": 1000,
+      "queue_depth_critical": 5000
+    },
+    "database_metrics": {
+      "connection_pool_warning_percent": 80,
+      "connection_pool_critical_percent": 95,
+      "query_response_warning_ms": 1000,
+      "query_response_critical_ms": 5000,
+      "deadlock_threshold_per_hour": 10
+    }
+  },
+  "notification_rules": {
+    "escalation_matrix": {
+      "level_1": {
+        "recipients": ["on-call-engineer"],
+        "methods": ["sms", "email"],
+        "timeout_minutes": 5
+      },
+      "level_2": {
+        "recipients": ["it-manager", "ops-manager"],
+        "methods": ["phone", "sms", "email"],
+        "timeout_minutes": 10
+      },
+      "level_3": {
+        "recipients": ["cio", "store-manager"],
+        "methods": ["phone", "sms"],
+        "timeout_minutes": 15
+      }
+    },
+    "business_hours": {
+      "standard": "06:00-23:00",
+      "extended": "05:00-24:00",
+      "holiday": "07:00-22:00"
+    }
+  },
+  "remediation_actions": {
+    "automatic": {
+      "restart_service": {
+        "max_attempts": 3,
+        "delay_seconds": 60,
+        "applicable_services": ["web-server", "cache-service"]
+      },
+      "clear_cache": {
+        "triggers": ["memory_high", "response_slow"],
+        "applicable_systems": ["pos", "inventory"]
+      },
+      "scale_resources": {
+        "cpu_threshold": 85,
+        "memory_threshold": 85,
+        "max_instances": 10
+      }
+    },
+    "manual_approval_required": [
+      "database_restart",
+      "system_reboot",
+      "network_configuration_change",
+      "failover_to_backup"
+    ]
+  },
+  "reporting": {
+    "sla_targets": {
+      "system_availability": 99.5,
+      "mean_time_to_detection_minutes": 5,
+      "mean_time_to_resolution_minutes": 30
+    },
+    "dashboard_refresh_seconds": 30,
+    "historical_data_retention_days": 90,
+    "compliance_reporting": {
+      "frequency": "monthly",
+      "stakeholders": ["cio", "compliance-officer", "operations-manager"]
+    }
+  }
+}

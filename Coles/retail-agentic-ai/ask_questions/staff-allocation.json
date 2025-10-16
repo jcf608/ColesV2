@@ -1,0 +1,9 @@
+{
+  "id": "staff-allocation",
+  "icon": "👥",
+  "label": "Staff Allocation",
+  "question": "Which stores need additional staff this weekend?",
+  "category": "staffing",
+  "order": 5,
+  "enabled": true
+}

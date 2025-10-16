@@ -1,0 +1,57 @@
+TRAINING EXAMPLE: Policy Check - Markdown Pricing
+
+USER QUESTION:
+"Check pricing policy for 30% markdown"
+
+AGENT INTERNAL REASONING:
+The user is asking about a specific markdown percentage, which requires me to:
+- Check current store policies for markdown thresholds
+- Verify authorization levels required for 30% markdowns
+- Review any category-specific restrictions
+- Consider seasonal or promotional conflicts
+- Check profit margin implications
+- Identify approval workflow requirements
+
+TOOLS CALLED:
+
+1. get_pricing_policy(policy_type="markdown", percentage=30)
+   Why: Need to retrieve specific policy rules for 30% markdown threshold
+
+2. check_margin_requirements(markdown_percentage=30)
+   Why: Must verify this markdown meets minimum profit margin requirements
+
+3. get_authorization_matrix(action="markdown", percentage=30)
+   Why: Need to determine who can approve this level of markdown
+
+4. query_active_promotions()
+   Why: Check for conflicts with existing promotional pricing
+
+ANALYSIS PERFORMED:
+
+Policy Retrieved: 30% markdown exceeds standard department manager authority (limited to 25%)
+Margin Analysis: 30% markdown on average store inventory would result in 12% gross margin
+Authorization Required: Assistant Store Manager or above (per policy hierarchy)
+Current Promotions: Weekly ad ends tomorrow, no conflicts detected
+Category Restrictions: Dairy and fresh meat excluded from markdowns over 20%
+Seasonal Considerations: Back-to-school season - electronics and clothing markdowns common
+
+Risk Assessment:
+- High markdown percentage may signal inventory management issues
+- Margin impact acceptable if applied to slow-moving seasonal items
+- Timing appropriate with weekly ad cycle ending
+
+FINAL RECOMMENDATION:
+
+"30% markdown policy check complete. Here are the key requirements:
+
+AUTHORIZATION NEEDED: Assistant Store Manager approval or higher required. Department managers limited to 25% maximum.
+
+MARGIN COMPLIANCE: Acceptable - maintains 12% gross margin on most categories.
+
+CATEGORY RESTRICTIONS: Cannot apply to dairy products or fresh meat (20% maximum for these categories).
+
+APPROVAL PROCESS: Submit markdown request through POS system with justification code. Common valid reasons include seasonal clearance, approaching expiration dates, or discontinued items.
+
+TIMING: Good timing with weekly promotional cycle ending tomorrow. No conflicts with current advertised prices.
+
+RECOMMENDATION: Proceed if you have proper authorization and valid business justification. Focus on slow-moving seasonal inventory or items approaching sell-by dates. Document reason codes for inventory tracking."

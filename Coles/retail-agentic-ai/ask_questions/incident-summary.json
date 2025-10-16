@@ -1,0 +1,9 @@
+{
+  "id": "incident-summary",
+  "icon": "⚡",
+  "label": "Recent Incidents",
+  "question": "Summarize incidents from the past 24 hours and their current status",
+  "category": "it-operations",
+  "order": 13,
+  "enabled": true
+}

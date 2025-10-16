@@ -1,0 +1,60 @@
+TRAINING EXAMPLE: Capacity Forecast Analysis
+
+USER QUESTION:
+"Which systems are approaching capacity thresholds in the next 30 days?"
+
+AGENT INTERNAL REASONING:
+I need to analyze capacity metrics across all critical grocery store systems to identify potential bottlenecks. This involves:
+- Checking current utilization rates vs maximum capacity
+- Analyzing growth trends and seasonal patterns
+- Considering upcoming events that might affect demand
+- Evaluating both physical and digital infrastructure
+- Prioritizing systems by business impact if they fail
+
+Key systems to examine: refrigeration units, checkout systems, inventory management servers, point-of-sale network, storage areas, parking capacity, and staff scheduling systems.
+
+TOOL CALLS AND JUSTIFICATION:
+
+First, I'll call get_system_capacity_metrics() to retrieve current utilization data across all monitored systems. This gives me baseline measurements.
+
+Next, I'll use forecast_capacity_trends() with a 30-day projection window to model expected growth patterns based on historical data and seasonal factors.
+
+Then I'll call get_upcoming_events() to identify any special promotions, holidays, or local events that could create capacity spikes.
+
+Finally, I'll use calculate_threshold_alerts() to determine which systems will likely exceed their 85% warning threshold or 95% critical threshold within the timeframe.
+
+ANALYSIS PERFORMED:
+
+Current system status analysis shows:
+- Refrigeration Unit Bank A: 78% capacity, trending upward 2% weekly
+- POS Network: 71% peak load capacity during rush hours
+- Inventory Database: 82% storage utilization, growing 1.5% weekly  
+- Parking Lot: 89% capacity during weekend peaks
+- Produce Storage: 76% capacity, seasonal increase expected
+
+Trend projection for next 30 days:
+- Refrigeration Unit Bank A will reach 86% (exceeds 85% threshold by day 18)
+- Inventory Database will hit 88% by month-end (exceeds threshold day 21)
+- Parking capacity will reach 97% during upcoming Memorial Day weekend
+- POS Network shows stable utilization within normal range
+- Produce storage will increase to 84% due to summer fruit season
+
+Risk assessment considers business impact:
+- Parking overflow causes customer loss (HIGH impact)
+- Refrigeration failure causes product spoilage (CRITICAL impact) 
+- Database slowdown affects all operations (HIGH impact)
+
+FINAL RECOMMENDATION:
+
+Three systems require immediate attention for capacity management:
+
+CRITICAL PRIORITY - Refrigeration Unit Bank A:
+Currently at 78% capacity but trending to exceed 85% threshold by May 18th. Recommend immediately scheduling maintenance to optimize efficiency and consider activating backup cooling unit. Budget for additional refrigeration expansion by July given continued growth trend.
+
+HIGH PRIORITY - Parking Lot Capacity:
+Will exceed 95% capacity during Memorial Day weekend. Implement temporary overflow parking arrangement with neighboring business or consider shuttle service from remote lot. Long-term solution needed as weekend peaks consistently approach limits.
+
+MEDIUM PRIORITY - Inventory Database Storage:
+Will reach 88% capacity by month-end, exceeding 85% threshold around May 21st. Schedule database maintenance to archive old records and optimize storage. Plan storage expansion or migration to higher-capacity system within 60 days.
+
+Monitoring recommendation: Increase capacity monitoring frequency to daily for these three systems and set automated alerts at 80% utilization to provide earlier warning for future planning.

@@ -1,0 +1,9 @@
+{
+  "id": "capacity-planning",
+  "icon": "📊",
+  "label": "Capacity Forecast",
+  "question": "Which systems are approaching capacity thresholds in the next 30 days?",
+  "category": "it-operations",
+  "order": 17,
+  "enabled": true
+}

@@ -1,0 +1,9 @@
+{
+  "id": "backup-status",
+  "icon": "💾",
+  "label": "Backup Status",
+  "question": "What is the status of last night's backups across all systems?",
+  "category": "it-operations",
+  "order": 15,
+  "enabled": true
+}

@@ -1,0 +1,46 @@
+CRITICAL SYSTEMS STATUS MONITORING
+
+Use this capability when retail managers request real-time status updates on mission-critical grocery store systems. Activate for questions about system health, operational readiness, or when investigating potential service disruptions.
+
+DECISION FRAMEWORK
+
+Check these core systems in priority order:
+- Point of Sale terminals and payment processing
+- Inventory management and warehouse systems
+- Refrigeration and temperature monitoring
+- Security cameras and access control
+- Network connectivity and Wi-Fi
+- Backup power and generator status
+- Fire safety and emergency systems
+
+Analyze each system by examining:
+- Current operational status and uptime percentage
+- Recent error logs or alert notifications
+- Performance metrics compared to baseline standards
+- Pending maintenance schedules or known issues
+- Staff reports of functional problems
+
+CRITICAL THRESHOLDS
+
+Classify systems as:
+- GREEN: 98%+ uptime, no active alerts, performance within normal range
+- YELLOW: 95-97% uptime, minor alerts present, performance slightly degraded
+- RED: Below 95% uptime, critical alerts active, significant performance issues
+
+Escalate immediately if:
+- POS systems show transaction failure rates above 2%
+- Refrigeration temperatures exceed safe food storage ranges
+- Network downtime affects customer checkout or inventory updates
+- Security system failures compromise store safety
+
+OUTPUT REQUIREMENTS
+
+Provide responses containing:
+- Executive summary with overall system health status
+- Individual system status with specific metrics
+- Any active alerts or warnings requiring immediate attention
+- Recommended actions for yellow or red status items
+- Estimated time to resolution for known issues
+- Contact information for relevant technical support teams
+
+Format responses for quick scanning during busy operational periods. Prioritize actionable information that enables immediate decision-making.

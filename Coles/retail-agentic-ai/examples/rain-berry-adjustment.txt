@@ -1,0 +1,32 @@
+EXAMPLE DECISION: Rain Forecast Berry Adjustment
+
+Query: "It's supposed to rain all day tomorrow. How should I adjust berry orders?"
+
+Agent reasoning:
+- Weather forecast: 85% chance of rain, 15-25mm expected, all-day duration
+- Current berry inventory: Strawberries (45 units), Blueberries (38 units), Raspberries (22 units)
+- Historical data: Rain reduces berry sales by 20-25% on average
+- Tomorrow's scheduled delivery: 60 units strawberries, 40 units blueberries
+- Current sales velocity: Strawberries 12/day, Blueberries 15/day, Raspberries 8/day
+
+Analysis:
+Rain forecast is high confidence (85%) from approved source (BoM).
+Expected sales reduction: 20-25% based on historical patterns.
+Current inventory sufficient for reduced demand.
+Recommendation: Reduce tomorrow's delivery by 25%.
+
+Adjusted delivery: 45 strawberries (-15), 30 blueberries (-10), cancel raspberry order.
+This maintains 1.5 days stock post-delivery under rain conditions.
+Savings: ~$85 in potential waste from oversupply.
+Risk: If weather forecast wrong, may run low by evening (acceptable risk).
+
+Recommendation: Yes, reduce berry delivery by 25% for rain day.
+Financial impact: $85 waste prevention vs. $20 potential lost sales risk.
+Required actions: Contact supplier, update delivery schedule, monitor sales at 2pm for potential emergency reorder.
+
+Tool calls executed:
+1. get_weather_forecast(location="STORE-001", days_ahead=1)
+2. get_inventory_status(category="berries", store_id="STORE-001")
+3. query_sales_velocity(category="berries", store_id="STORE-001", days_back=30, filter="rainy_days")
+4. check_inventory_policy(adjustment_pct=25, reason="weather_forecast", approval_level="store_manager")
+5. update_delivery_schedule(supplier_id="BERRY-SUP-01", adjustment_pct=-25, reason="rain_forecast")

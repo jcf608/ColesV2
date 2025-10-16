@@ -1,0 +1,106 @@
+[
+  {
+    "name": "get_weekend_traffic_forecast",
+    "description": "Retrieves predicted customer traffic levels for stores during the upcoming weekend",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "weekend_date": {
+          "type": "string",
+          "description": "The weekend date in YYYY-MM-DD format (Saturday date)"
+        },
+        "store_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional list of specific store IDs to check. If not provided, returns all stores"
+        }
+      },
+      "required": ["weekend_date"]
+    }
+  },
+  {
+    "name": "get_current_staff_schedules",
+    "description": "Gets the current staff scheduling information for specified stores and time period",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "start_date": {
+          "type": "string",
+          "description": "Start date in YYYY-MM-DD format"
+        },
+        "end_date": {
+          "type": "string",
+          "description": "End date in YYYY-MM-DD format"
+        },
+        "store_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional list of store IDs. If not provided, returns all stores"
+        }
+      },
+      "required": ["start_date", "end_date"]
+    }
+  },
+  {
+    "name": "calculate_staffing_requirements",
+    "description": "Calculates optimal staffing levels based on expected traffic, store size, and operational requirements",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "store_id": {
+          "type": "string",
+          "description": "The store ID to calculate requirements for"
+        },
+        "date": {
+          "type": "string",
+          "description": "The date in YYYY-MM-DD format"
+        },
+        "expected_traffic": {
+          "type": "integer",
+          "description": "Expected number of customers"
+        },
+        "special_events": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional list of special events or promotions that may affect staffing needs"
+        }
+      },
+      "required": ["store_id", "date", "expected_traffic"]
+    }
+  },
+  {
+    "name": "get_available_staff_pool",
+    "description": "Retrieves list of available staff members who can work additional shifts during specified time period",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "start_date": {
+          "type": "string",
+          "description": "Start date in YYYY-MM-DD format"
+        },
+        "end_date": {
+          "type": "string",
+          "description": "End date in YYYY-MM-DD format"
+        },
+        "store_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Optional list of store IDs to check for available staff. If not provided, checks all stores"
+        },
+        "minimum_hours_available": {
+          "type": "integer",
+          "description": "Minimum number of hours the staff member should be available"
+        }
+      },
+      "required": ["start_date", "end_date"]
+    }
+  }
+]

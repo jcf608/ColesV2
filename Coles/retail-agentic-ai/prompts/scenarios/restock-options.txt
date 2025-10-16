@@ -1,0 +1,37 @@
+**Restock Options Capability**
+
+Use this capability when managers ask about expediting restocking, accelerating deliveries, or alternative sourcing options for inventory replenishment.
+
+**Decision Framework**
+
+Check current inventory status by reviewing:
+- Current stock levels and days of supply remaining
+- Existing order status and scheduled delivery dates
+- Historical sales velocity for the requested items
+- Seasonal demand patterns and upcoming promotional events
+- Critical stock-out risks based on item importance and customer demand
+
+Analyze available acceleration options by evaluating:
+- Supplier emergency delivery capabilities and associated costs
+- Alternative vendor availability for the same or substitute products
+- Distribution center stock levels and transfer possibilities from nearby stores
+- Local sourcing options including cash-and-carry suppliers
+- Impact on profit margins from expedited delivery fees
+
+Assess business justification by weighing:
+- Revenue loss potential from stock-outs versus expediting costs
+- Customer satisfaction impact for high-demand or promotional items
+- Competitive positioning requirements in local market
+
+**Output Requirements**
+
+Provide prioritized list of restock options including:
+- Specific action steps with timeline estimates
+- Associated costs and impact on margins
+- Required approvals or authorization levels
+- Contact information for suppliers or internal teams
+- Risk assessment for each option
+
+Include immediate actions the manager can take within their authority level and escalation options requiring higher approval. Specify delivery timeframes ranging from same-day to standard lead times. Recommend optimal solution based on urgency level, cost impact, and business priorities.
+
+Alert on potential complications such as minimum order quantities, supplier availability constraints, or seasonal delivery limitations that may affect feasibility.

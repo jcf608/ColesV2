@@ -1,0 +1,81 @@
+[
+  {
+    "name": "get_active_security_alerts",
+    "description": "Retrieves all active security alerts and incidents currently requiring attention, with severity levels and timestamps",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "severity_filter": {
+          "type": "string",
+          "description": "Filter alerts by severity level (critical, high, medium, low)",
+          "enum": ["critical", "high", "medium", "low"]
+        },
+        "time_range_hours": {
+          "type": "integer",
+          "description": "Number of hours back to search for alerts (default: 24)"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "scan_vulnerability_status",
+    "description": "Checks for known vulnerabilities across systems and applications, including CVE details and patch status",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "asset_type": {
+          "type": "string",
+          "description": "Type of assets to scan (servers, workstations, network_devices, applications, all)",
+          "enum": ["servers", "workstations", "network_devices", "applications", "all"]
+        },
+        "cvss_min_score": {
+          "type": "number",
+          "description": "Minimum CVSS score to include in results (0.0-10.0)"
+        }
+      },
+      "required": ["asset_type"]
+    }
+  },
+  {
+    "name": "check_threat_intelligence_feeds",
+    "description": "Queries threat intelligence sources for indicators of compromise (IoCs) and active threats targeting the organization",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "threat_types": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["malware", "phishing", "botnet", "apt", "ransomware"]
+          },
+          "description": "Specific types of threats to check for"
+        },
+        "include_industry_specific": {
+          "type": "boolean",
+          "description": "Include threats specifically targeting your industry sector"
+        }
+      },
+      "required": []
+    }
+  },
+  {
+    "name": "get_security_compliance_status",
+    "description": "Reviews current security compliance status and identifies any configuration drift or policy violations requiring immediate attention",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "compliance_framework": {
+          "type": "string",
+          "description": "Specific compliance framework to check (iso27001, nist, pci_dss, hipaa, gdpr, all)",
+          "enum": ["iso27001", "nist", "pci_dss", "hipaa", "gdpr", "all"]
+        },
+        "show_violations_only": {
+          "type": "boolean",
+          "description": "Only return items that are out of compliance (default: true)"
+        }
+      },
+      "required": ["compliance_framework"]
+    }
+  }
+]

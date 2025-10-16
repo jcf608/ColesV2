@@ -1,0 +1,9 @@
+{
+  "id": "expiring-soon",
+  "icon": "📅",
+  "label": "Expiring Soon",
+  "question": "Show me products expiring in 2 days",
+  "category": "inventory",
+  "order": 2,
+  "enabled": true
+}

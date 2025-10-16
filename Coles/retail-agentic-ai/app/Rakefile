@@ -1,0 +1,118 @@
+require 'json'
+require_relative 'generate_question_assets'
+
+namespace :questions do
+  desc 'Generate Claude-powered assets for all enabled questions'
+  task :generate_all do
+    puts "🚀 Launching Claude-powered asset generation..."
+    generator = ClaudePoweredAssetGenerator.new
+    generator.generate_all
+  end
+  
+  desc 'Generate Claude-powered assets for a specific question'
+  task :generate, [:question_id] do |t, args|
+    unless args[:question_id]
+      puts "❌ Error: Please provide a question ID"
+      puts "Usage: rake questions:generate[items-at-risk]"
+      exit 1
+    end
+    
+    puts "🚀 Launching Claude-powered generation for: #{args[:question_id]}"
+    generator = ClaudePoweredAssetGenerator.new
+    success = generator.generate_for_question_id(args[:question_id])
+    exit(success ? 0 : 1)
+  end
+  
+  desc 'List all questions and their asset status'
+  task :status do
+    questions_dir = File.expand_path('../ask_questions', __FILE__)
+    
+    unless Dir.exist?(questions_dir)
+      puts "❌ Questions directory not found"
+      exit 1
+    end
+    
+    puts "\n📊 Question Asset Status Report"
+    puts "=" * 80
+    
+    total_questions = 0
+    enabled_questions = 0
+    complete_assets = 0
+    
+    Dir.glob(File.join(questions_dir, '*.json')).sort.each do |file|
+      question = JSON.parse(File.read(file))
+      id = question['id']
+      total_questions += 1
+      
+      status_icon = question['enabled'] ? '✅' : '⏸️ '
+      enabled_questions += 1 if question['enabled']
+      
+      assets = {
+        'System Prompt' => File.exist?(File.join('prompts', 'scenarios', "#{id}.txt")),
+        'Policy Text' => File.exist?(File.join('policies', "#{id}.txt")),
+        'Policy JSON' => File.exist?(File.join('policies', "#{id}.json")),
+        'Example Dialog' => File.exist?(File.join('examples', "#{id}.txt")),
+        'Tool Config' => File.exist?(File.join('config', 'tools', "#{id}_tools.json")),
+        'Tool Implementation' => File.exist?(File.join('tools', "#{id}_tools.rb"))
+      }
+      
+      assets_count = assets.values.count(true)
+      total_assets = assets.size
+      complete_assets += 1 if assets_count == total_assets && question['enabled']
+      
+      puts "\n#{status_icon} #{question['label']} (#{id})"
+      puts "   Category: #{question['category']} | Order: #{question['order']}"
+      puts "   Assets: #{assets_count}/#{total_assets} created"
+      
+      if assets_count < total_assets
+        assets.each do |name, exists|
+          icon = exists ? '  ✓' : '  ✗'
+          puts "   #{icon} #{name}" unless exists
+        end
+      else
+        puts "   🎉 All assets complete!"
+      end
+    end
+    
+    puts "\n" + "=" * 80
+    puts "Summary:"
+    puts "  Total questions: #{total_questions}"
+    puts "  Enabled: #{enabled_questions}"
+    puts "  Fully configured: #{complete_assets}"
+    puts "  Needs attention: #{enabled_questions - complete_assets}"
+    puts "=" * 80 + "\n"
+  end
+  
+  desc 'Clean all generated assets (WARNING: destructive!)'
+  task :clean do
+    puts "⚠️  WARNING: This will delete all generated assets!"
+    print "Are you sure? Type 'yes' to confirm: "
+    
+    confirmation = STDIN.gets.chomp
+    
+    unless confirmation.downcase == 'yes'
+      puts "❌ Cancelled"
+      exit 0
+    end
+    
+    dirs_to_clean = [
+      File.expand_path('../prompts/scenarios', __FILE__),
+      File.expand_path('../policies', __FILE__),
+      File.expand_path('../examples', __FILE__),
+      File.expand_path('../config/tools', __FILE__),
+      File.expand_path('../tools', __FILE__)
+    ]
+    
+    dirs_to_clean.each do |dir|
+      if Dir.exist?(dir)
+        file_count = Dir.glob(File.join(dir, '*')).length
+        FileUtils.rm_rf(Dir.glob(File.join(dir, '*')))
+        puts "🗑️  Cleaned #{file_count} files from #{File.basename(dir)}"
+      end
+    end
+    
+    puts "✅ Clean complete"
+  end
+end
+
+task default: 'questions:status'

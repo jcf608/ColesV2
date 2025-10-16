@@ -1,0 +1,199 @@
+<div class="decisions-hero">
+  <div class="container">
+    <div class="hero-content">
+      <img src="/kyndryl_logo.png" alt="Kyndryl" class="page-logo">
+      <h1>📋 Decision History</h1>
+      <p class="hero-subtitle">AI-powered recommendations keeping your produce fresh and your margins fresh-er! 🎯</p>
+    </div>
+  </div>
+</div>
+
+<div class="container decisions-container">
+  
+  <!-- Quick Stats Overview -->
+  <div class="quick-stats-bar">
+    <div class="quick-stat">
+      <div class="stat-icon">✅</div>
+      <div class="stat-content">
+        <div class="stat-number">94%</div>
+        <div class="stat-label">Approval Rate</div>
+      </div>
+    </div>
+    <div class="quick-stat">
+      <div class="stat-icon">💰</div>
+      <div class="stat-content">
+        <div class="stat-number">$18K</div>
+        <div class="stat-label">Recovered</div>
+      </div>
+    </div>
+    <div class="quick-stat">
+      <div class="stat-icon">📉</div>
+      <div class="stat-content">
+        <div class="stat-number">67%</div>
+        <div class="stat-label">Waste ↓</div>
+      </div>
+    </div>
+    <div class="quick-stat">
+      <div class="stat-icon">⚡</div>
+      <div class="stat-content">
+        <div class="stat-number">1.2s</div>
+        <div class="stat-label">Response</div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Recent Decisions Timeline -->
+  <div class="decisions-section">
+    <h2 class="section-title">Recent Decisions</h2>
+    
+    <div class="decisions-grid">
+      <% @recent_decisions.each do |decision| %>
+      <div class="decision-card-fancy <%= decision[:approved] ? 'approved' : 'rejected' %>">
+        <div class="card-corner-accent"></div>
+        
+        <div class="decision-card-header">
+          <div class="product-title">
+            <span class="product-emoji">🤔</span>
+            <h3><%= decision[:product] %></h3>
+          </div>
+          <div class="decision-badge <%= decision[:approved] ? 'badge-approved' : 'badge-rejected' %>">
+            <% if decision[:approved] %>
+              <span class="badge-icon">✓</span> Approved
+            <% else %>
+              <span class="badge-icon">✗</span> Rejected
+            <% end %>
+          </div>
+        </div>
+        
+        <div class="decision-card-body">
+          <div class="decision-detail">
+            <span class="detail-icon">🎯</span>
+            <div class="detail-content">
+              <label>Decision</label>
+              <strong><%= decision[:decision] %></strong>
+            </div>
+          </div>
+          
+          <div class="decision-detail">
+            <span class="detail-icon">💡</span>
+            <div class="detail-content">
+              <label>Reasoning</label>
+              <p><%= decision[:reason] %></p>
+            </div>
+          </div>
+          
+          <div class="decision-metrics">
+            <div class="metric-pill margin-pill">
+              <span class="pill-label">Margin</span>
+              <span class="pill-value"><%= decision[:margin] %></span>
+            </div>
+            <div class="metric-pill time-pill">
+              <span class="pill-label">Time</span>
+              <span class="pill-value"><%= decision[:timestamp].strftime('%I:%M %p') %></span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="decision-card-footer">
+          <button class="btn-details" onclick="viewDetails('<%= decision[:product] %>')">
+            <span>View Full Analysis</span>
+            <span class="btn-arrow">→</span>
+          </button>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  
+  <!-- Analytics Dashboard -->
+  <div class="analytics-dashboard">
+    <h2 class="section-title">Performance Analytics</h2>
+    
+    <div class="analytics-cards-grid">
+      <div class="analytics-card-fancy card-teal">
+        <div class="card-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <div class="card-metric">
+          <div class="metric-value">94%</div>
+          <div class="metric-label">Approval Rate</div>
+        </div>
+        <div class="card-description">
+          Decisions approved by policy engine
+        </div>
+        <div class="card-trend trend-up">
+          <span class="trend-arrow">↑</span>
+          <span>+5% from last month</span>
+        </div>
+      </div>
+      
+      <div class="analytics-card-fancy card-aqua">
+        <div class="card-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+        </div>
+        <div class="card-metric">
+          <div class="metric-value">$18,234</div>
+          <div class="metric-label">Margin Recovery</div>
+        </div>
+        <div class="card-description">
+          Total margin recovered this month
+        </div>
+        <div class="card-trend trend-up">
+          <span class="trend-arrow">↑</span>
+          <span>$2.1K from optimizations</span>
+        </div>
+      </div>
+      
+      <div class="analytics-card-fancy card-green">
+        <div class="card-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+        </div>
+        <div class="card-metric">
+          <div class="metric-value">67%</div>
+          <div class="metric-label">Waste Reduction</div>
+        </div>
+        <div class="card-description">
+          Decrease versus baseline
+        </div>
+        <div class="card-trend trend-up">
+          <span class="trend-arrow">↑</span>
+          <span>12% improvement</span>
+        </div>
+      </div>
+      
+      <div class="analytics-card-fancy card-red">
+        <div class="card-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+        </div>
+        <div class="card-metric">
+          <div class="metric-value">1.2s</div>
+          <div class="metric-label">Response Time</div>
+        </div>
+        <div class="card-description">
+          Average decision latency
+        </div>
+        <div class="card-trend trend-neutral">
+          <span class="trend-arrow">→</span>
+          <span>Stable performance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+
+<script>
+function viewDetails(product) {
+  alert(`📊 Loading detailed analytics for ${product}...\n\nThis would show:\n• Full decision history\n• Price trends\n• Velocity analysis\n• Margin breakdown\n• Competitor pricing`);
+}
+</script>

@@ -1,0 +1,93 @@
+TRAINING EXAMPLE: Critical Systems Status Check
+
+USER QUESTION:
+"What is the current status of all critical systems?"
+
+AGENT INTERNAL REASONING:
+The user is asking for a comprehensive overview of critical systems. As a grocery manager's assistant, I need to check all systems that directly impact store operations, customer experience, and safety. Critical systems typically include:
+- Point of Sale (POS) systems
+- Refrigeration units
+- Inventory management system  
+- Security systems
+- HVAC systems
+- Power/electrical systems
+- Network connectivity
+- Fire safety systems
+
+I should prioritize systems by business impact and check for any alerts, performance issues, or maintenance needs.
+
+TOOLS CALLED:
+1. check_pos_systems() - Need to verify all checkout lanes are operational
+2. monitor_refrigeration_units() - Critical for food safety and loss prevention
+3. check_inventory_system() - Essential for stock management and ordering
+4. verify_security_systems() - Important for theft prevention and safety
+5. check_hvac_status() - Affects customer comfort and equipment operation
+6. monitor_power_systems() - Foundation for all other systems
+7. test_network_connectivity() - Required for POS and inventory systems
+8. check_fire_safety_systems() - Regulatory compliance and safety
+
+ANALYSIS PERFORMED:
+
+POS Systems Check:
+- 8 of 8 checkout lanes: OPERATIONAL
+- Self-checkout stations: 5 of 6 operational (Station 3 has scanner malfunction)
+- Average transaction time: 2.3 minutes (within normal range)
+- Payment processing: All methods functional
+
+Refrigeration Status:
+- Dairy coolers: 36°F - NORMAL
+- Frozen food units: -2°F - NORMAL  
+- Deli case: 38°F - NORMAL
+- Produce misters: Operational
+- Freezer Unit 4: ALERT - Temperature at 8°F (should be 0°F)
+
+Inventory System:
+- Database connectivity: OPERATIONAL
+- Last sync with suppliers: 45 minutes ago - NORMAL
+- Barcode scanning accuracy: 99.2% - GOOD
+- Low stock alerts: 23 items flagged for reorder
+
+Security Systems:
+- CCTV cameras: 31 of 32 operational (Camera 12 offline - parking lot east)
+- Door sensors: All functional
+- Anti-theft gates: Operational
+- Panic buttons: All tested and functional
+
+HVAC System:
+- Store temperature: 72°F - OPTIMAL
+- Humidity: 45% - NORMAL
+- Air circulation: All zones operational
+
+Power Systems:
+- Main power: STABLE
+- UPS battery backup: 95% capacity - GOOD
+- Generator: Last test passed (monthly test due in 5 days)
+
+Network Connectivity:
+- Internet connection: 847 Mbps down/92 Mbps up - EXCELLENT
+- Internal network: All switches operational
+- WiFi for customers: Operational
+
+Fire Safety:
+- Smoke detectors: All functional
+- Sprinkler system: Operational (last inspection 3 months ago)
+- Fire extinguishers: 18 of 18 properly charged
+- Emergency exits: All clear and properly lit
+
+FINAL RECOMMENDATION:
+
+OVERALL STATUS: MOSTLY OPERATIONAL with 3 PRIORITY ISSUES
+
+Immediate Actions Required:
+1. HIGH PRIORITY: Freezer Unit 4 temperature is 8°F above normal. This could lead to product spoilage and food safety violations. Recommend immediate maintenance call and temporary product relocation.
+
+2. MEDIUM PRIORITY: Self-checkout Station 3 scanner malfunction is reducing customer throughput. Schedule repair within 24 hours or consider temporary closure with signage.
+
+3. LOW PRIORITY: Security Camera 12 (east parking lot) is offline, creating a blind spot. Replace or repair within 48 hours for complete coverage.
+
+Preventive Maintenance Due:
+- Generator monthly test due in 5 days
+- HVAC filter replacement recommended (based on usage hours)
+- Fire sprinkler system annual inspection due in 3 months
+
+Overall Assessment: Your store's critical systems are performing well with 94% operational status. The refrigeration issue requires immediate attention to prevent product loss and maintain food safety compliance. All other systems are within normal parameters and supporting efficient store operations.

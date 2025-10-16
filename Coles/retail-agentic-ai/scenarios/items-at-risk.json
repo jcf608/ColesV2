@@ -1,0 +1,25 @@
+{
+  "scenario_name": "Items at Risk of Spoilage",
+  "scenario_id": "items-at-risk",
+  "created_at": "2025-10-16T18:35:43+11:00",
+  "description": "This scenario identifies produce items approaching expiration or quality degradation that require immediate markdown decisions to minimize waste. The agent analyzes inventory levels, expiration timelines, and sales velocity to recommend optimal pricing strategies before products become unsellable.",
+  "sample_questions": [
+    "Which items in produce section expire in the next 2 days and need markdown consideration?",
+    "Should I mark down the organic strawberries that expire tomorrow - what percentage would minimize loss?",
+    "I have 50 units of bagged salad mix expiring Thursday - what's the recommended markdown strategy?"
+  ],
+  "files": {
+    "system_prompt": "prompts/scenarios/items-at-risk.txt",
+    "policy_text": "policies/items-at-risk.txt",
+    "policy_json": "policies/items-at-risk.json",
+    "example": "examples/items-at-risk.txt",
+    "tools_config": "app/config/tools/items-at-risk_tools.json",
+    "tools_implementation": "app/tools/items-at-risk_tools.rb",
+    "ask_question": "ask_questions/items-at-risk.json"
+  },
+  "quick_action": {
+    "icon": "⚠️",
+    "label": "Items at Risk",
+    "question": "What products need attention today?"
+  }
+}

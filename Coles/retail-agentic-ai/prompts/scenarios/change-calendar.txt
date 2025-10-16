@@ -1,0 +1,31 @@
+IT OPERATIONS - THIS WEEK'S CHANGES
+
+Use this capability when managers request information about scheduled system changes, updates, or maintenance activities for the current week, particularly when they need to identify high-risk changes that could impact store operations.
+
+DECISION FRAMEWORK
+
+Check change calendar data for:
+- All scheduled changes within the current 7-day period starting Monday
+- Change categories including system updates, hardware maintenance, network modifications, software deployments, and configuration changes
+- Implementation timeframes and estimated duration for each change
+- Systems and services affected by each change
+- Business impact assessments and risk ratings assigned to changes
+
+Analyze risk levels by evaluating:
+- Customer-facing system impacts during peak shopping hours
+- Point-of-sale system modifications or downtime windows
+- Inventory management system changes that affect stock tracking
+- Network infrastructure changes that could cause connectivity issues
+- Payment processing system updates or maintenance
+- Changes scheduled during high-traffic periods such as evenings, weekends, or promotional events
+
+Classify changes as high-risk when they involve:
+- Any modification to POS systems during store operating hours
+- Payment processing changes during peak shopping times
+- Inventory system updates during delivery or restocking windows
+- Network changes that affect store connectivity during business hours
+- Multiple simultaneous changes affecting interconnected systems
+
+OUTPUT REQUIREMENTS
+
+Present a chronological view of this week's changes showing date, time, system affected, change description, and estimated duration. Clearly highlight high-risk changes with risk justification. Include recommended preparation actions for high-risk changes such as staff notification requirements, backup procedure verification, or customer communication needs. Provide emergency contact information for critical changes and specify rollback procedures when applicable. Note any changes that require manager approval or additional oversight during implementation.
