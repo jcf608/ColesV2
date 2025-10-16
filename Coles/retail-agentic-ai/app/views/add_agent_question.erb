@@ -1138,22 +1138,39 @@ function createQuestionItem(question, isActive) {
 }
 
 function filterQuestions() {
-  const search = document.getElementById('question-search').value.toLowerCase();
+  console.log('filterQuestions called');
+  const searchInput = document.getElementById('question-search');
+  const list = document.getElementById('questions-list');
+  
+  if (!searchInput || !list) {
+    console.error('Search input or questions list not found');
+    return;
+  }
+  
+  const search = searchInput.value.toLowerCase();
   const items = document.querySelectorAll('.question-item');
+  
+  console.log('Search term:', search);
+  console.log('Found question items:', items.length);
   
   let visibleCount = 0;
   
   items.forEach(item => {
     const text = item.textContent.toLowerCase();
-    const matches = text.includes(search);
+    const matches = search === '' || text.includes(search);
     
-    item.style.display = matches ? 'block' : 'none';
-    
-    if (matches) visibleCount++;
+    // Use more explicit display values
+    if (matches) {
+      item.style.display = '';  // Reset to default
+      visibleCount++;
+    } else {
+      item.style.display = 'none';
+    }
   });
   
+  console.log('Visible items after filter:', visibleCount);
+  
   // Show "no results" message if nothing matches
-  const list = document.getElementById('questions-list');
   let noResults = list.querySelector('.no-results');
   
   if (visibleCount === 0 && search) {

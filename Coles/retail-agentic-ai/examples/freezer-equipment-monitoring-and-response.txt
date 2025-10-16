@@ -1,0 +1,108 @@
+USER: Freezer unit 3 is showing 15°F instead of -5°F - what's our immediate action plan for the $8,000 of frozen goods inside?
+
+AGENT INTERNAL REASONING:
+This is a critical temperature failure requiring immediate assessment and action. At 15°F, we're in the danger zone where product quality degrades rapidly but some items may still be salvageable. I need to:
+1. Get inventory details for freezer unit 3 to understand what products and quantities are at risk
+2. Check sales velocity to prioritize which items to move/markdown first
+3. Validate any emergency markdown pricing against policy
+4. Provide a time-critical action plan
+
+Key considerations:
+- Every minute counts - product integrity decreasing rapidly
+- $8,000 inventory value requires immediate intervention
+- Need to balance salvage operations vs total loss
+- Must follow food safety protocols
+
+TOOL CALLS:
+
+get_inventory_status(product_id="FREEZER_UNIT_3", store_id="STORE_001", include_supply_schedule=true)
+
+RESULT: {
+  "total_value": 8247.50,
+  "products": [
+    {"product_id": "FZ_PIZZA_001", "name": "Premium Frozen Pizza", "quantity": 48, "value": 1440.00, "temp_tolerance": "Critical_2hrs"},
+    {"product_id": "FZ_ICECREAM_002", "name": "Ben & Jerry's Pints", "quantity": 144, "value": 2016.00, "temp_tolerance": "Critical_1hr"},
+    {"product_id": "FZ_MEAT_003", "name": "Ground Beef 1lb", "quantity": 32, "value": 1280.00, "temp_tolerance": "Moderate_4hrs"},
+    {"product_id": "FZ_VEGGIES_004", "name": "Frozen Vegetables Mix", "quantity": 60, "value": 720.00, "temp_tolerance": "High_8hrs"},
+    {"product_id": "FZ_MEALS_005", "name": "Frozen Dinners", "quantity": 84, "value": 2791.50, "temp_tolerance": "Moderate_3hrs"}
+  ],
+  "temperature_log": "15°F for 45 minutes",
+  "next_delivery": "Tomorrow 6 AM"
+}
+
+query_sales_velocity(product_id="FZ_ICECREAM_002", store_id="STORE_001", days_back=7)
+
+RESULT: {
+  "daily_avg_sales": 24,
+  "velocity_trend": "+12% vs baseline",
+  "days_to_sell_current": 6
+}
+
+check_pricing_policy(product_id="FZ_ICECREAM_002", current_price=14.00, proposed_price=7.00, reason_code="EQUIPMENT_EMERGENCY")
+
+RESULT: {
+  "approved": true,
+  "margin_impact": "-64%",
+  "approval_token": "EMRG_7429X",
+  "note": "Emergency equipment failure override approved"
+}
+
+ANALYSIS:
+
+Time Criticality Assessment:
+- Ice cream: MOST CRITICAL - 1 hour tolerance, already 45 minutes in danger zone
+- Frozen pizzas: CRITICAL - 2 hour tolerance, 1.25 hours remaining
+- Frozen meals: MODERATE - 3 hour tolerance, 2.25 hours remaining
+- Ground beef: MODERATE - 4 hour tolerance, 3.25 hours remaining
+- Frozen vegetables: LOWEST RISK - 8 hour tolerance, 7.25 hours remaining
+
+Financial Impact:
+- Total at-risk inventory: $8,247.50
+- Immediate action needed on $5,247.50 (ice cream + pizza + meals)
+- Potential total loss if no action: $8,247.50
+- Estimated salvage with immediate action: $6,500-7,000
+
+Action Priority Matrix:
+1. Ice cream ($2,016) - Emergency 50% markdown, move to backup freezer immediately
+2. Pizzas ($1,440) - 30% markdown, customer announcement for quick sale
+3. Frozen meals ($2,791.50) - 25% markdown, promote for dinner rush
+4. Ground beef ($1,280) - Monitor, potential 15% markdown in 2 hours
+5. Vegetables ($720) - Lowest priority, monitor temperature
+
+RECOMMENDATION:
+
+IMMEDIATE ACTION PLAN (Next 15 minutes):
+
+1. EMERGENCY INVENTORY TRANSFER
+   - Move all 144 ice cream pints to backup freezer unit 5 IMMEDIATELY
+   - Relocate 24 premium pizzas to freezer unit 1 (save highest margin items)
+   - Document temperature exposure time for food safety compliance
+
+2. EMERGENCY MARKDOWN IMPLEMENTATION
+   - Ice cream: 50% off (was $14.00, now $7.00) - Use approval token EMRG_7429X
+   - Premium pizzas: 30% off for quick turnover
+   - Frozen meals: 25% off, promote for tonight's dinner rush
+   
+3. IMMEDIATE CUSTOMER COMMUNICATION
+   - PA announcement: "Flash freezer sale - 50% off all ice cream, while supplies last"
+   - Social media post about emergency sale (could drive traffic)
+   - Staff deployment: 2 associates to freezer section for customer assistance
+
+4. OPERATIONAL RESPONSE
+   - Call repair service - request emergency/same-day service
+   - Document incident for insurance claim
+   - Check other freezer units for sympathetic failures
+   - Prepare incident report for district manager
+
+PROJECTED OUTCOME:
+- Estimated salvage: $6,800 (82% recovery vs total loss)
+- Time to clear critical inventory: 3-4 hours with aggressive pricing
+- Customer satisfaction: High due to perceived value from emergency sales
+
+MONITORING REQUIRED:
+- Temperature checks every 30 minutes on remaining inventory
+- Sales velocity tracking on marked-down items
+- Freezer repair status updates
+- Backup freezer capacity management
+
+This plan prioritizes immediate product preservation while maintaining food safety standards and converting potential total loss into customer value proposition.

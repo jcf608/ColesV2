@@ -1,0 +1,25 @@
+{
+  "scenario_name": "Freezer Equipment Monitoring and Response",
+  "scenario_id": "freezer-equipment-monitoring-and-response",
+  "created_at": "2025-10-17T07:38:58+11:00",
+  "description": "This scenario handles freezer equipment malfunctions, temperature alerts, and emergency response protocols to prevent product loss. The agent monitors freezer performance, assesses risk to frozen inventory, and coordinates immediate action plans including product transfers, repair schedules, and markdown decisions for compromised items.",
+  "sample_questions": [
+    "Freezer unit 3 is showing 15°F instead of -5°F - what's our immediate action plan for the $8,000 of frozen goods inside?",
+    "The walk-in freezer has been down for 2 hours and repair won't arrive until tomorrow - which products need emergency markdowns?",
+    "Temperature alarm went off overnight in freezer section - how do I assess what inventory is still sellable versus total loss?"
+  ],
+  "files": {
+    "system_prompt": "prompts/scenarios/freezer-equipment-monitoring-and-response.txt",
+    "policy_text": "policies/freezer-equipment-monitoring-and-response.txt",
+    "policy_json": "policies/freezer-equipment-monitoring-and-response.json",
+    "example": "examples/freezer-equipment-monitoring-and-response.txt",
+    "tools_config": "config/operations/freezer-equipment-monitoring-and-response.json",
+    "tools_implementation": "tools/operations/freezer-equipment-monitoring-and-response.rb",
+    "ask_question": "ask_questions/freezer-equipment-monitoring-and-response.json"
+  },
+  "quick_action": {
+    "icon": "⚠️",
+    "label": "Check Refrigerators.",
+    "question": "Are the freezers okay?"
+  }
+}

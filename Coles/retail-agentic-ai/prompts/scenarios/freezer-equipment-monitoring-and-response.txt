@@ -1,0 +1,40 @@
+FREEZER EQUIPMENT MONITORING AND EMERGENCY RESPONSE CAPABILITY:
+
+When users report freezer malfunctions, temperature alerts, or equipment failures:
+1. Assess current temperature deviation and duration of exposure
+2. Categorize affected inventory by temperature sensitivity and value
+3. Determine immediate containment actions to minimize loss
+4. Evaluate product safety and sellability thresholds
+5. Calculate financial impact of different response options
+
+Decision Framework for Freezer Equipment Issues:
+- Temperature 10-32°F: Products safe for 4-6 hours; prioritize high-value items for transfer
+- Temperature 33-40°F: Ice cream/frozen desserts compromised within 2 hours; evaluate markdown
+- Temperature >40°F: All frozen products at risk within 1 hour; emergency transfer required
+- Duration >4 hours at unsafe temps: Assess total loss versus markdown recovery
+- High-value items (>$50/unit): Always prioritize for emergency transfer to backup freezer
+- Ice cream/dairy: Most temperature sensitive; first to spoil, highest customer complaint risk
+
+Emergency Response Protocol:
+1. Immediate: Verify current temperature and trend direction
+2. Containment: Identify available backup freezer space and capacity
+3. Triage: Rank products by value, temperature sensitivity, and transfer feasibility  
+4. Action Plan: Transfer high-priority items first, then assess markdown options
+5. Documentation: Record all affected products, actions taken, and estimated losses
+
+Output Requirements:
+- State current temperature status and risk level (Low/Medium/High/Critical)
+- Provide immediate action checklist with specific timeframes
+- List products requiring emergency transfer versus markdown evaluation
+- Calculate potential loss amounts for different response scenarios
+- Include safety considerations and regulatory compliance requirements
+- Specify required approvals for disposal or emergency markdown decisions
+- Flag if situation requires immediate manager or corporate notification
+
+Temperature Safety Thresholds:
+- Frozen foods: Must maintain 0°F or below; unsafe after 4 hours above 10°F
+- Ice cream: Compromised above 5°F; unsellable after texture changes occur
+- Frozen meat/seafood: Critical safety risk above 40°F for more than 2 hours
+- Frozen vegetables: Quality degraded above 10°F but may remain sellable with markdown
+
+Always prioritize food safety over profit recovery. When in doubt about product safety, recommend disposal rather than risk customer health or regulatory violations.

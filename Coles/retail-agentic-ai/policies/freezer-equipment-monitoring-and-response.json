@@ -1,0 +1,123 @@
+{
+  "policy": {
+    "name": "Freezer Equipment Monitoring and Emergency Response",
+    "version": "1.0",
+    "effective_date": "2024-01-01",
+    "monitoring": {
+      "temperature_logging_interval_minutes": 15,
+      "visual_inspection_frequency": "twice_daily",
+      "maintenance_log_frequency": "weekly",
+      "alert_threshold_temp_f": -10,
+      "alert_threshold_duration_minutes": 30
+    },
+    "response_thresholds": {
+      "minor_deviation": {
+        "temp_range_f": {
+          "min": -10,
+          "max": -8
+        },
+        "duration_minutes": {
+          "min": 30,
+          "max": 60
+        },
+        "required_approval": "none",
+        "response_time_minutes": 30,
+        "actions": [
+          "basic_troubleshooting",
+          "enhanced_monitoring"
+        ]
+      },
+      "moderate_deviation": {
+        "temp_range_f": {
+          "min": -8,
+          "max": -5
+        },
+        "duration_minutes": {
+          "min": 30,
+          "max": 120
+        },
+        "required_approval": "assistant_manager",
+        "response_time_minutes": 15,
+        "maintenance_contact_hours": 2,
+        "actions": [
+          "inventory_assessment",
+          "prepare_transfer",
+          "enhanced_documentation"
+        ]
+      },
+      "severe_deviation": {
+        "temp_range_f": {
+          "min": -5,
+          "max": 32
+        },
+        "duration_minutes": 1,
+        "required_approval": "store_manager",
+        "response_time_minutes": 15,
+        "actions": [
+          "cease_stocking",
+          "emergency_transfer",
+          "inventory_segregation"
+        ]
+      },
+      "critical_failure": {
+        "temp_threshold_f": 40,
+        "response_time_minutes": 15,
+        "required_contacts": [
+          "emergency_maintenance",
+          "district_operations",
+          "food_safety_coordinator"
+        ],
+        "contact_time_limit_minutes": 30,
+        "actions": [
+          "immediate_disposition",
+          "emergency_protocol"
+        ]
+      }
+    },
+    "transfer_procedures": {
+      "priority_items": [
+        "seafood",
+        "premium_ice_cream",
+        "specialty_frozen"
+      ],
+      "relocation_time_limit_hours": 4,
+      "capacity_confirmation_required": true
+    },
+    "approval_matrix": {
+      "product_transfer": "assistant_manager",
+      "markdown_under_500": "store_manager",
+      "markdown_over_500": "district_manager",
+      "product_disposal": "food_safety_coordinator"
+    },
+    "safety_limits": {
+      "general_frozen": {
+        "temp_threshold_f": 10,
+        "time_limit_hours": 2
+      },
+      "ice_cream_dairy": {
+        "temp_threshold_f": 5,
+        "time_limit_hours": 1
+      },
+      "raw_meat_seafood": {
+        "temp_threshold_f": 32,
+        "time_limit_hours": 1
+      }
+    },
+    "documentation": {
+      "incident_log_required": true,
+      "photo_evidence_disposal": true,
+      "district_report_hours": 24,
+      "required_signatures": [
+        "receiving_confirmation",
+        "disposal_approval"
+      ],
+      "financial_impact_assessment": true
+    },
+    "emergency_contacts": {
+      "maintain_current_info": true,
+      "backup_storage_arrangements": true,
+      "inter_store_communication": true,
+      "facilities_coordination": true
+    }
+  }
+}

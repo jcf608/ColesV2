@@ -1,61 +1,203 @@
 <div class="hero">
-  <h1>🤔 Produce Optimization Agent</h1>
+           <button class="action-item" onclick="askQuestion('Show me products exp          <button class="action-item" onclick="askQuestion('What is the current status of all critical systems?')">
+            <span class="action-icon">💻</span>
+            <span class="action-label">Critical Systems Status</span>
+          </button>g in 2 days')">
+            <span class="action-icon">📅</span>
+            <span class="action-label">Expiring Soon</span>
+          </button>
+          <button class="action-item" onclick="askQuestion('What products need attention today?')">
+            <span class="action-icon">⚠️</span>
+            <span class="action-label">Items at Risk</span>
+          </button>
+          <button class="action-item" onclick="askQuestion('What are competitor prices for berries?')">
+            <span class="action-icon">💰</span>
+            <span class="action-label">Competitor Pricing</span>
+          </button>
+          <button class="action-item" onclick="askQuestion('How can I get restock sooner? What are my options?')">
+            <span class="action-icon">📦</span>
+            <span class="action-label">Restock Options</span>
+          </button>
+        </div>
+      </div>ptimization Agent</h1>
   <p class="hero-subtitle">AI-powered markdown decisions that minimize waste and protect margins</p>
 </div>
 
 <div class="container">
-  <div class="chat-container">
-    <div class="chat-header">
-      <h2>Ask the Agent</h2>
-      <span class="status-indicator">● Online</span>
-    </div>
+  <div class="main-layout">
+    <!-- Left Sidebar for Questions -->
+    <div class="questions-sidebar">
+      <h3>Quick Actions</h3>
+    <h3>Quick Actions</h3>
     
-    <div id="chat-messages" class="chat-messages">
-      <div class="message agent-message">
-        <div class="message-avatar">🤔</div>
-        <div class="message-content">
-          <p>Hello! I'm your produce optimization agent. I can help you make data-driven markdown decisions.</p>
-          <p>Try asking me things like:</p>
-          <ul>
-            <li>"Should we mark down organic strawberries today?"</li>
-            <li>"What's the inventory status for blueberries?"</li>
-            <li>"Check competitor pricing for berries"</li>
-          </ul>
+    <!-- Inventory & Retail Operations -->
+    <div class="category-section">
+      <div class="category-header" onclick="toggleCategory('inventory')">
+        <h4>🛒 Inventory & Retail</h4>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="category-content" id="inventory-content">
+        <div class="action-list">
+        <button class="action-card" onclick="askQuestion('Show me products expiring in 2 days')">
+          <span class="action-icon">📅</span>
+          <span class="action-label">Expiring Soon</span>
+        </button>
+        <button class="action-card" onclick="askQuestion('What products need attention today?')">
+          <span class="action-icon">⚠️</span>
+          <span class="action-label">Items at Risk</span>
+        </button>
+        <button class="action-card" onclick="askQuestion('What are competitor prices for berries?')">
+          <span class="action-icon">💰</span>
+          <span class="action-label">Competitor Pricing</span>
+        </button>
+        <button class="action-card" onclick="askQuestion('How can I get restock sooner? What are my options?')">
+          <span class="action-icon">�</span>
+          <span class="action-label">Restock Options</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Policy & Compliance -->
+    <div class="category-section">
+      <div class="category-header" onclick="toggleCategory('policy')">
+        <h4>📋 Policy & Compliance</h4>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="category-content" id="policy-content">
+        <div class="action-list">
+          <button class="action-item" onclick="askQuestion('Check pricing policy for 30% markdown')">
+            <span class="action-icon">✅</span>
+            <span class="action-label">Policy Check</span>
+          </button>
         </div>
       </div>
     </div>
-    
-    <form id="chat-form" class="chat-input-form">
-      <input 
-        type="text" 
-        id="message-input" 
-        class="chat-input" 
-        placeholder="Ask about markdowns, inventory, pricing..."
-        autocomplete="off"
-      >
-      <button type="submit" class="chat-submit">Send</button>
-    </form>
-  </div>
-  
-  <div class="quick-actions">
-    <h3>Quick Actions</h3>
-    <div class="action-grid">
-      <button class="action-card" onclick="askQuestion('What products need attention today?')">
-        <span class="action-icon">⚠️</span>
-        <span class="action-label">Items at Risk</span>
-      </button>
-      <button class="action-card" onclick="askQuestion('Show me products expiring in 2 days')">
-        <span class="action-icon">📅</span>
-        <span class="action-label">Expiring Soon</span>
-      </button>
-      <button class="action-card" onclick="askQuestion('What are competitor prices for berries?')">
-        <span class="action-icon">💰</span>
-        <span class="action-label">Competitor Pricing</span>
-      </button>
-      <button class="action-card" onclick="askQuestion('Check pricing policy for 30% markdown')">
-        <span class="action-icon">✅</span>
-        <span class="action-label">Policy Check</span>
-      </button>
+
+    <!-- Staffing & Operations -->
+    <div class="category-section">
+      <div class="category-header" onclick="toggleCategory('staffing')">
+        <h4>👥 Staffing & Operations</h4>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="category-content" id="staffing-content">
+        <div class="action-list">
+          <button class="action-item" onclick="askQuestion('Which stores need additional staff this weekend?')">
+            <span class="action-icon">👥</span>
+            <span class="action-label">Staff Allocation</span>
+          </button>
+          <button class="action-item" onclick="askQuestion('How will tomorrow\'s weather affect my produce orders?')">
+            <span class="action-icon">🌧️</span>
+            <span class="action-label">Weather Impact</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- IT Operations -->
+    <div class="category-section">
+      <div class="category-header" onclick="toggleCategory('it-operations')">
+        <h4>💻 IT Operations</h4>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="category-content" id="it-operations-content">
+        <div class="action-list">
+        <button class="action-card" onclick="askQuestion('What is the current status of all critical systems?')">
+          <span class="action-icon">�</span>
+          <span class="action-label">Critical Systems Status</span>
+        </button>
+          <button class="action-item" onclick="askQuestion('Run a health check on all production systems and alert on any issues')">
+            <span class="action-icon">💚</span>
+            <span class="action-label">System Health Check</span>
+          </button>
+          <button class="action-item" onclick="askQuestion('What is the status of last night\'s backups across all systems?')">
+            <span class="action-icon">💾</span>
+            <span class="action-label">Backup Status</span>
+          </button>
+          <button class="action-item" onclick="askQuestion('Show me this week\'s change calendar and any high-risk changes')">
+            <span class="action-icon">📅</span>
+            <span class="action-label">This Week\'s Changes</span>
+          </button>
+          <button class="action-item" onclick="askQuestion('Summarize incidents from the past 24 hours and their current status')">
+            <span class="action-icon">⚡</span>
+            <span class="action-label">Recent Incidents</span>
+          </button>
+          <button class="action-item" onclick="askQuestion('Which systems are approaching capacity thresholds in the next 30 days?')">
+            <span class="action-icon">📊</span>
+            <span class="action-label">Capacity Forecast</span>
+          </button>
+      </div>
+    </div>
+
+    <!-- Security -->
+    <div class="category-section">
+      <div class="category-header" onclick="toggleCategory('security')">
+        <h4>🔒 Security</h4>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="category-content" id="security-content">
+        <div class="action-list">
+          <button class="action-item" onclick="askQuestion('Show me any active security alerts or vulnerabilities requiring attention')">
+            <span class="action-icon">🔒</span>
+            <span class="action-label">Security Alerts</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Emergency & Risk Management -->
+    <div class="category-section">
+      <div class="category-header" onclick="toggleCategory('emergency')">
+        <h4>🚨 Emergency & Risk</h4>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="category-content" id="emergency-content">
+        <div class="action-list">
+          <button class="action-item" onclick="askQuestion('Are the freezers okay?')">
+            <span class="action-icon">⚠️</span>
+            <span class="action-label">Check Refrigerators</span>
+          </button>
+          <button class="action-item" onclick="askQuestion('What would be the impact of a server outage on our critical systems?')">
+            <span class="action-icon">🚨</span>
+            <span class="action-label">Server Outage Impact</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Chat Area -->
+    <div class="chat-area">
+      <div class="chat-container">
+        <div class="chat-header">
+          <h2>Ask the Agent</h2>
+          <span class="status-indicator">● Online</span>
+        </div>
+        
+        <div id="chat-messages" class="chat-messages">
+          <div class="message agent-message">
+            <div class="message-avatar">🤔</div>
+            <div class="message-content">
+              <p>Hello! I'm your produce optimization agent. I can help you make data-driven markdown decisions.</p>
+              <p>Try asking me things like:</p>
+              <ul>
+                <li>"Should we mark down organic strawberries today?"</li>
+                <li>"What's the inventory status for blueberries?"</li>
+                <li>"Check competitor pricing for berries"</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <form id="chat-form" class="chat-input-form">
+          <input 
+            type="text" 
+            id="message-input" 
+            class="chat-input" 
+            placeholder="Ask about markdowns, inventory, pricing..."
+            autocomplete="off"
+          >
+          <button type="submit" class="chat-submit">Send</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
@@ -64,6 +206,32 @@
 <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <script>
+// Toggle category sections
+function toggleCategory(categoryId) {
+  const content = document.getElementById(categoryId + '-content');
+  const header = content.previousElementSibling;
+  const toggleIcon = header.querySelector('.toggle-icon');
+  
+  if (content.style.display === 'none') {
+    content.style.display = 'block';
+    toggleIcon.textContent = '▼';
+  } else {
+    content.style.display = 'none';
+    toggleIcon.textContent = '▶';
+  }
+}
+
+// Initialize all categories as expanded
+document.addEventListener('DOMContentLoaded', function() {
+  const categories = ['inventory', 'policy', 'staffing', 'it-operations', 'security', 'emergency'];
+  categories.forEach(category => {
+    const content = document.getElementById(category + '-content');
+    if (content) {
+      content.style.display = 'block';
+    }
+  });
+});
+
 const chatForm = document.getElementById('chat-form');
 const messageInput = document.getElementById('message-input');
 const chatMessages = document.getElementById('chat-messages');

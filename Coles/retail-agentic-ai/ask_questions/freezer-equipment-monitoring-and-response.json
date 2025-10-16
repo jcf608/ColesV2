@@ -1,0 +1,9 @@
+{
+  "id": "freezer-equipment-monitoring-and-response",
+  "icon": "⚠️",
+  "label": "Check Refrigerators.",
+  "question": "Are the freezers okay?",
+  "category": "custom",
+  "order": 100,
+  "enabled": true
+}

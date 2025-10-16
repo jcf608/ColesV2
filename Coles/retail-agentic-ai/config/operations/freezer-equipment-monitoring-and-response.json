@@ -1,0 +1,114 @@
+{
+  "category": "operations",
+  "module": "FreezerEquipmentMonitoringAndResponse",
+  "description": "This scenario handles freezer equipment malfunctions, temperature alerts, and emergency response protocols to prevent product loss. The agent monitors freezer performance, assesses risk to frozen inventory, and coordinates immediate action plans including product transfers, repair schedules, and markdown decisions for compromised items.",
+  "tools": [
+    {
+      "description": "Monitor current temperature and operational status of freezer equipment with alert thresholds",
+      "name": "check_freezer_status",
+      "parameters": {
+        "properties": {
+          "equipment_id": {
+            "type": "string"
+          },
+          "include_trend_data": {
+            "type": "boolean"
+          },
+          "store_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "store_id",
+          "equipment_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "description": "Assess product risk and inventory value in affected freezer units",
+      "name": "evaluate_inventory_risk",
+      "parameters": {
+        "properties": {
+          "equipment_id": {
+            "type": "string"
+          },
+          "temperature_threshold": {
+            "type": "number"
+          },
+          "time_exposed_hours": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "equipment_id",
+          "temperature_threshold",
+          "time_exposed_hours"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "description": "Find available freezer capacity and coordinate emergency product transfers",
+      "name": "coordinate_emergency_transfer",
+      "parameters": {
+        "properties": {
+          "destination_stores": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "priority_products": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "source_equipment_id": {
+            "type": "string"
+          },
+          "store_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "store_id",
+          "source_equipment_id"
+        ],
+        "type": "object"
+      }
+    },
+    {
+      "description": "Schedule repair service and estimate downtime for malfunctioning freezer equipment",
+      "name": "schedule_equipment_repair",
+      "parameters": {
+        "properties": {
+          "equipment_id": {
+            "type": "string"
+          },
+          "priority_level": {
+            "enum": [
+              "emergency",
+              "urgent",
+              "routine"
+            ],
+            "type": "string"
+          },
+          "store_id": {
+            "type": "string"
+          },
+          "symptom_description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "store_id",
+          "equipment_id",
+          "priority_level"
+        ],
+        "type": "object"
+      }
+    }
+  ]
+}
