@@ -1,0 +1,136 @@
+{
+  "category": "retail",
+  "module": "CompetitorPricing",
+  "description": "This scenario handles requests to analyze local competitor pricing for specific product categories to inform markdown and pricing decisions. The agent retrieves current market prices from nearby stores to ensure competitive positioning while maintaining margin requirements.",
+  "tools": [
+    {
+      "name": "get_competitor_pricing",
+      "description": "Retrieve current pricing for product category from local competitors within specified radius",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Product category (e.g. 'organic_berries', 'leafy_greens', 'citrus_fruits')"
+          },
+          "store_location": {
+            "type": "string",
+            "description": "Store address or location identifier"
+          },
+          "radius_miles": {
+            "type": "number",
+            "description": "Search radius in miles (default: 3)",
+            "default": 3
+          }
+        },
+        "required": [
+          "category",
+          "store_location"
+        ]
+      }
+    },
+    {
+      "name": "analyze_price_positioning",
+      "description": "Compare our current pricing against competitor data to identify pricing opportunities and risks",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "description": "Internal product identifier"
+          },
+          "current_price": {
+            "type": "number",
+            "description": "Our current price for the product"
+          },
+          "competitor_data": {
+            "type": "object",
+            "description": "Competitor pricing data from get_competitor_pricing"
+          },
+          "margin_threshold": {
+            "type": "number",
+            "description": "Minimum acceptable margin percentage (default: 20)",
+            "default": 20
+          }
+        },
+        "required": [
+          "product_id",
+          "current_price",
+          "competitor_data"
+        ]
+      }
+    },
+    {
+      "name": "get_market_price_trends",
+      "description": "Retrieve historical price trends for category over specified period to identify market direction",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Product category to analyze"
+          },
+          "store_location": {
+            "type": "string",
+            "description": "Store location for local market data"
+          },
+          "days_back": {
+            "type": "integer",
+            "description": "Number of days of historical data (default: 30)",
+            "default": 30
+          },
+          "include_seasonality": {
+            "type": "boolean",
+            "description": "Include seasonal adjustment factors (default: true)",
+            "default": true
+          }
+        },
+        "required": [
+          "category",
+          "store_location"
+        ]
+      }
+    },
+    {
+      "name": "calculate_competitive_markdown",
+      "description": "Calculate optimal markdown price based on competitor positioning and inventory urgency",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "product_id": {
+            "type": "string",
+            "description": "Product to calculate markdown for"
+          },
+          "current_price": {
+            "type": "number",
+            "description": "Current selling price"
+          },
+          "cost_basis": {
+            "type": "number",
+            "description": "Product cost basis"
+          },
+          "competitor_avg_price": {
+            "type": "number",
+            "description": "Average competitor price from market data"
+          },
+          "days_until_expiry": {
+            "type": "integer",
+            "description": "Days until product expires or quality degrades"
+          },
+          "inventory_units": {
+            "type": "integer",
+            "description": "Current inventory level in units"
+          }
+        },
+        "required": [
+          "product_id",
+          "current_price",
+          "cost_basis",
+          "competitor_avg_price",
+          "days_until_expiry",
+          "inventory_units"
+        ]
+      }
+    }
+  ]
+}

@@ -107,12 +107,28 @@
     }
   },
   "alerting_rules": {
-    "notification_channels": ["email", "sms", "slack", "pager"],
+    "notification_channels": [
+      "email",
+      "sms",
+      "slack",
+      "pager"
+    ],
     "escalation_matrix": {
-      "level_1": ["on_duty_technician"],
-      "level_2": ["it_supervisor", "store_manager"],
-      "level_3": ["it_manager", "regional_manager"],
-      "level_4": ["cto", "coo"]
+      "level_1": [
+        "on_duty_technician"
+      ],
+      "level_2": [
+        "it_supervisor",
+        "store_manager"
+      ],
+      "level_3": [
+        "it_manager",
+        "regional_manager"
+      ],
+      "level_4": [
+        "cto",
+        "coo"
+      ]
     },
     "business_hours": {
       "weekday_start": "06:00",

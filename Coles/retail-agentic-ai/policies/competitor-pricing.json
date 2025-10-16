@@ -57,30 +57,52 @@
       "max": 45
     },
     "seasonal_pricing": {
-      "peak_season_months": [6, 7, 8],
-      "off_season_months": [12, 1, 2],
+      "peak_season_months": [
+        6,
+        7,
+        8
+      ],
+      "off_season_months": [
+        12,
+        1,
+        2
+      ],
       "seasonal_variance_allowance": 25
     },
     "product_specific_constraints": {
       "strawberries": {
         "price_per_lb_min": 2.99,
         "price_per_lb_max": 8.99,
-        "standard_package_sizes": ["1lb", "2lb", "4lb"]
+        "standard_package_sizes": [
+          "1lb",
+          "2lb",
+          "4lb"
+        ]
       },
       "blueberries": {
         "price_per_lb_min": 3.99,
         "price_per_lb_max": 12.99,
-        "standard_package_sizes": ["6oz", "1lb", "2lb"]
+        "standard_package_sizes": [
+          "6oz",
+          "1lb",
+          "2lb"
+        ]
       },
       "raspberries": {
         "price_per_lb_min": 4.99,
         "price_per_lb_max": 15.99,
-        "standard_package_sizes": ["6oz", "12oz"]
+        "standard_package_sizes": [
+          "6oz",
+          "12oz"
+        ]
       },
       "blackberries": {
         "price_per_lb_min": 4.49,
         "price_per_lb_max": 13.99,
-        "standard_package_sizes": ["6oz", "12oz"]
+        "standard_package_sizes": [
+          "6oz",
+          "12oz"
+        ]
       }
     }
   },
@@ -99,7 +121,10 @@
   "compliance_requirements": {
     "audit_trail_retention_days": 730,
     "documentation_required": true,
-    "regulatory_compliance": ["state_pricing_laws", "fair_competition_act"],
+    "regulatory_compliance": [
+      "state_pricing_laws",
+      "fair_competition_act"
+    ],
     "approval_timeout_hours": 4
   }
 }

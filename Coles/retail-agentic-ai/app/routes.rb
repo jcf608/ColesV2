@@ -6,6 +6,71 @@ module ProduceOptimizationRoutes
   def self.registered(app)
     
     # ============================================
+    # HELPER METHODS
+    # ============================================
+    
+    # Helper method to determine tool category
+    app.helpers do
+      def determine_tool_category(scenario_name)
+        case scenario_name.downcase
+        when /competitor|pricing|inventory|stock|restock|expir|product|policy|compli/
+          'retail'
+        when /staff|allocation|capacity|shortfall|workforce|schedul/
+          'operations'  
+        when /system|server|backup|health|outage|critical|infrastructure/
+          'systems'
+        when /security|alert|threat|breach|incident/
+          'security'
+        when /incident|change|calendar|release|deploy/
+          'incidents'
+        when /weather|external|forecast|api|integration/
+          'external'
+        else
+          'operations' # Default category
+        end
+      end
+      
+      def load_tool_definitions(tool_config_file)
+        return '' unless File.exist?(tool_config_file)
+        
+        begin
+          config = JSON.parse(File.read(tool_config_file))
+          
+          # New rationalized format has 'tools' array
+          if config.is_a?(Hash) && config['tools']
+            JSON.pretty_generate(config['tools'])
+          # Old format is directly an array
+          elsif config.is_a?(Array)
+            JSON.pretty_generate(config)
+          else
+            File.read(tool_config_file)
+          end
+        rescue JSON::ParserError
+          File.read(tool_config_file)
+        end
+      end
+      
+      # Convert question_id to proper class name
+      def classify_name(question_id)
+        question_id.split('-').map(&:capitalize).join
+      end
+      
+      # Indent Ruby code for class method insertion
+      def indent_ruby_code(code)
+        return '' if code.nil? || code.empty?
+        
+        # Convert function definitions to class methods
+        code.lines.map do |line|
+          if line.strip.start_with?('def ')
+            "        #{line.gsub(/^def /, 'def self.')}"
+          else
+            "        #{line}"
+          end
+        end.join
+      end
+    end
+    
+    # ============================================
     # PAGE ROUTES - MAIN PAGES
     # ============================================
     
@@ -110,7 +175,7 @@ module ProduceOptimizationRoutes
         example_file = File.join(base_dir, 'examples', "#{question_id}.txt")
         
         # Try to load from new rationalized structure first
-        tool_category = CARINARoutes.determine_tool_category(question_data['label'] || question_id)
+        tool_category = determine_tool_category(question_data['label'] || question_id)
         new_tool_config_file = File.join(base_dir, 'config', tool_category, "#{question_id}.json")
         new_tool_impl_file = File.join(base_dir, 'tools', tool_category, "#{question_id}.rb")
         
@@ -673,70 +738,6 @@ module ProduceOptimizationRoutes
           success: false,
           error: "Network error: #{e.message}"
         }
-      end
-    end
-    
-    # ============================================
-    # HELPER FUNCTIONS FOR RATIONALIZED TOOLS
-    # ============================================
-    
-    # Determine tool category based on scenario name
-    def self.determine_tool_category(scenario_name)
-      case scenario_name.downcase
-      when /competitor|pricing|inventory|stock|restock|expir|product|policy|compli/
-        'retail'
-      when /staff|allocation|capacity|shortfall|workforce|schedul/
-        'operations'  
-      when /system|server|backup|health|outage|critical|infrastructure/
-        'systems'
-      when /security|alert|threat|breach|incident/
-        'security'
-      when /incident|change|calendar|release|deploy/
-        'incidents'
-      when /weather|external|forecast|api|integration/
-        'external'
-      else
-        'operations' # Default category
-      end
-    end
-    
-    # Convert question_id to proper class name
-    def self.classify_name(question_id)
-      question_id.split('-').map(&:capitalize).join
-    end
-    
-    # Indent Ruby code for class method insertion
-    def self.indent_ruby_code(code)
-      return '' if code.nil? || code.empty?
-      
-      # Convert function definitions to class methods
-      code.lines.map do |line|
-        if line.strip.start_with?('def ')
-          "        #{line.gsub(/^def /, 'def self.')}"
-        else
-          "        #{line}"
-        end
-      end.join
-    end
-    
-    # Load tool definitions handling both old and new formats
-    def self.load_tool_definitions(tool_config_file)
-      return '' unless File.exist?(tool_config_file)
-      
-      begin
-        config = JSON.parse(File.read(tool_config_file))
-        
-        # New rationalized format has 'tools' array
-        if config.is_a?(Hash) && config['tools']
-          JSON.pretty_generate(config['tools'])
-        # Old format is directly an array
-        elsif config.is_a?(Array)
-          JSON.pretty_generate(config)
-        else
-          File.read(tool_config_file)
-        end
-      rescue JSON::ParserError
-        File.read(tool_config_file)
       end
     end
     

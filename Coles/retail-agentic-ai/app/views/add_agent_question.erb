@@ -1053,9 +1053,13 @@ function captureFormState() {
 
 async function loadQuestions() {
   try {
+    console.log('Loading questions list...');
     const response = await fetch('/api/questions');
+    console.log('Questions response status:', response.status);
     const data = await response.json();
+    console.log('Questions data:', data);
     allQuestions = data.questions || [];
+    console.log('Loaded questions count:', allQuestions.length);
     renderQuestionsList();
   } catch (error) {
     console.error('Failed to load questions:', error);
@@ -1063,11 +1067,13 @@ async function loadQuestions() {
 }
 
 function renderQuestionsList() {
+  console.log('Rendering questions list...');
   const list = document.getElementById('questions-list');
   list.innerHTML = '';
   
   // Create a copy to sort
   let questionsToDisplay = [...allQuestions];
+  console.log('Questions to display:', questionsToDisplay.length);
   
   // Sort based on current mode
   if (sortAlphabetically) {
@@ -1102,6 +1108,7 @@ function renderQuestionsList() {
     const item = createQuestionItem(question, false);
     list.appendChild(item);
   });
+  console.log('Questions rendered, total items in list:', list.children.length);
   
   // Apply search filter if active
   filterQuestions();
@@ -1122,7 +1129,10 @@ function createQuestionItem(question, isActive) {
     <div class="question-item-category">${question.category}</div>
   `;
   
-  item.onclick = () => handleQuestionClick(question.id);
+  item.onclick = () => {
+    console.log('Question item clicked:', question.id);
+    handleQuestionClick(question.id);
+  };
   
   return item;
 }
@@ -1169,27 +1179,35 @@ function filterQuestions() {
 
 // Handle question click with unsaved changes check
 async function handleQuestionClick(questionId) {
+  console.log('Question clicked:', questionId, 'Current question:', currentQuestionId);
+  
   // Don't show dialog if clicking the same question
   if (questionId === currentQuestionId) {
+    console.log('Same question clicked, ignoring');
     return;
   }
   
   // Check for unsaved changes
   if (hasUnsavedChanges) {
+    console.log('Has unsaved changes, showing dialog');
     const result = await showUnsavedChangesDialog();
     
     if (result === 'cancel') {
+      console.log('User cancelled');
       return; // Stay on current question
     } else if (result === 'save') {
+      console.log('User chose to save');
       // Save current changes first
       await saveConfiguration();
       // Then load the new question
       await loadQuestion(questionId);
     } else if (result === 'discard') {
+      console.log('User chose to discard');
       // Just load the new question
       await loadQuestion(questionId);
     }
   } else {
+    console.log('No unsaved changes, loading question directly');
     // No changes, just load
     await loadQuestion(questionId);
   }
@@ -1257,8 +1275,11 @@ function showUnsavedChangesDialog() {
 
 async function loadQuestion(questionId) {
   try {
+    console.log('Loading question:', questionId);
     const response = await fetch(`/api/question/${questionId}`);
+    console.log('Response status:', response.status);
     const data = await response.json();
+    console.log('Response data:', data);
     
     if (data.success) {
       currentQuestionId = questionId;
@@ -1279,10 +1300,13 @@ async function loadQuestion(questionId) {
       
       // Scroll to top of page
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      console.error('API returned error:', data.error);
+      alert('Failed to load question: ' + data.error);
     }
   } catch (error) {
     console.error('Failed to load question:', error);
-    alert('Failed to load question details');
+    alert('Failed to load question details: ' + error.message);
   }
 }
 

@@ -3,7 +3,7 @@
   "icon": "💻",
   "label": "Critical Systems Status",
   "question": "What is the current status of all critical systems?",
-  "category": "it-operations",
-  "order": 11,
+  "category": "custom",
+  "order": 100,
   "enabled": true
 }

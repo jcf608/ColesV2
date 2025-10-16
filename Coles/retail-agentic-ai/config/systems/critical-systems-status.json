@@ -1,0 +1,6 @@
+{
+  "category": "systems",
+  "module": "CriticalSystemsStatus",
+  "description": "What is the current status of all critical systems?",
+  "tools": []
+}

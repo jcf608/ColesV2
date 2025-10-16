@@ -1,0 +1,25 @@
+{
+  "scenario_name": "Competitor Pricing Analysis",
+  "scenario_id": "competitor-pricing",
+  "created_at": "2025-10-17T07:20:10+11:00",
+  "description": "This scenario handles requests to analyze local competitor pricing for specific product categories to inform markdown and pricing decisions. The agent retrieves current market prices from nearby stores to ensure competitive positioning while maintaining margin requirements.",
+  "sample_questions": [
+    "What are competitors charging for organic berries within 5 miles of our downtown location?",
+    "Check competitor pricing for citrus fruits in the Beverly Hills area before I decide on this markdown",
+    "Show me how our apple prices compare to other stores within 3 miles"
+  ],
+  "files": {
+    "system_prompt": "prompts/scenarios/competitor-pricing.txt",
+    "policy_text": "policies/competitor-pricing.txt",
+    "policy_json": "policies/competitor-pricing.json",
+    "example": "examples/competitor-pricing.txt",
+    "tools_config": "config/retail/competitor-pricing.json",
+    "tools_implementation": "tools/retail/competitor-pricing.rb",
+    "ask_question": "ask_questions/competitor-pricing.json"
+  },
+  "quick_action": {
+    "icon": "💰",
+    "label": "Competitor Pricing",
+    "question": "What are competitor prices for berries?"
+  }
+}

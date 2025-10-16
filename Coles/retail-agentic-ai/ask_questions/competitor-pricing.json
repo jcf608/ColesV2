@@ -3,7 +3,7 @@
   "icon": "💰",
   "label": "Competitor Pricing",
   "question": "What are competitor prices for berries?",
-  "category": "pricing",
-  "order": 3,
+  "category": "custom",
+  "order": 100,
   "enabled": true
 }
